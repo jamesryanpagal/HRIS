@@ -1,0 +1,30 @@
+.spinner_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+}
+
+.spinner_container span {
+  margin: 0 5px;
+}
+
+.spinner_container .first_spinner {
+  border: 2px transparent solid;
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 50%;
+  position: relative;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  border-bottom-color: #ffffff;
+  animation: spinToLeft 0.5s ease-in-out infinite;
+}
+
+@keyframes spinToLeft {
+  to {
+    transform: rotate(360deg);
+  }
+}
