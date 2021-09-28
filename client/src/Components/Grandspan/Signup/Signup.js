@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axiosConfig from "../../ReusableFunctions/AxiosConfig/AxiosConfig";
+import { useDispatch } from "react-redux";
+import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
 // -------------------------------- REDUX ACTIONS -----------------------------
-import { userTokenActions } from "../../Redux/Redux_actions/actions";
+import { userTokenActions } from "../../../Redux/Redux_actions/actions";
 
 // ------------------------------ SPINNER -----------------------------
-import Spinner from "../../Spinner/Spinner";
+import Spinner from "../../../Spinner/Spinner";
 
 // -------------------------------------- CSS ---------------------------------
 import "./Signup.css";
@@ -32,16 +32,6 @@ const Signup = ({ history }) => {
 
   // dispatch
   const dispatch = useDispatch();
-
-  // ------------------------------- REDUX STORE ---------------------------------------
-  const { admin_token } = useSelector((state) => state.GS_Admin);
-
-  // ---------------------------- RIDIRECT USER IF ALREADY SIGNEDIN -------------------------
-  useEffect(() => {
-    if (admin_token) {
-      history.push("/admindashboard");
-    }
-  }, [admin_token, history]);
 
   // ----------------------------- HANDLE INPUT CHANGE ---------------------------------
   const handleInputChange = (e) => {
@@ -94,13 +84,9 @@ const Signup = ({ history }) => {
   };
   return (
     <div className="signup_Container">
-      {/* ------------------------------------- SIGNUP SIDE IMAGE ----------------------------------------- */}
-      <section className="signup_Side_Image_Container">
-        <section className="signup_Side_Image_Background"></section>
-        <section className="signup_Side_Image_Text">
-          <p className="first">Grandspan Development Corporation</p>
-          <p>The Leader in Quality Infrastracture</p>
-        </section>
+      {/* CLOSE SIGNIN */}
+      <section className="close_Signin" onClick={() => history.push("/")}>
+        <i className="fas fa-times"></i>
       </section>
       {/* ------------------------------------- SIGNUP FORM CONTAINER ----------------------------------------- */}
       <section className="signup_Form_Container">
@@ -192,7 +178,7 @@ const Signup = ({ history }) => {
           {/* LOGIN LINK */}
           <section className="login_Form_Btn">
             <span>
-              Already have an account? <Link to="/">Login</Link>
+              Already have an account? <Link to="/login">Login</Link>
             </span>
           </section>
         </form>

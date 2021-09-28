@@ -4,53 +4,25 @@
   width: 100%;
   height: 100vh;
   display: flex;
-}
-
-/* ---------------------------------------- SIGN UP SIDE IMAGE -------------------------------------- */
-
-.signup_Container .signup_Side_Image_Container {
-  width: 65%;
-  height: 100%;
   position: relative;
 }
 
-.signup_Container .signup_Side_Image_Container .signup_Side_Image_Background {
-  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%, 90% 50%);
-  background: #e6f3fc;
+.signup_Container .close_Signin {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("../../PublicImages/Login_Signup_Image.png");
-  background-size: cover;
-  z-index: -1;
-}
-
-.signup_Container .signup_Side_Image_Container .signup_Side_Image_Text {
-  text-align: center;
-  padding: 20px;
-  font-family: "PT Serif", serif;
-  width: 50%;
-  margin: 30% auto 0 auto;
-}
-
-.signup_Container .signup_Side_Image_Container .signup_Side_Image_Text p {
-  background: #e6f3fc;
-}
-
-.signup_Container .signup_Side_Image_Container .signup_Side_Image_Text .first {
-  font-size: 40px;
-  font-weight: bolder;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+  top: 10px;
+  right: 20px;
+  font-size: 20px;
+  padding: 10px;
+  color: #5f5f5f;
+  cursor: pointer;
 }
 
 /* --------------------------------------------- SIGNUP FORM ------------------------------------------------------ */
 
 .signup_Container .signup_Form_Container {
   width: 35%;
+  height: 100%;
+  margin: auto;
   position: relative;
 }
 

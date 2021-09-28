@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axiosConfig from "../../ReusableFunctions/AxiosConfig/AxiosConfig";
+import { useDispatch } from "react-redux";
+import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
 // ---------------------- REDUX ACTIONS --------------------------
-import { userTokenActions } from "../../Redux/Redux_actions/actions";
+import { userTokenActions } from "../../../Redux/Redux_actions/actions";
 
 // spinner
-import Spinner from "../../Spinner/Spinner";
+import Spinner from "../../../Spinner/Spinner";
 
 //css
 import "./Login.css";
@@ -29,16 +29,6 @@ const Login = ({ history }) => {
 
   // dispatch
   const dispatch = useDispatch();
-
-  // --------------------------- REDUX STORE -------------------------------
-  const { admin_token } = useSelector((state) => state.GS_Admin);
-
-  // check if already logged in
-  useEffect(() => {
-    if (admin_token) {
-      history.push("/admindashboard");
-    }
-  }, [admin_token, history]);
 
   // INPUT ON FOCUS
   const handleInputOnFocus = (e) => {
@@ -89,6 +79,10 @@ const Login = ({ history }) => {
 
   return (
     <div className="login_Container">
+      {/* ----------- CLOSE ---------------- */}
+      <section className="close_Login" onClick={() => history.push("/")}>
+        <i className="fas fa-times"></i>
+      </section>
       {/* --------------------------------------------- LOGIN FORM ------------------------------------------------ */}
       <section className="login_Form_Container">
         <section className="login_Form_Compname">
@@ -146,19 +140,6 @@ const Login = ({ history }) => {
             </span>
           </section>
         </form>
-      </section>
-
-      {/* --------------------------------------------- LOGIN SIDE IMAGE ------------------------------------------------ */}
-      <section className="login_Side_Image_Container">
-        <section className="login_Side_Image_Background"></section>
-        <section className="login_Side_Image_Text_Container">
-          <section className="login_Side_Image_Text">
-            <span>Join our team today!</span>
-          </section>
-          <section className="login_Side_Image_Link_Container">
-            <Link to="/applicantsform">Apply now</Link>
-          </section>
-        </section>
       </section>
     </div>
   );

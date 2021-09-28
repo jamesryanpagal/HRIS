@@ -1,26 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 //css
 import "./App.css";
 
 //Components
-import Login from "./Components/Login/Login";
-import Signup from "./Components/Signup/Signup";
-import ApplicantsForm from "./Components/Applicants/ApplicantsForm";
-import Dashboard from "./Components/Admin/Dashboard/Dashboard";
+import LandingPageRouter from "./Components/Grandspan/Router/LandingPage_Router";
+import AdminRouter from "./Components/Admin/AdminRouter/Admin_Router";
 
 function App() {
+  const { admin_token } = useSelector((state) => state.GS_Admin);
+
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/applicantsform" component={ApplicantsForm} />
-          <Route path="/admindashboard" component={Dashboard} />
-        </Switch>
-      </Router>
+      {admin_token ? <AdminRouter /> : <LandingPageRouter />}
     </div>
   );
 }

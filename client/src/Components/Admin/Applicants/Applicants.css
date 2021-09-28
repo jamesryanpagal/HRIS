@@ -1,0 +1,147 @@
+.applicants_Container {
+  width: 100%;
+}
+
+.applicants_Container .applicants_Header {
+  padding: 30px 50px 0 50px;
+  font-size: 40px;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  color: #1b3063;
+}
+
+/* ------------------- APPLICANTS LIST ----------------------- */
+.applicants_Container .applicants_List_Container {
+  height: 87.6vh;
+  border: transparent solid;
+}
+
+/* HEADER */
+.applicants_Container .applicants_List_Container .applicants_List_Header {
+  padding: 20px 50px;
+  color: #1b3063;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.applicants_Container .applicants_List_Container .applicants_List {
+  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
+  height: 90%;
+}
+
+/* APPLICATIONS LIST HEADER */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications_Header {
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 3px;
+  box-shadow: 0 5px 10px #afafaf;
+  color: #ffffff;
+}
+
+/* --------------------- PROCESSING -------------------- */
+.applicants_Container .applicants_List_Container .applicants_List .processing {
+  width: 55%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* APPLICATIONS */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications {
+  width: 32%;
+  overflow-y: scroll;
+}
+
+/* APPLICATIONS HEADER */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applications_Header {
+  background: #94ba77;
+}
+
+/* SCREENING */
+.applicants_Container .applicants_List_Container .applicants_List .screening {
+  width: 32%;
+  overflow-y: scroll;
+}
+
+/* SCREENING HEADER */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .screening
+  .applications_Header {
+  background: #235b58;
+}
+
+/* INTERVIEW */
+.applicants_Container .applicants_List_Container .applicants_List .interview {
+  width: 32%;
+  overflow-y: scroll;
+}
+
+/* INTERVIEW HEADER */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .interview
+  .applications_Header {
+  background: #ff7800;
+}
+
+/* --------------------------- RESULTS -------------------------- */
+.applicants_Container .applicants_List_Container .applicants_List .result {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* REJECTED */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .result
+  .rejected {
+  width: 48%;
+  overflow-y: scroll;
+}
+
+/* REJECTED HEADER */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .result
+  .rejected
+  .applications_Header {
+  background: #af3030;
+}
+
+/* HIRED */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .result
+  .hired {
+  width: 48%;
+  overflow-y: scroll;
+}
+
+/* HIRED HEADER */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .result
+  .hired
+  .applications_Header {
+  background: #e4be14;
+}

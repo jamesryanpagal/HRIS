@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
+
+.grandspan_LandingPage {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* ----------------------- BG IMAGE -------------------------- */
+.grandspan_LandingPage .grandspan_LandingPage_Background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  background: black;
+  z-index: -1;
+}
+
+.grandspan_LandingPage .grandspan_LandingPage_Background img {
+  height: 100%;
+  width: 100%;
+  opacity: 0.4;
+}
+
+/* --------------------------- TEXT ------------------------- */
+.grandspan_LandingPage .grandspan_LandingPage_Text {
+  border: transparent solid;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  text-align: center;
+}
+
+.grandspan_LandingPage .grandspan_LandingPage_Text p {
+  font-family: "PT Serif", serif;
+}
+
+.grandspan_LandingPage .grandspan_LandingPage_Text .first {
+  margin-top: 150px;
+  color: #ffffff;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.grandspan_LandingPage .grandspan_LandingPage_Text .third {
+  margin-top: 150px;
+  color: #92cdfa;
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* ------------------------ GRANDSPAN LINKS -------------------------- */
+.grandspan_LandingPage .grandspan_LandingPage_Text .grandspan_LandingPage_Btn {
+  display: flex;
+  justify-content: center;
+}
+
+.grandspan_LandingPage
+  .grandspan_LandingPage_Text
+  .grandspan_LandingPage_Btn
+  a {
+  display: block;
+  margin: 10px;
+  width: 15vw;
+  padding: 10px 0;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.grandspan_LandingPage
+  .grandspan_LandingPage_Text
+  .grandspan_LandingPage_Btn
+  .applicants {
+  border-radius: 50px;
+  background: #6dcf6d;
+}
+
+.grandspan_LandingPage
+  .grandspan_LandingPage_Text
+  .grandspan_LandingPage_Btn
+  .admin {
+  border-radius: 50px;
+  background: #035b96;
+}

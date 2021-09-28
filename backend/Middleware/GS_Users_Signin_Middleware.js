@@ -16,7 +16,7 @@ const GSusers_Signin_Middleware = async (req, res, next) => {
     }
 
     // ---------------------------------- CHECK EMP NUMBER ----------------------------
-    const empNumRegExp = /^[20]{2}[0-9]{2}-[0-9]{2}-[0-9]+$/;
+    const empNumRegExp = /^[20]{2}[0-9]{2}[0-9]{2}[0-9]+$/;
     const testEmployeeNumber = empNumRegExp.test(Employee_number);
 
     if (!testEmployeeNumber) {
