@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http, { cors: { origin: "*" } });
 const cors = require("cors");
 const mongoose = require("mongoose");
 
@@ -38,5 +40,13 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// -------------------------------- SOCKET IO ---------------------------
+io.on("connection", (socket) => {
+  // APPLICANTS
+  socket.on("applicants", (data) => {
+    io.emit("getApplicants", data);
+  });
+});
+
 // --------------------------- LISTEN TO PORT ----------------------------
-app.listen(PORT, () => console.log(`running on port ${PORT}`));
+http.listen(PORT, () => console.log(`running on port ${PORT}`));

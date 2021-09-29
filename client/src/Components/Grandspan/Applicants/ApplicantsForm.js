@@ -1,15 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import io from "socket.io-client";
 
 //css
 import "./ApplicantsForm.css";
 
+// SOCKET CONNECTION
+const socket = io.connect("https://grandspan.herokuapp.com/");
+
 const ApplicantsForm = () => {
+  // ------------------------ STATE ----------------------------
+
+  // applicant state
+  const [applicantDetails, setApplicantDetails] = useState({
+    firstname: "",
+    lastname: "",
+    middle: "",
+    phone: "",
+    birthday: "",
+    gender: "",
+    address: "",
+    email: "",
+    resume: "",
+  });
+
+  // response messsage state
+  const [resMessage, setResMessage] = useState("");
+
+  // ON FOCUS
   const handleAppFormOnFocus = (e) => {
     const target = e.target.parentElement;
     target.children[0].className = "appForm_OnFocus";
   };
 
+  // ON BLUR
   const handleAppFormOnBlur = (e) => {
     const target = e.target.parentElement;
     if (target.children[1].value) {
@@ -20,6 +44,136 @@ const ApplicantsForm = () => {
     target.children[0].className = "label";
   };
 
+  // --------------------------- HANDLE CHANGE -------------------------
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setApplicantDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // -------------------------- UPLOAD RESUME-------------------
+  const handleUploadResume = (e) => {
+    const selectedFile = e.target.files[0];
+    const fileType = ["application/pdf"];
+
+    const reader = new FileReader();
+
+    if (selectedFile) {
+      if (fileType.includes(selectedFile.type)) {
+        reader.readAsDataURL(selectedFile);
+        reader.onloadend = (e) => {
+          setApplicantDetails((prev) => ({ ...prev, resume: e.target.result }));
+          setResMessage("");
+        };
+        return;
+      }
+      setResMessage(
+        <section className="resError">
+          <i className="fas fa-exclamation-triangle"></i>
+          <span>Please upload pdf file only</span>
+        </section>
+      );
+      setApplicantDetails((prev) => ({ ...prev, resume: "" }));
+      return;
+    }
+  };
+
+  // ------------------------------ SUBMIT APPLICANT FORM ----------------------------
+  const handleApplicantFormSubmit = async (e) => {
+    e.preventDefault();
+
+    // DESCTRUCTURING applicants details
+    const {
+      lastname,
+      firstname,
+      middle,
+      phone,
+      birthday,
+      gender,
+      address,
+      email,
+      resume,
+    } = applicantDetails;
+
+    // CHECK NULL INPUT
+    if (
+      !lastname ||
+      !firstname ||
+      !middle ||
+      !phone ||
+      !birthday ||
+      !gender ||
+      !address ||
+      !email ||
+      !resume
+    ) {
+      setResMessage(
+        <section className="resError">
+          <i className="fas fa-exclamation-triangle"></i>
+          <span>Please fill out all the input fields</span>
+        </section>
+      );
+      return;
+    }
+
+    // CHECK, F,L AND M MUST BE STRING ONLY
+    const regexForString = /[0-9]/;
+
+    if (regexForString.test(lastname)) {
+      setResMessage(
+        <section className="resError">
+          <i className="fas fa-exclamation-triangle"></i>
+          <span>Invalid lastname</span>
+        </section>
+      );
+      return;
+    }
+
+    if (regexForString.test(firstname)) {
+      setResMessage(
+        <section className="resError">
+          <i className="fas fa-exclamation-triangle"></i>
+          <span>Invalid firstname</span>
+        </section>
+      );
+      return;
+    }
+
+    if (regexForString.test(middle)) {
+      setResMessage(
+        <section className="resError">
+          <i className="fas fa-exclamation-triangle"></i>
+          <span>Invalid middle</span>
+        </section>
+      );
+      return;
+    }
+
+    // SUBMIT FORM
+    await socket.emit("applicants", applicantDetails);
+    setResMessage(
+      <section className="resSuccess">
+        <i className="fas fa-check-circle"></i>
+        <span>
+          Application sent! We will send you an email after processing your form
+        </span>
+      </section>
+    );
+    setApplicantDetails((prev) => ({
+      ...prev,
+      lastname: "",
+      firstname: "",
+      middle: "",
+      phone: "",
+      birthday: "",
+      gender: "",
+      address: "",
+      email: "",
+      resume: "",
+    }));
+  };
+
   return (
     <div className="applicants_Form_Container">
       <section className="applicants_Form">
@@ -27,9 +181,11 @@ const ApplicantsForm = () => {
         <section className="applicants_Form_Text">
           <span>Applicants form</span>
         </section>
+        {/* RESPONSE MESSAGE */}
+        {resMessage && <section className="resMessage">{resMessage}</section>}
         {/* FORM */}
         <section className="applicants_Form_Inputs_Container">
-          <form>
+          <form onSubmit={handleApplicantFormSubmit}>
             {/* ----------------------------------------- FIRST INPUT GROUP --------------------------------------- */}
             <section className="applicants_Form_Input_Group">
               {/* LASTNAME */}
@@ -41,6 +197,8 @@ const ApplicantsForm = () => {
                   type="text"
                   name="lastname"
                   id="app_Lastname"
+                  value={applicantDetails.lastname}
+                  onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}
                 />
@@ -54,6 +212,8 @@ const ApplicantsForm = () => {
                   type="text"
                   name="firstname"
                   id="app_Firstname"
+                  value={applicantDetails.firstname}
+                  onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}
                 />
@@ -67,6 +227,8 @@ const ApplicantsForm = () => {
                   type="text"
                   name="middle"
                   id="app_Middle"
+                  value={applicantDetails.middle}
+                  onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}
                 />
@@ -84,6 +246,8 @@ const ApplicantsForm = () => {
                   type="number"
                   name="phone"
                   id="app_Phone"
+                  value={applicantDetails.phone}
+                  onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}
                 />
@@ -93,7 +257,13 @@ const ApplicantsForm = () => {
                 <label className="label_Bday" htmlFor="app_Birthday">
                   Birthday
                 </label>
-                <input type="date" name="birthday" id="app_Birthday" />
+                <input
+                  type="date"
+                  name="birthday"
+                  id="app_Birthday"
+                  value={applicantDetails.birthday}
+                  onChange={handleChange}
+                />
               </section>
               {/* ------------- GENDER ------------- */}
               <section className="applicants_Form_Inputs_Gender">
@@ -102,7 +272,18 @@ const ApplicantsForm = () => {
                   {/* MALE */}
                   <section className="gender_Container">
                     <label htmlFor="Male">Male</label>
-                    <input type="radio" name="gender" id="Male" value="male" />
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="Male"
+                      value="male"
+                      onClick={(e) =>
+                        setApplicantDetails((prev) => ({
+                          ...prev,
+                          gender: e.target.value,
+                        }))
+                      }
+                    />
                   </section>
                   {/* FEMALE */}
                   <section className="gender_Container">
@@ -112,6 +293,12 @@ const ApplicantsForm = () => {
                       name="gender"
                       id="Female"
                       value="female"
+                      onClick={(e) =>
+                        setApplicantDetails((prev) => ({
+                          ...prev,
+                          gender: e.target.value,
+                        }))
+                      }
                     />
                   </section>
                 </section>
@@ -129,6 +316,8 @@ const ApplicantsForm = () => {
                   type="tel"
                   name="address"
                   id="app_Address"
+                  value={applicantDetails.address}
+                  onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}
                 />
@@ -142,6 +331,8 @@ const ApplicantsForm = () => {
                   type="email"
                   name="email"
                   id="app_Email"
+                  value={applicantDetails.email}
+                  onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}
                 />
@@ -149,15 +340,20 @@ const ApplicantsForm = () => {
               {/* FILE */}
               <section className="applicants_Form_Inputs file">
                 <label className="label_File" htmlFor="app_File">
-                  File
+                  Resume
                 </label>
-                <input type="file" name="file" id="app_File" />
+                <input
+                  type="file"
+                  name="file"
+                  id="app_File"
+                  onChange={handleUploadResume}
+                />
               </section>
             </section>
 
             {/* FORM BUTTON */}
             <section className="applicants_Form_Button">
-              <Link to="/">Cancel</Link>
+              <Link to="/">Back</Link>
               <button type="submit">Submit</button>
             </section>
           </form>

@@ -12,3 +12,12 @@ export const removeUsertokenActions = () => (dispatch) => {
     type: "REMOVE_USER_TOKEN",
   });
 };
+
+export const applicantsActions = (newApplicants) => (dispatch) => {
+  dispatch({
+    type: "NEW_APPLICANTS",
+    payload: {
+      newApplicants,
+    },
+  });
+};
