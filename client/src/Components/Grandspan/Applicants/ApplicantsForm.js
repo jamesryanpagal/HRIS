@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import "./ApplicantsForm.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const ApplicantsForm = () => {
   // ------------------------ STATE ----------------------------

@@ -17,7 +17,7 @@ const Admin_Router = () => {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Applicants} />
-          <Route path="/employee" component={Employee} />
+          <Route path="/Employee" component={Employee} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

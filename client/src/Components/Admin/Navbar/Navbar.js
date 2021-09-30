@@ -27,7 +27,7 @@ const Navbar = () => {
           <li>
             <NavLink
               exact
-              to="/employee"
+              to="/Employee"
               className="link"
               activeClassName="active_Link"
             >

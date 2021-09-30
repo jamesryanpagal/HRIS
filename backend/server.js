@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 // IMPORT ROUTES
 const GSUsersSigninRoutes = require("./Routes/GS_Users_Signin_Routes");
 const GSUsersLoginRoutes = require("./Routes/GS_Users_Login_Routes");
+const ApplicantsRoutes = require("./Routes/Applicants_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -26,6 +27,7 @@ mongoose.connection.once("open", () => console.log("connected to mongodb"));
 // ----------------------------- ROUTES -----------------------------------
 app.use("/GSUserSignin", GSUsersSigninRoutes);
 app.use("/GSUserLogin", GSUsersLoginRoutes);
+app.use("/Applicants", ApplicantsRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -41,10 +43,35 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // -------------------------------- SOCKET IO ---------------------------
+// MODEL
+const Applicants = require("./Model/Applicants_Model");
+
 io.on("connection", (socket) => {
   // APPLICANTS
-  socket.on("applicants", (data) => {
-    io.emit("getApplicants", data);
+  socket.on("applicants", async (data) => {
+    const {
+      lastname,
+      firstname,
+      middle,
+      phone,
+      birthday,
+      gender,
+      address,
+      email,
+      resume,
+    } = data;
+    const newApplicants = await Applicants.create({
+      lastname,
+      firstname,
+      middle,
+      phone,
+      birthday,
+      gender,
+      address,
+      email,
+      resume,
+    });
+    io.emit("getApplicants", newApplicants);
   });
 });
 

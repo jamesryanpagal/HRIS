@@ -31,9 +31,20 @@ export const applicantsReducers = (
     case "NEW_APPLICANTS":
       const { newApplicants } = action.payload;
 
+      const applicantsExist = state.applicants.find(
+        (a) => a._id === newApplicants._id
+      );
+
+      if (!applicantsExist) {
+        return {
+          ...state,
+          applicants: [...state.applicants, newApplicants],
+        };
+      }
+
       return {
         ...state,
-        applicants: [...state.applicants, newApplicants],
+        applicants: [...state.applicants],
       };
 
     default:
