@@ -5,8 +5,14 @@ import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
+// COMPONENT
+import Reject from "../../../ReusableFunctions/Confirmation/Reject/Reject";
+
 // REDUX ACTIONS
-import { applicantsActions } from "../../../Redux/Redux_actions/actions";
+import {
+  applicantsActions,
+  removeApplicantActions,
+} from "../../../Redux/Redux_actions/actions";
 
 // Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -23,13 +29,24 @@ const ApplicantDetails = ({
   applicantId,
   applicants,
   setToggleApplicantDetails,
+  loading,
+  setLoading,
+  setIsRemove,
 }) => {
   // APPLICANT DETAILS STATE
   const [applicant_Details, setApplicant_Details] = useState({});
 
+  // TOGGLE CONFIRM REJECT STATE
+  const [confirmReject, setConfirmReject] = useState({
+    toggle: false,
+    applicantId: "",
+    apiUrl: "",
+  });
+
   // defaultLayoutPlugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
+  // get applicant details
   useEffect(() => {
     const applicant = applicants.find((a) => a._id === applicantId);
     setApplicant_Details({ ...applicant });
@@ -37,6 +54,19 @@ const ApplicantDetails = ({
 
   return (
     <div className="applicants_Details_Container">
+      {/* ------------------ TOGGLE CONFIRMATION ------------------- */}
+      {confirmReject.toggle && (
+        <Reject
+          apiUrl={confirmReject.apiUrl}
+          applicantId={confirmReject.applicantId}
+          socket={socket}
+          loading={loading}
+          setLoading={setLoading}
+          setIsRemove={setIsRemove}
+          setConfirmReject={setConfirmReject}
+        />
+      )}
+
       {/* CLOSE */}
       <section
         className="close_Applicant_Details"
@@ -88,6 +118,26 @@ const ApplicantDetails = ({
             <label>Email</label>
             <section className="info">{applicant_Details.email}</section>
           </section>
+          {/* ACTIONS */}
+          <section className="applicants_Actions">
+            <button
+              type="button"
+              className="reject"
+              onClick={() =>
+                setConfirmReject((prev) => ({
+                  ...prev,
+                  toggle: true,
+                  apiUrl: `/Applicants/removeApplicant/${applicantId}`,
+                  applicantId,
+                }))
+              }
+            >
+              Reject
+            </button>
+            <button type="button" className="accept">
+              Accept
+            </button>
+          </section>
         </section>
         {/* RESUME */}
         <section className="applicants_Resume">
@@ -112,6 +162,12 @@ const Applicants = () => {
   // applicant id
   const [applicantId, setApplicantId] = useState("");
 
+  // loading
+  const [loading, setLoading] = useState(false);
+
+  // remove applicant
+  const [isRemove, setIsRemove] = useState(false);
+
   // dispatch instance
   const dispatch = useDispatch();
 
@@ -135,6 +191,16 @@ const Applicants = () => {
     getApplicants();
   }, [dispatch]);
 
+  // delete applicants from redux
+  useEffect(() => {
+    socket.on("removeApplicant", (id) => {
+      dispatch(removeApplicantActions(id));
+      if (isRemove) {
+        window.location.reload();
+      }
+    });
+  }, [dispatch, isRemove]);
+
   // view applicant details
   const handleViewApplicantDetails = (e) => {
     const id = e.target.value;
@@ -151,6 +217,9 @@ const Applicants = () => {
           applicantId={applicantId}
           applicants={applicants}
           setToggleApplicantDetails={setToggleApplicantDetails}
+          loading={loading}
+          setLoading={setLoading}
+          setIsRemove={setIsRemove}
         />
       )}
 
@@ -162,7 +231,7 @@ const Applicants = () => {
       <section className="applicants_List_Container">
         {/* HEADER */}
         <section className="applicants_List_Header">
-          Total Applicants: 0
+          Total Applicants: <span>{applicants.length}</span>
         </section>
         {/* LIST */}
         <section className="applicants_List">

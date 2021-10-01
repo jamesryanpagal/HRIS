@@ -24,7 +24,7 @@ export const usersReducers = (state = { admin_token: "" }, action) => {
 
 // ------------------------------------------ APPLICANTS REDUCERS ----------------------------------
 export const applicantsReducers = (
-  state = { applicants: [], screening: [] },
+  state = { applicants: [], screening: [], message: "" },
   action
 ) => {
   switch (action.type) {
@@ -45,6 +45,22 @@ export const applicantsReducers = (
       return {
         ...state,
         applicants: [...state.applicants],
+      };
+
+    case "REMOVE_APPLICANT":
+      const { applicantId } = action.payload;
+
+      return {
+        ...state,
+        applicants: state.applicants.filter((a) => a._id !== applicantId),
+      };
+
+    case "REJECT_MESSAGE":
+      const { rejectMessage } = action.payload;
+
+      return {
+        ...state,
+        message: rejectMessage,
       };
 
     default:

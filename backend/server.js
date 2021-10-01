@@ -73,6 +73,11 @@ io.on("connection", (socket) => {
     });
     io.emit("getApplicants", newApplicants);
   });
+
+  // REJECT APPLICANT
+  socket.on("rejectapplicant", (id) => {
+    io.emit("removeApplicant", id);
+  });
 });
 
 // --------------------------- LISTEN TO PORT ----------------------------

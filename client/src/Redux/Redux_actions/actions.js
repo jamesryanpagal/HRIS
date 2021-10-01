@@ -1,3 +1,4 @@
+// --------------------------------- USERTOKEN ACTIONS -----------------------------
 export const userTokenActions = (token) => (dispatch) => {
   dispatch({
     type: "USER_TOKEN",
@@ -13,11 +14,30 @@ export const removeUsertokenActions = () => (dispatch) => {
   });
 };
 
+// ------------------------------------- APPLICANTS ACTIONS -----------------------------------
 export const applicantsActions = (newApplicants) => (dispatch) => {
   dispatch({
     type: "NEW_APPLICANTS",
     payload: {
       newApplicants,
+    },
+  });
+};
+
+export const removeApplicantActions = (applicantId) => (dispatch) => {
+  dispatch({
+    type: "REMOVE_APPLICANT",
+    payload: {
+      applicantId,
+    },
+  });
+};
+
+export const rejectApplicantMessage = () => (dispatch) => {
+  dispatch({
+    type: "REJECT_MESSAGE",
+    payload: {
+      rejectMessage: "Applicant was remove from the list",
     },
   });
 };

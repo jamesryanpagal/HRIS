@@ -38,6 +38,55 @@
   display: flex;
 }
 
+/* APPLICANTS ACTIONS */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .applicants_Actions {
+  margin: 10px 0;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* APPLICANTS ACTIONS REJECT */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .applicants_Actions
+  .reject {
+  border: none;
+  background: rgb(255, 133, 133);
+  height: 100%;
+  width: 45%;
+  color: #ffffff;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 5px 20px -10px black;
+  cursor: pointer;
+}
+
+/* APPLICANTS ACTIONS ACCEPT */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .applicants_Actions
+  .accept {
+  border: none;
+  background: rgb(85, 182, 93);
+  height: 100%;
+  width: 45%;
+  color: #ffffff;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 5px 20px -10px black;
+  cursor: pointer;
+}
+
 /* ------------ APPLICANTS BASIC DETAILS --------------- */
 .applicants_Container
   .applicants_Details_Container

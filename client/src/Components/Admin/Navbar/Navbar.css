@@ -3,6 +3,24 @@
   background: #1c212d;
 }
 
+/* ------------------- SIGNOUT ------------------- */
+.admin_Navbar .admin_Signout {
+  height: 30px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.admin_Navbar .admin_Signout button {
+  height: 100%;
+  width: 50%;
+  border: none;
+  border-radius: 3px;
+  background: #c9c9c9;
+  color: #5f5f5f;
+  font-size: 15px;
+  font-weight: bold;
+}
+
 .admin_Navbar .admin_Navbar_Header {
   width: 90%;
   margin: auto;
