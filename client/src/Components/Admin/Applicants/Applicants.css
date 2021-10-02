@@ -272,6 +272,16 @@
   font-weight: 600;
   cursor: pointer;
 }
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .applicant_View_Details
+  button
+  span {
+  display: none;
+}
 
 /* SCREENING */
 .applicants_Container .applicants_List_Container .applicants_List .screening {

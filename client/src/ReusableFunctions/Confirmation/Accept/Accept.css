@@ -1,0 +1,103 @@
+.accept_Container {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 80%);
+}
+
+.accept_Container .accept {
+  border-radius: 3px;
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px 10px;
+  background: #c9c9c9;
+  color: #353535;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.accept_Container .accept .confirm_Acception {
+  margin-top: 15px;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.accept_Container .accept .confirm_Acception button {
+  height: 100%;
+  border: none;
+  width: 45%;
+  cursor: pointer;
+  position: relative;
+}
+
+.accept_Container .accept .confirm_Acception .accept_Btn {
+  background: rgb(104, 199, 104);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px -15px black;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.accept_Container .accept .confirm_Acception .back_Btn {
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px -15px black;
+  background: rgb(255, 133, 133);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* DISABLE BUTTON ON LOADING */
+
+.accept_Container .accept .disable_Confirm_Acception {
+  margin-top: 15px;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.accept_Container .accept .disable_Confirm_Acception button {
+  height: 100%;
+  border: none;
+  width: 45%;
+  cursor: pointer;
+  position: relative;
+}
+
+.accept_Container .accept .disable_Confirm_Acception .accept_Btn {
+  background: rgb(104, 199, 104);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px -15px black;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.accept_Container .accept .disable_Confirm_Acception .back_Btn {
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 10px 20px -15px black;
+  background: rgb(255, 133, 133);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 1px;
+}

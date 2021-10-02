@@ -7,11 +7,13 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
 // COMPONENT
 import Reject from "../../../ReusableFunctions/Confirmation/Reject/Reject";
+import Accept from "../../../ReusableFunctions/Confirmation/Accept/Accept";
 
 // REDUX ACTIONS
 import {
   applicantsActions,
   removeApplicantActions,
+  moveToScreening,
 } from "../../../Redux/Redux_actions/actions";
 
 // Import the styles
@@ -27,6 +29,11 @@ const socket = io.connect("http://localhost:8080/");
 // --------------------------------- APPLICANT DETAILS MODAL ----------------------
 const ApplicantDetails = ({
   applicantId,
+  rejectApi,
+  acceptApi,
+  rejectSocket,
+  acceptSocket,
+  screening,
   applicants,
   setToggleApplicantDetails,
   loading,
@@ -37,33 +44,58 @@ const ApplicantDetails = ({
   const [applicant_Details, setApplicant_Details] = useState({});
 
   // TOGGLE CONFIRM REJECT STATE
-  const [confirmReject, setConfirmReject] = useState({
-    toggle: false,
-    applicantId: "",
-    apiUrl: "",
-  });
+  const [confirmReject, setConfirmReject] = useState(false);
+
+  // TOGGLE CONFIRM ACCEPT STATE
+  const [confirmAccept, setConfirmAccept] = useState(false);
 
   // defaultLayoutPlugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  // get applicant details
+  // get applicant details from Applicants
   useEffect(() => {
     const applicant = applicants.find((a) => a._id === applicantId);
-    setApplicant_Details({ ...applicant });
+    if (applicant) {
+      setApplicant_Details({ ...applicant });
+    }
   }, [applicantId, applicants]);
+
+  // get applicant details from Screening
+  useEffect(() => {
+    const applicant = screening.find((a) => a._id === applicantId);
+    if (applicant) {
+      setApplicant_Details({ ...applicant });
+    }
+  }, [applicantId, screening]);
 
   return (
     <div className="applicants_Details_Container">
       {/* ------------------ TOGGLE CONFIRMATION ------------------- */}
+      {/* CONFIRM REJECT */}
       {confirmReject.toggle && (
         <Reject
-          apiUrl={confirmReject.apiUrl}
-          applicantId={confirmReject.applicantId}
+          applicantId={applicantId}
+          rejectApi={rejectApi}
           socket={socket}
+          rejectSocket={rejectSocket}
           loading={loading}
           setLoading={setLoading}
           setIsRemove={setIsRemove}
           setConfirmReject={setConfirmReject}
+        />
+      )}
+
+      {/* CONFIRM ACCEPT */}
+      {confirmAccept.toggle && (
+        <Accept
+          applicantId={applicantId}
+          acceptApi={acceptApi}
+          socket={socket}
+          acceptSocket={acceptSocket}
+          loading={loading}
+          setIsRemove={setIsRemove}
+          setLoading={setLoading}
+          setConfirmAccept={setConfirmAccept}
         />
       )}
 
@@ -134,7 +166,18 @@ const ApplicantDetails = ({
             >
               Reject
             </button>
-            <button type="button" className="accept">
+            <button
+              type="button"
+              className="accept"
+              onClick={() =>
+                setConfirmAccept((prev) => ({
+                  ...prev,
+                  toggle: true,
+                  apiUrl: "/Applicants/acceptApplicant",
+                  applicantId,
+                }))
+              }
+            >
               Accept
             </button>
           </section>
@@ -162,6 +205,18 @@ const Applicants = () => {
   // applicant id
   const [applicantId, setApplicantId] = useState("");
 
+  // applicant reject api
+  const [rejectApi, setRejectApi] = useState("");
+
+  // applicant accept api
+  const [acceptApi, setAcceptApi] = useState("");
+
+  // reject socket
+  const [rejectSocket, setRejectSocket] = useState("");
+
+  // accept socket
+  const [acceptSocket, setAcceptSocket] = useState("");
+
   // loading
   const [loading, setLoading] = useState(false);
 
@@ -172,8 +227,9 @@ const Applicants = () => {
   const dispatch = useDispatch();
 
   // selector instance
-  const { applicants } = useSelector((state) => state.Applicants);
+  const { applicants, screening } = useSelector((state) => state.Applicants);
 
+  // ------------------------- FOR APPLICANTS ----------------------------
   // get applicants form in realtime
   useEffect(() => {
     socket.on("getApplicants", (data) => {
@@ -201,10 +257,37 @@ const Applicants = () => {
     });
   }, [dispatch, isRemove]);
 
+  // ------------------------- FOR SCREENING ----------------------------
+  // move applicant to screening
+  useEffect(() => {
+    socket.on("moveToScreening", (data) => {
+      dispatch(moveToScreening(data));
+      dispatch(removeApplicantActions(data.applicant_id));
+      if (isRemove) {
+        window.location.reload();
+      }
+    });
+  }, [dispatch, isRemove]);
+
+  useEffect(() => {
+    const getApplicantScreening = async () => {
+      const { data } = await axiosConfig.get(
+        "/Applicants/getApplicantScreening"
+      );
+      data.map((a) => dispatch(moveToScreening(a)));
+    };
+
+    getApplicantScreening();
+  }, [dispatch]);
+
   // view applicant details
   const handleViewApplicantDetails = (e) => {
-    const id = e.target.value;
-    setApplicantId(id);
+    const applicantInfo = e.target.children;
+    setApplicantId(applicantInfo[0].innerText);
+    setRejectApi(applicantInfo[1].innerText);
+    setAcceptApi(applicantInfo[2].innerText);
+    setRejectSocket(applicantInfo[3].innerText);
+    setAcceptSocket(applicantInfo[4].innerText);
     setToggleApplicantDetails(true);
   };
 
@@ -215,6 +298,11 @@ const Applicants = () => {
       {toggleApplicantDetails && (
         <ApplicantDetails
           applicantId={applicantId}
+          rejectApi={rejectApi}
+          acceptApi={acceptApi}
+          rejectSocket={rejectSocket}
+          acceptSocket={acceptSocket}
+          screening={screening}
           applicants={applicants}
           setToggleApplicantDetails={setToggleApplicantDetails}
           loading={loading}
@@ -237,9 +325,11 @@ const Applicants = () => {
         <section className="applicants_List">
           {/* PROCESSING */}
           <section className="processing">
+            {/* --------------------- APPLICATIONS -------------------- */}
             <section className="applications">
               {/* HEADER */}
               <section className="applications_Header">Applications</section>
+              {/* APPLICANTS LIST */}
               <section className="applicants_List">
                 {applicants.map((a) => {
                   return (
@@ -250,9 +340,13 @@ const Applicants = () => {
                       <section className="applicant_View_Details">
                         <button
                           type="button"
-                          value={a._id}
                           onClick={handleViewApplicantDetails}
                         >
+                          <span>{a._id}</span>
+                          <span>{`/Applicants/removeApplicant/${a._id}`}</span>
+                          <span>{"/Applicants/acceptApplicant"}</span>
+                          <span>{"rejectapplicant"}</span>
+                          <span>{"acceptApplicant"}</span>
                           View details
                         </button>
                       </section>
@@ -261,9 +355,35 @@ const Applicants = () => {
                 })}
               </section>
             </section>
-            <section className="screening">
+            {/* ----------------------- SCREENING ---------------------- */}
+            <section className="applications screening">
               {/* HEADER */}
               <section className="applications_Header">Screening</section>
+              {/* APPLICANTS SCREENING LIST */}
+              <section className="applicants_List">
+                {screening.map((a) => {
+                  return (
+                    <section key={a._id} className="applicant">
+                      <section className="applicant_Name">
+                        {a.firstname}
+                      </section>
+                      <section className="applicant_View_Details">
+                        <button
+                          type="button"
+                          onClick={handleViewApplicantDetails}
+                        >
+                          <span>{a._id}</span>
+                          <span>{`/Applicants/removeApplicant/${a._id}`}</span>
+                          <span>{"/Applicants/acceptApplicant"}</span>
+                          <span>{"rejectapplicant"}</span>
+                          <span>{"acceptApplicant"}</span>
+                          View details
+                        </button>
+                      </section>
+                    </section>
+                  );
+                })}
+              </section>
             </section>
             <section className="interview">
               {/* HEADER */}

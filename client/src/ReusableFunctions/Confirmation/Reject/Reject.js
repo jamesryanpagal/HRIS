@@ -1,13 +1,15 @@
 import React from "react";
 import axiosConfig from "../../AxiosConfig/AxiosConfig";
+import Spinner from "../../../Spinner/Spinner";
 
 // css
 import "./Reject.css";
 
 const Reject = ({
-  apiUrl,
   applicantId,
+  rejectApi,
   socket,
+  rejectSocket,
   loading,
   setLoading,
   setIsRemove,
@@ -17,8 +19,8 @@ const Reject = ({
   const handleRejectApplicant = async () => {
     try {
       setLoading(true);
-      await axiosConfig.delete(apiUrl);
-      socket.emit("rejectapplicant", applicantId);
+      await axiosConfig.delete(rejectApi);
+      socket.emit(rejectSocket, applicantId);
       setLoading(false);
       setIsRemove(true);
     } catch (error) {
@@ -30,13 +32,17 @@ const Reject = ({
     <div className="reject_Container">
       <section className="reject">
         <p>Are you sure you want to reject this applicant?</p>
-        <section className="confirm_Rejection">
+        <section
+          className={
+            loading ? "disable_Confirm_Rejection" : "confirm_Rejection"
+          }
+        >
           <button
             type="button"
             className="reject_Btn"
             onClick={handleRejectApplicant}
           >
-            {loading ? "Loading..." : "Confirm reject"}
+            {loading ? <Spinner /> : "Reject"}
           </button>
           <button
             type="button"

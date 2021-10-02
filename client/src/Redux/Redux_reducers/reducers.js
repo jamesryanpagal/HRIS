@@ -63,6 +63,25 @@ export const applicantsReducers = (
         message: rejectMessage,
       };
 
+    case "MOVE_TO_SCREENING":
+      const { applicantData } = action.payload;
+
+      const applicantDataExist = state.screening.find(
+        (a) => a.applicant_id === applicantData.applicant_id
+      );
+
+      if (!applicantDataExist) {
+        return {
+          ...state,
+          screening: [...state.screening, applicantData],
+        };
+      }
+
+      return {
+        ...state,
+        screening: [...state.screening],
+      };
+
     default:
       return state;
   }

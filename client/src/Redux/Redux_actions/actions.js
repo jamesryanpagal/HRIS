@@ -33,11 +33,21 @@ export const removeApplicantActions = (applicantId) => (dispatch) => {
   });
 };
 
+// not yet use
 export const rejectApplicantMessage = () => (dispatch) => {
   dispatch({
     type: "REJECT_MESSAGE",
     payload: {
       rejectMessage: "Applicant was remove from the list",
+    },
+  });
+};
+
+export const moveToScreening = (applicantData) => (dispatch) => {
+  dispatch({
+    type: "MOVE_TO_SCREENING",
+    payload: {
+      applicantData,
     },
   });
 };

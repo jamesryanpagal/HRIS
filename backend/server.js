@@ -45,6 +45,7 @@ if (process.env.NODE_ENV === "production") {
 // -------------------------------- SOCKET IO ---------------------------
 // MODEL
 const Applicants = require("./Model/Applicants_Model");
+const Screening = require("./Model/Screening_Model");
 
 io.on("connection", (socket) => {
   // APPLICANTS
@@ -77,6 +78,12 @@ io.on("connection", (socket) => {
   // REJECT APPLICANT
   socket.on("rejectapplicant", (id) => {
     io.emit("removeApplicant", id);
+  });
+
+  // ACCEPT APPLICANT
+  socket.on("acceptApplicant", async (id) => {
+    const getApplicantId = await Screening.findOne({ applicant_id: id });
+    io.emit("moveToScreening", getApplicantId);
   });
 });
 
