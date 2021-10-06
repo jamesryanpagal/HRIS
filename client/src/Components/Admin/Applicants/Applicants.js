@@ -14,6 +14,11 @@ import {
   applicantsActions,
   removeApplicantActions,
   moveToScreening,
+  removeApplicantScreeningActions,
+  moveToInterviewActions,
+  removeApplicantInterviewActions,
+  moveToHiredActions,
+  rejectedApplicantActions,
 } from "../../../Redux/Redux_actions/actions";
 
 // Import the styles
@@ -35,6 +40,7 @@ const ApplicantDetails = ({
   acceptSocket,
   screening,
   applicants,
+  interview,
   setToggleApplicantDetails,
   loading,
   setLoading,
@@ -68,11 +74,19 @@ const ApplicantDetails = ({
     }
   }, [applicantId, screening]);
 
+  // get applicant details from Interview
+  useEffect(() => {
+    const applicant = interview.find((a) => a._id === applicantId);
+    if (applicant) {
+      setApplicant_Details({ ...applicant });
+    }
+  }, [applicantId, interview]);
+
   return (
     <div className="applicants_Details_Container">
       {/* ------------------ TOGGLE CONFIRMATION ------------------- */}
       {/* CONFIRM REJECT */}
-      {confirmReject.toggle && (
+      {confirmReject && (
         <Reject
           applicantId={applicantId}
           rejectApi={rejectApi}
@@ -86,7 +100,7 @@ const ApplicantDetails = ({
       )}
 
       {/* CONFIRM ACCEPT */}
-      {confirmAccept.toggle && (
+      {confirmAccept && (
         <Accept
           applicantId={applicantId}
           acceptApi={acceptApi}
@@ -155,28 +169,14 @@ const ApplicantDetails = ({
             <button
               type="button"
               className="reject"
-              onClick={() =>
-                setConfirmReject((prev) => ({
-                  ...prev,
-                  toggle: true,
-                  apiUrl: `/Applicants/removeApplicant/${applicantId}`,
-                  applicantId,
-                }))
-              }
+              onClick={() => setConfirmReject(true)}
             >
               Reject
             </button>
             <button
               type="button"
               className="accept"
-              onClick={() =>
-                setConfirmAccept((prev) => ({
-                  ...prev,
-                  toggle: true,
-                  apiUrl: "/Applicants/acceptApplicant",
-                  applicantId,
-                }))
-              }
+              onClick={() => setConfirmAccept(true)}
             >
               Accept
             </button>
@@ -227,7 +227,9 @@ const Applicants = () => {
   const dispatch = useDispatch();
 
   // selector instance
-  const { applicants, screening } = useSelector((state) => state.Applicants);
+  const { applicants, screening, interview, rejected, hired } = useSelector(
+    (state) => state.Applicants
+  );
 
   // ------------------------- FOR APPLICANTS ----------------------------
   // get applicants form in realtime
@@ -249,8 +251,9 @@ const Applicants = () => {
 
   // delete applicants from redux
   useEffect(() => {
-    socket.on("removeApplicant", (id) => {
+    socket.on("removeApplicant", ({ id, applicantData }) => {
       dispatch(removeApplicantActions(id));
+      dispatch(rejectedApplicantActions(applicantData));
       if (isRemove) {
         window.location.reload();
       }
@@ -264,11 +267,13 @@ const Applicants = () => {
       dispatch(moveToScreening(data));
       dispatch(removeApplicantActions(data.applicant_id));
       if (isRemove) {
+        setLoading(false);
         window.location.reload();
       }
     });
   }, [dispatch, isRemove]);
 
+  // get applicant screening from database
   useEffect(() => {
     const getApplicantScreening = async () => {
       const { data } = await axiosConfig.get(
@@ -278,6 +283,91 @@ const Applicants = () => {
     };
 
     getApplicantScreening();
+  }, [dispatch]);
+
+  // delete applicantscreening from redux
+  useEffect(() => {
+    socket.on("removeApplicantScreening", ({ id, applicantData }) => {
+      dispatch(removeApplicantScreeningActions(id));
+      dispatch(rejectedApplicantActions(applicantData));
+      if (isRemove) {
+        setLoading(false);
+        window.location.reload();
+      }
+    });
+  }, [dispatch, isRemove]);
+
+  // ------------------------------- FOR INTERVIEW ----------------------
+  // move applicant to interview
+  useEffect(() => {
+    socket.on("moveToInterview", (data) => {
+      dispatch(moveToInterviewActions(data));
+      dispatch(removeApplicantScreeningActions(data.applicant_id));
+      if (isRemove) {
+        setLoading(false);
+        window.location.reload();
+      }
+    });
+  }, [dispatch, isRemove]);
+
+  // get applicant interview from database
+  useEffect(() => {
+    const getAllApplicantInterview = async () => {
+      const { data } = await axiosConfig.get(
+        "/Applicants/getApplicantInterview"
+      );
+      data.map((a) => dispatch(moveToInterviewActions(a)));
+    };
+
+    getAllApplicantInterview();
+  }, [dispatch]);
+
+  // delete applicant interview from redux
+  useEffect(() => {
+    socket.on("removeApplicantInterview", ({ id, applicantData }) => {
+      dispatch(removeApplicantInterviewActions(id));
+      dispatch(rejectedApplicantActions(applicantData));
+      if (isRemove) {
+        setLoading(false);
+        window.location.reload();
+      }
+    });
+  }, [dispatch, isRemove]);
+
+  // -------------------- FOR HIRED -----------------------
+  // move applicant to hired
+  useEffect(() => {
+    socket.on("moveToHired", (data) => {
+      dispatch(moveToHiredActions(data));
+      dispatch(removeApplicantInterviewActions(data.applicant_id));
+      if (isRemove) {
+        setLoading(false);
+        window.location.reload();
+      }
+    });
+  }, [dispatch, isRemove]);
+
+  // get applicant from database
+  useEffect(() => {
+    const getAllApplicantHires = async () => {
+      const { data } = await axiosConfig.get("/Applicants/getApplicantHired");
+      data.map((a) => dispatch(moveToHiredActions(a)));
+    };
+
+    getAllApplicantHires();
+  }, [dispatch]);
+
+  // ----------------------------- FOR REJECTED -----------------------
+  // get applicant from database
+  useEffect(() => {
+    const getAllApplicantRejected = async () => {
+      const { data } = await axiosConfig.get(
+        "/Applicants/getApplicantRejected"
+      );
+      data.map((a) => dispatch(rejectedApplicantActions(a)));
+    };
+
+    getAllApplicantRejected();
   }, [dispatch]);
 
   // view applicant details
@@ -304,6 +394,7 @@ const Applicants = () => {
           acceptSocket={acceptSocket}
           screening={screening}
           applicants={applicants}
+          interview={interview}
           setToggleApplicantDetails={setToggleApplicantDetails}
           loading={loading}
           setLoading={setLoading}
@@ -319,7 +410,10 @@ const Applicants = () => {
       <section className="applicants_List_Container">
         {/* HEADER */}
         <section className="applicants_List_Header">
-          Total Applicants: <span>{applicants.length}</span>
+          <span>Total Applicants: </span>
+          <section className="total_Applicant_List">
+            {applicants.length}
+          </section>
         </section>
         {/* LIST */}
         <section className="applicants_List">
@@ -372,11 +466,16 @@ const Applicants = () => {
                           type="button"
                           onClick={handleViewApplicantDetails}
                         >
+                          {/* Appicant id */}
                           <span>{a._id}</span>
-                          <span>{`/Applicants/removeApplicant/${a._id}`}</span>
-                          <span>{"/Applicants/acceptApplicant"}</span>
-                          <span>{"rejectapplicant"}</span>
-                          <span>{"acceptApplicant"}</span>
+                          {/* remove applicant from database api */}
+                          <span>{`/Applicants/removeApplicantScreening/${a._id}`}</span>
+                          {/* move applicant to interview */}
+                          <span>{"/Applicants/acceptApplicantScreening"}</span>
+                          {/* remove applicant from redux */}
+                          <span>{"rejectApplicantScreening"}</span>
+                          {/* move applicant to redux */}
+                          <span>{"acceptApplicantScreening"}</span>
                           View details
                         </button>
                       </section>
@@ -385,20 +484,74 @@ const Applicants = () => {
                 })}
               </section>
             </section>
-            <section className="interview">
+            {/* ----------------------- INTERVIEW ---------------------- */}
+            <section className="applications interview">
               {/* HEADER */}
               <section className="applications_Header">Interview</section>
+              <section className="applicants_List">
+                {interview.map((a) => {
+                  return (
+                    <section key={a._id} className="applicant">
+                      <section className="applicant_Name">
+                        {a.firstname}
+                      </section>
+                      <section className="applicant_View_Details">
+                        <button
+                          type="button"
+                          onClick={handleViewApplicantDetails}
+                        >
+                          {/* Appicant id */}
+                          <span>{a._id}</span>
+                          {/* remove applicant from database api */}
+                          <span>{`/Applicants/removeApplicantInterview/${a._id}`}</span>
+                          {/* hired applicant */}
+                          <span>{"/Applicants/hiredApplicant"}</span>
+                          {/* remove applicant from redux */}
+                          <span>{"rejectApplicantInterview"}</span>
+                          {/* move applicant to redux */}
+                          <span>{"acceptApplicantInterview"}</span>
+                          View details
+                        </button>
+                      </section>
+                    </section>
+                  );
+                })}
+              </section>
             </section>
           </section>
           {/* RESULT */}
           <section className="result">
-            <section className="rejected">
+            {/* ---------------------- REJECTED -------------------- */}
+            <section className="applications rejected">
               {/* HEADER */}
               <section className="applications_Header">Rejected</section>
+              <section className="applicants_List">
+                {rejected.map((a) => {
+                  return (
+                    <section key={a._id} className="applicant">
+                      <section className="applicant_Name">
+                        {a.firstname}
+                      </section>
+                    </section>
+                  );
+                })}
+              </section>
             </section>
-            <section className="hired">
+            {/* ---------------------------- HIRED -------------------------------------- */}
+            <section className="applications hired">
               {/* HEADER */}
               <section className="applications_Header">Hired</section>
+              <section className="applicants_List">
+                {hired.map((a) => {
+                  return (
+                    <section key={a._id} className="applicant">
+                      <section className="applicant_Name">
+                        {a.firstname}
+                      </section>
+                    </section>
+                  );
+                })}
+              </section>
             </section>
           </section>
         </section>

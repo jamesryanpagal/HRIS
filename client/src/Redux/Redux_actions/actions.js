@@ -51,3 +51,51 @@ export const moveToScreening = (applicantData) => (dispatch) => {
     },
   });
 };
+
+export const removeApplicantScreeningActions =
+  (applicantScreeningId) => (dispatch) => {
+    dispatch({
+      type: "REMOVE_APPLICANT_SCREENING",
+      payload: {
+        applicantScreeningId,
+      },
+    });
+  };
+
+export const moveToInterviewActions =
+  (applicantInterViewData) => (dispatch) => {
+    dispatch({
+      type: "MOVE_TO_INTERVIEW",
+      payload: {
+        applicantInterViewData,
+      },
+    });
+  };
+
+export const removeApplicantInterviewActions =
+  (applicantInterviewId) => (dispatch) => {
+    dispatch({
+      type: "REMOVE_APPLICANT_INTERVIEW",
+      payload: {
+        applicantInterviewId,
+      },
+    });
+  };
+
+export const moveToHiredActions = (applicantHiredData) => (dispatch) => {
+  dispatch({
+    type: "MOVE_TO_HIRED",
+    payload: {
+      applicantHiredData,
+    },
+  });
+};
+
+export const rejectedApplicantActions = (rejectedApplicant) => (dispatch) => {
+  dispatch({
+    type: "REJECTED_APPLICANT",
+    payload: {
+      rejectedApplicant,
+    },
+  });
+};

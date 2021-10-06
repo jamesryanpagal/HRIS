@@ -21,7 +21,6 @@ const Accept = ({
       setLoading(true);
       await axiosConfig.post(acceptApi, { applicantId });
       socket.emit(acceptSocket, applicantId);
-      setLoading(false);
       setIsRemove(true);
     } catch (error) {
       console.log(error);

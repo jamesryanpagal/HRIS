@@ -19,9 +19,8 @@ const Reject = ({
   const handleRejectApplicant = async () => {
     try {
       setLoading(true);
-      await axiosConfig.delete(rejectApi);
+      await axiosConfig.post(rejectApi);
       socket.emit(rejectSocket, applicantId);
-      setLoading(false);
       setIsRemove(true);
     } catch (error) {
       console.log(error);

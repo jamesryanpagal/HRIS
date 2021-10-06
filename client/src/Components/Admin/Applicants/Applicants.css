@@ -164,6 +164,19 @@
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 1px;
+  display: flex;
+}
+
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List_Header
+  .total_Applicant_List {
+  background: #1b3063;
+  color: #ffffff;
+  margin: 0 10px;
+  width: 35px;
+  text-align: center;
+  border-radius: 50%;
 }
 
 .applicants_Container .applicants_List_Container .applicants_List {

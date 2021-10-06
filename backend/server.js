@@ -46,6 +46,9 @@ if (process.env.NODE_ENV === "production") {
 // MODEL
 const Applicants = require("./Model/Applicants_Model");
 const Screening = require("./Model/Screening_Model");
+const Interview = require("./Model/Interview_Model");
+const Hires = require("./Model/Hires_Model");
+const Rejects = require("./Model/Rejects_Model");
 
 io.on("connection", (socket) => {
   // APPLICANTS
@@ -76,14 +79,39 @@ io.on("connection", (socket) => {
   });
 
   // REJECT APPLICANT
-  socket.on("rejectapplicant", (id) => {
-    io.emit("removeApplicant", id);
+  socket.on("rejectapplicant", async (id) => {
+    const applicantData = await Rejects.findOne({ applicant_id: id });
+    io.emit("removeApplicant", { id, applicantData });
   });
 
   // ACCEPT APPLICANT
   socket.on("acceptApplicant", async (id) => {
-    const getApplicantId = await Screening.findOne({ applicant_id: id });
-    io.emit("moveToScreening", getApplicantId);
+    const getApplicantData = await Screening.findOne({ applicant_id: id });
+    io.emit("moveToScreening", getApplicantData);
+  });
+
+  // REJECT APPLICANT FROM SCREENING
+  socket.on("rejectApplicantScreening", async (id) => {
+    const applicantData = await Rejects.findOne({ applicant_id: id });
+    io.emit("removeApplicantScreening", { id, applicantData });
+  });
+
+  // ACCEPT APPLICANTSCREENING
+  socket.on("acceptApplicantScreening", async (id) => {
+    const getApplicantData = await Interview.findOne({ applicant_id: id });
+    io.emit("moveToInterview", getApplicantData);
+  });
+
+  // REJECT APPLICANTINTERVIEW
+  socket.on("rejectApplicantInterview", async (id) => {
+    const applicantData = await Rejects.findOne({ applicant_id: id });
+    io.emit("removeApplicantInterview", { id, applicantData });
+  });
+
+  // ACCEPT APPLICANTINTERVIEW
+  socket.on("acceptApplicantInterview", async (id) => {
+    const getApplicantData = await Hires.findOne({ applicant_id: id });
+    io.emit("moveToHired", getApplicantData);
   });
 });
 
