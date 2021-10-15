@@ -6,8 +6,53 @@ import io from "socket.io-client";
 import "./ApplicantsForm.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
+// ----------------------- MARRIED ADDITIONAL FORM ------------------------------
+const MarriedAdditional = ({ setApplicantDetails }) => {
+  const handleMarriedAdditional = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setApplicantDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  return (
+    <div>
+      <section className="married_Additional_Inputs">
+        {/* SPOUCE FULLNAME */}
+        <section className="married_Additional_Inputs_Group">
+          <label>Spouce fullname</label>
+          <input
+            type="text"
+            name="spouce_fullname"
+            onChange={handleMarriedAdditional}
+          />
+        </section>
+        {/* SPOUCE BIRTHDAY */}
+        <section className="married_Additional_Inputs_Group">
+          <label>Spouce birthday</label>
+          <input
+            type="date"
+            name="spouce_birthday"
+            onChange={handleMarriedAdditional}
+          />
+        </section>
+        {/* SPOUCE CONTACT NUMBER */}
+        <section className="married_Additional_Inputs_Group">
+          <label>Spouce contact no.</label>
+          <input
+            type="number"
+            name="spouce_contact_number"
+            onChange={handleMarriedAdditional}
+          />
+        </section>
+      </section>
+    </div>
+  );
+};
+
+// --------------------------- MAIN -----------------------------
 const ApplicantsForm = () => {
   // ------------------------ STATE ----------------------------
 
@@ -22,7 +67,24 @@ const ApplicantsForm = () => {
     address: "",
     email: "",
     resume: "",
+    position: "",
+    civil_status: "",
+    spouce_fullname: "",
+    spouce_birthday: "",
+    spouce_contact_number: "",
+    religion: "",
+    bloodtype: "",
+    height: "",
+    weight: "",
+    guardian: "",
+    education: "",
+    hobbies: "",
+    language: "",
+    skills: "",
   });
+
+  // show married additional input
+  const [showMarriedAdditional, setShowMarriedAdditional] = useState(false);
 
   // response messsage state
   const [resMessage, setResMessage] = useState("");
@@ -94,6 +156,17 @@ const ApplicantsForm = () => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = applicantDetails;
 
     // CHECK NULL INPUT
@@ -106,7 +179,18 @@ const ApplicantsForm = () => {
       !gender ||
       !address ||
       !email ||
-      !resume
+      !resume ||
+      !position ||
+      !civil_status ||
+      !religion ||
+      !bloodtype ||
+      !height ||
+      !weight ||
+      !guardian ||
+      !education ||
+      !hobbies ||
+      !language ||
+      !skills
     ) {
       setResMessage(
         <section className="resError">
@@ -167,10 +251,22 @@ const ApplicantsForm = () => {
       middle: "",
       phone: "",
       birthday: "",
-      gender: "",
       address: "",
       email: "",
-      resume: "",
+      position: "",
+      civil_status: "",
+      spouce_fullname: "",
+      spouce_birthday: "",
+      spouce_contact_number: "",
+      religion: "",
+      bloodtype: "",
+      height: "",
+      weight: "",
+      guardian: "",
+      education: "",
+      hobbies: "",
+      language: "",
+      skills: "",
     }));
   };
 
@@ -347,6 +443,241 @@ const ApplicantsForm = () => {
                   name="file"
                   id="app_File"
                   onChange={handleUploadResume}
+                />
+              </section>
+            </section>
+
+            {/* ----------------------------------------- FOURTH INPUT GROUP --------------------------------------- */}
+            <section className="applicants_Form_Input_Group">
+              {/* POSITION */}
+              <section className="applicants_Form_Inputs">
+                <select onChange={handleChange} name="position">
+                  <option value="">Position</option>
+                  <option value="Administrative">Administrative</option>
+                  <option value="Human_Resource">Human Resource</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Security">Security</option>
+                </select>
+              </section>
+
+              {/* CIVIL STATUS */}
+              <section className="applicants_Form_Inputs_Gender civilStatus">
+                <span>Civil status</span>
+                <section className="gender_Form_Inputs_Group">
+                  {/* SINGLE */}
+                  <section
+                    className="gender_Container"
+                    onClick={() => setShowMarriedAdditional(false)}
+                  >
+                    <label htmlFor="Single">Single</label>
+                    <input
+                      type="radio"
+                      name="civil_status"
+                      id="Single"
+                      value="single"
+                      onClick={(e) =>
+                        setApplicantDetails((prev) => ({
+                          ...prev,
+                          civil_status: e.target.value,
+                        }))
+                      }
+                    />
+                  </section>
+                  {/* MARRIED */}
+                  <section
+                    className="gender_Container"
+                    onClick={() => setShowMarriedAdditional(true)}
+                  >
+                    <label htmlFor="Married">Married</label>
+                    <input
+                      type="radio"
+                      name="civil_status"
+                      id="Married"
+                      value="married"
+                      onClick={(e) =>
+                        setApplicantDetails((prev) => ({
+                          ...prev,
+                          civil_status: e.target.value,
+                        }))
+                      }
+                    />
+                  </section>
+                  {/* WIDOWED */}
+                  <section
+                    className="gender_Container"
+                    onClick={() => setShowMarriedAdditional(false)}
+                  >
+                    <label htmlFor="Widowed">Widowed</label>
+                    <input
+                      type="radio"
+                      name="civil_status"
+                      id="Widowed"
+                      value="widowed"
+                      onClick={(e) =>
+                        setApplicantDetails((prev) => ({
+                          ...prev,
+                          civil_status: e.target.value,
+                        }))
+                      }
+                    />
+                  </section>
+                </section>
+              </section>
+
+              {/* MARRIED ADDITIONAL */}
+              <section className="applicants_Form_Inputs married_Form_Inputs">
+                {showMarriedAdditional && (
+                  <MarriedAdditional
+                    setApplicantDetails={setApplicantDetails}
+                  />
+                )}
+              </section>
+            </section>
+
+            {/* ----------------------------------------- FIFTH INPUT GROUP --------------------------------------- */}
+            <section className="applicants_Form_Input_Group">
+              {/* RELIGION */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Religion">
+                  Religion
+                </label>
+                <input
+                  type="text"
+                  name="religion"
+                  id="app_Religion"
+                  value={applicantDetails.religion}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+              {/* BLOODTYPE */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Bloodtype">
+                  Bloodtype
+                </label>
+                <input
+                  type="text"
+                  name="bloodtype"
+                  id="app_Bloodtype"
+                  value={applicantDetails.bloodtype}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+              {/* HEIGHT */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Height">
+                  Height
+                </label>
+                <input
+                  type="text"
+                  name="height"
+                  id="app_Height"
+                  value={applicantDetails.height}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+            </section>
+
+            {/* ----------------------------------------- SIXTH INPUT GROUP --------------------------------------- */}
+            <section className="applicants_Form_Input_Group">
+              {/* WEIGHT */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Weight">
+                  Weight
+                </label>
+                <input
+                  type="text"
+                  name="weight"
+                  id="app_Weight"
+                  value={applicantDetails.weight}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+              {/* GUARDIAN */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Guardian">
+                  Guardian
+                </label>
+                <input
+                  type="text"
+                  name="guardian"
+                  id="app_Guardian"
+                  value={applicantDetails.guardian}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+              {/* EDUCATIONAL BACKGROUND */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Education">
+                  Education
+                </label>
+                <input
+                  type="text"
+                  name="education"
+                  id="app_Education"
+                  value={applicantDetails.education}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+            </section>
+
+            {/* ----------------------------------------- SEVENTH INPUT GROUP --------------------------------------- */}
+            <section className="applicants_Form_Input_Group">
+              {/* HOBBIES */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Hobbies">
+                  Hobbies
+                </label>
+                <input
+                  type="text"
+                  name="hobbies"
+                  id="app_Hobbies"
+                  value={applicantDetails.hobbies}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+              {/* LANGUAGE */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Language">
+                  Language
+                </label>
+                <input
+                  type="text"
+                  name="language"
+                  id="app_Language"
+                  value={applicantDetails.language}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
+                />
+              </section>
+              {/* SKILLS */}
+              <section className="applicants_Form_Inputs">
+                <label className="label" htmlFor="app_Skills">
+                  Skills
+                </label>
+                <input
+                  type="text"
+                  name="skills"
+                  id="app_Skills"
+                  value={applicantDetails.skills}
+                  onChange={handleChange}
+                  onFocus={handleAppFormOnFocus}
+                  onBlur={handleAppFormOnBlur}
                 />
               </section>
             </section>

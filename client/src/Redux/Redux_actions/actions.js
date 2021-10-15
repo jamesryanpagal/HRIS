@@ -99,3 +99,22 @@ export const rejectedApplicantActions = (rejectedApplicant) => (dispatch) => {
     },
   });
 };
+
+// ------------------------------------- EMPLOYEE ACTIONS -----------------------------------
+export const employeesActions = (employee) => (dispatch) => {
+  dispatch({
+    type: "EMPLOYEES",
+    payload: {
+      employee,
+    },
+  });
+};
+
+export const updateEmployeeActions = (employeeUpdates) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_EMPLOYEE_DETAILS",
+    payload: {
+      employeeUpdates,
+    },
+  });
+};

@@ -1,0 +1,285 @@
+.employee_Container {
+  width: 100%;
+  height: 100vh;
+  background: #dfdfdf;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ------------------------- HEADER --------------------------- */
+.employee_Container .employee_Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+/* SEARCH EMPLOYEE */
+.employee_Container .employee_Header .search_Employee {
+  display: flex;
+  height: 40px;
+  margin: 0 2px;
+  overflow: hidden;
+  width: 45px;
+  border-radius: 50px;
+  box-shadow: 0 0 5px #afafaf;
+}
+
+.employee_Container .employee_Header .search_Employee input {
+  outline: none;
+  padding: 0 10px;
+  border: none;
+  border-radius: 0px;
+  width: 100%;
+}
+
+.employee_Container .employee_Header .search_Employee .search_Icon {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  background: #ffffff;
+  cursor: pointer;
+  color: rgb(153, 153, 199);
+}
+
+/* TOGGLE SEARCH */
+.employee_Container .employee_Header .toggle_Search_Employee {
+  display: flex;
+  height: 40px;
+  margin: 0 5px;
+  width: 20vw;
+  border-radius: 50px;
+  transition: 0.3s;
+  box-shadow: 0 0 5px #afafaf;
+}
+
+.employee_Container .employee_Header .toggle_Search_Employee input {
+  outline: none;
+  padding: 0 10px;
+  border: none;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  width: 100%;
+  color: #5f5f5f;
+  letter-spacing: 1px;
+}
+
+.employee_Container .employee_Header .toggle_Search_Employee .search_Icon {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  background: rgb(153, 153, 199);
+  cursor: pointer;
+  color: #ffffff;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+/* SEARCHED RESULT */
+.employee_Container .employee_Header .toggle_Search_Employee .searched_Results {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 20;
+  width: 100%;
+  height: 90%;
+  background: rgba(0, 0, 0, 90%);
+}
+
+/* SEARCH HAS NO MATCHED */
+.employee_Container
+  .employee_Header
+  .toggle_Search_Employee
+  .searched_Results
+  .no_Matching_Results {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+/* SEARCH HAS A MATCH */
+.employee_Container
+  .employee_Header
+  .toggle_Search_Employee
+  .searched_Results
+  .results {
+  border-radius: 5px;
+  width: 60%;
+  margin: 5px auto;
+  padding: 10px 20px;
+  color: #3d3d3d;
+  cursor: pointer;
+  background: #c9c9c9;
+}
+
+.employee_Container
+  .employee_Header
+  .toggle_Search_Employee
+  .searched_Results
+  .results
+  span {
+  display: none;
+}
+
+/* REFRESH PAGE */
+.employee_Container .employee_Header .refresh_Page {
+  height: 40px;
+  margin: 0 5px;
+  border-radius: 50px;
+  box-shadow: 0 0 5px #afafaf;
+}
+
+.employee_Container .employee_Header .refresh_Page button {
+  height: 100%;
+  border: none;
+  width: 4vw;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(153, 153, 199);
+  letter-spacing: 1px;
+  background: #ffffff;
+  border-radius: 50px;
+}
+
+/* ------------------------- EMPLOYEE LIST ----------------------- */
+.employee_Container .employee_List {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: auto auto auto auto;
+  height: 90.5vh;
+  overflow-y: scroll;
+}
+
+/* --------------------------- EMPLOYEE CARD ------------------------------ */
+.employee_Container .employee_List .employee {
+  margin: 10px 0;
+  width: 20vw;
+  height: 45vh;
+  padding: 10px 5px;
+  box-shadow: 0 10px 20px #afafaf;
+  background: #ffffff;
+  position: relative;
+}
+
+/* EMPLOYEE IMAGE */
+.employee_Container .employee_List .employee .employee_image {
+  border: #afafaf 1px solid;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* -------------------------- EMPLOYEE NAME --------------------- */
+.employee_Container .employee_List .employee .employee_name {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* -------------- NAME ---------------- */
+.employee_Container .employee_List .employee .employee_name .name {
+  text-align: center;
+  color: #5f5f5f;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+/* ID */
+.employee_Container .employee_List .employee .employee_name .id {
+  text-align: center;
+  color: #5f5f5f;
+}
+
+/* POSITION */
+.employee_Container .employee_List .employee .employee_name .position {
+  text-align: center;
+  color: #4d9aff;
+  font-weight: bolder;
+  font-size: 13px;
+}
+
+/* -------------------------- EMPLOYEE INFO --------------------- */
+.employee_Container .employee_List .employee .employee_info {
+  background: #e7e7e7;
+  border-radius: 3px;
+  display: flex;
+  padding: 10px 3px;
+}
+
+/* ------------ DEPARTMENT ----------- */
+.employee_Container .employee_List .employee .employee_info .department {
+  width: 100%;
+}
+
+/* TITLE */
+.employee_Container .employee_List .employee .employee_info .department .title {
+  text-align: center;
+  font-weight: bolder;
+  color: #3d3d3d;
+  padding: 5px 0;
+}
+
+/* DESCRIPTION */
+.employee_Container
+  .employee_List
+  .employee
+  .employee_info
+  .department
+  .description {
+  text-align: center;
+  font-weight: bolder;
+  color: #5f5f5f;
+}
+
+/* ------------ DATE HIRED ----------- */
+.employee_Container .employee_List .employee .employee_info .date_hired {
+  width: 100%;
+}
+
+/* TITLE */
+.employee_Container .employee_List .employee .employee_info .date_hired .title {
+  text-align: center;
+  font-weight: bolder;
+  color: #3d3d3d;
+  padding: 5px 0;
+}
+
+/* DESCRIPTION */
+.employee_Container
+  .employee_List
+  .employee
+  .employee_info
+  .date_hired
+  .description {
+  text-align: center;
+  font-weight: bolder;
+  color: #5f5f5f;
+}
+
+/* ------------------------ VIEW DETAILS BTN --------------------------- */
+.employee_Container .employee_List .employee .view_Details_Btn {
+  margin-top: 20px;
+  text-align: center;
+  height: 45px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.employee_Container .employee_List .employee .view_Details_Btn button {
+  height: 100%;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  background: #3d3d3d;
+  border-radius: 0px;
+  cursor: pointer;
+}

@@ -5,11 +5,16 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 // -------------------------- REDUCER -------------------------
-import { usersReducers, applicantsReducers } from "../Redux_reducers/reducers";
+import {
+  usersReducers,
+  applicantsReducers,
+  employeeReducers,
+} from "../Redux_reducers/reducers";
 
 const reducer = combineReducers({
   GS_Admin: usersReducers,
   Applicants: applicantsReducers,
+  Employee: employeeReducers,
 });
 
 // ------------------------- PERSIST CONFIG ------------------

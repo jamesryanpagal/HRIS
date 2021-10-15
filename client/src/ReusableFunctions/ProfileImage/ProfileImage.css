@@ -1,0 +1,21 @@
+.profile_Image_Container {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50.5%;
+  transform: translate(-50%, -50%);
+  height: 90%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  background: rgb(153, 153, 199);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.profile_Image_Container img {
+  min-height: 20%;
+  min-width: 20%;
+}
