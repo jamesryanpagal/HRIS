@@ -33,6 +33,20 @@ const removeApplicant = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = getApplicant;
     // move to Rejects
     await Rejects.create({
@@ -46,6 +60,20 @@ const removeApplicant = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
     // remove applicant from Applicants
     const removeApplicant = await Applicants.findByIdAndDelete(applicantId.id);
@@ -74,6 +102,20 @@ const acceptApplicant = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = getApplicant;
 
     // move to screening
@@ -88,6 +130,20 @@ const acceptApplicant = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
 
     // remove applicant from Applicants table
@@ -126,6 +182,20 @@ const removeApplicantScreening = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = getApplicant;
     // move to Rejects
     await Rejects.create({
@@ -139,6 +209,20 @@ const removeApplicantScreening = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
     // remove from Screening
     const removeApplicant_Screening = await Screening.findByIdAndDelete(id);
@@ -166,6 +250,20 @@ const acceptApplicantScreening = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = getApplicantScreening;
 
     // move to interview
@@ -180,6 +278,20 @@ const acceptApplicantScreening = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
 
     // remove applicant from Screening
@@ -218,6 +330,20 @@ const removeApplicantInterview = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = getApplicant;
     // move to Rejects
     await Rejects.create({
@@ -231,6 +357,20 @@ const removeApplicantInterview = async (req, res) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
     // remove from Interview
     const removeApplicant_Interview = await Interview.findByIdAndDelete(id);
@@ -247,7 +387,32 @@ const hiredApplicant = async (req, res) => {
     // get applicant from interview
     const getApplicantInterview = await Interview.findById(applicantId);
     // destructure data
-    const { _id, lastname, firstname, middle } = getApplicantInterview;
+    const {
+      _id,
+      lastname,
+      firstname,
+      middle,
+      phone,
+      birthday,
+      gender,
+      address,
+      email,
+      resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
+    } = getApplicantInterview;
 
     // move to hired
     await Hires.create({
@@ -255,6 +420,26 @@ const hiredApplicant = async (req, res) => {
       lastname,
       firstname,
       middle,
+      phone,
+      birthday,
+      gender,
+      address,
+      email,
+      resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
     // remove applicant from interview
     const removeApplicant = await Interview.findByIdAndDelete(applicantId);

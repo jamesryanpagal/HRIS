@@ -1,12 +1,16 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const screeningSchema = new schema(
+const employeeSchema = new schema(
   {
-    applicant_id: {
+    employee_id: {
       type: String,
       required: true,
       unique: true,
+    },
+    employee_image: {
+      type: String,
+      required: true,
     },
     lastname: {
       type: String,
@@ -37,10 +41,6 @@ const screeningSchema = new schema(
       required: true,
     },
     email: {
-      type: String,
-      required: true,
-    },
-    resume: {
       type: String,
       required: true,
     },
@@ -100,11 +100,15 @@ const screeningSchema = new schema(
       type: String,
       required: true,
     },
+    date_hired: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const Screening = mongoose.model("screenings", screeningSchema);
-module.exports = Screening;
+const Employees = mongoose.model("employees", employeeSchema);
+module.exports = Employees;

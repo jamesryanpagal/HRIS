@@ -43,6 +43,62 @@ const rejectsSchema = new schema(
       type: String,
       required: true,
     },
+    position: {
+      type: String,
+      required: true,
+    },
+    civil_status: {
+      type: String,
+      required: true,
+    },
+    spouce_fullname: {
+      type: String,
+      required: true,
+    },
+    spouce_birthday: {
+      type: String,
+      required: true,
+    },
+    spouce_contact_number: {
+      type: String,
+      required: true,
+    },
+    religion: {
+      type: String,
+      required: true,
+    },
+    bloodtype: {
+      type: String,
+      required: true,
+    },
+    height: {
+      type: String,
+      required: true,
+    },
+    weight: {
+      type: String,
+      required: true,
+    },
+    guardian: {
+      type: String,
+      required: true,
+    },
+    education: {
+      type: String,
+      required: true,
+    },
+    hobbies: {
+      type: String,
+      required: true,
+    },
+    language: {
+      type: String,
+      required: true,
+    },
+    skills: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

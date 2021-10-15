@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const GSUsersSigninRoutes = require("./Routes/GS_Users_Signin_Routes");
 const GSUsersLoginRoutes = require("./Routes/GS_Users_Login_Routes");
 const ApplicantsRoutes = require("./Routes/Applicants_Routes");
+const EmployeeRoutes = require("./Routes/Employee_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -28,6 +29,7 @@ mongoose.connection.once("open", () => console.log("connected to mongodb"));
 app.use("/GSUserSignin", GSUsersSigninRoutes);
 app.use("/GSUserLogin", GSUsersLoginRoutes);
 app.use("/Applicants", ApplicantsRoutes);
+app.use("/Employee", EmployeeRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -49,6 +51,7 @@ const Screening = require("./Model/Screening_Model");
 const Interview = require("./Model/Interview_Model");
 const Hires = require("./Model/Hires_Model");
 const Rejects = require("./Model/Rejects_Model");
+const Employees = require("./Model/Employees_Model");
 
 io.on("connection", (socket) => {
   // APPLICANTS
@@ -63,6 +66,20 @@ io.on("connection", (socket) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname,
+      spouce_birthday,
+      spouce_contact_number,
+      religion,
+      bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     } = data;
     const newApplicants = await Applicants.create({
       lastname,
@@ -74,6 +91,22 @@ io.on("connection", (socket) => {
       address,
       email,
       resume,
+      position,
+      civil_status,
+      spouce_fullname: !spouce_fullname ? "N/A" : spouce_fullname,
+      spouce_birthday: !spouce_birthday ? "N/A" : spouce_birthday,
+      spouce_contact_number: !spouce_contact_number
+        ? "N/A"
+        : spouce_contact_number,
+      religion,
+      bloodtype: !bloodtype ? "N/A" : bloodtype,
+      height,
+      weight,
+      guardian,
+      education,
+      hobbies,
+      language,
+      skills,
     });
     io.emit("getApplicants", newApplicants);
   });
@@ -112,6 +145,21 @@ io.on("connection", (socket) => {
   socket.on("acceptApplicantInterview", async (id) => {
     const getApplicantData = await Hires.findOne({ applicant_id: id });
     io.emit("moveToHired", getApplicantData);
+  });
+
+  // UPDATE EMPLOYEE DETAILS
+  socket.on("editEmployeeDetails", async ({ id, data }) => {
+    const option = { new: true };
+    try {
+      const updateEmployeeDetails = await Employees.findByIdAndUpdate(
+        id,
+        data,
+        option
+      );
+      io.emit("updateEmployeeDetails", updateEmployeeDetails);
+    } catch (error) {
+      console.log(error.message);
+    }
   });
 });
 
