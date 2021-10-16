@@ -17,7 +17,7 @@ import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 import "./Employee.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("http://localhost:8080/");
+const socket = io.connect("https://grandspan.herokuapp.com/");
 
 const Employee = () => {
   // -------------------- STATE ------------------------
@@ -59,9 +59,9 @@ const Employee = () => {
   }, [dispatch]);
 
   // store to employees to local state
-  useEffect(() => {
-    setEmployeesContainer(employees);
-  }, [employees]);
+  // useEffect(() => {
+  //   setEmployeesContainer(employees);
+  // }, [employees]);
 
   // handle filter employee container
   const handleFilterEmployeeContainer = (e) => {
@@ -80,6 +80,12 @@ const Employee = () => {
     setToggleViewDetails(true);
   };
 
+  // handleToggleSearch
+  const handleToggleSearch = () => {
+    setToggleSearch((prev) => !prev);
+    setEmployeesContainer(employees);
+  };
+
   return (
     <div className="employee_Container">
       {/* VIEW DETAILS */}
@@ -96,10 +102,7 @@ const Employee = () => {
             toggleSearch ? "toggle_Search_Employee" : "search_Employee"
           }
         >
-          <section
-            className="search_Icon"
-            onClick={() => setToggleSearch((prev) => !prev)}
-          >
+          <section className="search_Icon" onClick={handleToggleSearch}>
             {toggleSearch ? (
               <i className="fas fa-times"></i>
             ) : (
@@ -155,58 +158,109 @@ const Employee = () => {
       </section>
       {/* EMPLOYEE LIST */}
       <section className="employee_List">
-        {employeesContainer &&
-          employeesContainer.map((e) => {
-            return (
-              // EMPLOYEE CARD
-              <section key={e._id} className="employee">
-                {/* IMAGE */}
-                <section className="employee_image">
-                  <ProfileImage
-                    image={e.employee_image}
-                    lastname={e.lastname}
-                    firstname={e.firstname}
-                  />
-                </section>
-                {/* NAME AND POSITION */}
-                <section className="employee_name">
-                  {/* NAME */}
-                  <section className="name">{`${e.lastname}, ${e.firstname} ${e.middle}.`}</section>
-                  {/* ID */}
-                  <section className="id">{e.employee_id}</section>
-                  {/* POSITION */}
-                  <section className="position">{e.position}</section>
-                </section>
-                {/* DEPARTMENT AND DATE HIRED */}
-                <section className="employee_info">
-                  {/* DEPARTMENT */}
-                  <section className="department">
-                    {/* TITLE */}
-                    <section className="title">Department</section>
-                    {/* DESCRIPTION */}
-                    <section className="description">Description</section>
+        {employeesContainer.length > 0
+          ? employeesContainer.map((e) => {
+              return (
+                // EMPLOYEE CARD
+                <section key={e._id} className="employee">
+                  {/* IMAGE */}
+                  <section className="employee_image">
+                    <ProfileImage
+                      image={e.employee_image}
+                      lastname={e.lastname}
+                      firstname={e.firstname}
+                    />
                   </section>
-                  {/* DATE HIRED */}
-                  <section className="date_hired">
-                    {/* TITLE */}
-                    <section className="title">Date hired</section>
-                    {/* DESCRIPTION */}
-                    <section className="description">{e.date_hired}</section>
+                  {/* NAME AND POSITION */}
+                  <section className="employee_name">
+                    {/* NAME */}
+                    <section className="name">{`${e.lastname}, ${e.firstname} ${e.middle}.`}</section>
+                    {/* ID */}
+                    <section className="id">{e.employee_id}</section>
+                    {/* POSITION */}
+                    <section className="position">{e.position}</section>
+                  </section>
+                  {/* DEPARTMENT AND DATE HIRED */}
+                  <section className="employee_info">
+                    {/* DEPARTMENT */}
+                    <section className="department">
+                      {/* TITLE */}
+                      <section className="title">Department</section>
+                      {/* DESCRIPTION */}
+                      <section className="description">Description</section>
+                    </section>
+                    {/* DATE HIRED */}
+                    <section className="date_hired">
+                      {/* TITLE */}
+                      <section className="title">Date hired</section>
+                      {/* DESCRIPTION */}
+                      <section className="description">{e.date_hired}</section>
+                    </section>
+                  </section>
+                  {/* VIEW DETAILS BUTTON */}
+                  <section className="view_Details_Btn">
+                    <button
+                      type="button"
+                      value={e.employee_id}
+                      onClick={handleViewDetails}
+                    >
+                      View details
+                    </button>
                   </section>
                 </section>
-                {/* VIEW DETAILS BUTTON */}
-                <section className="view_Details_Btn">
-                  <button
-                    type="button"
-                    value={e.employee_id}
-                    onClick={handleViewDetails}
-                  >
-                    View details
-                  </button>
+              );
+            })
+          : employees.map((e) => {
+              return (
+                // EMPLOYEE CARD
+                <section key={e._id} className="employee">
+                  {/* IMAGE */}
+                  <section className="employee_image">
+                    <ProfileImage
+                      image={e.employee_image}
+                      lastname={e.lastname}
+                      firstname={e.firstname}
+                    />
+                  </section>
+                  {/* NAME AND POSITION */}
+                  <section className="employee_name">
+                    {/* NAME */}
+                    <section className="name">{`${e.lastname}, ${e.firstname} ${e.middle}.`}</section>
+                    {/* ID */}
+                    <section className="id">{e.employee_id}</section>
+                    {/* POSITION */}
+                    <section className="position">{e.position}</section>
+                  </section>
+                  {/* DEPARTMENT AND DATE HIRED */}
+                  <section className="employee_info">
+                    {/* DEPARTMENT */}
+                    <section className="department">
+                      {/* TITLE */}
+                      <section className="title">Department</section>
+                      {/* DESCRIPTION */}
+                      <section className="description">Description</section>
+                    </section>
+                    {/* DATE HIRED */}
+                    <section className="date_hired">
+                      {/* TITLE */}
+                      <section className="title">Date hired</section>
+                      {/* DESCRIPTION */}
+                      <section className="description">{e.date_hired}</section>
+                    </section>
+                  </section>
+                  {/* VIEW DETAILS BUTTON */}
+                  <section className="view_Details_Btn">
+                    <button
+                      type="button"
+                      value={e.employee_id}
+                      onClick={handleViewDetails}
+                    >
+                      View details
+                    </button>
+                  </section>
                 </section>
-              </section>
-            );
-          })}
+              );
+            })}
       </section>
     </div>
   );
