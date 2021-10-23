@@ -29,7 +29,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "./Applicants.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 // --------------------------------- APPLICANT DETAILS MODAL ----------------------
 const ApplicantDetails = ({
@@ -310,6 +310,21 @@ const Applicants = () => {
     });
   }, [dispatch, isRemove]);
 
+  // if applicant still exist in screening
+  useEffect(() => {
+    interview.map((ai) => {
+      const applicantScreening = screening.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantScreening) {
+        return dispatch(
+          removeApplicantScreeningActions(applicantScreening._id)
+        );
+      }
+      return applicantScreening;
+    });
+  }, [dispatch, screening, interview]);
+
   // get applicant interview from database
   useEffect(() => {
     const getAllApplicantInterview = async () => {
@@ -429,7 +444,8 @@ const Applicants = () => {
                   return (
                     <section key={a._id} className="applicant">
                       <section className="applicant_Name">
-                        {a.firstname}
+                        <p>{`${a.firstname} ${a.middle}.`}</p>
+                        <p>{a.lastname}</p>
                       </section>
                       <section className="applicant_View_Details">
                         <button
@@ -459,7 +475,8 @@ const Applicants = () => {
                   return (
                     <section key={a._id} className="applicant">
                       <section className="applicant_Name">
-                        {a.firstname}
+                        <p>{`${a.firstname} ${a.middle}.`}</p>
+                        <p>{a.lastname}</p>
                       </section>
                       <section className="applicant_View_Details">
                         <button
@@ -493,7 +510,8 @@ const Applicants = () => {
                   return (
                     <section key={a._id} className="applicant">
                       <section className="applicant_Name">
-                        {a.firstname}
+                        <p>{`${a.firstname} ${a.middle}.`}</p>
+                        <p>{a.lastname}</p>
                       </section>
                       <section className="applicant_View_Details">
                         <button
@@ -530,7 +548,8 @@ const Applicants = () => {
                   return (
                     <section key={a._id} className="applicant">
                       <section className="applicant_Name">
-                        {a.firstname}
+                        <p>{`${a.firstname} ${a.middle}.`}</p>
+                        <p>{a.lastname}</p>
                       </section>
                     </section>
                   );
@@ -546,7 +565,8 @@ const Applicants = () => {
                   return (
                     <section key={a._id} className="applicant">
                       <section className="applicant_Name">
-                        {a.firstname}
+                        <p>{`${a.firstname} ${a.middle}.`}</p>
+                        <p>{a.lastname}</p>
                       </section>
                     </section>
                   );

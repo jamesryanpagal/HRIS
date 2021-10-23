@@ -17,7 +17,7 @@ import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 import "./Employee.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const Employee = () => {
   // -------------------- STATE ------------------------
@@ -57,11 +57,6 @@ const Employee = () => {
       dispatch(updateEmployeeActions(data));
     });
   }, [dispatch]);
-
-  // store to employees to local state
-  // useEffect(() => {
-  //   setEmployeesContainer(employees);
-  // }, [employees]);
 
   // handle filter employee container
   const handleFilterEmployeeContainer = (e) => {
