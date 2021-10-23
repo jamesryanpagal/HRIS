@@ -39,10 +39,6 @@ const rejectsSchema = new schema(
       type: String,
       required: true,
     },
-    resume: {
-      type: String,
-      required: true,
-    },
     position: {
       type: String,
       required: true,
