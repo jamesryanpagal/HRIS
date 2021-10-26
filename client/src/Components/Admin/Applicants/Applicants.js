@@ -407,6 +407,21 @@ const Applicants = () => {
     });
   }, [dispatch, isRemove]);
 
+  // if applicant still exist in interview
+  useEffect(() => {
+    hired.map((ai) => {
+      const applicantInterview = interview.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantInterview) {
+        return dispatch(
+          removeApplicantInterviewActions(applicantInterview._id)
+        );
+      }
+      return applicantInterview;
+    });
+  }, [dispatch, interview, hired]);
+
   // get applicant from database
   useEffect(() => {
     const getAllApplicantHires = async () => {
@@ -430,6 +445,19 @@ const Applicants = () => {
     getAllApplicantRejected();
   }, [dispatch]);
 
+  // if applicant still exist in application
+  useEffect(() => {
+    rejected.map((ai) => {
+      const applicantApplications = applicants.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantApplications) {
+        return dispatch(removeApplicantActions(applicantApplications._id));
+      }
+      return applicantApplications;
+    });
+  }, [dispatch, applicants, rejected]);
+
   // if applicant still exist in screening
   useEffect(() => {
     rejected.map((ai) => {
@@ -444,6 +472,21 @@ const Applicants = () => {
       return applicantScreening;
     });
   }, [dispatch, screening, rejected]);
+
+  // if applicant still exist in interview
+  useEffect(() => {
+    rejected.map((ai) => {
+      const applicantInterview = interview.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantInterview) {
+        return dispatch(
+          removeApplicantInterviewActions(applicantInterview._id)
+        );
+      }
+      return applicantInterview;
+    });
+  }, [dispatch, interview, rejected]);
 
   // ------------------- FOR ASSIGNING APPLICANT --------------
   // assigned application applicant
