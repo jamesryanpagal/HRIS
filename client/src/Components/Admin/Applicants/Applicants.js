@@ -430,6 +430,21 @@ const Applicants = () => {
     getAllApplicantRejected();
   }, [dispatch]);
 
+  // if applicant still exist in screening
+  useEffect(() => {
+    rejected.map((ai) => {
+      const applicantScreening = screening.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantScreening) {
+        return dispatch(
+          removeApplicantScreeningActions(applicantScreening._id)
+        );
+      }
+      return applicantScreening;
+    });
+  }, [dispatch, screening, rejected]);
+
   // ------------------- FOR ASSIGNING APPLICANT --------------
   // assigned application applicant
   useEffect(() => {
