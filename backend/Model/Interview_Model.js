@@ -3,6 +3,10 @@ const schema = mongoose.Schema;
 
 const interviewSchema = new schema(
   {
+    assignedBy: {
+      type: String,
+      required: true,
+    },
     applicant_id: {
       type: String,
       required: true,

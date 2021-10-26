@@ -16,6 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 /* CLOSE APPLICANT DETAILS */
@@ -163,6 +164,24 @@
   font-weight: bold;
   letter-spacing: 1px;
   display: flex;
+  position: relative;
+}
+
+/* RESPONSE MESSAGE */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List_Header
+  .resMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  text-align: center;
+  background: rgb(255, 133, 133);
+  color: rgb(143, 0, 0);
+  border-radius: 3px;
+  padding: 5px 0;
 }
 
 .applicants_Container
@@ -215,7 +234,7 @@
   .applicants_List
   .applications
   .applications_Header {
-  background: #94ba77;
+  background: #e4be14;
 }
 
 /* APPLICATIONS APPLICANTS LIST */
@@ -244,6 +263,153 @@
   margin: 10px auto;
   text-align: center;
   box-shadow: 0 5px 20px -5px #afafaa;
+  position: relative;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .assign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .assign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .assign_Button
+  span {
+  display: none;
+}
+
+/* DISABLE ASSIGN BUTTON */
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .disable_Assign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .disable_Assign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .disable_Assign_Button
+  span {
+  display: none;
+}
+
+/* APPLICATIONS APPLICANTS UNASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .unassign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* APPLICATIONS APPLICANTS UNASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .unassign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS UNASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .unassign_Button
+  span {
+  display: none;
+}
+
+/* DISABLE UNASSIGN BUTTON */
+/* APPLICATIONS APPLICANTS UNASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .disable_Assign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS UNASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .disable_Assign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS UNASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .applicant
+  .disable_Assign_Button
+  span {
+  display: none;
 }
 
 /* APPLICATIONS APPLICANTS NAME */
@@ -287,6 +453,218 @@
   .applicants_List
   .applications
   .applicant
+  .applicant_View_Details
+  button
+  span {
+  display: none;
+}
+
+/* DISABLE APPLICANT */
+/* APPLICATIONS APPLICANTS */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant {
+  background: #ffffff;
+  width: 95%;
+  border-radius: 5px;
+  padding: 10px 0px;
+  margin: 10px auto;
+  text-align: center;
+  box-shadow: 0 5px 20px -5px #afafaa;
+  position: relative;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .assign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .assign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .assign_Button
+  span {
+  display: none;
+}
+
+/* DISABLE ASSIGN BUTTON */
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .disable_Assign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .disable_Assign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .disable_Assign_Button
+  span {
+  display: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .unassign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .unassign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .unassign_Button
+  span {
+  display: none;
+}
+
+/* DISABLE ASSIGN BUTTON */
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .disable_Assign_Button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON ICON */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .disable_Assign_Button
+  i {
+  pointer-events: none;
+}
+
+/* APPLICATIONS APPLICANTS ASSIGN BUTTON SPAN */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .disable_Assign_Button
+  span {
+  display: none;
+}
+
+/* APPLICATIONS APPLICANTS NAME */
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .applicant_Name {
+  border: 1px solid transparent;
+  border-bottom-color: #afafaf;
+  padding: 5px;
+  width: 90%;
+  margin: 5px auto;
+  word-wrap: break-word;
+  font-size: 15px;
+  color: #5f5f5f;
+}
+
+/* APPLICATIONS APPLICANTS VIEW DETAILS */
+
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
+  .applicant_View_Details
+  button {
+  border: none;
+  width: 90%;
+  padding: 10px;
+  background: #4e4e4e;
+  color: #ffffff;
+  border-radius: 0px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.applicants_Container
+  .applicants_List_Container
+  .applicants_List
+  .applications
+  .disable_Applicant
   .applicant_View_Details
   button
   span {
@@ -403,7 +781,7 @@
   .result
   .hired
   .applications_Header {
-  background: #e4be14;
+  background: #94ba77;
 }
 
 /* HIRED HEADER */

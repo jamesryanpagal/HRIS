@@ -1,4 +1,5 @@
 // --------------------------------- USERTOKEN ACTIONS -----------------------------
+// create user token
 export const userTokenActions = (token) => (dispatch) => {
   dispatch({
     type: "USER_TOKEN",
@@ -8,6 +9,17 @@ export const userTokenActions = (token) => (dispatch) => {
   });
 };
 
+// add admin username
+export const adminUsernameActions = (adminUsername) => (dispatch) => {
+  dispatch({
+    type: "ADMIN_USERNAME",
+    payload: {
+      adminUsername,
+    },
+  });
+};
+
+// remove user token
 export const removeUsertokenActions = () => (dispatch) => {
   dispatch({
     type: "REMOVE_USER_TOKEN",
@@ -15,6 +27,9 @@ export const removeUsertokenActions = () => (dispatch) => {
 };
 
 // ------------------------------------- APPLICANTS ACTIONS -----------------------------------
+
+// ----------------------- FORM APPLICATIONS -----------------------
+// add applicant
 export const applicantsActions = (newApplicants) => (dispatch) => {
   dispatch({
     type: "NEW_APPLICANTS",
@@ -24,6 +39,31 @@ export const applicantsActions = (newApplicants) => (dispatch) => {
   });
 };
 
+// assign application applicant
+export const assignApplicationApplicantActions =
+  (assignApplicantApplicationsAdmin, assignApplicantApplicationsId) =>
+  (dispatch) => {
+    dispatch({
+      type: "ASSIGN_APPLICANT_APPLICATIONS",
+      payload: {
+        assignApplicantApplicationsAdmin,
+        assignApplicantApplicationsId,
+      },
+    });
+  };
+
+// unassign application applicant
+export const unassignApplicationApplicantActions =
+  (unassignApplicantApplicationsId) => (dispatch) => {
+    dispatch({
+      type: "UNASSIGN_APPLICANT_APPLICATIONS",
+      payload: {
+        unassignApplicantApplicationsId,
+      },
+    });
+  };
+
+// remove applicant from applications
 export const removeApplicantActions = (applicantId) => (dispatch) => {
   dispatch({
     type: "REMOVE_APPLICANT",
@@ -33,16 +73,8 @@ export const removeApplicantActions = (applicantId) => (dispatch) => {
   });
 };
 
-// not yet use
-export const rejectApplicantMessage = () => (dispatch) => {
-  dispatch({
-    type: "REJECT_MESSAGE",
-    payload: {
-      rejectMessage: "Applicant was remove from the list",
-    },
-  });
-};
-
+// ----------------------- FORM SCREENING -----------------------
+// move applicant from applicantions to screening
 export const moveToScreening = (applicantData) => (dispatch) => {
   dispatch({
     type: "MOVE_TO_SCREENING",
@@ -52,6 +84,30 @@ export const moveToScreening = (applicantData) => (dispatch) => {
   });
 };
 
+// assign screening applicant
+export const assignScreeningApplicantActions =
+  (assignApplicantScreeningAdmin, assignApplicantScreeningId) => (dispatch) => {
+    dispatch({
+      type: "ASSIGN_APPLICANT_SCREENING",
+      payload: {
+        assignApplicantScreeningAdmin,
+        assignApplicantScreeningId,
+      },
+    });
+  };
+
+// unassign screening applicant
+export const unassignScreeningApplicantActions =
+  (unassignApplicantScreeningId) => (dispatch) => {
+    dispatch({
+      type: "UNASSIGN_APPLICANT_SCREENING",
+      payload: {
+        unassignApplicantScreeningId,
+      },
+    });
+  };
+
+// remove applicant from screening
 export const removeApplicantScreeningActions =
   (applicantScreeningId) => (dispatch) => {
     dispatch({
@@ -62,6 +118,8 @@ export const removeApplicantScreeningActions =
     });
   };
 
+// ----------------------- FORM INTERVIEW -----------------------
+// move applicant from screening to interview
 export const moveToInterviewActions =
   (applicantInterViewData) => (dispatch) => {
     dispatch({
@@ -72,6 +130,30 @@ export const moveToInterviewActions =
     });
   };
 
+// assign interview applicant
+export const assignInterviewApplicantActions =
+  (assignApplicantInterviewAdmin, assignApplicantInterviewId) => (dispatch) => {
+    dispatch({
+      type: "ASSIGN_APPLICANT_INTERVIEW",
+      payload: {
+        assignApplicantInterviewAdmin,
+        assignApplicantInterviewId,
+      },
+    });
+  };
+
+// unassign interview applicant
+export const unassignInterviewApplicantActions =
+  (unassignApplicantInterviewId) => (dispatch) => {
+    dispatch({
+      type: "UNASSIGN_APPLICANT_INTERVIEW",
+      payload: {
+        unassignApplicantInterviewId,
+      },
+    });
+  };
+
+// remove applicant from interview
 export const removeApplicantInterviewActions =
   (applicantInterviewId) => (dispatch) => {
     dispatch({
@@ -82,6 +164,8 @@ export const removeApplicantInterviewActions =
     });
   };
 
+// ----------------------- FORM HIRED -----------------------
+// move applicant from interview to hired
 export const moveToHiredActions = (applicantHiredData) => (dispatch) => {
   dispatch({
     type: "MOVE_TO_HIRED",
@@ -91,6 +175,8 @@ export const moveToHiredActions = (applicantHiredData) => (dispatch) => {
   });
 };
 
+// ----------------------- FORM REJECTED -----------------------
+// move applicant to rejected
 export const rejectedApplicantActions = (rejectedApplicant) => (dispatch) => {
   dispatch({
     type: "REJECTED_APPLICANT",
@@ -101,6 +187,7 @@ export const rejectedApplicantActions = (rejectedApplicant) => (dispatch) => {
 };
 
 // ------------------------------------- EMPLOYEE ACTIONS -----------------------------------
+// add employee
 export const employeesActions = (employee) => (dispatch) => {
   dispatch({
     type: "EMPLOYEES",
@@ -110,6 +197,7 @@ export const employeesActions = (employee) => (dispatch) => {
   });
 };
 
+// update employee status
 export const updateEmployeeActions = (employeeUpdates) => (dispatch) => {
   dispatch({
     type: "UPDATE_EMPLOYEE_DETAILS",

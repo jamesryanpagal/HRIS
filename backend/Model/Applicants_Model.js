@@ -3,6 +3,10 @@ const schema = mongoose.Schema;
 
 const applicantsSchema = new schema(
   {
+    assignedBy: {
+      type: String,
+      required: true,
+    },
     lastname: {
       type: String,
       required: true,

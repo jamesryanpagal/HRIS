@@ -11,11 +11,18 @@ import Accept from "../../../ReusableFunctions/Confirmation/Accept/Accept";
 
 // REDUX ACTIONS
 import {
+  adminUsernameActions,
   applicantsActions,
+  assignApplicationApplicantActions,
+  unassignApplicationApplicantActions,
   removeApplicantActions,
   moveToScreening,
+  assignScreeningApplicantActions,
+  unassignScreeningApplicantActions,
   removeApplicantScreeningActions,
   moveToInterviewActions,
+  assignInterviewApplicantActions,
+  unassignInterviewApplicantActions,
   removeApplicantInterviewActions,
   moveToHiredActions,
   rejectedApplicantActions,
@@ -29,7 +36,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "./Applicants.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 // --------------------------------- APPLICANT DETAILS MODAL ----------------------
 const ApplicantDetails = ({
@@ -220,6 +227,12 @@ const Applicants = () => {
   // loading
   const [loading, setLoading] = useState(false);
 
+  // disable assign
+  const [loadingAssign, setLoadingAssign] = useState(false);
+
+  // response message for assigning
+  const [resMessage, setResmessage] = useState("");
+
   // remove applicant
   const [isRemove, setIsRemove] = useState(false);
 
@@ -230,6 +243,25 @@ const Applicants = () => {
   const { applicants, screening, interview, rejected, hired } = useSelector(
     (state) => state.Applicants
   );
+
+  const { admin_token, admin } = useSelector((state) => state.GS_Admin);
+
+  // -------------------- FOR ADMIN -------------------
+  // get admin details
+  useEffect(() => {
+    const getAdminDetails = async () => {
+      try {
+        const { data } = await axiosConfig.get("/VerifyToken", {
+          headers: { key: admin_token },
+        });
+        dispatch(adminUsernameActions(data.Username));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAdminDetails();
+  }, [admin_token, dispatch]);
 
   // ------------------------- FOR APPLICANTS ----------------------------
   // get applicants form in realtime
@@ -272,6 +304,19 @@ const Applicants = () => {
       }
     });
   }, [dispatch, isRemove]);
+
+  // if applicant still exist in application
+  useEffect(() => {
+    screening.map((ai) => {
+      const applicantApplication = applicants.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantApplication) {
+        return dispatch(removeApplicantActions(applicantApplication._id));
+      }
+      return applicantApplication;
+    });
+  }, [dispatch, applicants, screening]);
 
   // get applicant screening from database
   useEffect(() => {
@@ -385,6 +430,51 @@ const Applicants = () => {
     getAllApplicantRejected();
   }, [dispatch]);
 
+  // ------------------- FOR ASSIGNING APPLICANT --------------
+  // assigned application applicant
+  useEffect(() => {
+    socket.on("assignedApplicationApplicant", ({ adminName, applicantId }) => {
+      dispatch(assignApplicationApplicantActions(adminName, applicantId));
+    });
+  }, [dispatch]);
+
+  // unassign application applicant
+  useEffect(() => {
+    socket.on("unassignedApplicationApplicant", ({ applicantId }) => {
+      dispatch(unassignApplicationApplicantActions(applicantId));
+    });
+  }, [dispatch]);
+
+  // ------------------ FOR ASSIGNING SCREENING -----------------
+  // assigned screening applicant
+  useEffect(() => {
+    socket.on("assignedScreeningApplicant", ({ adminName, applicantId }) => {
+      dispatch(assignScreeningApplicantActions(adminName, applicantId));
+    });
+  }, [dispatch]);
+
+  // unassign screening applicant
+  useEffect(() => {
+    socket.on("unassignedScreeningApplicant", ({ applicantId }) => {
+      dispatch(unassignScreeningApplicantActions(applicantId));
+    });
+  }, [dispatch]);
+
+  // ------------------ FOR ASSIGNING INTERVIEW -----------------
+  // assigned interview applicant
+  useEffect(() => {
+    socket.on("assignedInterviewApplicant", ({ adminName, applicantId }) => {
+      dispatch(assignInterviewApplicantActions(adminName, applicantId));
+    });
+  }, [dispatch]);
+
+  // unassign interview applicant
+  useEffect(() => {
+    socket.on("unassignedInterviewApplicant", ({ applicantId }) => {
+      dispatch(unassignInterviewApplicantActions(applicantId));
+    });
+  }, [dispatch]);
+
   // view applicant details
   const handleViewApplicantDetails = (e) => {
     const applicantInfo = e.target.children;
@@ -394,6 +484,135 @@ const Applicants = () => {
     setRejectSocket(applicantInfo[3].innerText);
     setAcceptSocket(applicantInfo[4].innerText);
     setToggleApplicantDetails(true);
+  };
+
+  // handle assign application applicant
+  const handleAssignApplicationsApplicant = async (e) => {
+    const target = e.target;
+    try {
+      setLoadingAssign(true);
+      const { data } = await axiosConfig.patch(
+        "/AssignApplicant/assignApplicationApplicant/" +
+          target.children[0].innerText,
+        { adminName: admin }
+      );
+      if (data === "Already assigned") {
+        setResmessage("Already assign to other admin");
+        setLoadingAssign(false);
+        return;
+      }
+      socket.emit("assignApplicationApplicant", {
+        adminName: data.assignedBy,
+        applicantId: data._id,
+      });
+      setLoadingAssign(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle unassign application applicant
+  const handleUnassignApplicationsApplicant = async (e) => {
+    const target = e.target;
+    try {
+      setLoadingAssign(true);
+      const { data } = await axiosConfig.patch(
+        "/AssignApplicant/unassignApplicationApplicant/" +
+          target.children[0].innerText
+      );
+      socket.emit("unassignApplicationApplicant", {
+        applicantId: data,
+      });
+      setLoadingAssign(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle assign screening applicant
+  const handleAssignScreeningApplicant = async (e) => {
+    const target = e.target;
+    try {
+      setLoadingAssign(true);
+      const { data } = await axiosConfig.patch(
+        "/AssignApplicant/assignScreeningApplicant/" +
+          target.children[0].innerText,
+        { adminName: admin }
+      );
+      if (data === "Already assigned") {
+        setResmessage("Already assign to other admin");
+        setLoadingAssign(false);
+        return;
+      }
+      socket.emit("assignScreeningApplicant", {
+        adminName: data.assignedBy,
+        applicantId: data._id,
+      });
+      setLoadingAssign(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle unassign screening applicant
+  const handleUnassignScreeningApplicant = async (e) => {
+    const target = e.target;
+    try {
+      setLoadingAssign(true);
+      const { data } = await axiosConfig.patch(
+        "/AssignApplicant/unassignScreeningApplicant/" +
+          target.children[0].innerText
+      );
+      socket.emit("unassignScreeningApplicant", {
+        applicantId: data,
+      });
+      setLoadingAssign(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle assign interview applicant
+  const handleAssignInterviewApplicant = async (e) => {
+    const target = e.target;
+    try {
+      setLoadingAssign(true);
+      const { data } = await axiosConfig.patch(
+        "/AssignApplicant/assignInterviewApplicant/" +
+          target.children[0].innerText,
+        { adminName: admin }
+      );
+      if (data === "Already assigned") {
+        setResmessage("Already assign to other admin");
+        setLoadingAssign(false);
+        return;
+      }
+      socket.emit("assignInterviewApplicant", {
+        adminName: data.assignedBy,
+        applicantId: data._id,
+      });
+      setLoadingAssign(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle unassign interview applicant
+  const handleUnassignInterviewApplicant = async (e) => {
+    const target = e.target;
+    try {
+      setLoadingAssign(true);
+      const { data } = await axiosConfig.patch(
+        "/AssignApplicant/unassignInterviewApplicant/" +
+          target.children[0].innerText
+      );
+      socket.emit("unassignInterviewApplicant", {
+        applicantId: data,
+      });
+      setLoadingAssign(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -429,6 +648,13 @@ const Applicants = () => {
           <section className="total_Applicant_List">
             {applicants.length}
           </section>
+          {/* RESPONSE MESSAGE */}
+          {resMessage && (
+            <section className="resMessage">
+              <i className="fas fa-exclamation-triangle"></i>
+              <span> {resMessage}</span>
+            </section>
+          )}
         </section>
         {/* LIST */}
         <section className="applicants_List">
@@ -442,20 +668,64 @@ const Applicants = () => {
               <section className="applicants_List">
                 {applicants.map((a) => {
                   return (
-                    <section key={a._id} className="applicant">
+                    <section
+                      key={a._id}
+                      className={
+                        a.assignedBy === "N/A"
+                          ? "applicant"
+                          : a.assignedBy === admin
+                          ? "applicant"
+                          : "disable_Applicant"
+                      }
+                    >
+                      {/* ASSIGN BUTTON */}
+                      {admin !== a.assignedBy ? (
+                        // ASSIGN BUTTON
+                        <section
+                          className={
+                            loadingAssign
+                              ? "disable_Assign_Button"
+                              : "assign_Button"
+                          }
+                          onClick={handleAssignApplicationsApplicant}
+                        >
+                          <span>{a._id}</span>
+                          <i className="fas fa-thumbtack"></i>
+                        </section>
+                      ) : (
+                        // UNASSIGN BUTTON
+                        <section
+                          className={
+                            loadingAssign
+                              ? "disable_Assign_Button"
+                              : "unassign_Button"
+                          }
+                          onClick={handleUnassignApplicationsApplicant}
+                        >
+                          <span>{a._id}</span>
+                          <i className="fas fa-backspace"></i>
+                        </section>
+                      )}
+                      {/* APPLICANTS NAME */}
                       <section className="applicant_Name">
                         <p>{`${a.firstname} ${a.middle}.`}</p>
                         <p>{a.lastname}</p>
                       </section>
+                      {/* APPLICANTS VIEW DETAILS BUTTON */}
                       <section className="applicant_View_Details">
                         <button
                           type="button"
                           onClick={handleViewApplicantDetails}
                         >
+                          {/* applicant id */}
                           <span>{a._id}</span>
+                          {/* remove applicant from database */}
                           <span>{`/Applicants/removeApplicant/${a._id}`}</span>
+                          {/* move applicant to screening database */}
                           <span>{"/Applicants/acceptApplicant"}</span>
+                          {/* remove applicant from redux */}
                           <span>{"rejectapplicant"}</span>
+                          {/* move applicant to redux */}
                           <span>{"acceptApplicant"}</span>
                           View details
                         </button>
@@ -473,11 +743,50 @@ const Applicants = () => {
               <section className="applicants_List">
                 {screening.map((a) => {
                   return (
-                    <section key={a._id} className="applicant">
+                    <section
+                      key={a._id}
+                      className={
+                        a.assignedBy === "N/A"
+                          ? "applicant"
+                          : a.assignedBy === admin
+                          ? "applicant"
+                          : "disable_Applicant"
+                      }
+                    >
+                      {/* ASSIGN BUTTON */}
+                      {admin !== a.assignedBy ? (
+                        // ASSIGN BUTTON
+                        <section
+                          className={
+                            loadingAssign
+                              ? "disable_Assign_Button"
+                              : "assign_Button"
+                          }
+                          onClick={handleAssignScreeningApplicant}
+                        >
+                          <span>{a._id}</span>
+                          <i className="fas fa-thumbtack"></i>
+                        </section>
+                      ) : (
+                        // UNASSIGN BUTTON
+                        <section
+                          className={
+                            loadingAssign
+                              ? "disable_Assign_Button"
+                              : "unassign_Button"
+                          }
+                          onClick={handleUnassignScreeningApplicant}
+                        >
+                          <span>{a._id}</span>
+                          <i className="fas fa-backspace"></i>
+                        </section>
+                      )}
+                      {/* APPLICANTS NAME */}
                       <section className="applicant_Name">
                         <p>{`${a.firstname} ${a.middle}.`}</p>
                         <p>{a.lastname}</p>
                       </section>
+                      {/* APPLICANTS VIEW DETAILS BUTTON */}
                       <section className="applicant_View_Details">
                         <button
                           type="button"
@@ -508,11 +817,50 @@ const Applicants = () => {
               <section className="applicants_List">
                 {interview.map((a) => {
                   return (
-                    <section key={a._id} className="applicant">
+                    <section
+                      key={a._id}
+                      className={
+                        a.assignedBy === "N/A"
+                          ? "applicant"
+                          : a.assignedBy === admin
+                          ? "applicant"
+                          : "disable_Applicant"
+                      }
+                    >
+                      {/* ASSIGN BUTTON */}
+                      {admin !== a.assignedBy ? (
+                        // ASSIGN BUTTON
+                        <section
+                          className={
+                            loadingAssign
+                              ? "disable_Assign_Button"
+                              : "assign_Button"
+                          }
+                          onClick={handleAssignInterviewApplicant}
+                        >
+                          <span>{a._id}</span>
+                          <i className="fas fa-thumbtack"></i>
+                        </section>
+                      ) : (
+                        // UNASSIGN BUTTON
+                        <section
+                          className={
+                            loadingAssign
+                              ? "disable_Assign_Button"
+                              : "unassign_Button"
+                          }
+                          onClick={handleUnassignInterviewApplicant}
+                        >
+                          <span>{a._id}</span>
+                          <i className="fas fa-backspace"></i>
+                        </section>
+                      )}
+                      {/* APPLICANTS NAME */}
                       <section className="applicant_Name">
                         <p>{`${a.firstname} ${a.middle}.`}</p>
                         <p>{a.lastname}</p>
                       </section>
+                      {/* APPLICANTS VIEW DETAILS BUTTON */}
                       <section className="applicant_View_Details">
                         <button
                           type="button"
@@ -547,6 +895,7 @@ const Applicants = () => {
                 {rejected.map((a) => {
                   return (
                     <section key={a._id} className="applicant">
+                      {/* APPLICANTS NAME */}
                       <section className="applicant_Name">
                         <p>{`${a.firstname} ${a.middle}.`}</p>
                         <p>{a.lastname}</p>
@@ -564,6 +913,7 @@ const Applicants = () => {
                 {hired.map((a) => {
                   return (
                     <section key={a._id} className="applicant">
+                      {/* APPLICANTS NAME */}
                       <section className="applicant_Name">
                         <p>{`${a.firstname} ${a.middle}.`}</p>
                         <p>{a.lastname}</p>

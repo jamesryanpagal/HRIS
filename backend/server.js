@@ -11,6 +11,8 @@ const GSUsersSigninRoutes = require("./Routes/GS_Users_Signin_Routes");
 const GSUsersLoginRoutes = require("./Routes/GS_Users_Login_Routes");
 const ApplicantsRoutes = require("./Routes/Applicants_Routes");
 const EmployeeRoutes = require("./Routes/Employee_Routes");
+const VerifyTokenRoutes = require("./Routes/VerifyToken_Routes");
+const AssignApplicantRoutes = require("./Routes/AssignApplicant_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -30,6 +32,8 @@ app.use("/GSUserSignin", GSUsersSigninRoutes);
 app.use("/GSUserLogin", GSUsersLoginRoutes);
 app.use("/Applicants", ApplicantsRoutes);
 app.use("/Employee", EmployeeRoutes);
+app.use("/VerifyToken", VerifyTokenRoutes);
+app.use("/AssignApplicant", AssignApplicantRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -57,6 +61,7 @@ io.on("connection", (socket) => {
   // APPLICANTS
   socket.on("applicants", async (data) => {
     const {
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -82,6 +87,7 @@ io.on("connection", (socket) => {
       skills,
     } = data;
     const newApplicants = await Applicants.create({
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -160,6 +166,36 @@ io.on("connection", (socket) => {
     } catch (error) {
       console.log(error.message);
     }
+  });
+
+  // ASSIGN APPLICATION APPLICANT
+  socket.on("assignApplicationApplicant", ({ adminName, applicantId }) => {
+    io.emit("assignedApplicationApplicant", { adminName, applicantId });
+  });
+
+  // UNASSIGN APPLICATION APPLICANT
+  socket.on("unassignApplicationApplicant", ({ applicantId }) => {
+    io.emit("unassignedApplicationApplicant", { applicantId });
+  });
+
+  // ASSIGN SCREENING APPLICANT
+  socket.on("assignScreeningApplicant", ({ adminName, applicantId }) => {
+    io.emit("assignedScreeningApplicant", { adminName, applicantId });
+  });
+
+  // UNASSIGN SCREENING APPLICANT
+  socket.on("unassignScreeningApplicant", ({ applicantId }) => {
+    io.emit("unassignedScreeningApplicant", { applicantId });
+  });
+
+  // ASSIGN INTERVIEW APPLICANT
+  socket.on("assignInterviewApplicant", ({ adminName, applicantId }) => {
+    io.emit("assignedInterviewApplicant", { adminName, applicantId });
+  });
+
+  // UNASSIGN INTERVIEW APPLICANT
+  socket.on("unassignInterviewApplicant", ({ applicantId }) => {
+    io.emit("unassignedInterviewApplicant", { applicantId });
   });
 });
 

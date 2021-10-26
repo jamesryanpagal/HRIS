@@ -1,5 +1,8 @@
 // ------------------------------------------ USERS REDUCERS ----------------------------------
-export const usersReducers = (state = { admin_token: "" }, action) => {
+export const usersReducers = (
+  state = { admin_token: "", admin: "" },
+  action
+) => {
   switch (action.type) {
     // CREATE USER TOKEN
     case "USER_TOKEN":
@@ -8,6 +11,15 @@ export const usersReducers = (state = { admin_token: "" }, action) => {
       return {
         ...state,
         admin_token: token,
+      };
+
+    // ADMIN USERNAME
+    case "ADMIN_USERNAME":
+      const { adminUsername } = action.payload;
+
+      return {
+        ...state,
+        admin: adminUsername,
       };
 
     // REMOVE USER TOKEN
@@ -30,11 +42,12 @@ export const applicantsReducers = (
     interview: [],
     rejected: [],
     hired: [],
-    message: "",
   },
   action
 ) => {
   switch (action.type) {
+    // --------------------- FOR APPLICATIONS ---------------------
+    // add applicant
     case "NEW_APPLICANTS":
       const { newApplicants } = action.payload;
 
@@ -49,11 +62,49 @@ export const applicantsReducers = (
         };
       }
 
+      applicantsExist.assignedBy = newApplicants.assignedBy;
+
       return {
         ...state,
         applicants: [...state.applicants],
       };
 
+    // assign application applicant
+    case "ASSIGN_APPLICANT_APPLICATIONS":
+      const {
+        assignApplicantApplicationsAdmin,
+        assignApplicantApplicationsId,
+      } = action.payload;
+
+      const applicationIdIndex = state.applicants.findIndex(
+        (a) => a._id === assignApplicantApplicationsId
+      );
+
+      const applicationIdObj = state.applicants[applicationIdIndex];
+
+      applicationIdObj.assignedBy = assignApplicantApplicationsAdmin;
+
+      return { ...state, applicants: [...state.applicants] };
+
+    // unassign application applicant
+    case "UNASSIGN_APPLICANT_APPLICATIONS":
+      const { unassignApplicantApplicationsId } = action.payload;
+
+      const unassignApplicantApplicationsIdIndex = state.applicants.findIndex(
+        (a) => a._id === unassignApplicantApplicationsId
+      );
+
+      const unassignApplicantApplicationsIdObj =
+        state.applicants[unassignApplicantApplicationsIdIndex];
+
+      unassignApplicantApplicationsIdObj.assignedBy = "N/A";
+
+      return {
+        ...state,
+        applicants: [...state.applicants],
+      };
+
+    // remove applicant from applications
     case "REMOVE_APPLICANT":
       const { applicantId } = action.payload;
 
@@ -62,14 +113,8 @@ export const applicantsReducers = (
         applicants: state.applicants.filter((a) => a._id !== applicantId),
       };
 
-    case "REJECT_MESSAGE":
-      const { rejectMessage } = action.payload;
-
-      return {
-        ...state,
-        message: rejectMessage,
-      };
-
+    // --------------------- FOR SCREENING ---------------------
+    // move applicant from applications to screening
     case "MOVE_TO_SCREENING":
       const { applicantData } = action.payload;
 
@@ -84,11 +129,47 @@ export const applicantsReducers = (
         };
       }
 
+      applicantDataExist.assignedBy = applicantData.assignedBy;
+
       return {
         ...state,
         screening: [...state.screening],
       };
 
+    // assign screening applicant
+    case "ASSIGN_APPLICANT_SCREENING":
+      const { assignApplicantScreeningAdmin, assignApplicantScreeningId } =
+        action.payload;
+
+      const screeningIdIndex = state.screening.findIndex(
+        (a) => a._id === assignApplicantScreeningId
+      );
+
+      const screeningIdObj = state.screening[screeningIdIndex];
+
+      screeningIdObj.assignedBy = assignApplicantScreeningAdmin;
+
+      return { ...state, screening: [...state.screening] };
+
+    // unassign screening applicant
+    case "UNASSIGN_APPLICANT_SCREENING":
+      const { unassignApplicantScreeningId } = action.payload;
+
+      const unassignApplicantScreeningIdIndex = state.screening.findIndex(
+        (a) => a._id === unassignApplicantScreeningId
+      );
+
+      const unassignApplicantScreeningIdObj =
+        state.screening[unassignApplicantScreeningIdIndex];
+
+      unassignApplicantScreeningIdObj.assignedBy = "N/A";
+
+      return {
+        ...state,
+        screening: [...state.screening],
+      };
+
+    // remove applicant from screening
     case "REMOVE_APPLICANT_SCREENING":
       const { applicantScreeningId } = action.payload;
 
@@ -99,6 +180,8 @@ export const applicantsReducers = (
         ),
       };
 
+    // --------------------- FOR INTERVIEW ---------------------
+    // move applicant from screening to interview
     case "MOVE_TO_INTERVIEW":
       const { applicantInterViewData } = action.payload;
 
@@ -113,11 +196,48 @@ export const applicantsReducers = (
         };
       }
 
+      applicantInterviewDataExist.assignedBy =
+        applicantInterViewData.assignedBy;
+
       return {
         ...state,
         interview: [...state.interview],
       };
 
+    // assign interview applicant
+    case "ASSIGN_APPLICANT_INTERVIEW":
+      const { assignApplicantInterviewAdmin, assignApplicantInterviewId } =
+        action.payload;
+
+      const interviewIdIndex = state.interview.findIndex(
+        (a) => a._id === assignApplicantInterviewId
+      );
+
+      const interviewIdObj = state.interview[interviewIdIndex];
+
+      interviewIdObj.assignedBy = assignApplicantInterviewAdmin;
+
+      return { ...state, interview: [...state.interview] };
+
+    // unassign interview applicant
+    case "UNASSIGN_APPLICANT_INTERVIEW":
+      const { unassignApplicantInterviewId } = action.payload;
+
+      const unassignApplicantInterviewIdIndex = state.interview.findIndex(
+        (a) => a._id === unassignApplicantInterviewId
+      );
+
+      const unassignApplicantInterviewIdObj =
+        state.interview[unassignApplicantInterviewIdIndex];
+
+      unassignApplicantInterviewIdObj.assignedBy = "N/A";
+
+      return {
+        ...state,
+        interview: [...state.interview],
+      };
+
+    // remove applicant from interview
     case "REMOVE_APPLICANT_INTERVIEW":
       const { applicantInterviewId } = action.payload;
 
@@ -128,6 +248,7 @@ export const applicantsReducers = (
         ),
       };
 
+    // move applicant from interview to hired
     case "MOVE_TO_HIRED":
       const { applicantHiredData } = action.payload;
 
@@ -147,6 +268,7 @@ export const applicantsReducers = (
         hired: [...state.hired],
       };
 
+    // move applicant to rejected
     case "REJECTED_APPLICANT":
       const { rejectedApplicant } = action.payload;
 
@@ -174,6 +296,7 @@ export const applicantsReducers = (
 // ------------------------------------------ EMPLOYEE REDUCERS ----------------------------------
 export const employeeReducers = (state = { employees: [] }, action) => {
   switch (action.type) {
+    // add employee
     case "EMPLOYEES":
       const { employee } = action.payload;
 
@@ -211,6 +334,7 @@ export const employeeReducers = (state = { employees: [] }, action) => {
         employees: [...state.employees],
       };
 
+    // update employee details
     case "UPDATE_EMPLOYEE_DETAILS":
       const { employeeUpdates } = action.payload;
 

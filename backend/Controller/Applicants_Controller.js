@@ -24,6 +24,7 @@ const removeApplicant = async (req, res) => {
     // destructure the data
     const {
       _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -50,6 +51,7 @@ const removeApplicant = async (req, res) => {
     // move to Rejects
     await Rejects.create({
       applicant_id: _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -119,6 +121,7 @@ const acceptApplicant = async (req, res) => {
     // move to screening
     await Screening.create({
       applicant_id: _id,
+      assignedBy: "N/A",
       lastname,
       firstname,
       middle,
@@ -171,6 +174,7 @@ const removeApplicantScreening = async (req, res) => {
     // destructure the data
     const {
       _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -197,6 +201,7 @@ const removeApplicantScreening = async (req, res) => {
     // move to Rejects
     await Rejects.create({
       applicant_id: _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -265,6 +270,7 @@ const acceptApplicantScreening = async (req, res) => {
     // move to interview
     await Interview.create({
       applicant_id: _id,
+      assignedBy: "N/A",
       lastname,
       firstname,
       middle,
@@ -317,6 +323,7 @@ const removeApplicantInterview = async (req, res) => {
     // destructure the data
     const {
       _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -343,6 +350,7 @@ const removeApplicantInterview = async (req, res) => {
     // move to Rejects
     await Rejects.create({
       applicant_id: _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -383,6 +391,7 @@ const hiredApplicant = async (req, res) => {
     // destructure data
     const {
       _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
@@ -410,6 +419,7 @@ const hiredApplicant = async (req, res) => {
     // move to hired
     await Hires.create({
       applicant_id: _id,
+      assignedBy,
       lastname,
       firstname,
       middle,
