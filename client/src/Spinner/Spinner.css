@@ -7,10 +7,6 @@
   align-items: center;
 }
 
-.spinner_container span {
-  margin: 0 5px;
-}
-
 .spinner_container .first_spinner {
   border: 2px transparent solid;
   height: 1.3rem;

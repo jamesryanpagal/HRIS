@@ -206,3 +206,24 @@ export const updateEmployeeActions = (employeeUpdates) => (dispatch) => {
     },
   });
 };
+
+// ------------------------------ NEW ADMIN ACTIONS -------------------------
+// add new admin
+export const newAdminActions = (newadmin) => (dispatch) => {
+  dispatch({
+    type: "NEW_ADMIN",
+    payload: {
+      newadmin,
+    },
+  });
+};
+
+// remove new admin
+export const removeNewAdminActions = (removeNewAdminId) => (dispatch) => {
+  dispatch({
+    type: "REMOVE_NEW_ADMIN",
+    payload: {
+      removeNewAdminId,
+    },
+  });
+};

@@ -9,12 +9,14 @@ import {
   usersReducers,
   applicantsReducers,
   employeeReducers,
+  newAdminReducers,
 } from "../Redux_reducers/reducers";
 
 const reducer = combineReducers({
   GS_Admin: usersReducers,
   Applicants: applicantsReducers,
   Employee: employeeReducers,
+  newAdmin: newAdminReducers,
 });
 
 // ------------------------- PERSIST CONFIG ------------------

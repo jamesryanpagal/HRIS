@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Applicants from "../Applicants/Applicants";
 import Employee from "../Employee/Employee";
+import NewAdmin from "../NewAdmin/NewAdmin";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 
 //css
@@ -18,6 +19,7 @@ const Admin_Router = () => {
         <Switch>
           <Route exact path="/" component={Applicants} />
           <Route path="/Employee" component={Employee} />
+          <Route path="/NewAdmin" component={NewAdmin} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

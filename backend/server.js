@@ -13,6 +13,7 @@ const ApplicantsRoutes = require("./Routes/Applicants_Routes");
 const EmployeeRoutes = require("./Routes/Employee_Routes");
 const VerifyTokenRoutes = require("./Routes/VerifyToken_Routes");
 const AssignApplicantRoutes = require("./Routes/AssignApplicant_Routes");
+const NewUsersRoutes = require("./Routes/NewUsers_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -34,6 +35,7 @@ app.use("/Applicants", ApplicantsRoutes);
 app.use("/Employee", EmployeeRoutes);
 app.use("/VerifyToken", VerifyTokenRoutes);
 app.use("/AssignApplicant", AssignApplicantRoutes);
+app.use("/NewUsers", NewUsersRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -196,6 +198,11 @@ io.on("connection", (socket) => {
   // UNASSIGN INTERVIEW APPLICANT
   socket.on("unassignInterviewApplicant", ({ applicantId }) => {
     io.emit("unassignedInterviewApplicant", { applicantId });
+  });
+
+  // REMOVE NEW ADMIN
+  socket.on("removeNewAdmin", (id) => {
+    io.emit("remove_NewAdmin", id);
   });
 });
 

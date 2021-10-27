@@ -36,7 +36,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import "./Applicants.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 // --------------------------------- APPLICANT DETAILS MODAL ----------------------
 const ApplicantDetails = ({

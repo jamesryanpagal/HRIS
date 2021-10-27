@@ -50,6 +50,16 @@ const Navbar = () => {
               Employee
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              exact
+              to="/Newadmin"
+              className="link"
+              activeClassName="active_Link"
+            >
+              New admin
+            </NavLink>
+          </li>
         </ul>
       </section>
     </div>

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
-
-// -------------------------------- REDUX ACTIONS -----------------------------
-import { userTokenActions } from "../../../Redux/Redux_actions/actions";
 
 // ------------------------------ SPINNER -----------------------------
 import Spinner from "../../../Spinner/Spinner";
@@ -25,13 +21,13 @@ const Signup = ({ history }) => {
   });
 
   // error message
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // success message
+  const [successMessage, setSuccessMessage] = useState("");
 
   // loading state
   const [loading, setLoading] = useState(false);
-
-  // dispatch
-  const dispatch = useDispatch();
 
   // ----------------------------- HANDLE INPUT CHANGE ---------------------------------
   const handleInputChange = (e) => {
@@ -65,7 +61,7 @@ const Signup = ({ history }) => {
 
     try {
       setLoading(true);
-      const { data } = await axiosConfig.post("/GSUserSignin", {
+      const { data } = await axiosConfig.post("/NewUsers", {
         ...userSignInDetails,
       });
 
@@ -76,8 +72,35 @@ const Signup = ({ history }) => {
         return;
       }
 
-      // redirect to admin
-      dispatch(userTokenActions(data));
+      if (data.includes("dup key: { Employee_number:")) {
+        setErrorMessage("Employee number already been taken");
+        setLoading(false);
+        return;
+      }
+
+      if (data.includes("dup key: { Email:")) {
+        setErrorMessage("Email already been taken");
+        setLoading(false);
+        return;
+      }
+
+      if (data.includes("dup key: { Username:")) {
+        setErrorMessage("Username already been taken");
+        setLoading(false);
+        return;
+      }
+
+      setUserSignInDetails((prev) => ({
+        ...prev,
+        Employee_number: "",
+        Email: "",
+        Username: "",
+        Password: "",
+        ConfirmPassword: "",
+      }));
+      setSuccessMessage(data);
+      setErrorMessage("");
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -90,6 +113,13 @@ const Signup = ({ history }) => {
       </section>
       {/* ------------------------------------- SIGNUP FORM CONTAINER ----------------------------------------- */}
       <section className="signup_Form_Container">
+        {/* SUCCESS MESSAGE */}
+        {successMessage && (
+          <section className="successMessage">
+            <i className="fas fa-check-circle"></i>
+            <span> {successMessage}</span>
+          </section>
+        )}
         {/* FORM */}
         <form className="signup_Form" onSubmit={handleSignInSubmit}>
           <section className="signup_Form_Text">Create account</section>
@@ -108,6 +138,7 @@ const Signup = ({ history }) => {
               type="text"
               name="Employee_number"
               id="emp_number"
+              value={userSignInDetails.Employee_number}
               onChange={handleInputChange}
               onFocus={handleInputOnFocus}
               onBlur={handleInputOnBlur}
@@ -122,6 +153,7 @@ const Signup = ({ history }) => {
               type="email"
               name="Email"
               id="emp_email"
+              value={userSignInDetails.Email}
               onChange={handleInputChange}
               onFocus={handleInputOnFocus}
               onBlur={handleInputOnBlur}
@@ -136,6 +168,7 @@ const Signup = ({ history }) => {
               type="username"
               name="Username"
               id="emp_username"
+              value={userSignInDetails.Username}
               onChange={handleInputChange}
               onFocus={handleInputOnFocus}
               onBlur={handleInputOnBlur}
@@ -150,6 +183,7 @@ const Signup = ({ history }) => {
               type="password"
               name="Password"
               id="emp_password"
+              value={userSignInDetails.Password}
               onChange={handleInputChange}
               onFocus={handleInputOnFocus}
               onBlur={handleInputOnBlur}
@@ -164,6 +198,7 @@ const Signup = ({ history }) => {
               type="password"
               name="ConfirmPassword"
               id="emp_confirmpass"
+              value={userSignInDetails.ConfirmPassword}
               onChange={handleInputChange}
               onFocus={handleInputOnFocus}
               onBlur={handleInputOnBlur}
