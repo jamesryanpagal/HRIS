@@ -1,0 +1,70 @@
+.department_Container {
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  background: #f6f6ff;
+  overflow-x: hidden;
+}
+
+/* department list */
+.department_Container .department_List {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+/* department */
+.department_Container .department_List .department {
+  margin: 10px 0;
+  width: 15vw;
+  position: relative;
+  height: 20vh;
+  background: #ffffff;
+  /* background: #1c212d; */
+  box-shadow: 0 0 10px #c9c9c9;
+  cursor: pointer;
+}
+
+/* department interface */
+.department_Container
+  .department_List
+  .department
+  .department_Interface_Container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* department interface logo */
+.department_Container
+  .department_List
+  .department
+  .department_Interface_Container
+  .department_Logo {
+  text-align: center;
+  padding: 10px 0;
+  height: 60px;
+  width: 60px;
+  margin: 10px auto 0 auto;
+}
+
+/* department interface logo image */
+.department_Container
+  .department_List
+  .department
+  .department_Interface_Container
+  .department_Logo
+  img {
+  height: 100%;
+}
+
+/* department interface title */
+.department_Container
+  .department_List
+  .department
+  .department_Interface_Container
+  .department_Title {
+  text-align: center;
+  height: 50px;
+}

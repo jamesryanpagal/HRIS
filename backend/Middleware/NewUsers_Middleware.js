@@ -41,12 +41,11 @@ const newUsers_Middleware = async (req, res, next) => {
     }
 
     // ---------------------------------- CHECK USERNAME ----------------------------
-    if (
-      Username.includes(
-        "1" || "2" || "3" || "4" || "5" || "6" || "7" || "8" || "9" || "0"
-      )
-    ) {
-      error.errorMessage = "Invalid username";
+    const regexForUsername = /[0-9]/g;
+    const checkUsername = regexForUsername.test(Username);
+
+    if (checkUsername) {
+      error.errorMessage = "Invalid Username";
       res.json(error);
       return;
     }

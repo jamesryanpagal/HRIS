@@ -17,7 +17,7 @@ import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 import "./Employee.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const Employee = () => {
   // -------------------- STATE ------------------------

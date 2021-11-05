@@ -1,7 +1,7 @@
 .newAdmin_Container {
   width: 100%;
   height: 100vh;
-  background: #dfdfdf;
+  background: #f6f6ff;
   position: relative;
 }
 
@@ -13,12 +13,27 @@
   grid-template-columns: auto auto auto;
   justify-content: center;
   overflow-y: scroll;
+  position: relative;
+}
+
+/* NEW ADMIN LIST EMPTY IMAGE CONTAINER */
+.newAdmin_Container .newAdmin_List .empty_Image_Container {
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* NEW ADMIN LIST EMPTY IMAGE CONTAINER IMAGE */
+.newAdmin_Container .newAdmin_List .empty_Image_Container img {
+  height: 100%;
 }
 
 /* NEW ADMIN CARD */
 .newAdmin_Container .newAdmin_List .newAdmin {
   background: #ffffff;
-  box-shadow: 0 0 10px #afafaf;
+  box-shadow: 0 0 10px #c9c9c9;
   width: 20vw;
   height: 24vh;
   position: relative;

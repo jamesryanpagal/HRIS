@@ -6,6 +6,10 @@ const bcrypt = require("bcrypt");
 
 const GS_Users_Schema = new schema(
   {
+    Employee_image: {
+      type: String,
+      required: true,
+    },
     Employee_number: {
       type: String,
       required: true,

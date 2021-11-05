@@ -7,7 +7,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 // IMPORT ROUTES
-const GSUsersSigninRoutes = require("./Routes/GS_Users_Signin_Routes");
 const GSUsersLoginRoutes = require("./Routes/GS_Users_Login_Routes");
 const ApplicantsRoutes = require("./Routes/Applicants_Routes");
 const EmployeeRoutes = require("./Routes/Employee_Routes");
@@ -29,7 +28,6 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.once("open", () => console.log("connected to mongodb"));
 
 // ----------------------------- ROUTES -----------------------------------
-app.use("/GSUserSignin", GSUsersSigninRoutes);
 app.use("/GSUserLogin", GSUsersLoginRoutes);
 app.use("/Applicants", ApplicantsRoutes);
 app.use("/Employee", EmployeeRoutes);

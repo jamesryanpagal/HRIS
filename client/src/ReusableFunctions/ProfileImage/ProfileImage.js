@@ -8,7 +8,11 @@ const ProfileImage = ({ image, lastname, firstname, updateImagePreview }) => {
     <div className="profile_Image_Container">
       <>
         {image === "N/A" ? (
-          <>{`${lastname[0].toUpperCase()}${firstname[0].toUpperCase()}`}</>
+          <>
+            {!lastname
+              ? `${firstname[0].toUpperCase()}`
+              : `${lastname[0].toUpperCase()}${firstname[0].toUpperCase()}`}
+          </>
         ) : (
           <img src={updateImagePreview ? updateImagePreview : image} alt="" />
         )}

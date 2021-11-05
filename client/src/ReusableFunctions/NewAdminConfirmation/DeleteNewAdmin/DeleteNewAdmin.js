@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import "./DeleteNewAdmin.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const DeleteNewAdmin = ({ id, setDeleteConfirmation }) => {
   // ------------- STATE -----------------

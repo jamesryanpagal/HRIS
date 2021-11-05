@@ -41,6 +41,7 @@ const acceptNewAdmin_Controller = async (req, res) => {
 
     // add admin to users
     await Users.create({
+      Employee_image: "N/A",
       Employee_number,
       Username,
       Email,

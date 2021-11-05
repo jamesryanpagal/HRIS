@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import io from "socket.io-client";
 
+// image
+import emptyImage from "../../../PublicImages/empty.png";
+
 // REDUX ACTIONS
 import {
   newAdminActions,
@@ -17,7 +20,7 @@ import DeleteNewAdmin from "../../../ReusableFunctions/NewAdminConfirmation/Dele
 import "./NewAdmin.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const NewAdmin = () => {
   // ---------------- STATE ------------------
@@ -90,34 +93,40 @@ const NewAdmin = () => {
       {/* NEW ADMIN LIST */}
       <section className="newAdmin_List">
         {/* NEW ADMIN CARD */}
-        {newAdminList.map((a) => (
-          <section key={a._id} className="newAdmin">
-            {/* NEW ADMIN USERNAME */}
-            <section className="newAdmin_Username">{a.Username}</section>
-            {/* NEW ADMIN EMP ID */}
-            <h4>{a.Employee_number}</h4>
-            {/* NEW ADMIN EMAIL */}
-            <section className="newAdmin_Email">{a.Email}</section>
-            <section className="newAdmin_Actions_Container">
-              <button
-                type="button"
-                className="accept"
-                value={a._id}
-                onClick={handleToggleAcceptConfirmation}
-              >
-                Accept
-              </button>
-              <button
-                type="button"
-                className="delete"
-                value={a._id}
-                onClick={handleToggleDeleteConfirmation}
-              >
-                Delete
-              </button>
-            </section>
+        {newAdminList.length === 0 ? (
+          <section className="empty_Image_Container">
+            <img src={emptyImage} alt="" />
           </section>
-        ))}
+        ) : (
+          newAdminList.map((a) => (
+            <section key={a._id} className="newAdmin">
+              {/* NEW ADMIN USERNAME */}
+              <section className="newAdmin_Username">{a.Username}</section>
+              {/* NEW ADMIN EMP ID */}
+              <h4>{a.Employee_number}</h4>
+              {/* NEW ADMIN EMAIL */}
+              <section className="newAdmin_Email">{a.Email}</section>
+              <section className="newAdmin_Actions_Container">
+                <button
+                  type="button"
+                  className="accept"
+                  value={a._id}
+                  onClick={handleToggleAcceptConfirmation}
+                >
+                  Accept
+                </button>
+                <button
+                  type="button"
+                  className="delete"
+                  value={a._id}
+                  onClick={handleToggleDeleteConfirmation}
+                >
+                  Delete
+                </button>
+              </section>
+            </section>
+          ))
+        )}
       </section>
     </div>
   );

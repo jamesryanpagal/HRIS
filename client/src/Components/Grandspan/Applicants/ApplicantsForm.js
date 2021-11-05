@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import "./ApplicantsForm.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 // ----------------------- MARRIED ADDITIONAL FORM ------------------------------
 const MarriedAdditional = ({ setApplicantDetails }) => {
@@ -454,11 +454,403 @@ const ApplicantsForm = () => {
               <section className="applicants_Form_Inputs">
                 <select onChange={handleChange} name="position">
                   <option value="">Position</option>
-                  <option value="Administrative">Administrative</option>
-                  <option value="Human_Resource">Human Resource</option>
-                  <option value="Engineering">Engineering</option>
-                  <option value="Utilities">Utilities</option>
-                  <option value="Security">Security</option>
+                  {/* PRESIDENT'S OFFICE */}
+                  <option value="President (PRESIDENT)">
+                    President (PRESIDENT)
+                  </option>
+                  <option value="Secretary of President (PRESIDENT)">
+                    Secretary of President (PRESIDENT)
+                  </option>
+                  {/* ADMINISTRATION */}
+                  <option value="Division Head (ADMINISTRATION)">
+                    Division Head (ADMINISTRATION)
+                  </option>
+                  <option value="Administrative Officer (ADMINISTRATION)">
+                    Administrative Officer (ADMINISTRATION)
+                  </option>
+                  <option value="Administrative In-Charge (ADMINISTRATION)">
+                    Administrative In-Charge (ADMINISTRATION)
+                  </option>
+                  <option value="Assistant of the OIC (ADMINISTRATION)">
+                    Assistant of the OIC (ADMINISTRATION)
+                  </option>
+                  <option value="Adminis>OIC (ADMINISTRATION)trative">
+                    OIC (ADMINISTRATION)
+                  </option>
+                  <option value="Vice President (ADMINISTRATION)">
+                    Vice President (ADMINISTRATION)
+                  </option>
+                  <option value="EVP (ADMINISTRATION)">
+                    EVP (ADMINISTRATION)
+                  </option>
+                  {/* AUDITING */}
+                  <option value="Associate Bookkeeper (AUDITING)">
+                    Associate Bookkeeper (AUDITING)
+                  </option>
+                  <option value="Bookkeeper (AUDITING)">
+                    Bookkeeper (AUDITING)
+                  </option>
+                  <option value="Clerk 1 (AUDITING)">Clerk 1 (AUDITING)</option>
+                  <option value="Clerk 2 (AUDITING)">Clerk 2 (AUDITING)</option>
+                  <option value="Clerk 3 (AUDITING)">Clerk 3 (AUDITING)</option>
+                  <option value="Clerk 4 (AUDITING)">Clerk 4 (AUDITING)</option>
+                  <option value="Clerk 5 (AUDITING)">Clerk 5 (AUDITING)</option>
+                  <option value="Department Head (AUDITING)">
+                    Department Head (AUDITING)
+                  </option>
+                  {/* CASHIER */}
+                  <option value="Associate Sales Coordinator (CASHIER)">
+                    Associate Sales Coordinator (CASHIER)
+                  </option>
+                  <option value="Cashier (CASHIER)">Cashier (CASHIER)</option>
+                  <option value="Clerk 1 (CASHIER)">Clerk 1 (CASHIER)</option>
+                  <option value="Clerk 2 (CASHIER)">Clerk 2 (CASHIER)</option>
+                  <option value="Clerk 3 (CASHIER)">Clerk 3 (CASHIER)</option>
+                  <option value="Clerk 4 (CASHIER)">Clerk 4 (CASHIER)</option>
+                  <option value="Clerk 5 (CASHIER)">Clerk 5 (CASHIER)</option>
+                  <option value="Department Head (CASHIER)">
+                    Department Head (CASHIER)
+                  </option>
+                  <option value="Purchaser (CASHIER)">
+                    Purchaser (CASHIER)
+                  </option>
+                  <option value="Sales Coordinator (CASHIER)">
+                    Sales Coordinator (CASHIER)
+                  </option>
+                  <option value="Sales Coordinator 1 (CASHIER)">
+                    Sales Coordinator 1 (CASHIER)
+                  </option>
+                  <option value="Sales Coordinator 2 (CASHIER)">
+                    Sales Coordinator 2 (CASHIER)
+                  </option>
+                  <option value="Sales Coordinator 3 (CASHIER)">
+                    Sales Coordinator 3 (CASHIER)
+                  </option>
+                  {/* CLINIC */}
+                  <option value="Physician (CLINIC)">Physician (CLINIC)</option>
+                  <option value="First Aider (CLINIC)">
+                    First Aider (CLINIC)
+                  </option>
+                  <option value="Company Nurse (CLINIC)">
+                    Company Nurse (CLINIC)
+                  </option>
+                  <option value="Nurse 2 (CLINIC)">Nurse 2 (CLINIC)</option>
+                  {/* COMMUNICATIONS */}
+                  <option value="Liaison Staff (COMMUNICATIONS)">
+                    Liaison Staff (COMMUNICATIONS)
+                  </option>
+                  <option value="Liaison Officer (COMMUNICATIONS)">
+                    Liaison Officer (COMMUNICATIONS)
+                  </option>
+                  <option value="Department Head (COMMUNICATIONS)">
+                    Department Head (COMMUNICATIONS)
+                  </option>
+                  {/* CONSTRUCTION */}
+                  <option value="Division Head (CONSTRUCTION)">
+                    Division Head (CONSTRUCTION)
+                  </option>
+                  <option value="Assistant Manager (CONSTRUCTION)">
+                    Assistant Manager (CONSTRUCTION)
+                  </option>
+                  <option value="Associate Detailer (CONSTRUCTION)">
+                    Associate Detailer (CONSTRUCTION)
+                  </option>
+                  <option value="Associate Field Engineer (CONSTRUCTION)">
+                    Associate Field Engineer (CONSTRUCTION)
+                  </option>
+                  <option value="Field Engineer (CONSTRUCTION)">
+                    Field Engineer (CONSTRUCTION)
+                  </option>
+                  <option value="Junior Foreman (CONSTRUCTION)">
+                    Junior Foreman (CONSTRUCTION)
+                  </option>
+                  <option value="Foreman (CONSTRUCTION)">
+                    Foreman (CONSTRUCTION)
+                  </option>
+                  <option value="Department Head (CONSTRUCTION)">
+                    Department Head (CONSTRUCTION)
+                  </option>
+                  <option value="Project Engineer (CONSTRUCTION)">
+                    Project Engineer (CONSTRUCTION)
+                  </option>
+                  <option value="Project Engineer 1 (CONSTRUCTION)">
+                    Project Engineer 1 (CONSTRUCTION)
+                  </option>
+                  <option value=">Project Engineer 2 (CONSTRUCTION)">
+                    Project Engineer 2 (CONSTRUCTION)
+                  </option>
+                  <option value="Project Engineer 3 (CONSTRUCTION)">
+                    Project Engineer 3 (CONSTRUCTION)
+                  </option>
+                  <option value="Project Manager (CONSTRUCTION)">
+                    Project Manager (CONSTRUCTION)
+                  </option>
+                  <option value="Structural Detailer 1 (CONSTRUCTION)">
+                    Structural Detailer 1 (CONSTRUCTION)
+                  </option>
+                  <option value="Structural Detailer 2 (CONSTRUCTION)">
+                    Structural Detailer 2 (CONSTRUCTION)
+                  </option>
+                  <option value="Structural Detailer 3 (CONSTRUCTION)">
+                    Structural Detailer 3 (CONSTRUCTION)
+                  </option>
+                  <option value="Supervisor 1 (CONSTRUCTION)">
+                    Supervisor 1 (CONSTRUCTION)
+                  </option>
+                  <option value="Supervisor 2 (CONSTRUCTION)">
+                    Supervisor 2 (CONSTRUCTION)
+                  </option>
+                  <option value="Supervisor 3 (CONSTRUCTION)">
+                    Supervisor 3 (CONSTRUCTION)
+                  </option>
+                  {/* ENGINEERING */}
+                  <option value="Division Head (ENGINEERING)">
+                    Division Head (ENGINEERING)
+                  </option>
+                  <option value="Assistant Manager (ENGINEERING)">
+                    Assistant Manager (ENGINEERING)
+                  </option>
+                  <option value="Architect (ENGINEERING)">
+                    Architect (ENGINEERING)
+                  </option>
+                  <option value="Engineer (ENGINEERING)">
+                    Engineer (ENGINEERING)
+                  </option>
+                  <option value="CADD Operator (ENGINEERING)">
+                    CADD Operator (ENGINEERING)
+                  </option>
+                  <option value="Cadet Engineer (ENGINEERING)">
+                    Cadet Engineer (ENGINEERING)
+                  </option>
+                  <option value="Detailer (ENGINEERING)">
+                    Detailer (ENGINEERING)
+                  </option>
+                  <option value="Detailing Checker (ENGINEERING)">
+                    Detailing Checker (ENGINEERING)
+                  </option>
+                  <option value="Detailing Head (ENGINEERING)">
+                    Detailing Head (ENGINEERING)
+                  </option>
+                  <option value="Drafting Checker 1 (ENGINEERING)">
+                    Drafting Checker 1 (ENGINEERING)
+                  </option>
+                  <option value="Drafting Checker 2 (ENGINEERING)">
+                    Drafting Checker 2 (ENGINEERING)
+                  </option>
+                  <option value="Drafting Checker 3 (ENGINEERING)">
+                    Drafting Checker 3 (ENGINEERING)
+                  </option>
+                  <option value="Drafting (ENGINEERING)">
+                    Drafting (ENGINEERING)
+                  </option>
+                  <option value="Detailing Supervisor (ENGINEERING)">
+                    Detailing Supervisor (ENGINEERING)
+                  </option>
+                  <option value="Estimating Head (ENGINEERING)">
+                    Estimating Head (ENGINEERING)
+                  </option>
+                  <option value="Estimating Supervisor 1 (ENGINEERING)">
+                    Estimating Supervisor 1 (ENGINEERING)
+                  </option>
+                  <option value="Estimating Supervisor 2 (ENGINEERING)">
+                    Estimating Supervisor 2 (ENGINEERING)
+                  </option>
+                  <option value="Estimator 1 (ENGINEERING)">
+                    Estimator 1 (ENGINEERING)
+                  </option>
+                  <option value="Estimator 2 (ENGINEERING)">
+                    Estimator 2 (ENGINEERING)
+                  </option>
+                  <option value="Estimator 3 (ENGINEERING)">
+                    Estimator 3 (ENGINEERING)
+                  </option>
+                  <option value="Department Head (ENGINEERING)">
+                    Department Head (ENGINEERING)
+                  </option>
+                  {/* FABRICATION */}
+                  <option value="Department Head (FABRICATION)">
+                    Department Head (FABRICATION)
+                  </option>
+                  {/* GMSD */}
+                  <option value="Department Head (GMSD)">
+                    Department Head (GMSD)
+                  </option>
+                  {/* MOTORPOOL */}
+                  <option value="Department Head (MOTORPOOL)">
+                    Department Head (MOTORPOOL)
+                  </option>
+                  {/* HUMAN RESOURCE */}
+                  <option value="Clerk 1 (HUMAN RESOURCE)">
+                    Clerk 1 (HUMAN RESOURCE)
+                  </option>
+                  <option value="Clerk 2 (HUMAN RESOURCE)">
+                    Clerk 2 (HUMAN RESOURCE)
+                  </option>
+                  <option value="Clerk 3 (HUMAN RESOURCE)">
+                    Clerk 3 (HUMAN RESOURCE)
+                  </option>
+                  <option value="Clerk 4 (HUMAN RESOURCE)">
+                    Clerk 4 (HUMAN RESOURCE)
+                  </option>
+                  <option value="Clerk 5 (HUMAN RESOURCE)">
+                    Clerk 5 (HUMAN RESOURCE)
+                  </option>
+                  <option value="HR Officer (HUMAN RESOURCE)">
+                    HR Officer (HUMAN RESOURCE)
+                  </option>
+                  <option value="Department Head (HUMAN RESOURCE)">
+                    Department Head (HUMAN RESOURCE)
+                  </option>
+                  {/* MARKETING */}
+                  <option value="Assistant Manager (MARKETING)">
+                    Assistant Manager (MARKETING)
+                  </option>
+                  <option value="Department Head (MARKETING)">
+                    Department Head (MARKETING)
+                  </option>
+                  {/* I.T */}
+                  <option value="Computer Technician (I.T)">
+                    Computer Technician (I.T)
+                  </option>
+                  <option value="Department Head (I.T)">
+                    Department Head (I.T)
+                  </option>
+                  <option value="Programmer 1 (I.T)">Programmer 1 (I.T)</option>
+                  <option value="Programmer 2 (I.T)">Programmer 2 (I.T)</option>
+                  <option value="Programmer 3 (I.T)">Programmer 3 (I.T)</option>
+                  {/* OPERATIONS */}
+                  <option value="Associate Maintenance (OPERATIONS)">
+                    Associate Maintenance (OPERATIONS)
+                  </option>
+                  <option value="Safety Inspector (OPERATIONS)">
+                    Safety Inspector (OPERATIONS)
+                  </option>
+                  <option value="Chief Mechanic (OPERATIONS)">
+                    Chief Mechanic (OPERATIONS)
+                  </option>
+                  <option value="Jr. Safety Inspector (OPERATIONS)">
+                    Jr. Safety Inspector (OPERATIONS)
+                  </option>
+                  <option value="Department Head (OPERATIONS)">
+                    Department Head (OPERATIONS)
+                  </option>
+                  <option value="Safety Inspector (OPERATIONS)">
+                    Safety Inspector (OPERATIONS)
+                  </option>
+                  <option value="Safety Officer (OPERATIONS)">
+                    Safety Officer (OPERATIONS)
+                  </option>
+                  <option value="Safety Supervisor (OPERATIONS)">
+                    Safety Supervisor (OPERATIONS)
+                  </option>
+                  <option value="Technical Assistant (OPERATIONS)">
+                    Technical Assistant (OPERATIONS)
+                  </option>
+                  <option value="Technical Head (OPERATIONS)">
+                    Technical Head (OPERATIONS)
+                  </option>
+                  {/* PPC */}
+                  <option value="Associate PPC (PPC)">
+                    Associate PPC (PPC)
+                  </option>
+                  <option value="PPC Engineer (PPC)">PPC Engineer (PPC)</option>
+                  <option value="PPC Engineer 1 (PPC)">
+                    PPC Engineer 1 (PPC)
+                  </option>
+                  <option value="PPC Engineer 2 (PPC)">
+                    PPC Engineer 2 (PPC)
+                  </option>
+                  <option value="PPC Engineer 3 (PPC)">
+                    PPC Engineer 3 (PPC)
+                  </option>
+                  <option value="PPC Engineer 4 (PPC)">
+                    PPC Engineer 4 (PPC)
+                  </option>
+                  <option value="PPC Supervisor (PPC)">
+                    PPC Supervisor (PPC)
+                  </option>
+                  {/* PURCHASING */}
+                  <option value="Associate Purchaser (PURCHASING)">
+                    Associate Purchaser (PURCHASING)
+                  </option>
+                  <option value="Purchaser (PURCHASING)">
+                    Purchaser (PURCHASING)
+                  </option>
+                  {/* QA/QC */}
+                  <option value="Associate QC (QA/QC)">
+                    Associate QC (QA/QC)
+                  </option>
+                  <option value="Inspector Associate (QA/QC)">
+                    Inspector Associate (QA/QC)
+                  </option>
+                  <option value="Jr. QC Engineer (QA/QC)">
+                    Jr. QC Engineer (QA/QC)
+                  </option>
+                  <option value="Jr. QC Inspector (QA/QC)">
+                    Jr. QC Inspector (QA/QC)
+                  </option>
+                  <option value="Department Head (QA/QC)">
+                    Department Head (QA/QC)
+                  </option>
+                  <option value="QA Engineer (QA/QC)">
+                    QA Engineer (QA/QC)
+                  </option>
+                  <option value="QA/QC Supervisor (QA/QC)">
+                    QA/QC Supervisor (QA/QC)
+                  </option>
+                  <option value="QC Inspector (QA/QC)">
+                    QC Inspector (QA/QC)
+                  </option>
+                  <option value="QC Supervisor (QA/QC)">
+                    QC Supervisor (QA/QC)
+                  </option>
+                  {/* WAREHOUSE */}
+                  <option value="Associate Shop Engineer (WAREHOUSE)">
+                    Associate Shop Engineer (WAREHOUSE)
+                  </option>
+                  <option value="Materials Supervisor (WAREHOUSE)">
+                    Materials Supervisor (WAREHOUSE)
+                  </option>
+                  <option value="Production Supervisor (WAREHOUSE)">
+                    Production Supervisor (WAREHOUSE)
+                  </option>
+                  <option value="Sales Engineer (WAREHOUSE)">
+                    Sales Engineer (WAREHOUSE)
+                  </option>
+                  <option value="Sales Engineer 1 (WAREHOUSE)">
+                    Sales Engineer 1 (WAREHOUSE)
+                  </option>
+                  <option value="Sales Trainee Section Head (WAREHOUSE)">
+                    Sales Trainee Section Head (WAREHOUSE)
+                  </option>
+                  <option value="Shop Engineer (WAREHOUSE)">
+                    Shop Engineer (WAREHOUSE)
+                  </option>
+                  <option value="Warehouse Officer (WAREHOUSE)">
+                    Warehouse Officer (WAREHOUSE)
+                  </option>
+                  {/* FINISHING */}
+                  <option value="Administrative">
+                    Engineer Maintenance Supervisor (FINISHING)
+                  </option>
+                  <option value="Production Supervisor (FINISHING)">
+                    Production Supervisor (FINISHING)
+                  </option>
+                  <option value="Sr. QC Engineer (FINISHING)">
+                    Sr. QC Engineer (FINISHING)
+                  </option>
+                  <option value="Sr. QC Inspector (FINISHING)">
+                    Sr. QC Inspector (FINISHING)
+                  </option>
+                  <option value="Sr. Safety Inspector (FINISHING)">
+                    Sr. Safety Inspector (FINISHING)
+                  </option>
+                  {/* SECURITY */}
+                  <option value="Security Officer (SECURITY)">
+                    Security Officer (SECURITY)
+                  </option>
+                  {/* SUITES */}
+                  <option value="Staff (SUITES)">Staff (SUITES)</option>
                 </select>
               </section>
 

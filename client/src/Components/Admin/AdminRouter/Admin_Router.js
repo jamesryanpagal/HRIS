@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Applicants from "../Applicants/Applicants";
 import Employee from "../Employee/Employee";
+import Department from "../Department/Department";
 import NewAdmin from "../NewAdmin/NewAdmin";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 
@@ -20,6 +21,7 @@ const Admin_Router = () => {
           <Route exact path="/" component={Applicants} />
           <Route path="/Employee" component={Employee} />
           <Route path="/NewAdmin" component={NewAdmin} />
+          <Route path="/Department" component={Department} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

@@ -16,7 +16,7 @@ hr {
 
 /* ---------------------------- EMPLOYEE DETAILS ----------------------------- */
 .employee_Details_Container .employee_Details {
-  background: #e9e9e9;
+  background: #f6f6ff;
   position: absolute;
   top: 0;
   right: 0;
@@ -40,11 +40,10 @@ hr {
   cursor: pointer;
   height: 30px;
   width: 130px;
-  background: rgb(85, 182, 85);
   border-radius: 3px;
-  color: #ffffff;
+  background: rgb(170, 255, 170);
+  color: green;
   letter-spacing: 1px;
-  font-weight: bold;
   position: relative;
 }
 
@@ -78,7 +77,7 @@ hr {
 /* ------------------------- PROFILE ----------------------------- */
 .employee_Details_Container .employee_Details .profile {
   background: #c7e1ff;
-  height: 23vh;
+  height: 28vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -87,7 +86,7 @@ hr {
 /* IMAGE */
 .employee_Details_Container .employee_Details .profile .image {
   border: #5f5f5f solid 1px;
-  height: 80%;
+  height: 70%;
   width: 9vw;
   border-radius: 50%;
   position: relative;
@@ -242,7 +241,7 @@ hr {
 
 /* ------------- PERSONAL DETAILS ----------------- */
 .employee_Details_Container .other_Details .personal_Details {
-  height: 52vh;
+  height: 60vh;
   margin: 10px;
   border-radius: 10px;
   background: #ffffff;
@@ -260,6 +259,7 @@ hr {
 .employee_Details_Container .other_Details .personal_Details .group_Container {
   display: flex;
   padding: 5px;
+  border: red solid;
 }
 
 /* -------------- FIRST SECTION -------------- */
@@ -280,6 +280,20 @@ hr {
   .input_Group {
   padding: 10px 5px 3px 5px;
   position: relative;
+}
+
+/* INPUT GROUP POSITION */
+.employee_Details_Container
+  .other_Details
+  .personal_Details
+  .group_Container
+  .first_Section
+  .input_Group
+  select {
+  width: 16.5vw;
+  font-size: 11px;
+  padding: 5px 0;
+  border: none;
 }
 
 /* INPUT GROUP HEADER */
