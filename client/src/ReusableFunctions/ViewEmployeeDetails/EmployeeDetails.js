@@ -16,7 +16,7 @@ import ProfileImage from "../ProfileImage/ProfileImage";
 import "./EmployeeDetails.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("http://localhost:8080/");
+const socket = io.connect("https://grandspan.herokuapp.com/");
 
 const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
   // --------------------------------- STATE -----------------------------
