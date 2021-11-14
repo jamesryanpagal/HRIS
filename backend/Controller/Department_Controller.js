@@ -1,4 +1,4 @@
-// ------------------ model -----------
+// ------------------ MODEL -----------
 const PresidentsOffice = require("../Model/PresidentsOffice_Model");
 const Administration = require("../Model/Administration_Model");
 const Auditing = require("../Model/Auditing_Model");
