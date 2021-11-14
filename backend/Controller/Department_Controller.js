@@ -19,7 +19,7 @@ const Purchasing = require("../Model/Purchasing_Model");
 const QAQC = require("../Model/QAQC_Model");
 const Warehouse = require("../Model/Warehouse_Model");
 const Finishing = require("../Model/Finishing_Model");
-const Security = require("../Model/Security_Model");
+const Security = require("../Model/Security_model");
 const Suites = require("../Model/Suites_Model");
 
 const date = new Date();
