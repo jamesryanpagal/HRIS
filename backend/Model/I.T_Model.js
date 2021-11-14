@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const departmentInterfaceSchema = new schema(
+const itSchema = new schema(
   {
     employee_id: {
       type: String,
@@ -110,8 +110,5 @@ const departmentInterfaceSchema = new schema(
   }
 );
 
-const DepartmentInterface = mongoose.model(
-  "departmentInterfaces",
-  departmentInterfaceSchema
-);
-module.exports = DepartmentInterface;
+const It = mongoose.model("its", itSchema);
+module.exports = It;

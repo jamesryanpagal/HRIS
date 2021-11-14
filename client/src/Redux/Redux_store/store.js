@@ -5,18 +5,23 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 // -------------------------- REDUCER -------------------------
-import {
-  usersReducers,
-  applicantsReducers,
-  employeeReducers,
-  newAdminReducers,
-} from "../Redux_reducers/reducers";
+import { usersReducers, applicantsReducers } from "../Redux_reducers/reducers";
+
+import { employeeReducers } from "../Redux_reducers/employeeReducers";
+
+import { newAdminReducers } from "../Redux_reducers/newAdminReducers";
+
+import { departmentReducers } from "../Redux_reducers/departmentReducers";
+
+import { updatingReducers } from "../Redux_reducers/updatingReducers";
 
 const reducer = combineReducers({
   GS_Admin: usersReducers,
   Applicants: applicantsReducers,
   Employee: employeeReducers,
   newAdmin: newAdminReducers,
+  department: departmentReducers,
+  Updating: updatingReducers,
 });
 
 // ------------------------- PERSIST CONFIG ------------------

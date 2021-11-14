@@ -28,6 +28,7 @@ const employeeList = async (req, res) => {
           firstname: e.firstname,
           middle: e.middle,
           phone: e.phone,
+          contract: "N/A",
           birthday: e.birthday,
           gender: e.gender,
           address: e.address,

@@ -13,6 +13,7 @@ const EmployeeRoutes = require("./Routes/Employee_Routes");
 const VerifyTokenRoutes = require("./Routes/VerifyToken_Routes");
 const AssignApplicantRoutes = require("./Routes/AssignApplicant_Routes");
 const NewUsersRoutes = require("./Routes/NewUsers_Routes");
+const DepartmentRoutes = require("./Routes/Department_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -34,6 +35,7 @@ app.use("/Employee", EmployeeRoutes);
 app.use("/VerifyToken", VerifyTokenRoutes);
 app.use("/AssignApplicant", AssignApplicantRoutes);
 app.use("/NewUsers", NewUsersRoutes);
+app.use("/Department", DepartmentRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();

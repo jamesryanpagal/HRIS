@@ -20,7 +20,7 @@ import DeleteNewAdmin from "../../../ReusableFunctions/NewAdminConfirmation/Dele
 import "./NewAdmin.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const NewAdmin = () => {
   // ---------------- STATE ------------------
@@ -96,6 +96,7 @@ const NewAdmin = () => {
         {newAdminList.length === 0 ? (
           <section className="empty_Image_Container">
             <img src={emptyImage} alt="" />
+            <h4>There are no new admin for today !</h4>
           </section>
         ) : (
           newAdminList.map((a) => (

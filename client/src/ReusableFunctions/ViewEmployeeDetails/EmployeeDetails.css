@@ -11,7 +11,7 @@ hr {
   background: rgba(0, 0, 0, 0.8);
   transition: 0.3s;
   z-index: 10;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* ---------------------------- EMPLOYEE DETAILS ----------------------------- */
@@ -138,6 +138,7 @@ hr {
 .employee_Details_Container .employee_Details .profile .profile_Details {
   height: 90%;
   width: 75%;
+  padding: 15px 0;
 }
 
 /* HEADER */
@@ -259,7 +260,6 @@ hr {
 .employee_Details_Container .other_Details .personal_Details .group_Container {
   display: flex;
   padding: 5px;
-  border: red solid;
 }
 
 /* -------------- FIRST SECTION -------------- */
@@ -361,6 +361,28 @@ hr {
   i {
   display: none;
   pointer-events: none;
+}
+
+/* CONTRACT CONTAINER */
+.employee_Details_Container
+  .other_Details
+  .personal_Details
+  .group_Container
+  .first_Section
+  .input_Group
+  .contract_Container {
+  min-width: 10vw;
+  background: #ffffff;
+  position: absolute;
+  top: 70%;
+  left: 31%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #5f5f5f;
+  height: 4vh;
+  display: flex;
+  align-items: center;
 }
 
 /* HOVER DETAILS */

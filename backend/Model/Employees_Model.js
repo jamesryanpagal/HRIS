@@ -28,6 +28,10 @@ const employeeSchema = new schema(
       type: String,
       required: true,
     },
+    contract: {
+      type: String,
+      required: true,
+    },
     birthday: {
       type: String,
       required: true,

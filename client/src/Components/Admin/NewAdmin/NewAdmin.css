@@ -25,6 +25,14 @@
   transform: translate(-50%, -50%);
 }
 
+/* NEW ADMIN LIST EMPTY IMAGE CONTAINER H4 */
+.newAdmin_Container .newAdmin_List .empty_Image_Container h4 {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* NEW ADMIN LIST EMPTY IMAGE CONTAINER IMAGE */
 .newAdmin_Container .newAdmin_List .empty_Image_Container img {
   height: 100%;

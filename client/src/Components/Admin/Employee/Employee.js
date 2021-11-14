@@ -17,7 +17,7 @@ import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 import "./Employee.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const Employee = () => {
   // -------------------- STATE ------------------------
@@ -155,6 +155,16 @@ const Employee = () => {
       <section className="employee_List">
         {employeesContainer.length > 0
           ? employeesContainer.map((e) => {
+              // get department
+              const departmentArr = e.position.split("");
+              const departmentIndex = departmentArr.findIndex((c) => c === "(");
+              const getDepartment = e.position.substring(
+                departmentIndex + 1,
+                departmentArr.length - 1
+              );
+
+              // get position
+              const getPosition = e.position.substring(0, departmentIndex);
               return (
                 // EMPLOYEE CARD
                 <section key={e._id} className="employee">
@@ -173,7 +183,7 @@ const Employee = () => {
                     {/* ID */}
                     <section className="id">{e.employee_id}</section>
                     {/* POSITION */}
-                    <section className="position">{e.position}</section>
+                    <section className="position">{getPosition}</section>
                   </section>
                   {/* DEPARTMENT AND DATE HIRED */}
                   <section className="employee_info">
@@ -182,7 +192,7 @@ const Employee = () => {
                       {/* TITLE */}
                       <section className="title">Department</section>
                       {/* DESCRIPTION */}
-                      <section className="description">Description</section>
+                      <section className="description">{getDepartment}</section>
                     </section>
                     {/* DATE HIRED */}
                     <section className="date_hired">
@@ -206,6 +216,16 @@ const Employee = () => {
               );
             })
           : employees.map((e) => {
+              // get department
+              const departmentArr = e.position.split("");
+              const departmentIndex = departmentArr.findIndex((c) => c === "(");
+              const getDepartment = e.position.substring(
+                departmentIndex + 1,
+                departmentArr.length - 1
+              );
+
+              // get position
+              const getPosition = e.position.substring(0, departmentIndex);
               return (
                 // EMPLOYEE CARD
                 <section key={e._id} className="employee">
@@ -224,7 +244,7 @@ const Employee = () => {
                     {/* ID */}
                     <section className="id">{e.employee_id}</section>
                     {/* POSITION */}
-                    <section className="position">{e.position}</section>
+                    <section className="position">{getPosition}</section>
                   </section>
                   {/* DEPARTMENT AND DATE HIRED */}
                   <section className="employee_info">
@@ -233,7 +253,7 @@ const Employee = () => {
                       {/* TITLE */}
                       <section className="title">Department</section>
                       {/* DESCRIPTION */}
-                      <section className="description">Description</section>
+                      <section className="description">{getDepartment}</section>
                     </section>
                     {/* DATE HIRED */}
                     <section className="date_hired">

@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import "./ApplicantsForm.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 // ----------------------- MARRIED ADDITIONAL FORM ------------------------------
 const MarriedAdditional = ({ setApplicantDetails }) => {
@@ -455,11 +455,11 @@ const ApplicantsForm = () => {
                 <select onChange={handleChange} name="position">
                   <option value="">Position</option>
                   {/* PRESIDENT'S OFFICE */}
-                  <option value="President (PRESIDENT)">
-                    President (PRESIDENT)
+                  <option value="President (PRESIDENTS OFFICE)">
+                    President (PRESIDENT'S OFFICE)
                   </option>
-                  <option value="Secretary of President (PRESIDENT)">
-                    Secretary of President (PRESIDENT)
+                  <option value="Secretary of President (PRESIDENTS OFFICE)">
+                    Secretary of President (PRESIDENT'S OFFICE)
                   </option>
                   {/* ADMINISTRATION */}
                   <option value="Division Head (ADMINISTRATION)">

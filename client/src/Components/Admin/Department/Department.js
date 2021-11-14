@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 // images
 import presidentIcon from "../../../PublicImages/1President.png";
@@ -23,17 +24,215 @@ import motorpoolIcon from "../../../PublicImages/motorpool.png";
 import suiteIcon from "../../../PublicImages/suite.png";
 import ppcIcon from "../../../PublicImages/PPC.png";
 import gmsdIcon from "../../../PublicImages/gmsd.png";
+import empty from "../../../PublicImages/empty.png";
+
+// component
+import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 
 // css
 import "./Department.css";
 
+// -------------------- department modal ----------------------
+const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
+  // --------------- state ------------------
+  // department employee details state
+  const [departmentEmployee, setDepartmentEmployee] = useState([]);
+
+  // toggle search state
+  const [toggleSearch, setToggleSearch] = useState(false);
+
+  // search state
+  const [inputSearch, setInputSearch] = useState("");
+
+  // selector
+  const department = useSelector((state) => state.department);
+
+  // get department
+  useEffect(() => {
+    const dname = departmentName.toLowerCase();
+    for (let key in department) {
+      if (key === dname) {
+        setDepartmentEmployee([...department[key]]);
+      }
+    }
+  }, [department, departmentName]);
+
+  return (
+    <div className="department_Modal_Container">
+      {/* header */}
+      <section className="department_Header_Modal">
+        {/* -------------------- search ----------------- */}
+        <section className={toggleSearch ? "toggleSearch" : "search"}>
+          {/* search icon */}
+          <section
+            className="search_Icon_Container"
+            onClick={() => setToggleSearch((prev) => !prev)}
+          >
+            {toggleSearch ? (
+              <i className="fas fa-times"></i>
+            ) : (
+              <i className="fas fa-search"></i>
+            )}
+          </section>
+          {/* search input */}
+          <section className="search_Input_Container">
+            <input
+              type="text"
+              name="search"
+              onChange={(e) => setInputSearch(e.target.value)}
+            />
+          </section>
+        </section>
+        {/* ---------------- refresh ------------------ */}
+        <section className="refresh" onClick={() => window.location.reload()}>
+          <i className="fas fa-sync-alt"></i>
+        </section>
+        {/* close department */}
+        <section
+          className="close_Department"
+          onClick={() => setViewDepartmentModal(false)}
+        >
+          <i className="fas fa-times"></i>
+        </section>
+      </section>
+      {/* employee list container */}
+      <section className="employee_List_Container">
+        {/* employee list */}
+        <section className="employee_List">
+          {departmentEmployee.length === 0 ? (
+            <section className="empty_Department">
+              <img src={empty} alt="" />
+              <h4>There are no employee for this department !</h4>
+            </section>
+          ) : inputSearch.length === 0 ? (
+            departmentEmployee.map((e) => {
+              // get position
+              const departmentArr = e.position.split("");
+              const departmentIndex = departmentArr.findIndex((c) => c === "(");
+              const getPosition = e.position.substring(0, departmentIndex);
+              return (
+                // employee
+                <section key={e._id} className="employee">
+                  {/* employee image */}
+                  <section className="image">
+                    <ProfileImage
+                      image={e.employee_image}
+                      lastname={e.lastname}
+                      firstname={e.firstname}
+                    />
+                  </section>
+                  {/* employee name */}
+                  <section className="name">
+                    <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                  </section>
+                  {/* id and position group */}
+                  <section className="other_Details">
+                    {/* employee id */}
+                    <section className="id">
+                      {/* header */}
+                      <h4>Id</h4>
+                      {/* id */}
+                      <section>{e.employee_id}</section>
+                    </section>
+                    {/* employee position */}
+                    <section className="position">
+                      {/* header */}
+                      <h4>Position</h4>
+                      {/* position */}
+                      <section>{getPosition}</section>
+                    </section>
+                  </section>
+                </section>
+              );
+            })
+          ) : (
+            departmentEmployee
+              .filter((e) =>
+                e.lastname.toLowerCase().includes(inputSearch.toLowerCase())
+              )
+              .map((e) => {
+                // get position
+                const departmentArr = e.position.split("");
+                const departmentIndex = departmentArr.findIndex(
+                  (c) => c === "("
+                );
+                const getPosition = e.position.substring(0, departmentIndex);
+                return (
+                  // employee
+                  <section key={e._id} className="employee">
+                    {/* employee image */}
+                    <section className="image">
+                      <ProfileImage
+                        image={e.employee_image}
+                        lastname={e.lastname}
+                        firstname={e.firstname}
+                      />
+                    </section>
+                    {/* employee name */}
+                    <section className="name">
+                      <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                    </section>
+                    {/* id and position group */}
+                    <section className="other_Details">
+                      {/* employee id */}
+                      <section className="id">
+                        {/* header */}
+                        <h4>Id</h4>
+                        {/* id */}
+                        <section>{e.employee_id}</section>
+                      </section>
+                      {/* employee position */}
+                      <section className="position">
+                        {/* header */}
+                        <h4>Position</h4>
+                        {/* position */}
+                        <section>{getPosition}</section>
+                      </section>
+                    </section>
+                  </section>
+                );
+              })
+          )}
+        </section>
+      </section>
+    </div>
+  );
+};
+
+// ---------------- MAIN -----------------------
 const Department = () => {
+  // ------------------ STATE -----------
+  const [viewDepartmentModal, setViewDepartmentModal] = useState(false);
+
+  // department name state
+  const [departmentName, setDepartmentName] = useState("");
+
+  // handleViewDepartment
+  const handleViewDepartment = (e) => {
+    const target = e.target.children[0].children[2].innerText;
+    setDepartmentName(target);
+    setViewDepartmentModal(true);
+  };
+
   return (
     <div className="department_Container">
+      {/* TOGGLE DEPARTMENT MODAL */}
+      {viewDepartmentModal && (
+        <DepartmentModal
+          departmentName={departmentName}
+          setViewDepartmentModal={setViewDepartmentModal}
+        />
+      )}
+      {/* department header */}
+      <section className="department_Header">
+        <section className="refresh" onClick={() => window.location.reload()}>
+          <i className="fas fa-sync-alt"></i>
+        </section>
+      </section>
       {/* department list */}
       <section className="department_List">
         {/* president's office */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -42,10 +241,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">President's Office</section>
+            <span>PRESIDENTSOFFICE</span>
           </section>
         </section>
         {/* Admininstration */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -54,10 +254,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Admininstration</section>
+            <span>ADMINISTRATION</span>
           </section>
         </section>
         {/* Auditing */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -66,10 +267,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Auditing</section>
+            <span>AUDITING</span>
           </section>
         </section>
         {/* Cashier */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -78,10 +280,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Cashier</section>
+            <span>CASHIER</span>
           </section>
         </section>
         {/* Clinic */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -90,10 +293,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Clinic</section>
+            <span>CLINIC</span>
           </section>
         </section>
         {/* Communications */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -102,10 +306,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Communications</section>
+            <span>COMMUNICATIONS</span>
           </section>
         </section>
         {/* Construction */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -114,10 +319,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Construction</section>
+            <span>CONSTRUCTION</span>
           </section>
         </section>
         {/* Engineering */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -126,10 +332,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Engineering</section>
+            <span>ENGINEERING</span>
           </section>
         </section>
         {/* Fabrication */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -138,10 +345,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Fabrication</section>
+            <span>FABRICATION</span>
           </section>
         </section>
         {/* GMSD */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -150,10 +358,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">GMSD</section>
+            <span>GMSD</span>
           </section>
         </section>
         {/* Motorpool */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -162,10 +371,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Motorpool</section>
+            <span>MOTORPOOL</span>
           </section>
         </section>
         {/* Human Resource */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -174,10 +384,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Human Resource</section>
+            <span>HUMANRESOURCE</span>
           </section>
         </section>
         {/* Marketing */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -185,11 +396,12 @@ const Department = () => {
               <img src={marketingIcon} alt="" />
             </section>
             {/* department title */}
-            <section className="department_Title">Merketing</section>
+            <section className="department_Title">Marketing</section>
+            <span>MARKETING</span>
           </section>
         </section>
         {/* I.T */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -197,11 +409,12 @@ const Department = () => {
               <img src={itIcon} alt="" />
             </section>
             {/* department title */}
-            <section className="department_Title">department interface</section>
+            <section className="department_Title">I.T</section>
+            <span>IT</span>
           </section>
         </section>
         {/* Operations */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -210,10 +423,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Operations</section>
+            <span>OPERATIONS</span>
           </section>
         </section>
         {/* PPC */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -222,10 +436,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">PPC</section>
+            <span>PPC</span>
           </section>
         </section>
         {/* Purchasing */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -234,10 +449,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Purchasing</section>
+            <span>PURCHASING</span>
           </section>
         </section>
         {/* QA/QC */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -246,10 +462,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">QA/QC</section>
+            <span>QAQC</span>
           </section>
         </section>
         {/* Warehouse */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -258,10 +475,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Warehouse</section>
+            <span>WAREHOUSE</span>
           </section>
         </section>
         {/* Finishing */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -270,10 +488,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Finishing</section>
+            <span>FINISHING</span>
           </section>
         </section>
         {/* Security */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -282,10 +501,11 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Security</section>
+            <span>SECURITY</span>
           </section>
         </section>
         {/* Suites */}
-        <section className="department">
+        <section className="department" onClick={handleViewDepartment}>
           {/* department interface */}
           <section className="department_Interface_Container">
             {/* department logo */}
@@ -294,6 +514,7 @@ const Department = () => {
             </section>
             {/* department title */}
             <section className="department_Title">Suites</section>
+            <span>SUITES</span>
           </section>
         </section>
       </section>

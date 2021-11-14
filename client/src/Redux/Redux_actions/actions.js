@@ -227,3 +227,37 @@ export const removeNewAdminActions = (removeNewAdminId) => (dispatch) => {
     },
   });
 };
+
+// ------------------------------ DEPARTMENTS ACTIONS -------------------------
+export const departmentsActions =
+  (departmentType, departmentPayload) => (dispatch) => {
+    dispatch({
+      type: departmentType,
+      payload: {
+        departmentPayload,
+      },
+    });
+  };
+
+export const updateEmployeeDepartmentActions =
+  (departmentKey, departmentEmployeeId) => (dispatch) => {
+    dispatch({
+      type: `UPDATE ${departmentKey}`,
+      payload: {
+        departmentEmployeeId,
+      },
+    });
+  };
+
+// -------------------------- UPDATING ACTIONS
+export const updatingActions = () => (dispatch) => {
+  dispatch({
+    type: "UPDATING",
+  });
+};
+
+export const noUpdatesActions = () => (dispatch) => {
+  dispatch({
+    type: "NO_UPDATES",
+  });
+};

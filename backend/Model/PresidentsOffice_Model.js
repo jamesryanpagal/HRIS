@@ -111,7 +111,7 @@ const presidentsOfficeSchema = new schema(
 );
 
 const PresidentsOffice = mongoose.model(
-  "presidentsOffices",
+  "presidentsoffices",
   presidentsOfficeSchema
 );
 module.exports = PresidentsOffice;

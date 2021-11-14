@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axiosConfig from "../AxiosConfig/AxiosConfig";
 import io from "socket.io-client";
+
+// redux actions
+import { updatingActions } from "../../Redux/Redux_actions/actions";
 
 // Spinner
 import Spinner from "../../Spinner/Spinner";
@@ -13,7 +16,7 @@ import ProfileImage from "../ProfileImage/ProfileImage";
 import "./EmployeeDetails.css";
 
 // SOCKET CONNECTION
-const socket = io.connect("https://grandspan.herokuapp.com/");
+const socket = io.connect("http://localhost:8080/");
 
 const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
   // --------------------------------- STATE -----------------------------
@@ -26,6 +29,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     firstname: "",
     middle: "",
     phone: "",
+    contract: "",
     birthday: "",
     gender: "",
     address: "",
@@ -59,6 +63,9 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
   // SELECTOR
   const { employees } = useSelector((state) => state.Employee);
 
+  // dispatch
+  const dispatch = useDispatch();
+
   // get employee from redux
   useEffect(() => {
     const getEmployee = async () => {
@@ -73,6 +80,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
           firstname: employee.firstname,
           middle: employee.middle,
           phone: employee.phone,
+          contract: employee.contract,
           birthday: employee.birthday,
           gender: employee.gender,
           address: employee.address,
@@ -161,6 +169,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
       });
       setLoading(false);
       setUnSaveTotal(0);
+      dispatch(updatingActions());
     } catch (error) {
       console.log(error.message);
     }
@@ -205,6 +214,22 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     };
   };
 
+  // employee Department
+  const getEmployeeDepartment = employeeDetails.position;
+  const removeCloseParenthesis = getEmployeeDepartment.replace(")", "");
+  const employeeDepartmentArr = removeCloseParenthesis.split("");
+  const employeeDepartmentIndex = employeeDepartmentArr.findIndex(
+    (e) => e === "("
+  );
+  const employeeDepartment = removeCloseParenthesis.substring(
+    employeeDepartmentIndex + 1
+  );
+
+  // employee Position
+  const employeePosition = getEmployeeDepartment.substring(
+    0,
+    employeeDepartmentIndex
+  );
   return (
     <div
       className={
@@ -253,7 +278,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
             {/* PROFILE DETAILS HEADER */}
             <section className="header">
               <h2>{`${employeeDetails.lastname}, ${employeeDetails.firstname} ${employeeDetails.middle}.`}</h2>
-              <span>{employeeDetails.position}</span>
+              <span>{employeePosition}</span>
             </section>
             <hr />
             {/* PROFILE DETAILS */}
@@ -268,7 +293,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                 {/* DEPARTMENT */}
                 <section className="child">
                   <span>Department: </span>
-                  {employeeDetails.position}
+                  {employeeDepartment}
                 </section>
                 {/* DATE HIRED */}
                 <section className="child">
@@ -290,8 +315,8 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                 </section>
                 {/* CONTRACT EXPIRED */}
                 <section className="child">
-                  <span>Contract expired: </span>
-                  {employeeDetails.date_hired}
+                  <span>Contract: </span>
+                  {employeeDetails.contract}
                 </section>
               </section>
             </section>
@@ -370,11 +395,11 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                         {employeeDetails.position}
                       </option>
                       {/* PRESIDENT'S OFFICE */}
-                      <option value="President (PRESIDENT)">
-                        President (PRESIDENT)
+                      <option value="President (PRESIDENTS OFFICE)">
+                        President (PRESIDENT'S OFFICE)
                       </option>
-                      <option value="Secretary of President (PRESIDENT)">
-                        Secretary of President (PRESIDENT)
+                      <option value="Secretary of President (PRESIDENTS OFFICE)">
+                        Secretary of President (PRESIDENT'S OFFICE)
                       </option>
                       {/* ADMINISTRATION */}
                       <option value="Division Head (ADMINISTRATION)">
@@ -804,6 +829,44 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       onClick={handleEditDetails}
                     >
                       <i className="fas fa-pen"></i>
+                    </section>
+                  </section>
+                  {/* PHONE INPUT GROUP */}
+                  <section className="input_Group">
+                    <h6>Phone</h6>
+                    <input
+                      className="input"
+                      type="number"
+                      name="phone"
+                      onChange={handleChangeEmployeeDetails}
+                      disabled={true}
+                      value={employeeDetails.phone}
+                    />
+                    <section
+                      className="edit_Icon_Container"
+                      onClick={handleEditDetails}
+                    >
+                      <i className="fas fa-pen"></i>
+                    </section>
+                  </section>
+                  {/* CONTRACT INPUT GROUP */}
+                  <section className="input_Group">
+                    <h6>Contract</h6>
+                    <input
+                      className="input"
+                      type="date"
+                      name="contract"
+                      onChange={handleChangeEmployeeDetails}
+                      disabled={true}
+                    />
+                    <section
+                      className="edit_Icon_Container"
+                      onClick={handleEditDetails}
+                    >
+                      <i className="fas fa-pen"></i>
+                    </section>
+                    <section className="contract_Container">
+                      {employeeDetails.contract}
                     </section>
                   </section>
                 </section>

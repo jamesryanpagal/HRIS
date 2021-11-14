@@ -2,7 +2,7 @@
   width: 100%;
   background: #f6f6ff;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* --------------------------- MODAL ---------------------------- */
