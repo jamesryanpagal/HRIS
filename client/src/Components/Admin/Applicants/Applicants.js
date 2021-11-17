@@ -8,6 +8,7 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 // COMPONENT
 import Reject from "../../../ReusableFunctions/Confirmation/Reject/Reject";
 import Accept from "../../../ReusableFunctions/Confirmation/Accept/Accept";
+import Spinner from "../../../Spinner/Spinner";
 
 // REDUX ACTIONS
 import {
@@ -62,6 +63,33 @@ const ApplicantDetails = ({
   // TOGGLE CONFIRM ACCEPT STATE
   const [confirmAccept, setConfirmAccept] = useState(false);
 
+  // SHOW SEND EMAIL STATE
+  const [showSendEmail, setShowSendEmail] = useState(false);
+
+  // SENDING EMAIL DETAILS STATE
+  const [sendEmailDetails, setSendEmailDetails] = useState({
+    meetingLink: "",
+    interviewDate: "",
+    hour: "00",
+    minutes: "00",
+    meridiem: "am",
+  });
+
+  // MINUTES STATE
+  const [minuteList, setMinuteList] = useState([]);
+
+  // HOUR STATE
+  const [hourList, setHourList] = useState([]);
+
+  // SEND EMAIL RESPONSE STATE
+  const [emailResponse, setEmailResponse] = useState("");
+
+  // EMAIL SENT STATE
+  const [emailSent, setEmailSent] = useState(false);
+
+  // SEND EMAIL LOADER STATE
+  const [sendEmailLoading, setSendEmailLoading] = useState(false);
+
   // defaultLayoutPlugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
@@ -78,6 +106,7 @@ const ApplicantDetails = ({
     const applicant = screening.find((a) => a._id === applicantId);
     if (applicant) {
       setApplicant_Details({ ...applicant });
+      setShowSendEmail(true);
     }
   }, [applicantId, screening]);
 
@@ -88,6 +117,62 @@ const ApplicantDetails = ({
       setApplicant_Details({ ...applicant });
     }
   }, [applicantId, interview]);
+
+  // create time
+  useEffect(() => {
+    // minutes
+    let minutearr = [];
+    // hour
+    let hourarr = [];
+    for (let x = 0; x <= 59; x++) {
+      minutearr.push(x.toString());
+      if (x >= 0 && x <= 12) {
+        hourarr.push(x.toString());
+      }
+    }
+    setMinuteList([...minutearr]);
+    setHourList([...hourarr]);
+  }, []);
+
+  // send email onchange
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setSendEmailDetails((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // handle send email
+  const handleSendEmail = async () => {
+    try {
+      setSendEmailLoading(true);
+      const { data } = await axiosConfig.post("/SendingEmail", {
+        ...sendEmailDetails,
+        email: applicant_Details.email,
+        name: `${applicant_Details.firstname} ${applicant_Details.lastname}`,
+        gender: applicant_Details.gender === "male" ? "Mr" : "Ms/Mrs",
+      });
+
+      // check error
+      if (data.isError) {
+        setEmailResponse(
+          <section className="emailResponseError">
+            <i className="fas fa-exclamation-triangle"></i> {data.errorMessage}
+          </section>
+        );
+        setSendEmailLoading(false);
+        return;
+      }
+      setSendEmailLoading(false);
+      setEmailResponse(
+        <section className="emailResponseSuccess">
+          <i className="fas fa-check-circle"></i> {data}
+        </section>
+      );
+      setEmailSent(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="applicants_Details_Container">
@@ -171,6 +256,84 @@ const ApplicantDetails = ({
             <label>Email</label>
             <section className="info">{applicant_Details.email}</section>
           </section>
+          {/* SENDING EMAIL */}
+          {showSendEmail && (
+            <>
+              {/* SENDING EMAIL RESPONSE */}
+              {emailResponse && (
+                <section className="sending_Email_Response">
+                  {emailResponse}
+                </section>
+              )}
+              {/* SENDING EMAIL CONTAINER */}
+              <section className="sending_Email_Container">
+                {/* SEDING EMAIL HEADER */}
+                <section className="sending_Email_Header">Send email</section>
+                {/* SENDING EMAIL INPUT GROUPS */}
+                <section className="sending_Email_Input_Groups">
+                  {/* MEETING LINK GROUP */}
+                  <section className="sendingEmail_Group">
+                    <label htmlFor="meetingLink">Meeting link</label>
+                    <input
+                      type="text"
+                      name="meetingLink"
+                      id="meetingLink"
+                      onChange={handleChange}
+                    />
+                  </section>
+                  {/* INTERVIEW DATE GROUP */}
+                  <section className="sendingEmail_Group">
+                    <label htmlFor="interviewDate">Interview date</label>
+                    <input
+                      type="date"
+                      name="interviewDate"
+                      id="interviewDate"
+                      onChange={handleChange}
+                    />
+                  </section>
+                  {/* INTERVIEW TIME GROUP */}
+                  <section className="sendingEmail_Group">
+                    <label htmlFor="interviewTime">Interview time</label>
+                    <section>
+                      {/* HOUR */}
+                      <select name="hour" onChange={handleChange}>
+                        {hourList.map((h, i) => (
+                          <option key={i} value={h.length === 1 ? `0${h}` : h}>
+                            {h.length === 1 ? `0${h}` : h}
+                          </option>
+                        ))}
+                      </select>
+                      {/* MINUTES */}
+                      <select name="minutes" onChange={handleChange}>
+                        {minuteList.map((m, i) => (
+                          <option key={i} value={m.length === 1 ? `0${m}` : m}>
+                            {m.length === 1 ? `0${m}` : m}
+                          </option>
+                        ))}
+                      </select>
+                      {/* MERIDIEM */}
+                      <select name="meridiem" onChange={handleChange}>
+                        <option value="am">am</option>
+                        <option value="pm">pm</option>
+                      </select>
+                    </section>
+                  </section>
+                  {/* SEND EMAIL BUTTON */}
+                  <section
+                    className={
+                      sendEmailLoading
+                        ? "sendEmail_Button_Disable"
+                        : "sendEmail_Button"
+                    }
+                  >
+                    <button type="button" onClick={handleSendEmail}>
+                      {sendEmailLoading ? <Spinner /> : "Send"}
+                    </button>
+                  </section>
+                </section>
+              </section>
+            </>
+          )}
           {/* ACTIONS */}
           <section className="applicants_Actions">
             <button
@@ -182,7 +345,13 @@ const ApplicantDetails = ({
             </button>
             <button
               type="button"
-              className="accept"
+              className={
+                showSendEmail
+                  ? !emailSent
+                    ? "accept_Disable"
+                    : "accept"
+                  : "accept"
+              }
               onClick={() => setConfirmAccept(true)}
             >
               Accept

@@ -474,7 +474,7 @@ const ApplicantsForm = () => {
                   <option value="Assistant of the OIC (ADMINISTRATION)">
                     Assistant of the OIC (ADMINISTRATION)
                   </option>
-                  <option value="Adminis>OIC (ADMINISTRATION)trative">
+                  <option value="OIC (ADMINISTRATION)">
                     OIC (ADMINISTRATION)
                   </option>
                   <option value="Vice President (ADMINISTRATION)">

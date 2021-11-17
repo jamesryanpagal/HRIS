@@ -85,6 +85,24 @@
   cursor: pointer;
 }
 
+/* APPLICANTS ACTIONS ACCEPT DISABLE */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .applicants_Actions
+  .accept_Disable {
+  border: none;
+  background: rgb(170, 255, 170);
+  color: green;
+  height: 100%;
+  width: 45%;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 /* ------------ APPLICANTS BASIC DETAILS --------------- */
 .applicants_Container
   .applicants_Details_Container
@@ -129,6 +147,152 @@
   border-radius: 3px;
   padding: 5px;
   word-wrap: break-word;
+}
+
+/* APPLICANT SENDING EMAIL REPONSE MESSAGE */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Response {
+  margin: 20px 0 0 0;
+  text-align: center;
+}
+
+/* APPLICANT SENDING EMAIL REPONSE MESSAGE SUCCESS */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Response
+  .emailResponseError {
+  background: rgb(255, 185, 185);
+  padding: 5px 0;
+  color: red;
+}
+
+/* APPLICANT SENDING EMAIL REPONSE MESSAGE ERROR */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Response
+  .emailResponseSuccess {
+  background: rgb(187, 255, 185);
+  padding: 5px 0;
+  color: green;
+}
+
+/* APPLICANT SENDING EMAIL */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Container {
+  border-radius: 3px;
+  background: #ececec;
+  margin: 20px 0;
+  flex-direction: column;
+  position: relative;
+  padding: 30px 5px 5px 5px;
+}
+
+/* APPLICANT SENDING EMAIL HEADER */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #5f5f5f;
+  padding: 5px 0;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendingEmail_Group {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP LABEL */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendingEmail_Group
+  label {
+  color: #5f5f5f;
+  font-size: 13px;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP INPUT */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendingEmail_Group
+  input {
+  outline: none;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #afafaf;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP SEND EMAIL BUTTON CONTAINER */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendEmail_Button {
+  height: 5vh;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP SEND EMAIL BUTTON CONTAINER DISABLE */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendEmail_Button_Disable {
+  height: 5vh;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP SEND EMAIL BUTTON */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendEmail_Button
+  button {
+  border: none;
+  background: #9ebdfa;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  color: #ffffff;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+/* APPLICANT SENDING EMAIL INPUT GROUP SEND EMAIL BUTTON DISABLE */
+.applicants_Container
+  .applicants_Details_Container
+  .applicants_Details
+  .sending_Email_Input_Groups
+  .sendEmail_Button_Disable
+  button {
+  border: none;
+  background: #9ebdfa;
+  height: 100%;
+  width: 100%;
+  color: #ffffff;
+  letter-spacing: 1px;
+  position: relative;
 }
 
 /* APPLICANTS RESUME */

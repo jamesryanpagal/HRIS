@@ -68,12 +68,13 @@
   padding: 10px 0;
   font-weight: bolder;
   color: #afafaf;
+  border: transparent solid 5px;
 }
 
 .admin_Navbar .admin_Navbar_Links ul li .link:hover {
   display: block;
   text-decoration: none;
-  background: #dfe09e;
+  background: #c9c9c9;
   text-align: center;
   padding: 10px 0;
   font-weight: bolder;
@@ -82,6 +83,7 @@
 
 /* ACTIVE LINK */
 .admin_Navbar .admin_Navbar_Links ul li .active_Link {
-  background: #dfe09e;
-  color: #1c212d;
+  background: rgba(201, 201, 201, 30%);
+  color: #ffffff;
+  border-left-color: #dfe09e;
 }
