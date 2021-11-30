@@ -188,11 +188,12 @@ export const rejectedApplicantActions = (rejectedApplicant) => (dispatch) => {
 
 // ------------------------------------- EMPLOYEE ACTIONS -----------------------------------
 // add employee
-export const employeesActions = (employee) => (dispatch) => {
+export const employeesActions = (employee, employeeArr) => (dispatch) => {
   dispatch({
     type: "EMPLOYEES",
     payload: {
       employee,
+      employeeArr,
     },
   });
 };
@@ -230,11 +231,12 @@ export const removeNewAdminActions = (removeNewAdminId) => (dispatch) => {
 
 // ------------------------------ DEPARTMENTS ACTIONS -------------------------
 export const departmentsActions =
-  (departmentType, departmentPayload) => (dispatch) => {
+  (departmentType, departmentPayload, departmentDataArr) => (dispatch) => {
     dispatch({
       type: departmentType,
       payload: {
         departmentPayload,
+        departmentDataArr,
       },
     });
   };

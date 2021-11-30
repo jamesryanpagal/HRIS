@@ -12,6 +12,7 @@ import {
 // COMPONENTS
 import EmployeeDetails from "../../../ReusableFunctions/ViewEmployeeDetails/EmployeeDetails";
 import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
+import Header from "./Header/Header";
 
 //css
 import "./Employee.css";
@@ -44,8 +45,23 @@ const Employee = () => {
   // get all employee from Database
   useEffect(() => {
     const getEmployeeList = async () => {
-      const { data } = await axiosConfig.get("Employee/employeeList");
-      data.map((e) => dispatch(employeesActions(e)));
+      // Employees container
+      let employeesArr = [];
+
+      // get employees from Employees database table
+      const employees = await axiosConfig.get("Employee/employeeList");
+
+      // insert employees to employeesArr
+      employeesArr = [...employeesArr, ...employees.data];
+
+      // if employeeArr has no data
+      if (employeesArr.length === 0) {
+        dispatch(employeesActions("no data", employeesArr));
+        return;
+      }
+
+      // if employeeArr has a data
+      employeesArr.map((e) => dispatch(employeesActions(e, employeesArr)));
     };
 
     getEmployeeList();
@@ -90,67 +106,14 @@ const Employee = () => {
         id={emp_id}
       />
       {/* HEADER */}
-      <section className="employee_Header">
-        {/* SEARCH */}
-        <section
-          className={
-            toggleSearch ? "toggle_Search_Employee" : "search_Employee"
-          }
-        >
-          <section className="search_Icon" onClick={handleToggleSearch}>
-            {toggleSearch ? (
-              <i className="fas fa-times"></i>
-            ) : (
-              <i className="fas fa-search"></i>
-            )}
-          </section>
-          <input
-            type="text"
-            name="search"
-            onChange={(e) => setSearchedValue(e.target.value)}
-          />
-          {/* SEARCHED RESULT */}
-          <section className="searched_Results">
-            {/* SEARCHED VALUE IS EMPTY */}
-            {!searchedValue ? (
-              <section className="no_Matching_Results">
-                No matching results!
-              </section>
-            ) : // SEACHED VALUE HAS NO MATCHED
-            employeesContainer.filter((e) =>
-                e.lastname.toLowerCase().includes(searchedValue.toLowerCase())
-              ).length < 1 ? (
-              <section className="no_Matching_Results">
-                No matching results!
-              </section>
-            ) : (
-              // SEARCHED VALUE HAS A MATCH
-              employeesContainer
-                .filter((e) =>
-                  e.lastname.toLowerCase().includes(searchedValue.toLowerCase())
-                )
-                .map((e) => {
-                  return (
-                    <section
-                      key={e.employee_id}
-                      className="results"
-                      onClick={handleFilterEmployeeContainer}
-                    >
-                      <h4>{`${e.lastname}, ${e.firstname} ${e.middle}.`}</h4>
-                      <span>{e.employee_id}</span>
-                    </section>
-                  );
-                })
-            )}
-          </section>
-        </section>
-        {/* REFRESH */}
-        <section className="refresh_Page">
-          <button type="button" onClick={() => window.location.reload()}>
-            <i className="fas fa-sync-alt"></i>
-          </button>
-        </section>
-      </section>
+      <Header
+        searchSource={employeesContainer}
+        toggleSearch={toggleSearch}
+        searchedValue={searchedValue}
+        setSearchedValue={setSearchedValue}
+        handleToggleSearch={handleToggleSearch}
+        handleFilterEmployeeContainer={handleFilterEmployeeContainer}
+      />
       {/* EMPLOYEE LIST */}
       <section className="employee_List">
         {employeesContainer.length > 0

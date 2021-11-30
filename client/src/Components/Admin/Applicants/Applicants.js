@@ -163,6 +163,18 @@ const ApplicantDetails = ({
         return;
       }
       setSendEmailLoading(false);
+
+      // something went wrong
+      if (data === "Something went wrong!") {
+        setEmailResponse(
+          <section className="emailResponseError">
+            <i className="fas fa-exclamation-triangle"></i> {data}
+          </section>
+        );
+        setSendEmailLoading(false);
+        return;
+      }
+
       setEmailResponse(
         <section className="emailResponseSuccess">
           <i className="fas fa-check-circle"></i> {data}

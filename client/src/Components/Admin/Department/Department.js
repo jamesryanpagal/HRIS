@@ -99,7 +99,7 @@ const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
       <section className="employee_List_Container">
         {/* employee list */}
         <section className="employee_List">
-          {departmentEmployee.length === 0 ? (
+          {departmentEmployee.length === 1 ? (
             <section className="empty_Department">
               <img src={empty} alt="" />
               <h4>There are no employee for this department !</h4>
@@ -112,36 +112,40 @@ const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
               const getPosition = e.position.substring(0, departmentIndex);
               return (
                 // employee
-                <section key={e._id} className="employee">
-                  {/* employee image */}
-                  <section className="image">
-                    <ProfileImage
-                      image={e.employee_image}
-                      lastname={e.lastname}
-                      firstname={e.firstname}
-                    />
-                  </section>
-                  {/* employee name */}
-                  <section className="name">
-                    <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
-                  </section>
-                  {/* id and position group */}
-                  <section className="other_Details">
-                    {/* employee id */}
-                    <section className="id">
-                      {/* header */}
-                      <h4>Id</h4>
-                      {/* id */}
-                      <section>{e.employee_id}</section>
+                <section key={e._id}>
+                  {e.employee_id !== "default" && (
+                    <section className="employee">
+                      {/* employee image */}
+                      <section className="image">
+                        <ProfileImage
+                          image={e.employee_image}
+                          lastname={e.lastname}
+                          firstname={e.firstname}
+                        />
+                      </section>
+                      {/* employee name */}
+                      <section className="name">
+                        <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                      </section>
+                      {/* id and position group */}
+                      <section className="other_Details">
+                        {/* employee id */}
+                        <section className="id">
+                          {/* header */}
+                          <h4>Id</h4>
+                          {/* id */}
+                          <section>{e.employee_id}</section>
+                        </section>
+                        {/* employee position */}
+                        <section className="position">
+                          {/* header */}
+                          <h4>Position</h4>
+                          {/* position */}
+                          <section>{getPosition}</section>
+                        </section>
+                      </section>
                     </section>
-                    {/* employee position */}
-                    <section className="position">
-                      {/* header */}
-                      <h4>Position</h4>
-                      {/* position */}
-                      <section>{getPosition}</section>
-                    </section>
-                  </section>
+                  )}
                 </section>
               );
             })
@@ -159,36 +163,40 @@ const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
                 const getPosition = e.position.substring(0, departmentIndex);
                 return (
                   // employee
-                  <section key={e._id} className="employee">
-                    {/* employee image */}
-                    <section className="image">
-                      <ProfileImage
-                        image={e.employee_image}
-                        lastname={e.lastname}
-                        firstname={e.firstname}
-                      />
-                    </section>
-                    {/* employee name */}
-                    <section className="name">
-                      <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
-                    </section>
-                    {/* id and position group */}
-                    <section className="other_Details">
-                      {/* employee id */}
-                      <section className="id">
-                        {/* header */}
-                        <h4>Id</h4>
-                        {/* id */}
-                        <section>{e.employee_id}</section>
+                  <section key={e._id}>
+                    {e.employee_id !== "default" && (
+                      <section className="employee">
+                        {/* employee image */}
+                        <section className="image">
+                          <ProfileImage
+                            image={e.employee_image}
+                            lastname={e.lastname}
+                            firstname={e.firstname}
+                          />
+                        </section>
+                        {/* employee name */}
+                        <section className="name">
+                          <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                        </section>
+                        {/* id and position group */}
+                        <section className="other_Details">
+                          {/* employee id */}
+                          <section className="id">
+                            {/* header */}
+                            <h4>Id</h4>
+                            {/* id */}
+                            <section>{e.employee_id}</section>
+                          </section>
+                          {/* employee position */}
+                          <section className="position">
+                            {/* header */}
+                            <h4>Position</h4>
+                            {/* position */}
+                            <section>{getPosition}</section>
+                          </section>
+                        </section>
                       </section>
-                      {/* employee position */}
-                      <section className="position">
-                        {/* header */}
-                        <h4>Position</h4>
-                        {/* position */}
-                        <section>{getPosition}</section>
-                      </section>
-                    </section>
+                    )}
                   </section>
                 );
               })

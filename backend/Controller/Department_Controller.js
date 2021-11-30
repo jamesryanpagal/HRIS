@@ -22,6 +22,11 @@ const Finishing = require("../Model/Finishing_Model");
 const Security = require("../Model/Security_model");
 const Suites = require("../Model/Suites_Model");
 
+// ------------ BLACKLIST, TERMINATED, RESIGNED ----------------
+const Blacklist = require("../Model/Blacklist_Model");
+const Terminated = require("../Model/Terminated_Model");
+const Resigned = require("../Model/Resigned_Model");
+
 const date = new Date();
 
 const addToDepartment = async (req, res) => {
@@ -32,40 +37,70 @@ const addToDepartment = async (req, res) => {
     const filterPresident = employee.filter((e) =>
       e.position.includes("(PRESIDENTS OFFICE)")
     );
+
+    // BLACKLIST
+    const blacklistEmployeeList = await Blacklist.find();
+
+    // TERMINATED
+    const terminatedEmployeeList = await Terminated.find();
+
+    // RESIGNED
+    const resignedEmployeeList = await Resigned.find();
+
+    // search blacklist, terminated, resigned employee
     filterPresident.map(async (e) => {
-      try {
-        await PresidentsOffice.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await PresidentsOffice.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- ADMINISTRATION -----------------
@@ -74,39 +109,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(ADMINISTRATION)")
     );
     filterAdministration.map(async (e) => {
-      try {
-        await Administration.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Administration.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- AUDITING -----------------
@@ -115,39 +169,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(AUDITING)")
     );
     filterAuditing.map(async (e) => {
-      try {
-        await Auditing.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Auditing.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- CASHIER -----------------
@@ -156,39 +229,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(CASHIER)")
     );
     filterCashier.map(async (e) => {
-      try {
-        await Cashier.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Cashier.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- CLINIC -----------------
@@ -197,39 +289,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(CLINIC)")
     );
     filterClinic.map(async (e) => {
-      try {
-        await Clinic.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Clinic.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- COMMUNICATIONS -----------------
@@ -238,39 +349,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(COMMUNICATIONS)")
     );
     filterCommunication.map(async (e) => {
-      try {
-        await Communication.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Communication.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- CONSTRUCTION -----------------
@@ -279,39 +409,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(CONSTRUCTION)")
     );
     filterConstruction.map(async (e) => {
-      try {
-        await Construction.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Construction.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- ENGINEERING -----------------
@@ -320,39 +469,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(ENGINEERING)")
     );
     filterEngineering.map(async (e) => {
-      try {
-        await Engineering.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Engineering.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- FABRICATION -----------------
@@ -361,78 +529,116 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(FABRICATION)")
     );
     filterFabrication.map(async (e) => {
-      try {
-        await Fabrication.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Fabrication.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- GMSD -----------------
     // FILTER GMSD
     const filterGmsd = employee.filter((e) => e.position.includes("(GMSD)"));
     filterGmsd.map(async (e) => {
-      try {
-        await GMSD.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await GMSD.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- MOTORPOOL -----------------
@@ -441,39 +647,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(MOTORPOOL)")
     );
     filterMotorpool.map(async (e) => {
-      try {
-        await Motorpool.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Motorpool.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- HUMAN RESOURCE -----------------
@@ -482,39 +707,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(HUMAN RESOURCE)")
     );
     filterHumanResource.map(async (e) => {
-      try {
-        await HumanResource.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await HumanResource.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- MARKETING -----------------
@@ -523,78 +767,116 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(MARKETING)")
     );
     filterMarketing.map(async (e) => {
-      try {
-        await Marketing.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Marketing.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- I.T -----------------
     // FILTER I.T
     const filterIt = employee.filter((e) => e.position.includes("(I.T)"));
     filterIt.map(async (e) => {
-      try {
-        await it.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await it.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- OPERATIONS -----------------
@@ -603,78 +885,116 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(OPERATIONS)")
     );
     filterOperations.map(async (e) => {
-      try {
-        await Operations.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Operations.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- PPC -----------------
     // FILTER PPC
     const filterPpc = employee.filter((e) => e.position.includes("(PPC)"));
     filterPpc.map(async (e) => {
-      try {
-        await PPC.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await PPC.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- PURCHASING -----------------
@@ -683,78 +1003,116 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(PURCHASING)")
     );
     filterPurchasing.map(async (e) => {
-      try {
-        await Purchasing.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Purchasing.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- QA/QC -----------------
     // FILTER QA/QC
     const filterQaqc = employee.filter((e) => e.position.includes("(QA/QC)"));
     filterQaqc.map(async (e) => {
-      try {
-        await QAQC.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await QAQC.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- WAREHOUSE -----------------
@@ -763,39 +1121,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(WAREHOUSE)")
     );
     filterWarehouse.map(async (e) => {
-      try {
-        await Warehouse.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Warehouse.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- FINISHING -----------------
@@ -804,39 +1181,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(FINISHING)")
     );
     filterFinishing.map(async (e) => {
-      try {
-        await Finishing.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Finishing.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- SECURITY -----------------
@@ -845,39 +1241,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(SECURITY)")
     );
     filterSecurity.map(async (e) => {
-      try {
-        await Security.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Security.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     // --------------- SUITES -----------------
@@ -886,39 +1301,58 @@ const addToDepartment = async (req, res) => {
       e.position.includes("(SUITES)")
     );
     filterSuites.map(async (e) => {
-      try {
-        await Suites.create({
-          employee_id: e.employee_id,
-          employee_image: e.employee_image,
-          lastname: e.lastname,
-          firstname: e.firstname,
-          middle: e.middle,
-          phone: e.phone,
-          birthday: e.birthday,
-          gender: e.gender,
-          address: e.address,
-          email: e.email,
-          position: e.position,
-          civil_status: e.civil_status,
-          spouce_fullname: e.spouce_fullname,
-          spouce_birthday: e.spouce_birthday,
-          spouce_contact_number: e.spouce_contact_number,
-          religion: e.religion,
-          bloodtype: e.bloodtype,
-          height: e.height,
-          weight: e.weight,
-          guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
-        });
-      } catch (error) {
-        if (error.message.includes("duplicate")) {
-          return;
+      // find blacklist employee
+      const blacklistEmployee = blacklistEmployeeList.find(
+        (be) => be.employee_id === e.employee_id
+      );
+
+      // find terminated employee
+      const terminatedEmployee = terminatedEmployeeList.find(
+        (te) => te.employee_id === e.employee_id
+      );
+
+      // find resigned employee
+      const resignedEmployee = resignedEmployeeList.find(
+        (re) => re.employee_id === e.employee_id
+      );
+
+      if (blacklistEmployee || terminatedEmployee || resignedEmployee) {
+        console.log("found!");
+      } else {
+        try {
+          await Suites.create({
+            employee_id: e.employee_id,
+            employee_image: e.employee_image,
+            lastname: e.lastname,
+            firstname: e.firstname,
+            middle: e.middle,
+            phone: e.phone,
+            birthday: e.birthday,
+            gender: e.gender,
+            address: e.address,
+            email: e.email,
+            position: e.position,
+            civil_status: e.civil_status,
+            spouce_fullname: e.spouce_fullname,
+            spouce_birthday: e.spouce_birthday,
+            spouce_contact_number: e.spouce_contact_number,
+            religion: e.religion,
+            bloodtype: e.bloodtype,
+            height: e.height,
+            weight: e.weight,
+            guardian: e.guardian,
+            education: e.education,
+            hobbies: e.hobbies,
+            language: e.language,
+            skills: e.skills,
+            date_hired: date.toString(),
+          });
+        } catch (error) {
+          if (error.message.includes("duplicate")) {
+            return;
+          }
+          console.log({ error: true, message: error.message });
         }
-        console.log({ error: true, message: error.message });
       }
     });
     res.json("hello world");

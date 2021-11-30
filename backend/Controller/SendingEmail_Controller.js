@@ -37,7 +37,7 @@ const sendingEmailController = async (req, res) => {
     // send email
     transporter.sendMail(emailMsg, (err, info) => {
       if (err) {
-        res.json(err);
+        res.json("Something went wrong!");
         return;
       }
       res.json("Email sent!");

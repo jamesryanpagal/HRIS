@@ -1,0 +1,161 @@
+.moveto_Modal_Container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 90%);
+  z-index: 10;
+}
+
+.moveto_Modal_Container .warning {
+  width: 50%;
+  margin: 150px auto 20px auto;
+  background: rgba(231, 231, 156, 30%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-radius: 5px;
+  color: orange;
+}
+
+.moveto_Modal_Container .warning p {
+  margin: 0 5px;
+}
+
+.moveto_Modal_Container .employee_Moved {
+  width: 50%;
+  margin: 150px auto 20px auto;
+  background: rgba(162, 231, 156, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-radius: 5px;
+  color: rgb(0, 255, 0);
+}
+
+.moveto_Modal_Container .employee_Moved p {
+  margin: 0 5px;
+}
+
+.moveto_Modal_Container .moveto_Confirmation {
+  border-radius: 5px;
+  width: 50%;
+  margin: auto;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.moveto_Modal_Container .moveto_Confirmation .moveto_Details {
+  background: #c9c9c9;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.moveto_Modal_Container .moveto_Confirmation textarea {
+  background: #c9c9c9;
+  border-radius: 5px;
+  padding: 10px;
+  outline: none;
+  width: 100%;
+  min-height: 100px;
+}
+
+.moveto_Modal_Container .moveto_Actions {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.moveto_Modal_Container .moveto_Actions .move {
+  background: rgb(255, 170, 170);
+  border: none;
+  height: 100%;
+  width: 48%;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: red;
+  font-size: 15px;
+  position: relative;
+  cursor: pointer;
+}
+
+.moveto_Modal_Container .moveto_Actions .cancel {
+  background: rgb(170, 255, 170);
+  border: none;
+  height: 100%;
+  width: 48%;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: green;
+  font-size: 15px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* MOVE TO MOVE BUTTON */
+.moveto_Modal_Container .moveto_Actions .move_Disable {
+  background: rgb(255, 170, 170);
+  border: none;
+  height: 100%;
+  width: 48%;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: red;
+  font-size: 15px;
+  position: relative;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* MOVE TO MOVE BUTTON BACK */
+.moveto_Modal_Container .moveto_Actions .back {
+  background: rgb(170, 255, 170);
+  border: none;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: green;
+  font-size: 15px;
+  position: relative;
+  cursor: pointer;
+}
+
+/* MOVE TO ACTIONS DISABLE */
+.moveto_Modal_Container .moveto_Actions_Disable {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.moveto_Modal_Container .moveto_Actions_Disable .move {
+  background: rgb(255, 170, 170);
+  border: none;
+  height: 100%;
+  width: 48%;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: #5f5f5f;
+  font-size: 15px;
+  position: relative;
+  cursor: pointer;
+}
+
+.moveto_Modal_Container .moveto_Actions_Disable .cancel {
+  background: rgb(170, 255, 170);
+  border: none;
+  height: 100%;
+  width: 48%;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  color: #5f5f5f;
+  font-size: 15px;
+  position: relative;
+  cursor: pointer;
+}

@@ -27,9 +27,41 @@ export const departmentReducers = (
   action
 ) => {
   switch (action.type) {
+    // -------------------- clear department ---------------------
+    case "CLEAR_DEPARTMENT":
+      return {
+        ...state,
+        presidentsoffice: [],
+        administration: [],
+        auditing: [],
+        cashier: [],
+        clinic: [],
+        communications: [],
+        construction: [],
+        engineering: [],
+        fabrication: [],
+        gmsd: [],
+        motorpool: [],
+        humanresource: [],
+        marketing: [],
+        it: [],
+        operations: [],
+        ppc: [],
+        purchasing: [],
+        qaqc: [],
+        warehouse: [],
+        finishing: [],
+        security: [],
+        suites: [],
+      };
+
     // -------------------- president ---------------------
     case "PRESIDENTS OFFICE":
       const presidentData = action.payload.departmentPayload;
+
+      state.presidentsoffice.filter(
+        (e) => e.employee_id === presidentData.employee_id
+      );
 
       // check if data already exist
       const presidentDataExist = state.presidentsoffice.find(
@@ -72,6 +104,10 @@ export const departmentReducers = (
     // -------------------- administration ---------------------
     case "ADMINISTRATION":
       const administrationData = action.payload.departmentPayload;
+
+      state.administration.filter(
+        (e) => e.employee_id === administrationData.employee_id
+      );
 
       // check if data already exist
       const administrationDataExist = state.administration.find(
@@ -118,6 +154,8 @@ export const departmentReducers = (
     case "AUDITING":
       const auditingData = action.payload.departmentPayload;
 
+      state.auditing.filter((e) => e.employee_id === auditingData.employee_id);
+
       // check if data already exist
       const auditingDataExist = state.auditing.find(
         (e) => e.employee_id === auditingData.employee_id
@@ -160,6 +198,8 @@ export const departmentReducers = (
     case "CASHIER":
       const cashierData = action.payload.departmentPayload;
 
+      state.cashier.filter((e) => e.employee_id === cashierData.employee_id);
+
       // check if data already exist
       const cashierDataExist = state.cashier.find(
         (e) => e.employee_id === cashierData.employee_id
@@ -201,6 +241,8 @@ export const departmentReducers = (
     case "CLINIC":
       const clinicData = action.payload.departmentPayload;
 
+      state.clinic.filter((e) => e.employee_id === clinicData.employee_id);
+
       // check if data already exist
       const clinicDataExist = state.clinic.find(
         (e) => e.employee_id === clinicData.employee_id
@@ -241,6 +283,10 @@ export const departmentReducers = (
     // -------------------- communications ---------------------
     case "COMMUNICATIONS":
       const communicationsData = action.payload.departmentPayload;
+
+      state.communications.filter(
+        (e) => e.employee_id === communicationsData.employee_id
+      );
 
       // check if data already exist
       const communicationsDataExist = state.communications.find(
@@ -287,6 +333,10 @@ export const departmentReducers = (
     case "CONSTRUCTION":
       const constructionData = action.payload.departmentPayload;
 
+      state.construction.filter(
+        (e) => e.employee_id === constructionData.employee_id
+      );
+
       // check if data already exist
       const constructionDataExist = state.construction.find(
         (e) => e.employee_id === constructionData.employee_id
@@ -328,6 +378,10 @@ export const departmentReducers = (
     // -------------------- engineering ---------------------
     case "ENGINEERING":
       const engineeringData = action.payload.departmentPayload;
+
+      state.engineering.filter(
+        (e) => e.employee_id === engineeringData.employee_id
+      );
 
       // check if data already exist
       const engineeringDataExist = state.engineering.find(
@@ -371,6 +425,10 @@ export const departmentReducers = (
     case "FABRICATION":
       const fabricationData = action.payload.departmentPayload;
 
+      state.fabrication.filter(
+        (e) => e.employee_id === fabricationData.employee_id
+      );
+
       // check if data already exist
       const fabricationDataExist = state.fabrication.find(
         (e) => e.employee_id === fabricationData.employee_id
@@ -413,6 +471,8 @@ export const departmentReducers = (
     case "GMSD":
       const gmsdData = action.payload.departmentPayload;
 
+      state.gmsd.filter((e) => e.employee_id === gmsdData.employee_id);
+
       // check if data already exist
       const gmsdDataExist = state.gmsd.find(
         (e) => e.employee_id === gmsdData.employee_id
@@ -453,6 +513,10 @@ export const departmentReducers = (
     // -------------------- motorpool ---------------------
     case "MOTORPOOL":
       const motorpoolData = action.payload.departmentPayload;
+
+      state.motorpool.filter(
+        (e) => e.employee_id === motorpoolData.employee_id
+      );
 
       // check if data already exist
       const motorpoolDataExist = state.motorpool.find(
@@ -496,6 +560,10 @@ export const departmentReducers = (
     case "HUMAN RESOURCE":
       const humanResourceData = action.payload.departmentPayload;
 
+      state.humanresource.filter(
+        (e) => e.employee_id === humanResourceData.employee_id
+      );
+
       // check if data already exist
       const humanResourceDataExist = state.humanresource.find(
         (e) => e.employee_id === humanResourceData.employee_id
@@ -538,6 +606,10 @@ export const departmentReducers = (
     case "MARKETING":
       const marketingData = action.payload.departmentPayload;
 
+      state.marketing.filter(
+        (e) => e.employee_id === marketingData.employee_id
+      );
+
       // check if data already exist
       const marketingDataExist = state.marketing.find(
         (e) => e.employee_id === marketingData.employee_id
@@ -577,8 +649,10 @@ export const departmentReducers = (
         marketing: [...state.marketing],
       };
     // -------------------- I.T ---------------------
-    case "IT":
+    case "I.T":
       const itData = action.payload.departmentPayload;
+
+      state.it.filter((e) => e.employee_id === itData.employee_id);
 
       // check if data already exist
       const itDataExist = state.it.find(
@@ -620,6 +694,10 @@ export const departmentReducers = (
     // -------------------- operations ---------------------
     case "OPERATIONS":
       const operationsData = action.payload.departmentPayload;
+
+      state.operations.filter(
+        (e) => e.employee_id === operationsData.employee_id
+      );
 
       // check if data already exist
       const operationsDataExist = state.operations.find(
@@ -663,6 +741,8 @@ export const departmentReducers = (
     case "PPC":
       const ppcData = action.payload.departmentPayload;
 
+      state.ppc.filter((e) => e.employee_id === ppcData.employee_id);
+
       // check if data already exist
       const ppcDataExist = state.ppc.find(
         (e) => e.employee_id === ppcData.employee_id
@@ -703,6 +783,10 @@ export const departmentReducers = (
     // -------------------- purchasing ---------------------
     case "PURCHASING":
       const purchasingData = action.payload.departmentPayload;
+
+      state.purchasing.filter(
+        (e) => e.employee_id === purchasingData.employee_id
+      );
 
       // check if data already exist
       const purchasingDataExist = state.purchasing.find(
@@ -746,15 +830,17 @@ export const departmentReducers = (
     case "QAQC":
       const qaqcData = action.payload.departmentPayload;
 
+      state.qaqc.filter((e) => e.employee_id === qaqcData.employee_id);
+
       // check if data already exist
-      const qaqcDataExist = state.purchasing.find(
+      const qaqcDataExist = state.qaqc.find(
         (e) => e.employee_id === qaqcData.employee_id
       );
 
       if (!qaqcDataExist) {
         return {
           ...state,
-          purchasing: [...state.purchasing, qaqcData],
+          qaqc: [...state.qaqc, qaqcData],
         };
       }
 
@@ -786,6 +872,10 @@ export const departmentReducers = (
     // -------------------- warehouse ---------------------
     case "WAREHOUSE":
       const warehouseData = action.payload.departmentPayload;
+
+      state.warehouse.filter(
+        (e) => e.employee_id === warehouseData.employee_id
+      );
 
       // check if data already exist
       const warehouseDataExist = state.warehouse.find(
@@ -829,6 +919,10 @@ export const departmentReducers = (
     case "FINISHING":
       const finishingData = action.payload.departmentPayload;
 
+      state.finishing.filter(
+        (e) => e.employee_id === finishingData.employee_id
+      );
+
       // check if data already exist
       const finishingDataExist = state.finishing.find(
         (e) => e.employee_id === finishingData.employee_id
@@ -871,6 +965,8 @@ export const departmentReducers = (
     case "SECURITY":
       const securityData = action.payload.departmentPayload;
 
+      state.security.filter((e) => e.employee_id === securityData.employee_id);
+
       // check if data already exist
       const securityDataExist = state.security.find(
         (e) => e.employee_id === securityData.employee_id
@@ -912,6 +1008,8 @@ export const departmentReducers = (
     // -------------------- suites ---------------------
     case "SUITES":
       const suitesData = action.payload.departmentPayload;
+
+      state.suites.filter((e) => e.employee_id === suitesData.employee_id);
 
       // check if data already exist
       const suitesDataExist = state.suites.find(

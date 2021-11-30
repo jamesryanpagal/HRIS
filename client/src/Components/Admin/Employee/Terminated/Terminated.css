@@ -1,0 +1,149 @@
+.terminated_Container {
+  height: 100vh;
+  background: #f6f6ff;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* terminated EMPLOYEE CONTAINER */
+.terminated_Container .terminated_Employee_Container {
+  height: 90%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  overflow-y: scroll;
+}
+
+/* terminated EMPLOYEE */
+.terminated_Container .terminated_Employee_Container .terminated_Employee {
+  box-shadow: 0 0 10px #afafaf;
+  height: 30vh;
+  margin: 10px;
+  width: 20vw;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* terminated EMPLOYEE IMAGE */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee
+  .image {
+  border: rgb(240, 111, 111) solid;
+  position: relative;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  border-radius: 50%;
+}
+
+/* terminated EMPLOYEE FIRSTNAME */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee
+  .firstname {
+  text-align: center;
+  font-weight: bold;
+  color: #5f5f5f;
+}
+
+/* terminated EMPLOYEE LASTNAME */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee
+  .lastname {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #5f5f5f;
+}
+
+/* terminated EMPLOYEE DETAILS CONTAINER */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee
+  .details_Container {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 0px;
+  height: 0px;
+  overflow-y: hidden;
+  transition-property: width, pointer-events, height, top;
+}
+
+/* terminated EMPLOYEE DETAILS CONTAINER ANIMATION */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee:hover
+  .details_Container {
+  border: #5f5f5f solid 1px;
+  width: 80vw;
+  pointer-events: all;
+  height: 80vh;
+  top: 55%;
+  transition-duration: 0.3s;
+  transition-delay: 1s, 0s, 1.5s, 1.5s;
+  overflow-y: scroll;
+  background: white;
+}
+
+/* terminated EMPLOYEE PERSONAL DETAILS HEADER */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee:hover
+  .details_Container
+  .personal_Details
+  h4 {
+  background: rgb(153, 153, 199);
+  text-align: center;
+  color: #ffffff;
+}
+
+/* terminated EMPLOYEE PERSONAL DETAILS GROUP DETAILS */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee:hover
+  .details_Container
+  .personal_Details
+  .group_Details {
+  display: flex;
+}
+
+/* terminated EMPLOYEE PERSONAL DETAILS GROUP DETAILS PARAGRAPH */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee:hover
+  .details_Container
+  .personal_Details
+  .group_Details
+  p {
+  flex: 1;
+  padding: 10px 5px;
+  color: #5f5f5f;
+}
+
+/* terminated EMPLOYEE REASON HEADER */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee:hover
+  .details_Container
+  .terminateded_Details
+  h4 {
+  background: rgb(153, 153, 199);
+  text-align: center;
+  color: #ffffff;
+}
+
+/* terminated EMPLOYEE REASON CONTAINER */
+.terminated_Container
+  .terminated_Employee_Container
+  .terminated_Employee:hover
+  .details_Container
+  .terminateded_Details
+  .reason_Container {
+  padding: 10px;
+  color: #5f5f5f;
+}

@@ -11,6 +11,7 @@ import Spinner from "../../Spinner/Spinner";
 
 // Components
 import ProfileImage from "../ProfileImage/ProfileImage";
+import Moveto from "./Moveto/Moveto";
 
 //css
 import "./EmployeeDetails.css";
@@ -59,6 +60,18 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
 
   // unsave total
   const [unsaveTotal, setUnSaveTotal] = useState(0);
+
+  // move to state
+  const [moveto, setMoveto] = useState(false);
+
+  // move to destination
+  const [destination, setDestination] = useState("");
+
+  // move to details
+  const [movetoDetails, setMovetoDetails] = useState({
+    id: "",
+    name: "",
+  });
 
   // SELECTOR
   const { employees } = useSelector((state) => state.Employee);
@@ -214,6 +227,17 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     };
   };
 
+  // handle move to
+  const handleMoveTo = (e) => {
+    setMovetoDetails((prev) => ({
+      ...prev,
+      id: employeeDetails.employee_id,
+      name: `${employeeDetails.lastname}, ${employeeDetails.firstname} ${employeeDetails.middle}`,
+    }));
+    setDestination(e.target.innerText);
+    setMoveto(true);
+  };
+
   // employee Department
   const getEmployeeDepartment = employeeDetails.position;
   const removeCloseParenthesis = getEmployeeDepartment.replace(")", "");
@@ -236,6 +260,13 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
         toggleViewDetails ? "employee_Details_Container" : "close_View_Details"
       }
     >
+      {moveto && (
+        <Moveto
+          setMoveto={setMoveto}
+          destination={destination}
+          movetoDetails={movetoDetails}
+        />
+      )}
       <section className="employee_Details">
         {/* CLOSE */}
         <section className="close">
@@ -1070,6 +1101,23 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
               </section>
             </section>
           </form>
+        </section>
+        {/* MOVE TO */}
+        <section className="moveto_Container">
+          {/* TEXT */}
+          <section className="moveto_Text">Move employee to: </section>
+          {/* ACTIONS BUTTON */}
+          <section className="moveto_Actions_Button">
+            <button type="button" onClick={handleMoveTo}>
+              Blacklist
+            </button>
+            <button type="button" onClick={handleMoveTo}>
+              Terminated
+            </button>
+            <button type="button" onClick={handleMoveTo}>
+              Resigned
+            </button>
+          </section>
         </section>
       </section>
     </div>

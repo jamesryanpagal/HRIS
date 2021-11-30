@@ -235,8 +235,39 @@ const ApplicantsForm = () => {
       return;
     }
 
+    // FORMAT LASTNAME, FIRSTNAME, MIDDLE
+
+    const editlastname = applicantDetails.lastname;
+    const lastnamearr = editlastname.split(" ");
+
+    const formatLastname = lastnamearr.map((w) => {
+      return (w =
+        w.toLowerCase().substring(0, 1).toUpperCase() + w.substring(1));
+    });
+
+    const editfirstname = applicantDetails.firstname;
+    const firstnamearr = editfirstname.split(" ");
+
+    const formatFirstname = firstnamearr.map((w) => {
+      return (w =
+        w.toLowerCase().substring(0, 1).toUpperCase() + w.substring(1));
+    });
+
+    const editmiddle = applicantDetails.middle;
+    const middlearr = editmiddle.split(" ");
+
+    const formatMiddle = middlearr.map((w) => {
+      return (w =
+        w.toLowerCase().substring(0, 1).toUpperCase() + w.substring(1));
+    });
+
     // SUBMIT FORM
-    await socket.emit("applicants", applicantDetails);
+    await socket.emit("applicants", {
+      ...applicantDetails,
+      lastname: formatLastname.join(" "),
+      firstname: formatFirstname.join(" "),
+      middle: formatMiddle.join(""),
+    });
     setResMessage(
       <section className="resSuccess">
         <i className="fas fa-check-circle"></i>
@@ -576,7 +607,7 @@ const ApplicantsForm = () => {
                   <option value="Project Engineer 1 (CONSTRUCTION)">
                     Project Engineer 1 (CONSTRUCTION)
                   </option>
-                  <option value=">Project Engineer 2 (CONSTRUCTION)">
+                  <option value="Project Engineer 2 (CONSTRUCTION)">
                     Project Engineer 2 (CONSTRUCTION)
                   </option>
                   <option value="Project Engineer 3 (CONSTRUCTION)">

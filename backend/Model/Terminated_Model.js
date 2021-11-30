@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const employeeSchema = new schema(
+const terminatedSchema = new schema(
   {
     hiredId: {
       type: String,
-      unique: true,
       required: true,
+      unique: true,
     },
     employee_id: {
       type: String,
@@ -113,11 +113,15 @@ const employeeSchema = new schema(
       type: String,
       required: true,
     },
+    reason: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const Employees = mongoose.model("employees", employeeSchema);
-module.exports = Employees;
+const Terminated = mongoose.model("Terminates", terminatedSchema);
+module.exports = Terminated;

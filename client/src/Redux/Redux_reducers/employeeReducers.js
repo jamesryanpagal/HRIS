@@ -1,9 +1,37 @@
 // ------------------------------------------ EMPLOYEE REDUCERS ----------------------------------
-export const employeeReducers = (state = { employees: [] }, action) => {
+export const employeeReducers = (
+  state = { employees: [], blacklist: [], terminated: [], resigned: [] },
+  action
+) => {
   switch (action.type) {
     // add employee
     case "EMPLOYEES":
-      const { employee } = action.payload;
+      const { employee, employeeArr } = action.payload;
+
+      // clear employees arr when there are no employee left
+      if (employee === "no data") {
+        return {
+          ...state,
+          employees: [],
+        };
+      }
+
+      // remove employee
+      state.employees.map((e) => {
+        const findEmployee = employeeArr.find(
+          (ea) => ea.employee_id === e.employee_id
+        );
+        if (!findEmployee) {
+          const employeeIndexToRemove = state.employees.findIndex(
+            (em) => em.employee_id === e.employee_id
+          );
+          return {
+            ...state,
+            employees: state.employees.splice(employeeIndexToRemove, 1),
+          };
+        }
+        return e;
+      });
 
       const employeeIndex = state.employees.findIndex(
         (e) => e.employee_id === employee.employee_id
@@ -38,6 +66,7 @@ export const employeeReducers = (state = { employees: [] }, action) => {
       employeeObj.language = employee.language;
       employeeObj.hobbies = employee.hobbies;
       employeeObj.skills = employee.skills;
+
       return {
         ...state,
         employees: [...state.employees],
