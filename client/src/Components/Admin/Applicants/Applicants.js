@@ -46,9 +46,6 @@ const ApplicantDetails = ({
   acceptApi,
   rejectSocket,
   acceptSocket,
-  screening,
-  applicants,
-  interview,
   setToggleApplicantDetails,
   loading,
   setLoading,
@@ -95,28 +92,47 @@ const ApplicantDetails = ({
 
   // get applicant details from Applicants
   useEffect(() => {
-    const applicant = applicants.find((a) => a._id === applicantId);
-    if (applicant) {
-      setApplicant_Details({ ...applicant });
-    }
-  }, [applicantId, applicants]);
+    const getApplicant = async () => {
+      const { data } = await axiosConfig.get("Applicants/getApplicants");
+      const applicant = data.find((a) => a._id === applicantId);
+      if (applicant) {
+        setApplicant_Details({ ...applicant });
+      }
+    };
+
+    getApplicant();
+  }, [applicantId]);
 
   // get applicant details from Screening
   useEffect(() => {
-    const applicant = screening.find((a) => a._id === applicantId);
-    if (applicant) {
-      setApplicant_Details({ ...applicant });
-      setShowSendEmail(true);
-    }
-  }, [applicantId, screening]);
+    const getApplicantScreening = async () => {
+      const { data } = await axiosConfig.get(
+        "Applicants/getApplicantScreening"
+      );
+      const applicant = data.find((a) => a._id === applicantId);
+      if (applicant) {
+        setApplicant_Details({ ...applicant });
+        setShowSendEmail(true);
+      }
+    };
+
+    getApplicantScreening();
+  }, [applicantId]);
 
   // get applicant details from Interview
   useEffect(() => {
-    const applicant = interview.find((a) => a._id === applicantId);
-    if (applicant) {
-      setApplicant_Details({ ...applicant });
-    }
-  }, [applicantId, interview]);
+    const getApplicantInterview = async () => {
+      const { data } = await axiosConfig.get(
+        "Applicants/getApplicantInterview"
+      );
+      const applicant = data.find((a) => a._id === applicantId);
+      if (applicant) {
+        setApplicant_Details({ ...applicant });
+      }
+    };
+
+    getApplicantInterview();
+  }, [applicantId]);
 
   // create time
   useEffect(() => {
@@ -226,159 +242,183 @@ const ApplicantDetails = ({
       </section>
       {/* APPLICANT DETAILS */}
       <section className="applicants_Details">
-        {/* BASIC DETAILS */}
-        <section className="applicants_Basic_Details">
-          {/* LASTNAME */}
-          <section className="applicant">
-            <label>Lastname</label>
-            <section className="info">{applicant_Details.lastname}</section>
+        {!applicant_Details._id ? (
+          <section className="applicants_Details_Loading">
+            <section className="applicants_Details_Spinner"></section>
+            <h4>Please wait while getting the applicant details. . .</h4>
           </section>
-          {/* FIRSTNAME */}
-          <section className="applicant">
-            <label>Firstname</label>
-            <section className="info">{applicant_Details.firstname}</section>
-          </section>
-          {/* MIDDLE */}
-          <section className="applicant">
-            <label>Middle</label>
-            <section className="info">{applicant_Details.middle}</section>
-          </section>
-          {/* PHONE */}
-          <section className="applicant">
-            <label>Phone</label>
-            <section className="info">{applicant_Details.phone}</section>
-          </section>
-          {/* BIRTHDAY */}
-          <section className="applicant">
-            <label>Birthday</label>
-            <section className="info">{applicant_Details.birthday}</section>
-          </section>
-          {/* GENDER */}
-          <section className="applicant">
-            <label>Gender</label>
-            <section className="info">{applicant_Details.gender}</section>
-          </section>
-          {/* ADDRESS */}
-          <section className="applicant">
-            <label>Address</label>
-            <section className="info">{applicant_Details.address}</section>
-          </section>
-          {/* EMAIL */}
-          <section className="applicant">
-            <label>Email</label>
-            <section className="info">{applicant_Details.email}</section>
-          </section>
-          {/* SENDING EMAIL */}
-          {showSendEmail && (
-            <>
-              {/* SENDING EMAIL RESPONSE */}
-              {emailResponse && (
-                <section className="sending_Email_Response">
-                  {emailResponse}
-                </section>
-              )}
-              {/* SENDING EMAIL CONTAINER */}
-              <section className="sending_Email_Container">
-                {/* SEDING EMAIL HEADER */}
-                <section className="sending_Email_Header">Send email</section>
-                {/* SENDING EMAIL INPUT GROUPS */}
-                <section className="sending_Email_Input_Groups">
-                  {/* MEETING LINK GROUP */}
-                  <section className="sendingEmail_Group">
-                    <label htmlFor="meetingLink">Meeting link</label>
-                    <input
-                      type="text"
-                      name="meetingLink"
-                      id="meetingLink"
-                      onChange={handleChange}
-                    />
-                  </section>
-                  {/* INTERVIEW DATE GROUP */}
-                  <section className="sendingEmail_Group">
-                    <label htmlFor="interviewDate">Interview date</label>
-                    <input
-                      type="date"
-                      name="interviewDate"
-                      id="interviewDate"
-                      onChange={handleChange}
-                    />
-                  </section>
-                  {/* INTERVIEW TIME GROUP */}
-                  <section className="sendingEmail_Group">
-                    <label htmlFor="interviewTime">Interview time</label>
-                    <section>
-                      {/* HOUR */}
-                      <select name="hour" onChange={handleChange}>
-                        {hourList.map((h, i) => (
-                          <option key={i} value={h.length === 1 ? `0${h}` : h}>
-                            {h.length === 1 ? `0${h}` : h}
-                          </option>
-                        ))}
-                      </select>
-                      {/* MINUTES */}
-                      <select name="minutes" onChange={handleChange}>
-                        {minuteList.map((m, i) => (
-                          <option key={i} value={m.length === 1 ? `0${m}` : m}>
-                            {m.length === 1 ? `0${m}` : m}
-                          </option>
-                        ))}
-                      </select>
-                      {/* MERIDIEM */}
-                      <select name="meridiem" onChange={handleChange}>
-                        <option value="am">am</option>
-                        <option value="pm">pm</option>
-                      </select>
-                    </section>
-                  </section>
-                  {/* SEND EMAIL BUTTON */}
-                  <section
-                    className={
-                      sendEmailLoading
-                        ? "sendEmail_Button_Disable"
-                        : "sendEmail_Button"
-                    }
-                  >
-                    <button type="button" onClick={handleSendEmail}>
-                      {sendEmailLoading ? <Spinner /> : "Send"}
-                    </button>
-                  </section>
+        ) : (
+          <>
+            {/* BASIC DETAILS */}
+            <section className="applicants_Basic_Details">
+              {/* LASTNAME */}
+              <section className="applicant">
+                <label>Lastname</label>
+                <section className="info">{applicant_Details.lastname}</section>
+              </section>
+              {/* FIRSTNAME */}
+              <section className="applicant">
+                <label>Firstname</label>
+                <section className="info">
+                  {applicant_Details.firstname}
                 </section>
               </section>
-            </>
-          )}
-          {/* ACTIONS */}
-          <section className="applicants_Actions">
-            <button
-              type="button"
-              className="reject"
-              onClick={() => setConfirmReject(true)}
-            >
-              Reject
-            </button>
-            <button
-              type="button"
-              className={
-                showSendEmail
-                  ? !emailSent
-                    ? "accept_Disable"
-                    : "accept"
-                  : "accept"
-              }
-              onClick={() => setConfirmAccept(true)}
-            >
-              Accept
-            </button>
-          </section>
-        </section>
-        {/* RESUME */}
-        <section className="applicants_Resume">
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-            <Viewer
-              fileUrl={applicant_Details.resume}
-              plugins={[defaultLayoutPluginInstance]}
-            />
-          </Worker>
-        </section>
+              {/* MIDDLE */}
+              <section className="applicant">
+                <label>Middle</label>
+                <section className="info">{applicant_Details.middle}</section>
+              </section>
+              {/* PHONE */}
+              <section className="applicant">
+                <label>Phone</label>
+                <section className="info">{applicant_Details.phone}</section>
+              </section>
+              {/* BIRTHDAY */}
+              <section className="applicant">
+                <label>Birthday</label>
+                <section className="info">{applicant_Details.birthday}</section>
+              </section>
+              {/* GENDER */}
+              <section className="applicant">
+                <label>Gender</label>
+                <section className="info">{applicant_Details.gender}</section>
+              </section>
+              {/* ADDRESS */}
+              <section className="applicant">
+                <label>Address</label>
+                <section className="info">{applicant_Details.address}</section>
+              </section>
+              {/* EMAIL */}
+              <section className="applicant">
+                <label>Email</label>
+                <section className="info">{applicant_Details.email}</section>
+              </section>
+              {/* APPLYING FOR */}
+              <section className="applicant">
+                <label>Applying for</label>
+                <section className="info">{applicant_Details.position}</section>
+              </section>
+              {/* SENDING EMAIL */}
+              {showSendEmail && (
+                <>
+                  {/* SENDING EMAIL RESPONSE */}
+                  {emailResponse && (
+                    <section className="sending_Email_Response">
+                      {emailResponse}
+                    </section>
+                  )}
+                  {/* SENDING EMAIL CONTAINER */}
+                  <section className="sending_Email_Container">
+                    {/* SEDING EMAIL HEADER */}
+                    <section className="sending_Email_Header">
+                      Send email
+                    </section>
+                    {/* SENDING EMAIL INPUT GROUPS */}
+                    <section className="sending_Email_Input_Groups">
+                      {/* MEETING LINK GROUP */}
+                      <section className="sendingEmail_Group">
+                        <label htmlFor="meetingLink">Meeting link</label>
+                        <input
+                          type="text"
+                          name="meetingLink"
+                          id="meetingLink"
+                          onChange={handleChange}
+                        />
+                      </section>
+                      {/* INTERVIEW DATE GROUP */}
+                      <section className="sendingEmail_Group">
+                        <label htmlFor="interviewDate">Interview date</label>
+                        <input
+                          type="date"
+                          name="interviewDate"
+                          id="interviewDate"
+                          onChange={handleChange}
+                        />
+                      </section>
+                      {/* INTERVIEW TIME GROUP */}
+                      <section className="sendingEmail_Group">
+                        <label htmlFor="interviewTime">Interview time</label>
+                        <section>
+                          {/* HOUR */}
+                          <select name="hour" onChange={handleChange}>
+                            {hourList.map((h, i) => (
+                              <option
+                                key={i}
+                                value={h.length === 1 ? `0${h}` : h}
+                              >
+                                {h.length === 1 ? `0${h}` : h}
+                              </option>
+                            ))}
+                          </select>
+                          {/* MINUTES */}
+                          <select name="minutes" onChange={handleChange}>
+                            {minuteList.map((m, i) => (
+                              <option
+                                key={i}
+                                value={m.length === 1 ? `0${m}` : m}
+                              >
+                                {m.length === 1 ? `0${m}` : m}
+                              </option>
+                            ))}
+                          </select>
+                          {/* MERIDIEM */}
+                          <select name="meridiem" onChange={handleChange}>
+                            <option value="am">am</option>
+                            <option value="pm">pm</option>
+                          </select>
+                        </section>
+                      </section>
+                      {/* SEND EMAIL BUTTON */}
+                      <section
+                        className={
+                          sendEmailLoading
+                            ? "sendEmail_Button_Disable"
+                            : "sendEmail_Button"
+                        }
+                      >
+                        <button type="button" onClick={handleSendEmail}>
+                          {sendEmailLoading ? <Spinner /> : "Send"}
+                        </button>
+                      </section>
+                    </section>
+                  </section>
+                </>
+              )}
+              {/* ACTIONS */}
+              <section className="applicants_Actions">
+                <button
+                  type="button"
+                  className="reject"
+                  onClick={() => setConfirmReject(true)}
+                >
+                  Reject
+                </button>
+                <button
+                  type="button"
+                  className={
+                    showSendEmail
+                      ? !emailSent
+                        ? "accept_Disable"
+                        : "accept"
+                      : "accept"
+                  }
+                  onClick={() => setConfirmAccept(true)}
+                >
+                  Accept
+                </button>
+              </section>
+            </section>
+            {/* RESUME */}
+            <section className="applicants_Resume">
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+                <Viewer
+                  fileUrl={applicant_Details.resume}
+                  plugins={[defaultLayoutPluginInstance]}
+                />
+              </Worker>
+            </section>
+          </>
+        )}
       </section>
     </div>
   );
@@ -448,7 +488,18 @@ const Applicants = () => {
   // get applicants form in realtime
   useEffect(() => {
     socket.on("getApplicants", (data) => {
-      dispatch(applicantsActions(data));
+      dispatch(
+        applicantsActions({
+          _id: data._id,
+          assignedBy: data.assignedBy,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          middle: data.middle,
+          employee_id: data.employee_id,
+          position: data.position,
+          applicant_id: data.applicant_id,
+        })
+      );
     });
   }, [dispatch]);
 
@@ -456,7 +507,20 @@ const Applicants = () => {
   useEffect(() => {
     const getApplicants = async () => {
       const { data } = await axiosConfig.get("/Applicants/getApplicants");
-      data.map((a) => dispatch(applicantsActions(a)));
+      data.map((a) =>
+        dispatch(
+          applicantsActions({
+            _id: a._id,
+            assignedBy: a.assignedBy,
+            firstname: a.firstname,
+            lastname: a.lastname,
+            middle: a.middle,
+            employee_id: a.employee_id,
+            position: a.position,
+            applicant_id: a.applicant_id,
+          })
+        )
+      );
     };
 
     getApplicants();
@@ -477,7 +541,18 @@ const Applicants = () => {
   // move applicant to screening
   useEffect(() => {
     socket.on("moveToScreening", (data) => {
-      dispatch(moveToScreening(data));
+      dispatch(
+        moveToScreening({
+          _id: data._id,
+          assignedBy: data.assignedBy,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          middle: data.middle,
+          employee_id: data.employee_id,
+          position: data.position,
+          applicant_id: data.applicant_id,
+        })
+      );
       dispatch(removeApplicantActions(data.applicant_id));
       if (isRemove) {
         setLoading(false);
@@ -505,7 +580,20 @@ const Applicants = () => {
       const { data } = await axiosConfig.get(
         "/Applicants/getApplicantScreening"
       );
-      data.map((a) => dispatch(moveToScreening(a)));
+      data.map((a) =>
+        dispatch(
+          moveToScreening({
+            _id: a._id,
+            assignedBy: a.assignedBy,
+            firstname: a.firstname,
+            lastname: a.lastname,
+            middle: a.middle,
+            employee_id: a.employee_id,
+            position: a.position,
+            applicant_id: a.applicant_id,
+          })
+        )
+      );
     };
 
     getApplicantScreening();
@@ -527,7 +615,18 @@ const Applicants = () => {
   // move applicant to interview
   useEffect(() => {
     socket.on("moveToInterview", (data) => {
-      dispatch(moveToInterviewActions(data));
+      dispatch(
+        moveToInterviewActions({
+          _id: data._id,
+          assignedBy: data.assignedBy,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          middle: data.middle,
+          employee_id: data.employee_id,
+          position: data.position,
+          applicant_id: data.applicant_id,
+        })
+      );
       dispatch(removeApplicantScreeningActions(data.applicant_id));
       if (isRemove) {
         setLoading(false);
@@ -551,13 +650,39 @@ const Applicants = () => {
     });
   }, [dispatch, screening, interview]);
 
+  // if applicant still exist in application
+  useEffect(() => {
+    interview.map((ai) => {
+      const applicantApplications = applicants.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantApplications) {
+        return dispatch(removeApplicantActions(applicantApplications._id));
+      }
+      return applicantApplications;
+    });
+  }, [dispatch, applicants, interview]);
+
   // get applicant interview from database
   useEffect(() => {
     const getAllApplicantInterview = async () => {
       const { data } = await axiosConfig.get(
         "/Applicants/getApplicantInterview"
       );
-      data.map((a) => dispatch(moveToInterviewActions(a)));
+      data.map((a) =>
+        dispatch(
+          moveToInterviewActions({
+            _id: a._id,
+            assignedBy: a.assignedBy,
+            firstname: a.firstname,
+            lastname: a.lastname,
+            middle: a.middle,
+            employee_id: a.employee_id,
+            position: a.position,
+            applicant_id: a.applicant_id,
+          })
+        )
+      );
     };
 
     getAllApplicantInterview();
@@ -579,7 +704,18 @@ const Applicants = () => {
   // move applicant to hired
   useEffect(() => {
     socket.on("moveToHired", (data) => {
-      dispatch(moveToHiredActions(data));
+      dispatch(
+        moveToHiredActions({
+          _id: data._id,
+          assignedBy: data.assignedBy,
+          firstname: data.firstname,
+          lastname: data.lastname,
+          middle: data.middle,
+          employee_id: data.employee_id,
+          position: data.position,
+          applicant_id: data.applicant_id,
+        })
+      );
       dispatch(removeApplicantInterviewActions(data.applicant_id));
       if (isRemove) {
         setLoading(false);
@@ -603,11 +739,52 @@ const Applicants = () => {
     });
   }, [dispatch, interview, hired]);
 
+  // if applicant still exist in application
+  useEffect(() => {
+    hired.map((ai) => {
+      const applicantApplications = applicants.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantApplications) {
+        return dispatch(removeApplicantActions(applicantApplications._id));
+      }
+      return applicantApplications;
+    });
+  }, [dispatch, applicants, hired]);
+
+  // if applicant still exist in screening
+  useEffect(() => {
+    hired.map((ai) => {
+      const applicantScreening = screening.find(
+        (as) => as._id === ai.applicant_id
+      );
+      if (applicantScreening) {
+        return dispatch(
+          removeApplicantScreeningActions(applicantScreening._id)
+        );
+      }
+      return applicantScreening;
+    });
+  }, [dispatch, screening, hired]);
+
   // get applicant from database
   useEffect(() => {
     const getAllApplicantHires = async () => {
       const { data } = await axiosConfig.get("/Applicants/getApplicantHired");
-      data.map((a) => dispatch(moveToHiredActions(a)));
+      data.map((a) =>
+        dispatch(
+          moveToHiredActions({
+            _id: a._id,
+            assignedBy: a.assignedBy,
+            firstname: a.firstname,
+            lastname: a.lastname,
+            middle: a.middle,
+            employee_id: a.employee_id,
+            position: a.position,
+            applicant_id: a.applicant_id,
+          })
+        )
+      );
     };
 
     getAllApplicantHires();
@@ -620,7 +797,20 @@ const Applicants = () => {
       const { data } = await axiosConfig.get(
         "/Applicants/getApplicantRejected"
       );
-      data.map((a) => dispatch(rejectedApplicantActions(a)));
+      data.map((a) =>
+        dispatch(
+          rejectedApplicantActions({
+            _id: a._id,
+            assignedBy: a.assignedBy,
+            firstname: a.firstname,
+            lastname: a.lastname,
+            middle: a.middle,
+            employee_id: a.employee_id,
+            position: a.position,
+            applicant_id: a.applicant_id,
+          })
+        )
+      );
     };
 
     getAllApplicantRejected();
@@ -865,9 +1055,6 @@ const Applicants = () => {
           acceptApi={acceptApi}
           rejectSocket={rejectSocket}
           acceptSocket={acceptSocket}
-          screening={screening}
-          applicants={applicants}
-          interview={interview}
           setToggleApplicantDetails={setToggleApplicantDetails}
           loading={loading}
           setLoading={setLoading}

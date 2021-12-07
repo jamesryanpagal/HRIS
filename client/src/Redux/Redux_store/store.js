@@ -15,6 +15,8 @@ import { departmentReducers } from "../Redux_reducers/departmentReducers";
 
 import { updatingReducers } from "../Redux_reducers/updatingReducers";
 
+import { companyProjectReducers } from "../Redux_reducers/companyProjectReducers";
+
 const reducer = combineReducers({
   GS_Admin: usersReducers,
   Applicants: applicantsReducers,
@@ -22,6 +24,7 @@ const reducer = combineReducers({
   newAdmin: newAdminReducers,
   department: departmentReducers,
   Updating: updatingReducers,
+  CompanyProjects: companyProjectReducers,
 });
 
 // ------------------------- PERSIST CONFIG ------------------

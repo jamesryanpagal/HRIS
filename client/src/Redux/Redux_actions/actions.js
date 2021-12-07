@@ -251,7 +251,7 @@ export const updateEmployeeDepartmentActions =
     });
   };
 
-// -------------------------- UPDATING ACTIONS
+// -------------------------- UPDATING ACTIONS -----------------------
 export const updatingActions = () => (dispatch) => {
   dispatch({
     type: "UPDATING",
@@ -261,5 +261,40 @@ export const updatingActions = () => (dispatch) => {
 export const noUpdatesActions = () => (dispatch) => {
   dispatch({
     type: "NO_UPDATES",
+  });
+};
+
+// ------------------------- COMPANY PROJECTS ------------------------
+export const companyProjectActions = (companyProjectData) => (dispatch) => {
+  dispatch({
+    type: "COMPANY_PROJECT",
+    payload: {
+      companyProjectData,
+    },
+  });
+};
+
+export const companyProjectSiteEmployees =
+  (siteEmployeesData) => (dispatch) => {
+    dispatch({
+      type: "SITE_EMPLOYEES",
+      payload: {
+        siteEmployeesData,
+      },
+    });
+  };
+
+export const clearCompanyProjects = () => (dispatch) => {
+  dispatch({
+    type: "CLEAR_COMPANY_PROJECTS",
+  });
+};
+
+export const removeSiteEmployee = (removeSiteEmployeeData) => (dispatch) => {
+  dispatch({
+    type: "REMOVE_SITE_EMPLOYEE",
+    payload: {
+      removeSiteEmployeeData,
+    },
   });
 };

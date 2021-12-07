@@ -90,6 +90,17 @@ const Navbar = () => {
           <li>
             <NavLink
               exact
+              to="/Companyprojects"
+              className="link"
+              activeClassName="active_Link"
+            >
+              Company <br />
+              Projects
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              exact
               to="/Newadmin"
               className="link"
               activeClassName="active_Link"

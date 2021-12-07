@@ -8,6 +8,7 @@ import Navbar from "../Navbar/Navbar";
 import Applicants from "../Applicants/Applicants";
 import Employee_Router from "../Employee/Employee_Router/Employee_Router";
 import Department from "../Department/Department";
+import CompanyProject from "../CompanyProjects/CompanyProject";
 import NewAdmin from "../NewAdmin/NewAdmin";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 
@@ -216,7 +217,6 @@ const Admin_Router = () => {
         return be;
       });
 
-      console.log("employees: ", employeeList);
       await axiosConfig.post("/Department", employeeList);
     };
 
@@ -241,7 +241,21 @@ const Admin_Router = () => {
             removeFromDepartment.employee_id
           )
         );
-        dispatch(departmentsActions(getLastWord, e, data));
+        dispatch(
+          departmentsActions(
+            getLastWord,
+            {
+              _id: e._id,
+              employee_image: e.employee_image,
+              lastname: e.lastname,
+              firstname: e.firstname,
+              middle: e.middle,
+              employee_id: e.employee_id,
+              position: e.position,
+            },
+            data
+          )
+        );
         return e;
       });
     };
@@ -258,6 +272,7 @@ const Admin_Router = () => {
           <Route path="/Employee" component={Employee_Router} />
           <Route path="/NewAdmin" component={NewAdmin} />
           <Route path="/Department" component={Department} />
+          <Route path="/Companyprojects" component={CompanyProject} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

@@ -1,0 +1,667 @@
+.company_Project_Container {
+  width: 100%;
+  background: #f6f6ff;
+  display: flex;
+  position: relative;
+}
+
+/* PROJECT DETAILS MESSAGE */
+.company_Project_Container .projectDetailsMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: rgb(255, 188, 188);
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.company_Project_Container .projectDetailsMessage i {
+  margin: 0 5px;
+}
+
+/* PROJECT CREATED MESSAGE */
+.company_Project_Container .projectCreatedMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  background: rgb(170, 255, 170);
+  color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.company_Project_Container .projectCreatedMessage i {
+  margin: 0 5px;
+}
+
+/* -------------------------- PROJECT LIST ------------------------- */
+.projectlist_Container {
+  flex: 1;
+  padding: 20px 50px;
+}
+
+/* PROJECTSLIST HEADER */
+.projectlist_Container .projectlist_Header {
+  background: rgb(153, 153, 199);
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+/* PROJECTSLIST */
+.projectlist_Container .projectslist {
+  border: #c9c9c9 1px solid;
+  margin: 5px 0;
+  height: 80%;
+  padding: 10px;
+}
+
+/* PROJECTS */
+.projectlist_Container .projectslist .companyProject_Container {
+  border-radius: 5px;
+  box-shadow: 0 0 5px #c9c9c9;
+  margin: 10px 0;
+  background: #ffffff;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #5f5f5f;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+/* PROJECTS HOVER */
+.projectlist_Container .projectslist .companyProject_Container:hover {
+  background: #f1f1f1;
+}
+
+/* PROJECTS TITLE */
+.projectlist_Container .projectslist .companyProject_Container .title {
+  width: 250px;
+}
+
+/* PROJECTS ID */
+.projectlist_Container .projectslist .companyProject_Container .id {
+  width: 250px;
+}
+
+/* PROJECTSLIST BUTTON CONTAINER */
+.projectlist_Container .projectslistbutton_Container {
+  text-align: center;
+  height: 8%;
+}
+
+/* PROJECTSLIST BUTTON */
+.projectlist_Container .projectslistbutton_Container button {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 50%;
+  font-size: 15px;
+  background: #ffffff;
+  box-shadow: 0 0 5px #c9c9c9;
+  border-radius: 5px;
+  color: #414141;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* --------------------------- PROJECT DETAILS --------------------------- */
+.projectdetails_Container {
+  flex: 1;
+  padding: 20px 50px;
+}
+
+/* NEW PROJECT CONTAINER */
+.projectdetails_Container .newProject_Container {
+  height: 100%;
+}
+
+/* NEW PROJECT HEADER */
+.projectdetails_Container .newProject_Container .newProject_Header {
+  background: rgb(170, 255, 170);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: green;
+}
+
+/* NEW PROJECT HEADER CLOSE BUTTON */
+.projectdetails_Container .newProject_Container .newProject_Header .close {
+  border: none;
+  background: none;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+/* NEW PROJECT HEADER CLOSE BUTTON */
+.projectdetails_Container
+  .newProject_Container
+  .newProject_Header
+  .editProject {
+  background: rgb(153, 153, 199);
+  color: #ffffff;
+  border: none;
+  height: 30px;
+  width: 50px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* NEW PROJECT HEADER CLOSE BUTTON ACTIVE */
+.projectdetails_Container
+  .newProject_Container
+  .newProject_Header
+  .editProject_Active {
+  background: rgb(153, 153, 199);
+  color: #ffffff;
+  outline: none;
+  border: #ffffff 3px solid;
+  box-shadow: 0 0 5px #afafaf;
+  height: 30px;
+  width: 50px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* NEW PROJECT DETAILS */
+.projectdetails_Container .newProject_Container .projectDetails {
+  margin: 5px 0;
+}
+
+/* NEW PROJECT DETAILS GROUP */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group {
+  display: flex;
+  margin: 5px 0;
+}
+
+/* NEW PROJECT DETAILS GROUP IMAGE CONTAINER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDetails_Image {
+  border: #c9c9c9 1px solid;
+  width: 45%;
+  height: 25vh;
+  position: relative;
+}
+
+/* NEW PROJECT DETAILS GROUP IMAGE CONTAINER H3 */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDetails_Image
+  h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #afafaf;
+}
+
+/* NEW PROJECT DETAILS GROUP IMAGE */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDetails_Image
+  img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+}
+
+/* NEW PROJECT DETAILS GROUP IMAGE HOVER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDetails_Image:hover
+  label {
+  display: block;
+}
+
+/* NEW PROJECT DETAILS GROUP IMAGE ADD IMAGE */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDetails_Image
+  label {
+  padding: 3px 8px;
+  position: absolute;
+  top: 90%;
+  left: 93%;
+  transform: translate(-50%, -50%);
+  display: none;
+  cursor: pointer;
+  color: rgb(153, 153, 199);
+}
+
+/* NEW PROJECT DETAILS GROUP IMAGE FILE INPUT */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDetails_Image
+  input {
+  display: none;
+}
+
+/* NEW PROJECT DETAILS GROUP DETAILS */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .details {
+  width: 55%;
+}
+
+/* NEW PROJECT DETAILS GROUP DETAILS HEADER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .details
+  .details_Header {
+  background: #5f5f5f;
+  color: #ffffff;
+  padding: 5px 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* NEW PROJECT DETAILS GROUP DETAILS CONTAINER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .details
+  .details_Container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 3px;
+  color: #5f5f5f;
+}
+
+/* NEW PROJECT DETAILS GROUP DETAILS CONTAINER INPUT */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .details
+  .details_Container
+  input {
+  border: 1px solid #afafaf;
+  outline: none;
+  padding: 0 5px;
+}
+
+/* DISABLE EDIT DETAILS CONTAINER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .details
+  .disableDetails_Container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 3px;
+  color: #5f5f5f;
+}
+
+/* NEW PROJECT DETAILS GROUP DETAILS CONTAINER INPUT DISABLE */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .details
+  .disableDetails_Container
+  input {
+  border: 1px solid transparent;
+  pointer-events: none;
+  outline: none;
+  padding: 0 5px;
+}
+
+/* SITE PERSONNEL CONTAINER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container {
+  width: 100%;
+}
+
+/* SITE PERSONNEL CONTAINER HEADER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container
+  .sitePersonnel_Header {
+  background: #5f5f5f;
+  color: #ffffff;
+  padding: 5px 10px;
+  letter-spacing: 1px;
+}
+
+/* SITE PERSONNEL */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container
+  .sitePersonnel {
+  margin: 10px 0;
+  color: #5f5f5f;
+}
+
+/* SITE PERSONNEL GROUP */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container
+  .sitePersonnel
+  .sitePersonnel_Group {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+/* SITE PERSONNEL GROUP INPUT */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container
+  .sitePersonnel
+  .sitePersonnel_Group
+  input {
+  border: 1px solid #afafaf;
+  width: 60%;
+  padding: 0 5px;
+  outline: none;
+}
+
+/* EDIT SITE PERSONNEL */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container
+  .sitePersonnel
+  .disableSitePersonnel_Group {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+/* SITE PERSONNEL GROUP INPUT DISABLE */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .sitePersonnel_Container
+  .sitePersonnel
+  .disableSitePersonnel_Group
+  input {
+  border: 1px solid #c9c9c9;
+  width: 60%;
+  padding: 0 5px;
+  outline: none;
+  border: none;
+  pointer-events: none;
+}
+
+/* SITE EMPLOYEES CONTAINER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container {
+  width: 100%;
+}
+
+/* SITE EMPLOYEES CONTAINER HEADER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_Header {
+  background: #5f5f5f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* SITE EMPLOYEES CONTAINER HEADER BUTTON */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_Header
+  button {
+  border: none;
+  border-radius: 50%;
+  background: rgb(153, 153, 199);
+  color: #ffffff;
+  padding: 5px 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+}
+
+/* DISABLE SITE EMPLOYEES HEADER */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .disableSiteEmployees_Header {
+  background: #5f5f5f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* SITE EMPLOYEES CONTAINER HEADER BUTTON DISABLE */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .disableSiteEmployees_Header
+  button {
+  border: none;
+  border-radius: 50%;
+  background: rgb(153, 153, 199);
+  color: #ffffff;
+  padding: 5px 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* SITE EMPLOYEES LIST */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List {
+  margin: 5px 0;
+  height: 27.5vh;
+  overflow-y: scroll;
+}
+
+/* SITE EMPLOYEE */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee {
+  margin: 5px auto;
+  background: #ffffff;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #5f5f5f;
+  box-shadow: 0 0 5px #c9c9c9;
+  width: 98%;
+}
+
+/* SITE EMPLOYEE POSITION AND DEPARTMENT */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee
+  .position_department {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 15vw;
+}
+
+/* SITE EMPLOYEE POSITION */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee
+  p {
+  font-size: 10px;
+}
+
+/* SITE EMPLOYEE DEPARTMENT */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee
+  h5 {
+  margin: 0 5px;
+  color: rgb(153, 153, 199);
+  font-size: 10px;
+}
+
+/* PROJECT DONE BUTTON */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .projectDone {
+  border: none;
+  background: rgb(170, 255, 170);
+  color: green;
+  font-size: 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px #c9c9c9;
+  height: 50px;
+  width: 50%;
+  margin: auto;
+}
+
+/* SAVE CHANGES */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .saveChanges {
+  border: none;
+  background: rgb(170, 255, 170);
+  color: green;
+  font-size: 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px #c9c9c9;
+  height: 50px;
+  width: 50%;
+  margin: auto;
+  position: relative;
+}
+
+/* SITE EMPLOYEE REMOVE BUTTON */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee
+  button {
+  border: none;
+  background: rgb(240, 108, 108);
+  color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+/* SITE EMPLOYEE REMOVE BUTTON ICON */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee
+  button
+  i {
+  pointer-events: none;
+}
+
+/* PROJECT DETAILS CONTAINER */
+.projectdetails_Container .project_Details_Container {
+  height: 100%;
+}

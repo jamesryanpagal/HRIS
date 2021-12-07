@@ -237,28 +237,25 @@ const ApplicantsForm = () => {
 
     // FORMAT LASTNAME, FIRSTNAME, MIDDLE
 
-    const editlastname = applicantDetails.lastname;
+    const editlastname = applicantDetails.lastname.toLowerCase();
     const lastnamearr = editlastname.split(" ");
 
     const formatLastname = lastnamearr.map((w) => {
-      return (w =
-        w.toLowerCase().substring(0, 1).toUpperCase() + w.substring(1));
+      return (w = w.substring(0, 1).toUpperCase() + w.substring(1));
     });
 
-    const editfirstname = applicantDetails.firstname;
+    const editfirstname = applicantDetails.firstname.toLowerCase();
     const firstnamearr = editfirstname.split(" ");
 
     const formatFirstname = firstnamearr.map((w) => {
-      return (w =
-        w.toLowerCase().substring(0, 1).toUpperCase() + w.substring(1));
+      return (w = w.substring(0, 1).toUpperCase() + w.substring(1));
     });
 
-    const editmiddle = applicantDetails.middle;
+    const editmiddle = applicantDetails.middle.toLowerCase();
     const middlearr = editmiddle.split(" ");
 
     const formatMiddle = middlearr.map((w) => {
-      return (w =
-        w.toLowerCase().substring(0, 1).toUpperCase() + w.substring(1));
+      return (w = w.substring(0, 1).toUpperCase() + w.substring(1));
     });
 
     // SUBMIT FORM

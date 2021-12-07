@@ -17,6 +17,7 @@ const DepartmentRoutes = require("./Routes/Department_Routes");
 const SendingEmailRoutes = require("./Routes/SendingEmail_Routes");
 const MoveToRoutes = require("./Routes/Moveto_Routes");
 const RemoveFromDepartment = require("./Routes/RemoveFromDepartment_Routes");
+const CompanyProjects = require("./Routes/CompanyProjects_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -42,6 +43,7 @@ app.use("/Department", DepartmentRoutes);
 app.use("/SendingEmail", SendingEmailRoutes);
 app.use("/MoveTo", MoveToRoutes);
 app.use("/RemoveFromDepartment", RemoveFromDepartment);
+app.use("/CompanyProjects", CompanyProjects);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -128,7 +130,19 @@ io.on("connection", (socket) => {
   // REJECT APPLICANT
   socket.on("rejectapplicant", async (id) => {
     const applicantData = await Rejects.findOne({ applicant_id: id });
-    io.emit("removeApplicant", { id, applicantData });
+    io.emit("removeApplicant", {
+      id,
+      applicantData: {
+        _id: applicantData._id,
+        assignedBy: applicantData.assignedBy,
+        firstname: applicantData.firstname,
+        lastname: applicantData.lastname,
+        middle: applicantData.middle,
+        employee_id: applicantData.employee_id,
+        position: applicantData.position,
+        applicant_id: applicantData.applicant_id,
+      },
+    });
   });
 
   // ACCEPT APPLICANT
@@ -140,7 +154,19 @@ io.on("connection", (socket) => {
   // REJECT APPLICANT FROM SCREENING
   socket.on("rejectApplicantScreening", async (id) => {
     const applicantData = await Rejects.findOne({ applicant_id: id });
-    io.emit("removeApplicantScreening", { id, applicantData });
+    io.emit("removeApplicantScreening", {
+      id,
+      applicantData: {
+        _id: applicantData._id,
+        assignedBy: applicantData.assignedBy,
+        firstname: applicantData.firstname,
+        lastname: applicantData.lastname,
+        middle: applicantData.middle,
+        employee_id: applicantData.employee_id,
+        position: applicantData.position,
+        applicant_id: applicantData.applicant_id,
+      },
+    });
   });
 
   // ACCEPT APPLICANTSCREENING
@@ -152,7 +178,19 @@ io.on("connection", (socket) => {
   // REJECT APPLICANTINTERVIEW
   socket.on("rejectApplicantInterview", async (id) => {
     const applicantData = await Rejects.findOne({ applicant_id: id });
-    io.emit("removeApplicantInterview", { id, applicantData });
+    io.emit("removeApplicantInterview", {
+      id,
+      applicantData: {
+        _id: applicantData._id,
+        assignedBy: applicantData.assignedBy,
+        firstname: applicantData.firstname,
+        lastname: applicantData.lastname,
+        middle: applicantData.middle,
+        employee_id: applicantData.employee_id,
+        position: applicantData.position,
+        applicant_id: applicantData.applicant_id,
+      },
+    });
   });
 
   // ACCEPT APPLICANTINTERVIEW
