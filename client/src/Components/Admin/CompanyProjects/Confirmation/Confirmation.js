@@ -35,10 +35,9 @@ const Confirmation = ({
         ...projectDetails,
         projectImage: uploadedImage && uploadedImage,
       });
-      console.log(data);
       setProjectCreated(true);
       setLoading(false);
-      setProjectConfirmation(false);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
