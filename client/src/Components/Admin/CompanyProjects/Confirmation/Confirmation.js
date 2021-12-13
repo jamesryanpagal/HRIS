@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import axiosConfig from "../../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import Spinner from "../../../../Spinner/Spinner";
+
+// redux actions
+import { clearCompanyProjects } from "../../../../Redux/Redux_actions/actions";
 
 // css
 import "./Confirmation.css";
@@ -13,6 +17,9 @@ const Confirmation = ({
   // ---------------- STATE ------------------
   // LOADING STATE
   const [loading, setLoading] = useState(false);
+
+  // dispatch
+  const dispatch = useDispatch();
 
   // SAVE PROJECT
   const handleSaveProject = async () => {
@@ -31,12 +38,13 @@ const Confirmation = ({
         uploadedImage = uploadProjectImage.data.url;
       }
 
-      const { data } = await axiosConfig.post("CompanyProjects", {
+      await axiosConfig.post("CompanyProjects", {
         ...projectDetails,
         projectImage: uploadedImage && uploadedImage,
       });
       setProjectCreated(true);
       setLoading(false);
+      dispatch(clearCompanyProjects());
       window.location.reload();
     } catch (error) {
       console.log(error);

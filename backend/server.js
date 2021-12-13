@@ -18,6 +18,7 @@ const SendingEmailRoutes = require("./Routes/SendingEmail_Routes");
 const MoveToRoutes = require("./Routes/Moveto_Routes");
 const RemoveFromDepartment = require("./Routes/RemoveFromDepartment_Routes");
 const CompanyProjects = require("./Routes/CompanyProjects_Routes");
+const SchedulesRoutes = require("./Routes/Schedules_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -44,6 +45,7 @@ app.use("/SendingEmail", SendingEmailRoutes);
 app.use("/MoveTo", MoveToRoutes);
 app.use("/RemoveFromDepartment", RemoveFromDepartment);
 app.use("/CompanyProjects", CompanyProjects);
+app.use("/Schedule", SchedulesRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();

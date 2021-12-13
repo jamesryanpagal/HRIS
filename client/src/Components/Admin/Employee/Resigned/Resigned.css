@@ -103,17 +103,31 @@
   display: flex;
 }
 
-/* resigned EMPLOYEE PERSONAL DETAILS GROUP DETAILS PARAGRAPH */
+/* resigned EMPLOYEE PERSONAL DETAILS GROUP DETAILS */
 .resigned_Container
   .resigned_Employee_Container
   .resigned_Employee:hover
   .details_Container
   .personal_Details
   .group_Details
-  p {
+  .resignedList_details {
   flex: 1;
-  padding: 10px 5px;
-  color: #5f5f5f;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+/* resigned EMPLOYEE PERSONAL DETAILS GROUP DETAILS */
+.resigned_Container
+  .resigned_Employee_Container
+  .resigned_Employee:hover
+  .details_Container
+  .personal_Details
+  .group_Details
+  .resignedList_details
+  h5 {
+  background: #5f5f5f;
+  color: #ffffff;
+  padding: 5px;
 }
 
 /* resigned EMPLOYEE REASON HEADER */

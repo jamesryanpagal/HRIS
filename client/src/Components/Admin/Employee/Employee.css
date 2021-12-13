@@ -28,7 +28,6 @@
 
 /* EMPLOYEE IMAGE */
 .employee_Container .employee_List .employee .employee_image {
-  border: #afafaf 1px solid;
   width: 100px;
   height: 100px;
   margin: auto;

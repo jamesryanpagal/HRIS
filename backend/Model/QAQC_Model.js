@@ -110,5 +110,5 @@ const qaqcSchema = new schema(
   }
 );
 
-const Qaqc = mongoose.model("qaqcs", qaqcSchema);
-module.exports = Qaqc;
+const QAQC = mongoose.model("qaqcs", qaqcSchema);
+module.exports = QAQC;

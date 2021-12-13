@@ -126,6 +126,10 @@ const CompanyProject = () => {
     };
 
     getProjectList();
+
+    return () => {
+      setProjectList([]);
+    };
   }, []);
 
   // GET PROJECT DETAILS FROM DATABASE

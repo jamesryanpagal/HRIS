@@ -7,6 +7,14 @@ import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 // REDUX ACTIONS
 import { removeUsertokenActions } from "../../../Redux/Redux_actions/actions";
 
+// Icons
+import applicantsIcon from "../../../PublicImages/applicantsIcon.png";
+import employeesIcon from "../../../PublicImages/employeesIcon.png";
+import departmentIcon from "../../../PublicImages/departmentIcon.png";
+import companyProjectsIcon from "../../../PublicImages/companyProjectsIcon.png";
+import scheduleIcon from "../../../PublicImages/scheduleIcon.png";
+import newadminIcon from "../../../PublicImages/newadminIcon.png";
+
 //css
 import "./Navbar.css";
 
@@ -64,7 +72,8 @@ const Navbar = () => {
               className="link"
               activeClassName="active_Link"
             >
-              Applicants
+              <img src={applicantsIcon} alt="" />
+              <span>Applicants</span>
             </NavLink>
           </li>
           <li>
@@ -74,7 +83,8 @@ const Navbar = () => {
               className="link"
               activeClassName="active_Link"
             >
-              Employee
+              <img src={employeesIcon} alt="" />
+              <span>Employees</span>
             </NavLink>
           </li>
           <li>
@@ -84,7 +94,8 @@ const Navbar = () => {
               className="link"
               activeClassName="active_Link"
             >
-              Department
+              <img src={departmentIcon} alt="" />
+              <span>Department</span>
             </NavLink>
           </li>
           <li>
@@ -94,8 +105,22 @@ const Navbar = () => {
               className="link"
               activeClassName="active_Link"
             >
-              Company <br />
-              Projects
+              <img src={companyProjectsIcon} alt="" />
+              <span>
+                Company <br />
+                Projects
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              exact
+              to="/Schedules"
+              className="link"
+              activeClassName="active_Link"
+            >
+              <img src={scheduleIcon} alt="" />
+              <span>Schedule</span>
             </NavLink>
           </li>
           <li>
@@ -105,7 +130,8 @@ const Navbar = () => {
               className="link"
               activeClassName="active_Link"
             >
-              New admin
+              <img src={newadminIcon} alt="" />
+              <span>New Admin</span>
             </NavLink>
           </li>
         </ul>

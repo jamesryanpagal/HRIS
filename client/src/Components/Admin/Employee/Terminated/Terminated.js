@@ -99,154 +99,154 @@ const Terminated = () => {
                     {/* ----------------- FIRST GROUP ------------------ */}
                     <section className="group_Details">
                       {/* LASTNAME */}
-                      <p>
-                        <strong>Lastname: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Lastname: </h5>
                         {e.lastname}
-                      </p>
+                      </section>
                       {/* FIRSTNAME */}
-                      <p>
-                        <strong>Firstname: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Firstname: </h5>
                         {e.firstname}
-                      </p>
+                      </section>
                       {/* MIDDLE */}
-                      <p>
-                        <strong>Middle: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Middle: </h5>
                         {e.middle}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- SECOND GROUP ------------------ */}
                     <section className="group_Details">
                       {/* EMPLOYEE ID */}
-                      <p>
-                        <strong>Employee id: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Employee id: </h5>
                         {e.employee_id}
-                      </p>
+                      </section>
                       {/* PHONE */}
-                      <p>
-                        <strong>Phone: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Phone: </h5>
                         {e.phone}
-                      </p>
+                      </section>
                       {/* CONTRACT */}
-                      <p>
-                        <strong>Contract: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Contract: </h5>
                         {e.contract}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- THIRD GROUP ------------------ */}
                     <section className="group_Details">
                       {/* BIRTHDAY */}
-                      <p>
-                        <strong>Birthday: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Birthday: </h5>
                         {e.birthday}
-                      </p>
+                      </section>
                       {/* GENDER */}
-                      <p>
-                        <strong>Gender: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Gender: </h5>
                         {e.gender}
-                      </p>
+                      </section>
                       {/* ADDRESS */}
-                      <p>
-                        <strong>Address: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Address: </h5>
                         {e.address}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- FOURTH GROUP ------------------ */}
                     <section className="group_Details">
                       {/* EMAIL */}
-                      <p>
-                        <strong>Email: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Email: </h5>
                         {e.email}
-                      </p>
+                      </section>
                       {/* POSITION */}
-                      <p>
-                        <strong>Position: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Position: </h5>
                         {e.position}
-                      </p>
+                      </section>
                       {/* CIVIL STATUS */}
-                      <p>
-                        <strong>Civil status: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Civil status: </h5>
                         {e.civil_status}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- FIFTH GROUP ------------------ */}
                     <section className="group_Details">
                       {/* SPOUSE NAME */}
-                      <p>
-                        <strong>Spouse name: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Spouse name: </h5>
                         {e.spouce_fullname}
-                      </p>
+                      </section>
                       {/* SPOUSE BIRTHDAY */}
-                      <p>
-                        <strong>Spouse birthday: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Spouse birthday: </h5>
                         {e.spouce_birthday}
-                      </p>
+                      </section>
                       {/* SPOUSE CONTACT NUMBER */}
-                      <p>
-                        <strong>Spouse contact number:</strong>
+                      <section className="terminatedList_details">
+                        <h5>Spouse contact number: </h5>
                         {e.spouce_contact_number}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- SIXTH GROUP ------------------ */}
                     <section className="group_Details">
                       {/* RELIGION */}
-                      <p>
-                        <strong>Religion: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Religion: </h5>
                         {e.religion}
-                      </p>
+                      </section>
                       {/* BLOODTYPE */}
-                      <p>
-                        <strong>Bloodtype: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Bloodtype: </h5>
                         {e.bloodtype}
-                      </p>
+                      </section>
                       {/* HEIGHT */}
-                      <p>
-                        <strong>Height: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Height: </h5>
                         {e.height}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- SEVENTH GROUP ------------------ */}
                     <section className="group_Details">
                       {/* WEIGHT */}
-                      <p>
-                        <strong>Weight: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Weight: </h5>
                         {e.weight}
-                      </p>
+                      </section>
                       {/* GUARDIAN */}
-                      <p>
-                        <strong>Guardian: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Guardian: </h5>
                         {e.guardian}
-                      </p>
+                      </section>
                       {/* Education */}
-                      <p>
-                        <strong>Education: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Education: </h5>
                         {e.education}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- EIGHT GROUP ------------------ */}
                     <section className="group_Details">
                       {/* HOBBIES */}
-                      <p>
-                        <strong>Hobbies: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Hobbies: </h5>
                         {e.hobbies}
-                      </p>
+                      </section>
                       {/* LANGUAGE */}
-                      <p>
-                        <strong>Language: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Language: </h5>
                         {e.language}
-                      </p>
+                      </section>
                       {/* SKILLS */}
-                      <p>
-                        <strong>Skills: </strong>
+                      <section className="terminatedList_details">
+                        <h5>Skills: </h5>
                         {e.skills}
-                      </p>
+                      </section>
                     </section>
                     {/* ----------------- NINTH GROUP ------------------ */}
                     <section className="group_Details">
                       {/* DATE HIRED */}
-                      <p>
-                        <strong>Date hired:</strong>
+                      <section className="terminatedList_details">
+                        <h5>Date hired: </h5>
                         {e.date_hired.substring(4, 14)}
-                      </p>
+                      </section>
                     </section>
                   </section>
                   {/* terminatedED DETAILS */}

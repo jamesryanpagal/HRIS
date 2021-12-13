@@ -110,5 +110,5 @@ const contructionSchema = new schema(
   }
 );
 
-const Contruction = mongoose.model("contructions", contructionSchema);
-module.exports = Contruction;
+const Construction = mongoose.model("contructions", contructionSchema);
+module.exports = Construction;

@@ -19,3 +19,8 @@
   min-height: 20%;
   min-width: 20%;
 }
+
+.profile_Image_Container span {
+  color: #ffffff;
+  font-size: 50%;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
@@ -9,6 +9,7 @@ import Applicants from "../Applicants/Applicants";
 import Employee_Router from "../Employee/Employee_Router/Employee_Router";
 import Department from "../Department/Department";
 import CompanyProject from "../CompanyProjects/CompanyProject";
+import Schedules from "../Schedules/Schedules";
 import NewAdmin from "../NewAdmin/NewAdmin";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 
@@ -23,12 +24,6 @@ import {
 import "./Admin_Router.css";
 
 const Admin_Router = () => {
-  // --------------------- STATE ----------------
-  const [removeFromDepartment, setRemoveFromDepartment] = useState({
-    department: "",
-    employee_id: "",
-  });
-
   // dispatch
   const dispatch = useDispatch();
 
@@ -78,21 +73,29 @@ const Admin_Router = () => {
       const getDepartment = removeCloseParenthesis.substring(
         departmentIndex + 1
       );
-      const employeeDepartment = getDepartment.toLowerCase().replace(" ", "");
+      const removeSpaces = getDepartment.toLowerCase().replace(" ", "");
+      const removeDot = removeSpaces.toLowerCase().replace(".", "");
+      const removeSpecialChar = removeDot.toLowerCase().replace("/", "");
+      const employeeDepartment = removeSpecialChar;
       for (let key in departmentRedux) {
         if (key !== employeeDepartment) {
           const employeeExist = departmentRedux[key].find(
             (d) => d.employee_id === e.employee_id
           );
           if (employeeExist) {
-            await axiosConfig.delete(
+            const { data } = await axiosConfig.delete(
               `/Department/updateEmployeeDepartment_${key.toUpperCase()}/${
                 employeeExist._id
               }`
             );
+            console.log(data);
             dispatch(
               updateEmployeeDepartmentActions(
-                key.toUpperCase(),
+                key === "qaqc"
+                  ? "QA/QC"
+                  : key === "it"
+                  ? "I.T"
+                  : key.toUpperCase(),
                 employeeExist.employee_id
               )
             );
@@ -123,23 +126,21 @@ const Admin_Router = () => {
           const employeePositionIndex = employeePositionArr.findIndex(
             (ep) => ep === "("
           );
-          const department = employeePosition.substring(
+          const getDepartment = employeePosition.substring(
             employeePositionIndex + 1,
             employeePosition.length - 1
           );
 
+          const removeSpace = getDepartment.replace(" ", "");
+          const removeDot = removeSpace.replace(".", "");
+          const removeSpecialChar = removeDot.replace("/", "");
+          const department = removeSpecialChar;
+
           // remove employee to its department to database
           await axiosConfig.post("RemoveFromDepartment", {
-            departmentKey: department.replace(" ", ""),
+            departmentKey: department,
             employee_id: be.employee_id,
           });
-
-          // add department employee to removeFromDepartment
-          setRemoveFromDepartment((prev) => ({
-            ...prev,
-            department: department.replace(" ", ""),
-            employee_id: be.employee_id,
-          }));
 
           const blacklistEmployeeListIndex = employeeList.findIndex(
             (el) => el.employee_id === be.employee_id
@@ -162,23 +163,26 @@ const Admin_Router = () => {
           const employeePositionIndex = employeePositionArr.findIndex(
             (ep) => ep === "("
           );
-          const department = employeePosition.substring(
+          const getDepartment = employeePosition.substring(
             employeePositionIndex + 1,
             employeePosition.length - 1
           );
 
+          const removeSpace = getDepartment.replace(" ", "");
+          const removeDot = removeSpace.replace(".", "");
+          const removeSpecialChar = removeDot.replace("/", "");
+          const department = removeSpecialChar;
+
           // remove employee to its department to database
           await axiosConfig.post("RemoveFromDepartment", {
-            departmentKey: department.replace(" ", ""),
+            departmentKey: department,
             employee_id: be.employee_id,
           });
 
-          // add department employee to removeFromDepartment
-          setRemoveFromDepartment((prev) => ({
-            ...prev,
-            department: department.replace(" ", ""),
-            employee_id: be.employee_id,
-          }));
+          const terminatedEmployeeListIndex = employeeList.findIndex(
+            (el) => el.employee_id === be.employee_id
+          );
+          employeeList = employeeList.splice(terminatedEmployeeListIndex, 1);
         }
         return be;
       });
@@ -196,23 +200,26 @@ const Admin_Router = () => {
           const employeePositionIndex = employeePositionArr.findIndex(
             (ep) => ep === "("
           );
-          const department = employeePosition.substring(
+          const getDepartment = employeePosition.substring(
             employeePositionIndex + 1,
             employeePosition.length - 1
           );
 
+          const removeSpace = getDepartment.replace(" ", "");
+          const removeDot = removeSpace.replace(".", "");
+          const removeSpecialChar = removeDot.replace("/", "");
+          const department = removeSpecialChar;
+
           // remove employee to its department to database
           await axiosConfig.post("RemoveFromDepartment", {
-            departmentKey: department.replace(" ", ""),
+            departmentKey: department,
             employee_id: be.employee_id,
           });
 
-          // add department employee to removeFromDepartment
-          setRemoveFromDepartment((prev) => ({
-            ...prev,
-            department: department.replace(" ", ""),
-            employee_id: be.employee_id,
-          }));
+          const resignedEmployeeListIndex = employeeList.findIndex(
+            (el) => el.employee_id === be.employee_id
+          );
+          employeeList = employeeList.splice(resignedEmployeeListIndex, 1);
         }
         return be;
       });
@@ -235,12 +242,7 @@ const Admin_Router = () => {
         const getLastWord = removeCloseParenthesis.substring(
           getLastWordIndex + 1
         );
-        dispatch(
-          updateEmployeeDepartmentActions(
-            removeFromDepartment.department,
-            removeFromDepartment.employee_id
-          )
-        );
+
         dispatch(
           departmentsActions(
             getLastWord,
@@ -261,7 +263,45 @@ const Admin_Router = () => {
     };
 
     getEmployee();
-  }, [dispatch, removeFromDepartment]);
+  }, [dispatch]);
+
+  // remove blacklist, terminated and resigned employee to its department
+  useEffect(() => {
+    const getBlacklisted = async () => {
+      let removeEmployeeArr = [];
+      try {
+        const blacklistEmployee = await axiosConfig.get("MoveTo/GetBlacklist");
+        const terminatedEmployee = await axiosConfig.get(
+          "MoveTo/GetTerminated"
+        );
+        const resignedEmployee = await axiosConfig.get("MoveTo/GetResigned");
+        removeEmployeeArr = [
+          ...blacklistEmployee.data,
+          ...terminatedEmployee.data,
+          ...resignedEmployee.data,
+        ];
+        removeEmployeeArr.map((e) => {
+          const departmentArr = e.position.split("");
+          const getDepartment = departmentArr.findIndex((d) => d === "(");
+          const department = e.position.substring(
+            getDepartment + 1,
+            e.position.length - 1
+          );
+          dispatch(
+            updateEmployeeDepartmentActions(
+              department.replace(" ", ""),
+              e.employee_id
+            )
+          );
+          return e;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getBlacklisted();
+  }, [dispatch]);
 
   return (
     <div className="admin_Router">
@@ -273,6 +313,7 @@ const Admin_Router = () => {
           <Route path="/NewAdmin" component={NewAdmin} />
           <Route path="/Department" component={Department} />
           <Route path="/Companyprojects" component={CompanyProject} />
+          <Route path="/Schedules" component={Schedules} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

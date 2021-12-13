@@ -512,11 +512,11 @@ const ApplicantsForm = () => {
                     EVP (ADMINISTRATION)
                   </option>
                   {/* AUDITING */}
-                  <option value="Associate Bookkeeper (AUDITING)">
-                    Associate Bookkeeper (AUDITING)
+                  <option value="Associate Book keeper (AUDITING)">
+                    Associate Book keeper (AUDITING)
                   </option>
-                  <option value="Bookkeeper (AUDITING)">
-                    Bookkeeper (AUDITING)
+                  <option value="Book keeper (AUDITING)">
+                    Book keeper (AUDITING)
                   </option>
                   <option value="Clerk 1 (AUDITING)">Clerk 1 (AUDITING)</option>
                   <option value="Clerk 2 (AUDITING)">Clerk 2 (AUDITING)</option>
@@ -858,7 +858,7 @@ const ApplicantsForm = () => {
                     Warehouse Officer (WAREHOUSE)
                   </option>
                   {/* FINISHING */}
-                  <option value="Administrative">
+                  <option value="Engineer Maintenance Supervisor (FINISHING)">
                     Engineer Maintenance Supervisor (FINISHING)
                   </option>
                   <option value="Production Supervisor (FINISHING)">

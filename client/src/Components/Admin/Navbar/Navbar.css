@@ -64,20 +64,25 @@
 .admin_Navbar .admin_Navbar_Links ul li .link {
   display: block;
   text-decoration: none;
-  text-align: center;
-  padding: 10px 0;
+  height: 60px;
   font-weight: bolder;
   font-size: 15px;
   color: #afafaf;
   border: transparent solid 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.admin_Navbar .admin_Navbar_Links ul li .link img {
+  height: 30px;
+  width: 30px;
+  margin: 0 25px;
 }
 
 .admin_Navbar .admin_Navbar_Links ul li .link:hover {
-  display: block;
-  text-decoration: none;
   background: #c9c9c9;
-  text-align: center;
-  padding: 10px 0;
   font-weight: bolder;
   color: #1c212d;
 }
@@ -86,5 +91,5 @@
 .admin_Navbar .admin_Navbar_Links ul li .active_Link {
   background: rgba(201, 201, 201, 30%);
   color: #ffffff;
-  border-left-color: #dfe09e;
+  border-left-color: #9ebdfa;
 }

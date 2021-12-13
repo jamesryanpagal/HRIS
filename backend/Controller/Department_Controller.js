@@ -12,7 +12,7 @@ const GMSD = require("../Model/GMSD_Model");
 const Motorpool = require("../Model/Motorpool_Model");
 const HumanResource = require("../Model/HumanResource_Model");
 const Marketing = require("../Model/Marketing_Model");
-const it = require("../Model/I.T_Model");
+const It = require("../Model/IT_Model");
 const Operations = require("../Model/Operations_Model");
 const PPC = require("../Model/PPC_Model");
 const Purchasing = require("../Model/Purchasing_Model");
@@ -408,6 +408,7 @@ const addToDepartment = async (req, res) => {
     const filterConstruction = employee.filter((e) =>
       e.position.includes("(CONSTRUCTION)")
     );
+
     filterConstruction.map(async (e) => {
       // find blacklist employee
       const blacklistEmployee = blacklistEmployeeList.find(
@@ -844,7 +845,7 @@ const addToDepartment = async (req, res) => {
         console.log("found!");
       } else {
         try {
-          await it.create({
+          await It.create({
             employee_id: e.employee_id,
             employee_image: e.employee_image,
             lastname: e.lastname,
@@ -1378,7 +1379,7 @@ const getDepartmentEmployee = async (req, res) => {
     const getMotorpoolEmployee = await Motorpool.find();
     const getHumanResourceEmployee = await HumanResource.find();
     const getMarketingEmployee = await Marketing.find();
-    const getitEmployee = await it.find();
+    const getitEmployee = await It.find();
     const getOperationsEmployee = await Operations.find();
     const getPPCEmployee = await PPC.find();
     const getPurchasingEmployee = await Purchasing.find();
@@ -1638,9 +1639,9 @@ const updateEmployeeDepartment_Marketing = async (req, res) => {
 const updateEmployeeDepartment_it = async (req, res) => {
   const id = req.params.id;
   try {
-    const employeeExist = await it.findById(id);
+    const employeeExist = await It.findById(id);
     if (employeeExist) {
-      await it.findByIdAndDelete(id);
+      await It.findByIdAndDelete(id);
       res.json("Employee has been remove to it department");
       return;
     }
@@ -2039,8 +2040,8 @@ const updateEmployeeDetails_IT = async (req, res) => {
   delete updates._id;
   const options = { new: true };
   try {
-    const employee = await it.findOne({ employee_id: id });
-    const updateEmployeeDetails = await it.findByIdAndUpdate(
+    const employee = await It.findOne({ employee_id: id });
+    const updateEmployeeDetails = await It.findByIdAndUpdate(
       employee._id,
       updates,
       options

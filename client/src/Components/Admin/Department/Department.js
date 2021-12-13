@@ -6,13 +6,13 @@ import presidentIcon from "../../../PublicImages/1President.png";
 import administrationIcon from "../../../PublicImages/2Administration.png";
 import auditingIcon from "../../../PublicImages/3Auditing.png";
 import cashierIcon from "../../../PublicImages/4Cashier.png";
-import clinicIcon from "../../../PublicImages/5Clinic.jpg";
+import clinicIcon from "../../../PublicImages/5Clinic.png";
 import communicationsIcon from "../../../PublicImages/6Communications.png";
 import constructionIcon from "../../../PublicImages/7Construction.png";
 import engineeringIcon from "../../../PublicImages/8Engineering.png";
 import fabricationIcon from "../../../PublicImages/9Fabrication.png";
 import humanresourceIcon from "../../../PublicImages/12HumanResource.png";
-import marketingIcon from "../../../PublicImages/13Marketing.jpg";
+import marketingIcon from "../../../PublicImages/13Marketing.png";
 import itIcon from "../../../PublicImages/14I.T.png";
 import operationsIcon from "../../../PublicImages/15Operations.png";
 import purchasingIcon from "../../../PublicImages/17Purchasing.png";
@@ -115,17 +115,20 @@ const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
                 <section key={e._id}>
                   {e.employee_id !== "default" && (
                     <section className="employee">
-                      {/* employee image */}
-                      <section className="image">
-                        <ProfileImage
-                          image={e.employee_image}
-                          lastname={e.lastname}
-                          firstname={e.firstname}
-                        />
-                      </section>
-                      {/* employee name */}
-                      <section className="name">
-                        <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                      {/* image group */}
+                      <section className="image_Group">
+                        {/* employee image */}
+                        <section className="image">
+                          <ProfileImage
+                            image={e.employee_image}
+                            lastname={e.lastname}
+                            firstname={e.firstname}
+                          />
+                        </section>
+                        {/* employee name */}
+                        <section className="name">
+                          <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                        </section>
                       </section>
                       {/* id and position group */}
                       <section className="other_Details">
@@ -134,14 +137,18 @@ const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
                           {/* header */}
                           <h4>Id</h4>
                           {/* id */}
-                          <section>{e.employee_id}</section>
+                          <section className="id_Details">
+                            {e.employee_id}
+                          </section>
                         </section>
                         {/* employee position */}
                         <section className="position">
                           {/* header */}
                           <h4>Position</h4>
                           {/* position */}
-                          <section>{getPosition}</section>
+                          <section className="position_Details">
+                            {getPosition}
+                          </section>
                         </section>
                       </section>
                     </section>
@@ -166,17 +173,20 @@ const DepartmentModal = ({ departmentName, setViewDepartmentModal }) => {
                   <section key={e._id}>
                     {e.employee_id !== "default" && (
                       <section className="employee">
-                        {/* employee image */}
-                        <section className="image">
-                          <ProfileImage
-                            image={e.employee_image}
-                            lastname={e.lastname}
-                            firstname={e.firstname}
-                          />
-                        </section>
-                        {/* employee name */}
-                        <section className="name">
-                          <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                        {/* image group */}
+                        <section className="image_Group">
+                          {/* employee image */}
+                          <section className="image">
+                            <ProfileImage
+                              image={e.employee_image}
+                              lastname={e.lastname}
+                              firstname={e.firstname}
+                            />
+                          </section>
+                          {/* employee name */}
+                          <section className="name">
+                            <h4>{`${e.lastname}, ${e.firstname} ${e.middle}`}</h4>
+                          </section>
                         </section>
                         {/* id and position group */}
                         <section className="other_Details">

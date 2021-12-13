@@ -122,11 +122,16 @@ const employeeList = async (req, res) => {
     });
 
     // move to Employees
-    hiredContainer.map(async (e, i) => {
+    hiredContainer.map(async (e) => {
+      const index = getHired.findIndex(
+        (gh) => gh.applicant_id === e.applicant_id
+      );
       try {
         await Employees.create({
           hiredId: e.applicant_id,
-          employee_id: `${date.getFullYear()}${date.getMonth() + 1}${i + 1}`,
+          employee_id: `${date.getFullYear()}${date.getMonth() + 1}${
+            index + 1
+          }`,
           employee_image: "N/A",
           lastname: e.lastname,
           firstname: e.firstname,

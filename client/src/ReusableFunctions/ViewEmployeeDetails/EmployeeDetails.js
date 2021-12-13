@@ -336,7 +336,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
               <section className="second_Section">
                 {/* EMAIL */}
                 <section className="child">
-                  <span>Emial: </span>
+                  <span>Email: </span>
                   {employeeDetails.email}
                 </section>
                 {/* CONTACT NUMBER */}
@@ -455,11 +455,11 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                         EVP (ADMINISTRATION)
                       </option>
                       {/* AUDITING */}
-                      <option value="Associate Bookkeeper (AUDITING)">
-                        Associate Bookkeeper (AUDITING)
+                      <option value="Associate Book keeper (AUDITING)">
+                        Associate Book keeper (AUDITING)
                       </option>
-                      <option value="Bookkeeper (AUDITING)">
-                        Bookkeeper (AUDITING)
+                      <option value="Book keeper (AUDITING)">
+                        Book keeper (AUDITING)
                       </option>
                       <option value="Clerk 1 (AUDITING)">
                         Clerk 1 (AUDITING)
@@ -571,7 +571,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       <option value="Project Engineer 1 (CONSTRUCTION)">
                         Project Engineer 1 (CONSTRUCTION)
                       </option>
-                      <option value=">Project Engineer 2 (CONSTRUCTION)">
+                      <option value="Project Engineer 2 (CONSTRUCTION)">
                         Project Engineer 2 (CONSTRUCTION)
                       </option>
                       <option value="Project Engineer 3 (CONSTRUCTION)">
@@ -833,7 +833,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                         Warehouse Officer (WAREHOUSE)
                       </option>
                       {/* FINISHING */}
-                      <option value="Administrative">
+                      <option value="Engineer Maintenance Supervisor (FINISHING)">
                         Engineer Maintenance Supervisor (FINISHING)
                       </option>
                       <option value="Production Supervisor (FINISHING)">
@@ -970,7 +970,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                   </section>
                   {/* SPOUCE NAME INPUT GROUP */}
                   <section className="input_Group">
-                    <h6>Spouce name</h6>
+                    <h6>Spouse name</h6>
                     <input
                       className="input"
                       type="text"
@@ -988,7 +988,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                   </section>
                   {/* SPOUCE BIRTHDAY INPUT GROUP */}
                   <section className="input_Group">
-                    <h6>Spouce birthdate</h6>
+                    <h6>Spouse birthdate</h6>
                     <input
                       className="input"
                       type="text"
@@ -1006,7 +1006,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                   </section>
                   {/* SPOUCE CONTACT NUMBER INPUT GROUP */}
                   <section className="input_Group">
-                    <h6>Spouce contact number</h6>
+                    <h6>Spouse contact number</h6>
                     <input
                       className="input"
                       type="text"
