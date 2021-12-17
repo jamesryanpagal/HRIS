@@ -3,13 +3,14 @@ import axiosConfig from "../../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import Spinner from "../../../../Spinner/Spinner";
 
 // css
-import "./AddNewEvent.css";
+import "./EditEvent.css";
 
-const AddNewEvent = ({ setToggleNewEvent }) => {
+const EditEvent = ({ setToggleEditEvent }) => {
   // ------------------- STATE ------------------
   // event details state
   const [eventDetails, setEventDetails] = useState({
     title: "",
+    newTitle: "",
     startTime: "",
     endTime: "",
     startDate: "",
@@ -41,7 +42,10 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
 
     try {
       setLoading(true);
-      const { data } = await axiosConfig.post("Schedule", eventDetails);
+      const { data } = await axiosConfig.post(
+        "Schedule/editSchedule",
+        eventDetails
+      );
       if (data.isError) {
         setErrorMessage(data.errorMessage);
         setLoading(false);
@@ -53,11 +57,10 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
       console.log(error.message);
     }
   };
-
   return (
-    <div className="addNewEvent_Container">
-      <section className="addnewEventForm_Container">
-        <h1>Add New Event</h1>
+    <div className="editEvent_Container">
+      <section className="editEventForm_Container">
+        <h1>Edit Event</h1>
         {/* ERROR MESSAGE */}
         {errorMessage && (
           <section className="errorMessage">
@@ -66,13 +69,23 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
           </section>
         )}
         <form onSubmit={handleSubmit}>
-          {/* TITLE */}
+          {/* EVENT TITLE */}
           <section className="input_Container">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Event Title</label>
             <input
               type="text"
               id="title"
               name="title"
+              onChange={handleChange}
+            />
+          </section>
+          {/* NEW TITLE */}
+          <section className="input_Container">
+            <label htmlFor="newTitle">New Title</label>
+            <input
+              type="text"
+              id="newTitle"
+              name="newTitle"
               onChange={handleChange}
             />
           </section>
@@ -121,7 +134,7 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
             <button
               type="button"
               className="back"
-              onClick={() => setToggleNewEvent(false)}
+              onClick={() => setToggleEditEvent(false)}
             >
               Back
             </button>
@@ -132,4 +145,4 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
   );
 };
 
-export default AddNewEvent;
+export default EditEvent;

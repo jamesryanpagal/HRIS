@@ -1,0 +1,143 @@
+.editEvent_Container {
+  background: rgba(0, 0, 0, 80%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+/* FORM CONTAINER */
+.editEvent_Container .editEventForm_Container {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+}
+
+/* FORM CONTAINER HEADER */
+.editEvent_Container .editEventForm_Container h1 {
+  text-align: center;
+  color: #9ebdfa;
+}
+
+/* FORM CONTAINER ERROR MESSAGE */
+.editEvent_Container .editEventForm_Container .errorMessage {
+  text-align: center;
+  padding: 5px 0;
+  background: rgb(255, 170, 170);
+  color: red;
+}
+
+/* FORM CONTAINER ERROR MESSAGE ICON */
+.editEvent_Container .editEventForm_Container .errorMessage i {
+  margin-right: 5px;
+}
+
+/* FORM INPUT CONTAINER */
+.editEvent_Container .editEventForm_Container .input_Container {
+  margin: 10px 0;
+}
+
+/* FORM LABEL */
+.editEvent_Container .editEventForm_Container .input_Container label {
+  color: #5f5f5f;
+}
+
+/* FORM INPUT */
+.editEvent_Container .editEventForm_Container .input_Container input {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 15px;
+  border: 1px solid #afafaf;
+  outline: none;
+}
+
+/* FORM SELECT */
+.editEvent_Container .editEventForm_Container .input_Container select {
+  width: 33%;
+  text-align: center;
+}
+
+/* FORM SUBMIT ACTIONS CONTAINER */
+.editEvent_Container .editEventForm_Container .formActions_Container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-top: 40px;
+}
+
+/* FORM SUBMIT ACTIONS ADD */
+.editEvent_Container .editEventForm_Container .formActions_Container .add {
+  border: none;
+  background: rgb(170, 255, 170);
+  color: green;
+  height: 100%;
+  width: 45%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+}
+
+/* FORM SUBMIT ACTIONS BACK */
+.editEvent_Container .editEventForm_Container .formActions_Container .back {
+  border: none;
+  background: rgb(255, 170, 170);
+  color: red;
+  height: 100%;
+  width: 45%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* FORM SUBMIT ACTIONS CONTAINER DISABLE */
+.editEvent_Container .editEventForm_Container .formActions_Container_Disable {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin-top: 40px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.editEvent_Container
+  .editEventForm_Container
+  .formActions_Container_Disable
+  .add {
+  border: none;
+  background: rgb(170, 255, 170);
+  color: green;
+  height: 100%;
+  width: 45%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+}
+
+.editEvent_Container
+  .editEventForm_Container
+  .formActions_Container_Disable
+  .back {
+  border: none;
+  background: rgb(255, 170, 170);
+  color: red;
+  height: 100%;
+  width: 45%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}

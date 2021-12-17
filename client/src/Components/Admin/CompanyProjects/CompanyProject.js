@@ -822,46 +822,58 @@ const CompanyProject = () => {
                         {/* BODY */}
                         <section className="siteEmployees_List">
                           {projectDetailsContainer.siteEmployees.map((se) => {
+                            let employee = {};
+
+                            let department = "";
+                            let position = "";
+
                             // GET EMPLOYEE
-                            const employee = employees.find(
+                            const getEmployee = employees.find(
                               (e) => e.employee_id === se
                             );
 
-                            // GET POSITION AND DEPARTMENT
-                            const positionArr = employee.position.split("");
-                            const departmentIndex = positionArr.findIndex(
-                              (c) => c === "("
-                            );
-                            const department = employee.position.substring(
-                              departmentIndex + 1,
-                              employee.position.length - 1
-                            );
+                            if (getEmployee) {
+                              employee = { ...getEmployee };
+                            }
 
-                            const position = employee.position.substring(
-                              0,
-                              departmentIndex
-                            );
+                            // GET POSITION AND DEPARTMENT
+                            if (employee.employee_id) {
+                              const positionArr = employee.position.split("");
+                              const departmentIndex = positionArr.findIndex(
+                                (c) => c === "("
+                              );
+                              department = employee.position.substring(
+                                departmentIndex + 1,
+                                employee.position.length - 1
+                              );
+
+                              position = employee.position.substring(
+                                0,
+                                departmentIndex
+                              );
+                            }
 
                             return (
-                              <section
-                                key={employee._id}
-                                className="siteEmployee"
-                              >
-                                {/* NAME */}
-                                <h4>{`${employee.lastname}, ${employee.firstname} ${employee.middle}`}</h4>
-                                {/* POSITION AND DEPARTMENT */}
-                                <section className="position_department">
-                                  <p>{position}</p> <h5>{department}</h5>
-                                </section>
-                                {/* ACTIONS */}
-                                {editProject && (
-                                  <button
-                                    type="button"
-                                    value={employee.employee_id}
-                                    onClick={handleEditRemoveSiteEmployees}
-                                  >
-                                    <i className="fas fa-trash"></i>
-                                  </button>
+                              <section key={se}>
+                                {employee.employee_id && (
+                                  <section className="siteEmployee">
+                                    {/* NAME */}
+                                    <h4>{`${employee.lastname}, ${employee.firstname} ${employee.middle}`}</h4>
+                                    {/* POSITION AND DEPARTMENT */}
+                                    <section className="position_department">
+                                      <p>{position}</p> <h5>{department}</h5>
+                                    </section>
+                                    {/* ACTIONS */}
+                                    {editProject && (
+                                      <button
+                                        type="button"
+                                        value={employee.employee_id}
+                                        onClick={handleEditRemoveSiteEmployees}
+                                      >
+                                        <i className="fas fa-trash"></i>
+                                      </button>
+                                    )}
+                                  </section>
                                 )}
                               </section>
                             );

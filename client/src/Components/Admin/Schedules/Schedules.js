@@ -11,6 +11,7 @@ import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
 // components
 import AddNewEvent from "./AddNewEvent/AddNewEvent";
+import EditEvent from "./EditEvent/EditEvent";
 
 // css
 import "./Schedules.css";
@@ -31,6 +32,9 @@ const Schedules = () => {
   // ----------------- STATES -----------------
   // toggle add new event state
   const [toggleNewEvent, setToggleNewEvent] = useState(false);
+
+  // toggle edit event state
+  const [toggleEditEvent, setToggleEditEvent] = useState(false);
 
   // all events
   const [allEvents, setAllEvents] = useState([]);
@@ -65,8 +69,16 @@ const Schedules = () => {
           <i className="fas fa-plus"></i>
         </button>
       </section>
+      {/* TOGGLE EDIT EVENT BUTTON */}
+      <section className="editEvent_Button">
+        <button type="button" onClick={() => setToggleEditEvent(true)}>
+          <i className="fas fa-edit"></i>
+        </button>
+      </section>
       {/* ADD NEW EVENT CONTAINER */}
       {toggleNewEvent && <AddNewEvent setToggleNewEvent={setToggleNewEvent} />}
+      {/* EDIT EVENT CONTAINER */}
+      {toggleEditEvent && <EditEvent setToggleEditEvent={setToggleEditEvent} />}
       <Calendar
         localizer={localizer}
         events={allEvents}

@@ -23,3 +23,23 @@
   box-shadow: 0 0 5px #c9c9c9;
   cursor: pointer;
 }
+
+/* ADD BUTTON CONTAINER */
+.schedules_Container .editEvent_Button {
+  position: absolute;
+  top: 3%;
+  left: 26%;
+  transform: translate(-50%, -50%);
+}
+
+/* ADD BUTTON */
+.schedules_Container .editEvent_Button button {
+  border: none;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: rgb(170, 204, 255);
+  color: blue;
+  box-shadow: 0 0 5px #c9c9c9;
+  cursor: pointer;
+}

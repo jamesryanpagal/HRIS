@@ -16,6 +16,28 @@ const createSchedule = async (req, res) => {
   }
 };
 
+// Edit Schedule
+const editSchedule = async (req, res) => {
+  const { title, newTitle, startTime, endTime, startDate } = req.body;
+  try {
+    const option = { new: true };
+
+    const getEvent = await Schedule.findOne({ title });
+    const update = await Schedule.findByIdAndUpdate(
+      getEvent._id,
+      {
+        title: newTitle,
+        start: `${startDate} ${startTime}`,
+        end: `${startDate} ${endTime}`,
+      },
+      option
+    );
+    res.json(update);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
 // Get All Schedule
 const getSchedule = async (req, res) => {
   try {
@@ -26,4 +48,4 @@ const getSchedule = async (req, res) => {
   }
 };
 
-module.exports = { createSchedule, getSchedule };
+module.exports = { createSchedule, getSchedule, editSchedule };
