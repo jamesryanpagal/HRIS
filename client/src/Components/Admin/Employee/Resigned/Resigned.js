@@ -216,29 +216,6 @@ const Resigned = () => {
                         <h5>Guardian: </h5>
                         {e.guardian}
                       </section>
-                      {/* Education */}
-                      <section className="resignedList_details">
-                        <h5>Education: </h5>
-                        {e.education}
-                      </section>
-                    </section>
-                    {/* ----------------- EIGHT GROUP ------------------ */}
-                    <section className="group_Details">
-                      {/* HOBBIES */}
-                      <section className="resignedList_details">
-                        <h5>Hobbies: </h5>
-                        {e.hobbies}
-                      </section>
-                      {/* LANGUAGE */}
-                      <section className="resignedList_details">
-                        <h5>Language: </h5>
-                        {e.language}
-                      </section>
-                      {/* SKILLS */}
-                      <section className="resignedList_details">
-                        <h5>Skills: </h5>
-                        {e.skills}
-                      </section>
                     </section>
                     {/* ----------------- NINTH GROUP ------------------ */}
                     <section className="group_Details">

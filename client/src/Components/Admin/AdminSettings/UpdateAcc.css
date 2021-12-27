@@ -1,0 +1,128 @@
+.accDetails_Container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 80%);
+  z-index: 10;
+}
+
+/* FORM CONTAINER */
+.accDetails_Container form {
+  background: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 10px 0 10px;
+  border-radius: 10px;
+  width: 30%;
+}
+
+/* FORM CONTAINER HEADER */
+.accDetails_Container form h2 {
+  color: rgb(170, 204, 255);
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* FORM CONTAINER ERROR MESSAGE */
+.accDetails_Container form .errorMessage {
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background: rgb(255, 170, 170);
+  color: red;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* FORM CONTAINER ERROR MESSAGE ICON */
+.accDetails_Container form .errorMessage i {
+  margin: 0 5px;
+}
+
+/* FORM CONTAINER INPUT */
+.accDetails_Container form input {
+  border: 1px solid #afafaf;
+  width: 100%;
+  padding: 15px;
+  font-size: 15px;
+  border-radius: 3px;
+  outline: none;
+  margin: 5px 0;
+}
+
+/* FORM CONTAINER ACTIONS */
+.accDetails_Container form .actionsContainer {
+  margin: 10px 0;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* FORM CONTAINER ACTIONS BUTTON */
+.accDetails_Container form .actionsContainer button {
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  height: 100%;
+  width: 48%;
+  cursor: pointer;
+  position: relative;
+}
+
+/* FORM CONTAINER ACTIONS SAVE */
+.accDetails_Container form .actionsContainer .save {
+  background: rgb(170, 255, 170);
+  color: green;
+}
+
+/* FORM CONTAINER ACTIONS SAVE DISABLE */
+.accDetails_Container form .actionsContainer .save_disable {
+  background: rgb(170, 255, 170);
+  color: green;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* FORM CONTAINER ACTIONS BACK */
+.accDetails_Container form .actionsContainer .back {
+  background: rgb(255, 170, 170);
+  color: red;
+}
+
+/* FORM CONTAINER ACTIONS DISABLE */
+.accDetails_Container form .actionsContainer_disable {
+  margin: 10px 0;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* FORM CONTAINER ACTIONS BUTTON */
+.accDetails_Container form .actionsContainer_disable button {
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  height: 100%;
+  width: 48%;
+  cursor: pointer;
+  position: relative;
+}
+
+/* FORM CONTAINER ACTIONS SAVE */
+.accDetails_Container form .actionsContainer_disable .save {
+  background: rgb(170, 255, 170);
+  color: green;
+}
+
+/* FORM CONTAINER ACTIONS BACK */
+.accDetails_Container form .actionsContainer_disable .back {
+  background: rgb(255, 170, 170);
+  color: red;
+}

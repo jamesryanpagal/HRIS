@@ -5,6 +5,7 @@ import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
 //components
 import Navbar from "../Navbar/Navbar";
+import AdminSettings from "../AdminSettings/AdminSettings";
 import Applicants from "../Applicants/Applicants";
 import Employee_Router from "../Employee/Employee_Router/Employee_Router";
 import Department from "../Department/Department";
@@ -314,6 +315,7 @@ const Admin_Router = () => {
           <Route path="/Department" component={Department} />
           <Route path="/Companyprojects" component={CompanyProject} />
           <Route path="/Schedules" component={Schedules} />
+          <Route path="/Adminsettings/:id" component={AdminSettings} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

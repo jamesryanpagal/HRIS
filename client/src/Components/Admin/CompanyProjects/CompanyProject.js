@@ -377,8 +377,8 @@ const CompanyProject = () => {
         <section className="projectslist">
           {loading ? (
             <section className="loadingProjectList">
-              <section className="projectListSpinner"></section>Getting company
-              projects, please wait!
+              <section className="projectListSpinner"></section>Loading company
+              projects please wait...
             </section>
           ) : (
             projectList.map((p) => {

@@ -12,7 +12,6 @@ import Spinner from "../../../Spinner/Spinner";
 
 // REDUX ACTIONS
 import {
-  adminUsernameActions,
   applicantsActions,
   assignApplicationApplicantActions,
   unassignApplicationApplicantActions,
@@ -178,9 +177,8 @@ const ApplicantDetails = ({
         setSendEmailLoading(false);
         return;
       }
-      setSendEmailLoading(false);
 
-      // something went wrong
+      // something went wrong // Reason: Your sender acc has been locked due to constantly sending data. Unlock it to fix the problem
       if (data === "Something went wrong!") {
         setEmailResponse(
           <section className="emailResponseError">
@@ -188,6 +186,7 @@ const ApplicantDetails = ({
           </section>
         );
         setSendEmailLoading(false);
+        setEmailSent(true);
         return;
       }
 
@@ -196,6 +195,7 @@ const ApplicantDetails = ({
           <i className="fas fa-check-circle"></i> {data}
         </section>
       );
+      setSendEmailLoading(false);
       setEmailSent(true);
     } catch (error) {
       console.log(error);
@@ -465,24 +465,7 @@ const Applicants = () => {
     (state) => state.Applicants
   );
 
-  const { admin_token, admin } = useSelector((state) => state.GS_Admin);
-
-  // -------------------- FOR ADMIN -------------------
-  // get admin details
-  useEffect(() => {
-    const getAdminDetails = async () => {
-      try {
-        const { data } = await axiosConfig.get("/VerifyToken", {
-          headers: { key: admin_token },
-        });
-        dispatch(adminUsernameActions(data.Username));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getAdminDetails();
-  }, [admin_token, dispatch]);
+  const { admin } = useSelector((state) => state.GS_Admin);
 
   // ------------------------- FOR APPLICANTS ----------------------------
   // get applicants form in realtime

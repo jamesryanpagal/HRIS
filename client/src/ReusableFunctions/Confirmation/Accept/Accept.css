@@ -10,7 +10,7 @@
 }
 
 .accept_Container .accept {
-  border-radius: 3px;
+  border-radius: 10px;
   width: 30%;
   position: absolute;
   top: 50%;
@@ -19,9 +19,7 @@
   padding: 15px 10px;
   background: #ffffff;
   color: #353535;
-  font-size: 20px;
   text-align: center;
-  font-weight: bold;
 }
 
 .accept_Container .accept .confirm_Acception {
@@ -44,7 +42,6 @@
   border-radius: 3px;
   background: rgb(170, 255, 170);
   color: green;
-  font-size: 15px;
   letter-spacing: 1px;
 }
 
@@ -53,7 +50,6 @@
   border-radius: 3px;
   background: rgb(255, 170, 170);
   color: red;
-  font-size: 15px;
   letter-spacing: 1px;
 }
 
@@ -76,13 +72,16 @@
   position: relative;
 }
 
+.accept_Container .accept .disable_Confirm_Acception button .first_spinner {
+  border-top-color: black;
+}
+
 .accept_Container .accept .disable_Confirm_Acception .accept_Btn {
   border: none;
   border-radius: 3px;
   background: rgb(170, 255, 170);
   color: green;
   font-weight: bold;
-  font-size: 15px;
   letter-spacing: 1px;
 }
 
@@ -91,6 +90,5 @@
   border-radius: 3px;
   background: rgb(255, 170, 170);
   color: red;
-  font-size: 15px;
   letter-spacing: 1px;
 }

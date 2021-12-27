@@ -10,11 +10,11 @@ export const userTokenActions = (token) => (dispatch) => {
 };
 
 // add admin username
-export const adminUsernameActions = (adminUsername) => (dispatch) => {
+export const adminDetailsActions = (adminDetails) => (dispatch) => {
   dispatch({
-    type: "ADMIN_USERNAME",
+    type: "ADMIN_DETAILS",
     payload: {
-      adminUsername,
+      ...adminDetails,
     },
   });
 };

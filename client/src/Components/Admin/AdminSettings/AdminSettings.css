@@ -1,0 +1,105 @@
+.admin_Settings_Container {
+  width: 100%;
+  background: #f6f6ff;
+  position: relative;
+}
+
+/* OPTIONS CONTAINER */
+.admin_Settings_Container .options_Container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  width: 60%;
+  margin: auto;
+}
+
+/* OPTION ADMIN LIST */
+.admin_Settings_Container .options_Container .admin_List_Container {
+  border-radius: 50%;
+  box-shadow: 0 0 10px #afafaf;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* OPTION ADMIN LIST h5 */
+.admin_Settings_Container .options_Container .admin_List_Container h5 {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  text-align: center;
+  color: #5f5f5f;
+}
+
+/* OPTION ADMIN LIS HOVER */
+.admin_Settings_Container .options_Container .admin_List_Container:hover {
+  background: #f0f0f0;
+  transition: 0.5s;
+}
+
+/* OPTION ADMIN USERNAME */
+.admin_Settings_Container .options_Container .change_Username_Container {
+  border-radius: 50%;
+  box-shadow: 0 0 10px #afafaf;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* OPTION ADMIN USERNAME h5 */
+.admin_Settings_Container .options_Container .change_Username_Container h5 {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  text-align: center;
+  color: #5f5f5f;
+}
+
+/* OPTION ADMIN USERNAME HOVER */
+.admin_Settings_Container .options_Container .change_Username_Container:hover {
+  background: #f0f0f0;
+  transition: 0.5s;
+}
+
+/* OPTION ADMIN PASSWORD */
+.admin_Settings_Container .options_Container .change_Password_Container {
+  border-radius: 50%;
+  box-shadow: 0 0 10px #afafaf;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* OPTION ADMIN PASSWORD h5 */
+.admin_Settings_Container .options_Container .change_Password_Container h5 {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  text-align: center;
+  color: #5f5f5f;
+}
+
+/* OPTION ADMIN PASSWORD HOVER */
+.admin_Settings_Container .options_Container .change_Password_Container:hover {
+  background: #f0f0f0;
+  transition: 0.5s;
+}

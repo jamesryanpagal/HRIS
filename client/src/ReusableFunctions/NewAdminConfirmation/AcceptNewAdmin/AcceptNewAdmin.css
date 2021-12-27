@@ -10,7 +10,6 @@
 
 .acceptNewAdmin_Container .acceptNewAdmin {
   background: #ffffff;
-  font-size: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,6 +17,7 @@
   width: 20vw;
   text-align: center;
   padding: 10px;
+  border-radius: 10px;
 }
 
 .acceptNewAdmin_Container .acceptNewAdmin .acceptNewAdminActions_Container {
@@ -39,6 +39,7 @@
   background: rgb(170, 255, 170);
   color: green;
   letter-spacing: 1px;
+  border-radius: 5px;
 }
 
 .acceptNewAdmin_Container
@@ -53,6 +54,7 @@
   background: rgb(255, 170, 170);
   color: red;
   letter-spacing: 1px;
+  border-radius: 5px;
 }
 
 /* DISABLE ACTIONS BUTTON */
@@ -74,6 +76,7 @@
   background: rgb(170, 255, 170);
   color: green;
   letter-spacing: 1px;
+  border-radius: 5px;
 }
 
 .acceptNewAdmin_Container
@@ -95,4 +98,5 @@
   background: rgb(255, 170, 170);
   color: red;
   letter-spacing: 1px;
+  border-radius: 5px;
 }

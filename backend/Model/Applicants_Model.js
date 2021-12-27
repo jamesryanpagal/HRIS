@@ -83,22 +83,6 @@ const applicantsSchema = new schema(
       type: String,
       required: true,
     },
-    education: {
-      type: String,
-      required: true,
-    },
-    hobbies: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      required: true,
-    },
-    skills: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: true,

@@ -14,8 +14,6 @@
   border-radius: 50%;
   position: relative;
   border-top-color: #ffffff;
-  border-left-color: #ffffff;
-  border-bottom-color: #ffffff;
   animation: spinToLeft 0.5s ease-in-out infinite;
 }
 

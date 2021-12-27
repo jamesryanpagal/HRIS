@@ -43,10 +43,6 @@ const removeApplicant = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = getApplicant;
     // move to Rejects
     await Rejects.create({
@@ -70,10 +66,6 @@ const removeApplicant = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
     // remove applicant from Applicants
     const removeApplicant = await Applicants.findByIdAndDelete(applicantId.id);
@@ -112,10 +104,6 @@ const acceptApplicant = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = getApplicant;
 
     // move to screening
@@ -141,10 +129,6 @@ const acceptApplicant = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
 
     // remove applicant from Applicants table
@@ -193,10 +177,6 @@ const removeApplicantScreening = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = getApplicant;
     // move to Rejects
     await Rejects.create({
@@ -220,10 +200,6 @@ const removeApplicantScreening = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
     // remove from Screening
     const removeApplicant_Screening = await Screening.findByIdAndDelete(id);
@@ -261,10 +237,6 @@ const acceptApplicantScreening = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = getApplicantScreening;
 
     // move to interview
@@ -290,10 +262,6 @@ const acceptApplicantScreening = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
 
     // remove applicant from Screening
@@ -342,10 +310,6 @@ const removeApplicantInterview = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = getApplicant;
     // move to Rejects
     await Rejects.create({
@@ -369,10 +333,6 @@ const removeApplicantInterview = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
     // remove from Interview
     const removeApplicant_Interview = await Interview.findByIdAndDelete(id);
@@ -410,10 +370,6 @@ const hiredApplicant = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = getApplicantInterview;
 
     // move to hired
@@ -438,10 +394,6 @@ const hiredApplicant = async (req, res) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
     // remove applicant from interview
     const removeApplicant = await Interview.findByIdAndDelete(applicantId);

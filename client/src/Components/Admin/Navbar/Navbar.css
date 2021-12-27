@@ -7,8 +7,43 @@
 /* ADMIN PROFILE CONTAINER */
 .admin_Navbar .admin_Profile_Container {
   width: 90%;
-  margin: auto;
-  padding: 20px 0 10px 0;
+  margin: 10px auto 0 auto;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: #262d3d;
+  position: relative;
+}
+
+/* ADMIN SETTINGS */
+.admin_Navbar .admin_Profile_Container .admin_Settings {
+  border: none;
+  padding: 6px 5px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: #1c212d;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+
+/* ADMIN SETTINGS HOVER */
+.admin_Navbar .admin_Profile_Container .admin_Settings:hover i {
+  color: #9ebdfa;
+}
+
+/* ADMIN SETTINGS icon */
+.admin_Navbar .admin_Profile_Container .admin_Settings i {
+  pointer-events: none;
+  color: #5f5f5f;
+}
+
+/* ADMIN SETTINGS HOVER */
+.admin_Navbar .admin_Profile_Container .admin_Settings_Active i {
+  color: #9ebdfa;
 }
 
 /* ADMIN PROFILE LINK */
@@ -20,6 +55,14 @@
   border-radius: 50%;
   text-decoration: none;
   position: relative;
+}
+
+/* ADMIN USERNAME */
+.admin_Navbar .admin_Username {
+  width: 90%;
+  margin: 10px auto 0 auto;
+  text-align: center;
+  color: #afafaf;
 }
 
 /* ------------------- SIGNOUT ------------------- */
@@ -49,7 +92,7 @@
   border: 2px transparent solid;
   border-bottom-color: #afafaf;
   text-align: center;
-  padding: 20px 0;
+  padding: 5px 0;
   font-size: 20px;
   font-weight: bolder;
   color: #9ebdfa;

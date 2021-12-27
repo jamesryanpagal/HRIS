@@ -1,0 +1,79 @@
+.adminList_Container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 80%);
+  z-index: 10;
+}
+
+/* CLOSE MODAL */
+.adminList_Container .close_AdminList {
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  background: none;
+  font-size: 20px;
+  color: #ffffff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* CLOSE MODAL i */
+.adminList_Container .close_AdminList i {
+  pointer-events: none;
+}
+
+/* ADMIN HEADER */
+.adminList_Container .adminList_Header {
+  text-align: center;
+  padding: 20px;
+  color: #ffffff;
+}
+
+/* ADMIN LIST */
+.adminList_Container .adminList {
+  height: 88%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+/* ADMIN LIST LOADING ADMIN */
+.adminList_Container .adminList .loading_Adminlist {
+  height: 50px;
+  width: 50px;
+  position: relative;
+}
+
+/* ADMIN */
+.adminList_Container .adminList .admin {
+  background: #ffffff;
+  width: 30%;
+  border-radius: 50px;
+  padding: 5px 20px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+}
+
+/* ADMIN ACTION */
+.adminList_Container .adminList .admin button {
+  border: none;
+  background: rgb(255, 170, 170);
+  color: red;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ADMIN ACTION */
+.adminList_Container .adminList .admin button i {
+  pointer-events: none;
+}

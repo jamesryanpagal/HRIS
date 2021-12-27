@@ -1,14 +1,14 @@
 // ----------------- model ----------------
 const NewUsers = require("../Model/NewUsers_Model");
 const Users = require("../Model/Users_Model");
+const Employees = require("../Model/Employees_Model");
 
 // add new admin
 const addNewUsers_Controller = async (req, res) => {
-  const { Employee_number, Email, Username, Password } = req.body;
+  const { Employee_number, Username, Password } = req.body;
   try {
     await NewUsers.create({
       Employee_number,
-      Email,
       Username,
       Password,
     });
@@ -37,14 +37,18 @@ const acceptNewAdmin_Controller = async (req, res) => {
     const getNewAdmin = await NewUsers.findById(id);
 
     // destructure data
-    const { Employee_number, Username, Email, Password } = getNewAdmin;
+    const { Employee_number, Username, Password } = getNewAdmin;
+
+    // get employee details
+    const getEmployeeDetails = await Employees.findOne({
+      employee_id: Employee_number,
+    });
 
     // add admin to users
     await Users.create({
-      Employee_image: "N/A",
+      Employee_image: getEmployeeDetails.employee_image,
       Employee_number,
       Username,
-      Email,
       Password,
     });
 

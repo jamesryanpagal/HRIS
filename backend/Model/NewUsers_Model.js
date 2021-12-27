@@ -8,11 +8,6 @@ const newUsersSchema = new schema(
       required: true,
       unique: true,
     },
-    Email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     Username: {
       type: String,
       required: true,

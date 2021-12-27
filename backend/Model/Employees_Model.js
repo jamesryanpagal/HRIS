@@ -93,23 +93,31 @@ const employeeSchema = new schema(
       type: String,
       required: true,
     },
-    education: {
-      type: String,
-      required: true,
-    },
-    hobbies: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      required: true,
-    },
-    skills: {
-      type: String,
-      required: true,
-    },
     date_hired: {
+      type: String,
+      required: true,
+    },
+    sssno: {
+      type: String,
+      required: true,
+    },
+    tin: {
+      type: String,
+      required: true,
+    },
+    pagibig: {
+      type: String,
+      required: true,
+    },
+    philhealth: {
+      type: String,
+      required: true,
+    },
+    biometricIdno: {
+      type: String,
+      required: true,
+    },
+    infotrackIdno: {
       type: String,
       required: true,
     },

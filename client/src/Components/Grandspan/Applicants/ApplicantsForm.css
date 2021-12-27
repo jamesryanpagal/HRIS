@@ -329,6 +329,15 @@
   transition: 0.3s;
 }
 
+/* ----------------- LAST GROUP --------------- */
+
+.applicants_Form_Container
+  .applicants_Form_Inputs_Container
+  .last_Group
+  .applicants_Form_Inputs {
+  width: 47%;
+}
+
 /* ----------------- BUTTON --------------- */
 
 .applicants_Form_Container

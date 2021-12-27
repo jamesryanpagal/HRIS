@@ -1,6 +1,6 @@
 // ------------------------------------------ USERS REDUCERS ----------------------------------
 export const usersReducers = (
-  state = { admin_token: "", admin: "" },
+  state = { admin_token: "", admin: "", adminImage: "", adminId: "" },
   action
 ) => {
   switch (action.type) {
@@ -14,12 +14,14 @@ export const usersReducers = (
       };
 
     // ADMIN USERNAME
-    case "ADMIN_USERNAME":
-      const { adminUsername } = action.payload;
+    case "ADMIN_DETAILS":
+      const { Username, Employee_image, _id } = action.payload;
 
       return {
         ...state,
-        admin: adminUsername,
+        admin: Username,
+        adminImage: Employee_image,
+        adminId: _id,
       };
 
     // REMOVE USER TOKEN
@@ -27,6 +29,9 @@ export const usersReducers = (
       return {
         ...state,
         admin_token: "",
+        admin: "",
+        adminImage: "",
+        adminId: "",
       };
 
     default:

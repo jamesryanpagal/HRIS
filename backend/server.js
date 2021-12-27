@@ -19,6 +19,8 @@ const MoveToRoutes = require("./Routes/Moveto_Routes");
 const RemoveFromDepartment = require("./Routes/RemoveFromDepartment_Routes");
 const CompanyProjects = require("./Routes/CompanyProjects_Routes");
 const SchedulesRoutes = require("./Routes/Schedules_Routes");
+const AdminListRoutes = require("./Routes/AdminListRoutes");
+const UpdateAdminRoutes = require("./Routes/UpdateAdmin_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -46,6 +48,8 @@ app.use("/MoveTo", MoveToRoutes);
 app.use("/RemoveFromDepartment", RemoveFromDepartment);
 app.use("/CompanyProjects", CompanyProjects);
 app.use("/Schedule", SchedulesRoutes);
+app.use("/AdminList", AdminListRoutes);
+app.use("/UpdateAdmin", UpdateAdminRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -93,10 +97,6 @@ io.on("connection", (socket) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = data;
     const newApplicants = await Applicants.create({
       assignedBy,
@@ -121,10 +121,6 @@ io.on("connection", (socket) => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     });
     io.emit("getApplicants", newApplicants);
   });

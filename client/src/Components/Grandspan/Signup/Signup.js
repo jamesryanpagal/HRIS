@@ -14,7 +14,6 @@ const Signup = ({ history }) => {
   // user state
   const [userSignInDetails, setUserSignInDetails] = useState({
     Employee_number: "",
-    Email: "",
     Username: "",
     Password: "",
     ConfirmPassword: "",
@@ -72,32 +71,6 @@ const Signup = ({ history }) => {
         return;
       }
 
-      if (data.includes("dup key: { Employee_number:")) {
-        setErrorMessage("Employee number already been taken");
-        setLoading(false);
-        return;
-      }
-
-      if (data.includes("dup key: { Email:")) {
-        setErrorMessage("Email already been taken");
-        setLoading(false);
-        return;
-      }
-
-      if (data.includes("dup key: { Username:")) {
-        setErrorMessage("Username already been taken");
-        setLoading(false);
-        return;
-      }
-
-      setUserSignInDetails((prev) => ({
-        ...prev,
-        Employee_number: "",
-        Email: "",
-        Username: "",
-        Password: "",
-        ConfirmPassword: "",
-      }));
       setSuccessMessage(data);
       setErrorMessage("");
       setLoading(false);
@@ -139,21 +112,6 @@ const Signup = ({ history }) => {
               name="Employee_number"
               id="emp_number"
               value={userSignInDetails.Employee_number}
-              onChange={handleInputChange}
-              onFocus={handleInputOnFocus}
-              onBlur={handleInputOnBlur}
-            />
-          </section>
-          {/* EMAIL */}
-          <section className="signup_Form_Input_Group">
-            <label className="label" htmlFor="emp_email">
-              Email
-            </label>
-            <input
-              type="email"
-              name="Email"
-              id="emp_email"
-              value={userSignInDetails.Email}
               onChange={handleInputChange}
               onFocus={handleInputOnFocus}
               onBlur={handleInputOnBlur}

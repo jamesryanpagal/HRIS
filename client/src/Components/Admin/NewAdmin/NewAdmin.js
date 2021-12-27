@@ -114,7 +114,7 @@ const NewAdmin = () => {
                   value={a._id}
                   onClick={handleToggleAcceptConfirmation}
                 >
-                  Accept
+                  <i className="fas fa-check"></i>
                 </button>
                 <button
                   type="button"
@@ -122,7 +122,7 @@ const NewAdmin = () => {
                   value={a._id}
                   onClick={handleToggleDeleteConfirmation}
                 >
-                  Delete
+                  <i className="fas fa-trash"></i>
                 </button>
               </section>
             </section>

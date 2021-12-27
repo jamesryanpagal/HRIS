@@ -43,10 +43,7 @@ export const employeeReducers = (
       if (!employeeExist) {
         return {
           ...state,
-          employees: [
-            ...state.employees,
-            { ...employee, date_hired: employee.date_hired.substring(4, 16) },
-          ],
+          employees: [...state.employees, { ...employee }],
         };
       }
 
@@ -63,9 +60,12 @@ export const employeeReducers = (
       employeeObj.spouce_fullname = employee.spouce_fullname;
       employeeObj.spouce_birthday = employee.spouce_birthday;
       employeeObj.spouce_contact_number = employee.spouce_contact_number;
-      employeeObj.language = employee.language;
-      employeeObj.hobbies = employee.hobbies;
-      employeeObj.skills = employee.skills;
+      employeeObj.sssno = employee.sssno;
+      employeeObj.tin = employee.tin;
+      employeeObj.pagibig = employee.pagibig;
+      employeeObj.philhealth = employee.philhealth;
+      employeeObj.biometricIdno = employee.biometricIdno;
+      employeeObj.infotrackIdno = employee.infotrackIdno;
 
       return {
         ...state,
@@ -95,9 +95,12 @@ export const employeeReducers = (
       employeeUpdatesObj.spouce_birthday = employeeUpdates.spouce_birthday;
       employeeUpdatesObj.spouce_contact_number =
         employeeUpdates.spouce_contact_number;
-      employeeUpdatesObj.language = employeeUpdates.language;
-      employeeUpdatesObj.hobbies = employeeUpdates.hobbies;
-      employeeUpdatesObj.skills = employeeUpdates.skills;
+      employeeUpdatesObj.sssno = employeeUpdates.sssno;
+      employeeUpdatesObj.tin = employeeUpdates.tin;
+      employeeUpdatesObj.pagibig = employeeUpdates.pagibig;
+      employeeUpdatesObj.philhealth = employeeUpdates.philhealth;
+      employeeUpdatesObj.biometricIdno = employeeUpdates.biometricIdno;
+      employeeUpdatesObj.infotrackIdno = employeeUpdates.infotrackIdno;
 
       return {
         ...state,

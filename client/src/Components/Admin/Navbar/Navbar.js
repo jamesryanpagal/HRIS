@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 
 // REDUX ACTIONS
-import { removeUsertokenActions } from "../../../Redux/Redux_actions/actions";
+import {
+  removeUsertokenActions,
+  adminDetailsActions,
+} from "../../../Redux/Redux_actions/actions";
 
 // Icons
 import applicantsIcon from "../../../PublicImages/applicantsIcon.png";
@@ -19,18 +22,13 @@ import newadminIcon from "../../../PublicImages/newadminIcon.png";
 import "./Navbar.css";
 
 const Navbar = () => {
-  // ----------------- STATE ----------------
-  // admin details state
-  const [adminDetails, setAdminDetails] = useState({
-    Employee_image: "",
-    Username: "",
-  });
-
   // dispatch
   const dispatch = useDispatch();
 
   // selector
-  const { admin_token } = useSelector((state) => state.GS_Admin);
+  const { admin_token, admin, adminImage, adminId } = useSelector(
+    (state) => state.GS_Admin
+  );
 
   // get admin details
   useEffect(() => {
@@ -38,27 +36,34 @@ const Navbar = () => {
       const { data } = await axiosConfig.get("/VerifyToken", {
         headers: { key: admin_token },
       });
-      setAdminDetails((prev) => ({
-        ...prev,
-        Employee_image: data.Employee_image,
-        Username: data.Username,
-      }));
+      dispatch(adminDetailsActions(data));
     };
 
     getAdminDetails();
-  }, [admin_token]);
+  }, [admin_token, dispatch]);
 
   return (
     <div className="admin_Navbar">
       {/* HEADER */}
       <section className="admin_Profile_Container">
+        {/* ADMIN SETTINGS */}
+        <NavLink
+          exact
+          to={"/Adminsettings/" + adminId}
+          activeClassName="admin_Settings_Active"
+          className="admin_Settings"
+        >
+          <i className="fas fa-user-cog"></i>
+        </NavLink>
         <section className="adminProfile">
-          <ProfileImage
-            image={adminDetails.Employee_image}
-            firstname={adminDetails.Username}
-          />
+          <ProfileImage image={adminImage} firstname={admin} />
+        </section>
+        <section className="admin_Username">
+          <h4>{admin}</h4>
         </section>
       </section>
+      {/* USERNAME */}
+      {/* SYSTEM NAME */}
       <section className="admin_Navbar_Header">
         <span>GDC HRIS</span>
       </section>

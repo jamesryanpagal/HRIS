@@ -78,10 +78,6 @@ const ApplicantsForm = () => {
     height: "",
     weight: "",
     guardian: "",
-    education: "",
-    hobbies: "",
-    language: "",
-    skills: "",
   });
 
   // show married additional input
@@ -164,10 +160,6 @@ const ApplicantsForm = () => {
       height,
       weight,
       guardian,
-      education,
-      hobbies,
-      language,
-      skills,
     } = applicantDetails;
 
     // CHECK NULL INPUT
@@ -187,11 +179,7 @@ const ApplicantsForm = () => {
       !bloodtype ||
       !height ||
       !weight ||
-      !guardian ||
-      !education ||
-      !hobbies ||
-      !language ||
-      !skills
+      !guardian
     ) {
       setResMessage(
         <section className="resError">
@@ -292,10 +280,6 @@ const ApplicantsForm = () => {
       height: "",
       weight: "",
       guardian: "",
-      education: "",
-      hobbies: "",
-      language: "",
-      skills: "",
     }));
   };
 
@@ -481,14 +465,14 @@ const ApplicantsForm = () => {
               {/* POSITION */}
               <section className="applicants_Form_Inputs">
                 <select onChange={handleChange} name="position">
-                  <option value="">Position</option>
+                  <option value="">-- Select Position --</option>
                   {/* PRESIDENT'S OFFICE */}
-                  <option value="President (PRESIDENTS OFFICE)">
+                  {/* <option value="President (PRESIDENTS OFFICE)">
                     President (PRESIDENT'S OFFICE)
                   </option>
                   <option value="Secretary of President (PRESIDENTS OFFICE)">
                     Secretary of President (PRESIDENT'S OFFICE)
-                  </option>
+                  </option> */}
                   {/* ADMINISTRATION */}
                   <option value="Division Head (ADMINISTRATION)">
                     Division Head (ADMINISTRATION)
@@ -1006,7 +990,7 @@ const ApplicantsForm = () => {
             </section>
 
             {/* ----------------------------------------- SIXTH INPUT GROUP --------------------------------------- */}
-            <section className="applicants_Form_Input_Group">
+            <section className="applicants_Form_Input_Group last_Group">
               {/* WEIGHT */}
               <section className="applicants_Form_Inputs">
                 <label className="label" htmlFor="app_Weight">
@@ -1032,70 +1016,6 @@ const ApplicantsForm = () => {
                   name="guardian"
                   id="app_Guardian"
                   value={applicantDetails.guardian}
-                  onChange={handleChange}
-                  onFocus={handleAppFormOnFocus}
-                  onBlur={handleAppFormOnBlur}
-                />
-              </section>
-              {/* EDUCATIONAL BACKGROUND */}
-              <section className="applicants_Form_Inputs">
-                <label className="label" htmlFor="app_Education">
-                  Education
-                </label>
-                <input
-                  type="text"
-                  name="education"
-                  id="app_Education"
-                  value={applicantDetails.education}
-                  onChange={handleChange}
-                  onFocus={handleAppFormOnFocus}
-                  onBlur={handleAppFormOnBlur}
-                />
-              </section>
-            </section>
-
-            {/* ----------------------------------------- SEVENTH INPUT GROUP --------------------------------------- */}
-            <section className="applicants_Form_Input_Group">
-              {/* HOBBIES */}
-              <section className="applicants_Form_Inputs">
-                <label className="label" htmlFor="app_Hobbies">
-                  Hobbies
-                </label>
-                <input
-                  type="text"
-                  name="hobbies"
-                  id="app_Hobbies"
-                  value={applicantDetails.hobbies}
-                  onChange={handleChange}
-                  onFocus={handleAppFormOnFocus}
-                  onBlur={handleAppFormOnBlur}
-                />
-              </section>
-              {/* LANGUAGE */}
-              <section className="applicants_Form_Inputs">
-                <label className="label" htmlFor="app_Language">
-                  Language
-                </label>
-                <input
-                  type="text"
-                  name="language"
-                  id="app_Language"
-                  value={applicantDetails.language}
-                  onChange={handleChange}
-                  onFocus={handleAppFormOnFocus}
-                  onBlur={handleAppFormOnBlur}
-                />
-              </section>
-              {/* SKILLS */}
-              <section className="applicants_Form_Inputs">
-                <label className="label" htmlFor="app_Skills">
-                  Skills
-                </label>
-                <input
-                  type="text"
-                  name="skills"
-                  id="app_Skills"
-                  value={applicantDetails.skills}
                   onChange={handleChange}
                   onFocus={handleAppFormOnFocus}
                   onBlur={handleAppFormOnBlur}

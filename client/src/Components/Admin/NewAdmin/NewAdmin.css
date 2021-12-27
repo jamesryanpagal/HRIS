@@ -9,9 +9,10 @@
 .newAdmin_Container .newAdmin_List {
   padding: 20px 0;
   height: 100%;
-  display: grid;
-  grid-template-columns: auto auto auto;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   overflow-y: scroll;
   position: relative;
 }
@@ -42,40 +43,37 @@
 .newAdmin_Container .newAdmin_List .newAdmin {
   background: #ffffff;
   box-shadow: 0 0 10px #c9c9c9;
-  width: 20vw;
-  height: 24vh;
+  width: 50vw;
+  height: 10vh;
   position: relative;
   margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
 }
 
 /* NEW ADMIN USERNAME */
 .newAdmin_Container .newAdmin_List .newAdmin .newAdmin_Username {
-  font-size: 20px;
-  text-align: center;
-  padding: 10px 0;
+  font-size: 17px;
   color: #5f5f5f;
-  font-weight: bolder;
+  width: 100%;
 }
 
-/* NEW ADMIN USERNAME */
+/* NEW ADMIN h4 */
 .newAdmin_Container .newAdmin_List .newAdmin h4 {
-  text-align: center;
-  color: #5f5f5f;
-}
-
-/* NEW ADMIN USERNAME */
-.newAdmin_Container .newAdmin_List .newAdmin .newAdmin_Email {
-  text-align: center;
-  color: rgb(106, 106, 245);
+  color: rgb(94, 94, 207);
+  width: 100%;
 }
 
 /* NEW ADMIN ACTIONS CONTAINER */
 .newAdmin_Container .newAdmin_List .newAdmin .newAdmin_Actions_Container {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  width: 200px;
   height: 50px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* NEW ADMIN ACTIONS BUTTON */
@@ -84,9 +82,20 @@
   .newAdmin
   .newAdmin_Actions_Container
   button {
-  height: 100%;
-  width: 100%;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
+}
+
+/* NEW ADMIN ACTIONS BUTTON */
+.newAdmin_Container
+  .newAdmin_List
+  .newAdmin
+  .newAdmin_Actions_Container
+  button
+  i {
+  pointer-events: none;
 }
 
 /* NEW ADMIN ACTIONS ACCEPT */

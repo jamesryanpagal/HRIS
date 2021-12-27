@@ -93,22 +93,6 @@ const resignedSchema = new schema(
       type: String,
       required: true,
     },
-    education: {
-      type: String,
-      required: true,
-    },
-    hobbies: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      required: true,
-    },
-    skills: {
-      type: String,
-      required: true,
-    },
     date_hired: {
       type: String,
       required: true,

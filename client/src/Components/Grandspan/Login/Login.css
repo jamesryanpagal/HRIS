@@ -34,7 +34,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .login_Container .login_Form_Container .error_Message_Container {
   text-align: center;
-  padding: 10px 0;
+  padding: 10px 5px;
   background: rgba(255, 122, 122, 50%);
   border-radius: 3px;
   color: red;

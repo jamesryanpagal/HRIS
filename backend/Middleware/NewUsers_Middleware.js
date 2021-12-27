@@ -1,41 +1,35 @@
 // ------------------------------ MODEL --------------------------------
 const GS_Users = require("../Model/Users_Model");
+const Employees = require("../Model/Employees_Model");
 
 const newUsers_Middleware = async (req, res, next) => {
-  const { Employee_number, Email, Username, Password, ConfirmPassword } =
-    req.body;
+  const { Employee_number, Username, Password, ConfirmPassword } = req.body;
 
   try {
     const error = { error: true, errorMessage: "" };
 
     // ---------------------------------- CHECK INPUT FIELDS --------------------------
-    if (!Employee_number || !Email || !Username || !Password) {
+    if (!Employee_number || !Username || !Password) {
       error.errorMessage = "Please fill out all the input fields";
       res.json(error);
       return;
     }
 
     // ---------------------------------- CHECK EMP NUMBER ----------------------------
-    const empNumRegExp = /^[20]{2}[0-9]{2}[0-9]{2}[0-9]+$/;
-    const testEmployeeNumber = empNumRegExp.test(Employee_number);
+    // const empNumRegExp = /^[20]{2}[0-9]{2}[0-9]{2}[0-9]+$/;
+    // const testEmployeeNumber = empNumRegExp.test(Employee_number);
 
-    if (!testEmployeeNumber) {
-      error.errorMessage = "Invalid employee number";
-      res.json(error);
-      return;
-    }
+    // if (!testEmployeeNumber) {
+    //   error.errorMessage = "Invalid employee number";
+    //   res.json(error);
+    //   return;
+    // }
 
-    const empNumExist = await GS_Users.findOne({ Employee_number });
-    if (empNumExist) {
-      error.errorMessage = "Employee number already been taken";
-      res.json(error);
-      return;
-    }
-
-    // ---------------------------------- CHECK EMAIL ----------------------------
-    const emailExist = await GS_Users.findOne({ Email });
-    if (emailExist) {
-      error.errorMessage = "Email aldready been taken";
+    const empNumExist = await Employees.findOne({
+      employee_id: Employee_number,
+    });
+    if (!empNumExist) {
+      error.errorMessage = "Employee number not found!";
       res.json(error);
       return;
     }
@@ -58,6 +52,13 @@ const newUsers_Middleware = async (req, res, next) => {
     }
 
     // ---------------------------------- CHECK PASSWORD ----------------------------
+
+    if (Password.length <= 5) {
+      error.errorMessage = "Password to short!";
+      res.json(error);
+      return;
+    }
+
     if (Password !== ConfirmPassword) {
       error.errorMessage = "Password don't matched";
       res.json(error);

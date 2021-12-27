@@ -7,6 +7,21 @@ const Resigned = require("../Model/Resigned_Model");
 
 const date = new Date();
 
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
 const employeeList = async (req, res) => {
   let hiredContainer = [];
   try {
@@ -152,11 +167,15 @@ const employeeList = async (req, res) => {
           height: e.height,
           weight: e.weight,
           guardian: e.guardian,
-          education: e.education,
-          hobbies: e.hobbies,
-          language: e.language,
-          skills: e.skills,
-          date_hired: date.toString(),
+          date_hired: `${
+            months[date.getMonth()]
+          } ${date.getDay()}, ${date.getFullYear()}`,
+          sssno: "N/A",
+          tin: "N/A",
+          pagibig: "N/A",
+          philhealth: "N/A",
+          biometricIdno: "N/A",
+          infotrackIdno: "N/A",
         });
       } catch (error) {
         if (error.message.includes("duplicate")) {

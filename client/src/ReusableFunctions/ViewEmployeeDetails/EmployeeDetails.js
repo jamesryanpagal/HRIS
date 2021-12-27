@@ -45,11 +45,13 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     height: "",
     weight: "",
     guardian: "",
-    education: "",
-    hobbies: "",
-    language: "",
-    skills: "",
     date_hired: "",
+    sssno: "",
+    tin: "",
+    pagibig: "",
+    philhealth: "",
+    biometricIdno: "",
+    infotrackIdno: "",
   });
 
   // update image preview state
@@ -79,7 +81,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
   // dispatch
   const dispatch = useDispatch();
 
-  // get employee from redux
+  // get employee from database
   useEffect(() => {
     const getEmployee = async () => {
       const employee = await employees.find((e) => e.employee_id === id);
@@ -108,11 +110,13 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
           height: employee.height,
           weight: employee.weight,
           guardian: employee.guardian,
-          education: employee.education,
-          hobbies: employee.hobbies,
-          language: employee.language,
-          skills: employee.skills,
           date_hired: employee.date_hired,
+          sssno: employee.sssno,
+          tin: employee.tin,
+          pagibig: employee.pagibig,
+          philhealth: employee.sssno,
+          biometricIdno: employee.biometricIdno,
+          infotrackIdno: employee.infotrackIdno,
         }));
       }
     };
@@ -1043,16 +1047,16 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       <i className="fas fa-pen"></i>
                     </section>
                   </section>
-                  {/* LANGUAGE INPUT GROUP */}
+                  {/* SSSNO INPUT GROUP */}
                   <section className="input_Group">
-                    <h6>Language</h6>
+                    <h6>SSS no.</h6>
                     <input
                       className="input"
                       type="text"
-                      name="language"
+                      name="sssno"
                       onChange={handleChangeEmployeeDetails}
                       disabled={true}
-                      value={employeeDetails.language}
+                      value={employeeDetails.sssno}
                     />
                     <section
                       className="edit_Icon_Container"
@@ -1061,16 +1065,16 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       <i className="fas fa-pen"></i>
                     </section>
                   </section>
-                  {/* HOBBIES INPUT GROUP */}
+                  {/* TIN INPUT GROUP */}
                   <section className="input_Group">
-                    <h6>Hobbies</h6>
-                    <textarea
+                    <h6>Tin</h6>
+                    <input
                       className="input"
                       type="text"
-                      name="hobbies"
+                      name="tin"
                       onChange={handleChangeEmployeeDetails}
                       disabled={true}
-                      value={employeeDetails.hobbies}
+                      value={employeeDetails.tin}
                     />
                     <section
                       className="edit_Icon_Container"
@@ -1079,16 +1083,52 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       <i className="fas fa-pen"></i>
                     </section>
                   </section>
-                  {/* SKILLS INPUT GROUP */}
+                  {/* PHILHEALTH INPUT GROUP */}
                   <section className="input_Group">
-                    <h6>Skills</h6>
-                    <textarea
+                    <h6>Philhealth</h6>
+                    <input
                       className="input"
                       type="text"
-                      name="skills"
+                      name="philhealth"
                       onChange={handleChangeEmployeeDetails}
                       disabled={true}
-                      value={employeeDetails.skills}
+                      value={employeeDetails.philhealth}
+                    />
+                    <section
+                      className="edit_Icon_Container"
+                      onClick={handleEditDetails}
+                    >
+                      <i className="fas fa-pen"></i>
+                    </section>
+                  </section>
+                  {/* BIOMETRIC ID NO INPUT GROUP */}
+                  <section className="input_Group">
+                    <h6>Biometric id no.</h6>
+                    <input
+                      className="input"
+                      type="text"
+                      name="biometricIdno"
+                      onChange={handleChangeEmployeeDetails}
+                      disabled={true}
+                      value={employeeDetails.biometricIdno}
+                    />
+                    <section
+                      className="edit_Icon_Container"
+                      onClick={handleEditDetails}
+                    >
+                      <i className="fas fa-pen"></i>
+                    </section>
+                  </section>
+                  {/* INFOTRACK ID NO INPUT GROUP */}
+                  <section className="input_Group">
+                    <h6>Infotrack id no.</h6>
+                    <input
+                      className="input"
+                      type="text"
+                      name="infotrackIdno"
+                      onChange={handleChangeEmployeeDetails}
+                      disabled={true}
+                      value={employeeDetails.infotrackIdno}
                     />
                     <section
                       className="edit_Icon_Container"

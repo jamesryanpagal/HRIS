@@ -33,10 +33,6 @@ const moveToBlacklistController = async (req, res) => {
       height: employee.height,
       weight: employee.weight,
       guardian: employee.guardian,
-      education: employee.education,
-      hobbies: employee.hobbies,
-      language: employee.language,
-      skills: employee.skills,
       date_hired: employee.date_hired,
       reason,
     });
@@ -89,10 +85,6 @@ const moveToTerminatedController = async (req, res) => {
       height: employee.height,
       weight: employee.weight,
       guardian: employee.guardian,
-      education: employee.education,
-      hobbies: employee.hobbies,
-      language: employee.language,
-      skills: employee.skills,
       date_hired: employee.date_hired,
       reason,
     });
@@ -145,10 +137,6 @@ const moveToResignedController = async (req, res) => {
       height: employee.height,
       weight: employee.weight,
       guardian: employee.guardian,
-      education: employee.education,
-      hobbies: employee.hobbies,
-      language: employee.language,
-      skills: employee.skills,
       date_hired: employee.date_hired,
       reason,
     });
