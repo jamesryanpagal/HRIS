@@ -26,7 +26,7 @@
 
 /* BLACKLIST EMPLOYEE IMAGE */
 .blacklist_Container .blacklist_Employee_Container .blacklist_Employee .image {
-  border: rgb(240, 111, 111) solid;
+  background: rgb(240, 111, 111);
   position: relative;
   height: 100px;
   width: 100px;
@@ -85,6 +85,7 @@
   overflow-y: scroll;
   background: white;
   box-shadow: 0 0 5px #c9c9c9;
+  border-radius: 10px;
 }
 
 /* BLACKLIST EMPLOYEE PERSONAL DETAILS HEADER */
@@ -94,9 +95,8 @@
   .details_Container
   .personal_Details
   h4 {
-  background: rgb(153, 153, 199);
-  text-align: center;
-  color: #ffffff;
+  color: rgb(153, 153, 199);
+  padding: 10px;
 }
 
 /* BLACKLIST EMPLOYEE PERSONAL DETAILS GROUP DETAILS */
@@ -131,9 +131,24 @@
   .group_Details
   .blackList_details
   h5 {
-  background: #5f5f5f;
-  color: #ffffff;
+  color: #5f5f5f;
+  text-align: start;
+}
+
+/* BLACKLIST EMPLOYEE PERSONAL DETAILS GROUP DETAILS HEADER */
+.blacklist_Container
+  .blacklist_Employee_Container
+  .blacklist_Employee:hover
+  .details_Container
+  .personal_Details
+  .group_Details
+  .blackList_details
+  p {
+  background: #c9c9c9;
+  color: #000000;
   padding: 5px;
+  border-radius: 5px;
+  text-align: start;
 }
 
 /* BLACKLIST EMPLOYEE REASON HEADER */
@@ -143,9 +158,8 @@
   .details_Container
   .blacklisted_Details
   h4 {
-  background: rgb(153, 153, 199);
-  text-align: center;
-  color: #ffffff;
+  color: rgb(153, 153, 199);
+  padding: 10px;
 }
 
 /* BLACKLIST EMPLOYEE REASON CONTAINER */
@@ -157,4 +171,19 @@
   .reason_Container {
   padding: 10px;
   color: #5f5f5f;
+}
+
+/* BLACKLIST EMPLOYEE REASON CONTAINER p */
+.blacklist_Container
+  .blacklist_Employee_Container
+  .blacklist_Employee:hover
+  .details_Container
+  .blacklisted_Details
+  .reason_Container
+  p {
+  margin: auto;
+  padding: 10px 5px;
+  background: #c9c9c9;
+  color: #000000;
+  border-radius: 5px;
 }

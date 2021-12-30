@@ -7,20 +7,7 @@ const Resigned = require("../Model/Resigned_Model");
 
 const date = new Date();
 
-const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const monthName = date.toLocaleString("default", { month: "short" });
 
 const employeeList = async (req, res) => {
   let hiredContainer = [];
@@ -167,9 +154,7 @@ const employeeList = async (req, res) => {
           height: e.height,
           weight: e.weight,
           guardian: e.guardian,
-          date_hired: `${
-            months[date.getMonth()]
-          } ${date.getDay()}, ${date.getFullYear()}`,
+          datehired: `${monthName} ${date.getDate()}, ${date.getFullYear()}`,
           sssno: "N/A",
           tin: "N/A",
           pagibig: "N/A",

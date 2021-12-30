@@ -45,7 +45,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     height: "",
     weight: "",
     guardian: "",
-    date_hired: "",
+    datehired: "",
     sssno: "",
     tin: "",
     pagibig: "",
@@ -110,11 +110,11 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
           height: employee.height,
           weight: employee.weight,
           guardian: employee.guardian,
-          date_hired: employee.date_hired,
+          datehired: employee.datehired,
           sssno: employee.sssno,
           tin: employee.tin,
           pagibig: employee.pagibig,
-          philhealth: employee.sssno,
+          philhealth: employee.philhealth,
           biometricIdno: employee.biometricIdno,
           infotrackIdno: employee.infotrackIdno,
         }));
@@ -258,6 +258,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     0,
     employeeDepartmentIndex
   );
+
   return (
     <div
       className={
@@ -333,7 +334,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                 {/* DATE HIRED */}
                 <section className="child">
                   <span>Date hired: </span>
-                  {employeeDetails.date_hired}
+                  {employeeDetails.datehired}
                 </section>
               </section>
               {/* SECOND SECTION */}

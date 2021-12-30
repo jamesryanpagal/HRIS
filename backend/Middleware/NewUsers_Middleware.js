@@ -25,6 +25,16 @@ const newUsers_Middleware = async (req, res, next) => {
     //   return;
     // }
 
+    // throws error if emp num already exist in gs users
+    const gsUserExist = await GS_Users.findOne({ Employee_number });
+
+    if (gsUserExist) {
+      error.errorMessage = "Employee number is in used";
+      res.json(error);
+      return;
+    }
+
+    // throws error if emp num does not exist in employee
     const empNumExist = await Employees.findOne({
       employee_id: Employee_number,
     });

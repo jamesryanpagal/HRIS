@@ -93,7 +93,7 @@ const terminatedSchema = new schema(
       type: String,
       required: true,
     },
-    date_hired: {
+    datehired: {
       type: String,
       required: true,
     },

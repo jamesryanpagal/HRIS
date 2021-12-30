@@ -93,7 +93,7 @@ const employeeSchema = new schema(
       type: String,
       required: true,
     },
-    date_hired: {
+    datehired: {
       type: String,
       required: true,
     },
@@ -127,5 +127,5 @@ const employeeSchema = new schema(
   }
 );
 
-const Employees = mongoose.model("employees", employeeSchema);
+const Employees = mongoose.model("Employeelists", employeeSchema);
 module.exports = Employees;

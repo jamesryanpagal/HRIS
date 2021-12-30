@@ -89,11 +89,24 @@
 /* PROJECTS TITLE */
 .projectlist_Container .projectslist .companyProject_Container .title {
   width: 250px;
+  border-radius: 5px;
+  padding: 0 5px;
+  background: #5f5f5f;
+  color: #ffffff;
+}
+
+/* PROJECTS TITLE strong*/
+.projectlist_Container .projectslist .companyProject_Container strong {
+  color: rgb(153, 153, 199);
 }
 
 /* PROJECTS ID */
 .projectlist_Container .projectslist .companyProject_Container .id {
   width: 250px;
+  border-radius: 5px;
+  padding: 0 5px;
+  background: #5f5f5f;
+  color: #ffffff;
 }
 
 /* PROJECTSLIST BUTTON CONTAINER */
@@ -553,6 +566,18 @@
   width: 98%;
 }
 
+/* SITE EMPLOYEE h4 */
+.projectdetails_Container
+  .newProject_Container
+  .projectDetails
+  .projectDetails_Group
+  .siteEmployees_Container
+  .siteEmployees_List
+  .siteEmployee
+  h4 {
+  width: 100%;
+}
+
 /* SITE EMPLOYEE POSITION AND DEPARTMENT */
 .projectdetails_Container
   .newProject_Container
@@ -565,7 +590,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 15vw;
+  width: 100%;
 }
 
 /* SITE EMPLOYEE POSITION */

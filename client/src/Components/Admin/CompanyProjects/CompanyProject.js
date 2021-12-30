@@ -307,13 +307,22 @@ const CompanyProject = () => {
 
         uploadedImage = uploadProjectImage.data.url;
       }
-      await axiosConfig.patch(
-        "CompanyProjects/updateProject/" + projectDetailsContainer._id,
-        {
-          ...projectDetailsContainer,
-          projectImage: uploadedImage && uploadedImage,
-        }
-      );
+      if (!uploadedImage) {
+        const { projectImage, ...newProjectDetailsContainer } =
+          projectDetailsContainer;
+        await axiosConfig.patch(
+          "CompanyProjects/updateProject/" + projectDetailsContainer._id,
+          { ...newProjectDetailsContainer }
+        );
+      } else {
+        await axiosConfig.patch(
+          "CompanyProjects/updateProject/" + projectDetailsContainer._id,
+          {
+            ...projectDetailsContainer,
+            projectImage: uploadedImage && uploadedImage,
+          }
+        );
+      }
       setSaveChangesLoading(false);
       window.location.reload();
     } catch (error) {
@@ -390,12 +399,12 @@ const CompanyProject = () => {
                 >
                   <section className="title">
                     <p>
-                      <strong>Title: </strong> {p.projectTitle}
+                      <strong>Title </strong> {p.projectTitle}
                     </p>
                   </section>
                   <section className="id">
                     <p>
-                      <strong>Id: </strong> {p.projectId}
+                      <strong>Id </strong> {p.projectId}
                     </p>
                   </section>
                 </section>
@@ -622,7 +631,7 @@ const CompanyProject = () => {
               </section>
             ) : (
               // ------------------------- PROJECT DETAILS -----------------
-              projectDetailsContainer.projectTitle && (
+              projectDetailsContainer.projectId && (
                 <section className="newProject_Container">
                   {/* HEADER */}
                   <section className="newProject_Header">
@@ -673,19 +682,13 @@ const CompanyProject = () => {
                         </section>
                         {/* BODY */}
                         {/* PROJECT ID */}
-                        <section
-                          className={
-                            !editProject
-                              ? "disableDetails_Container"
-                              : "details_Container"
-                          }
-                        >
+                        <section className="disableDetails_Container">
                           <h5>Project ID: </h5>
                           <input
                             type="text"
                             name="projectId"
                             value={projectDetailsContainer.projectId}
-                            onChange={handleEdit}
+                            readOnly
                           />
                         </section>
                         {/* PROJECT TITLE */}

@@ -24,6 +24,8 @@
   box-shadow: 0 10px 20px #afafaf;
   background: #ffffff;
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 /* EMPLOYEE IMAGE */
@@ -34,6 +36,7 @@
   border-radius: 50%;
   position: relative;
   overflow: hidden;
+  background: rgb(153, 153, 199);
 }
 
 /* -------------------------- EMPLOYEE NAME --------------------- */

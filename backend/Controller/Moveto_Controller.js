@@ -33,7 +33,7 @@ const moveToBlacklistController = async (req, res) => {
       height: employee.height,
       weight: employee.weight,
       guardian: employee.guardian,
-      date_hired: employee.date_hired,
+      datehired: employee.datehired,
       reason,
     });
 
@@ -85,7 +85,7 @@ const moveToTerminatedController = async (req, res) => {
       height: employee.height,
       weight: employee.weight,
       guardian: employee.guardian,
-      date_hired: employee.date_hired,
+      datehired: employee.datehired,
       reason,
     });
 
@@ -137,7 +137,7 @@ const moveToResignedController = async (req, res) => {
       height: employee.height,
       weight: employee.weight,
       guardian: employee.guardian,
-      date_hired: employee.date_hired,
+      datehired: employee.datehired,
       reason,
     });
 

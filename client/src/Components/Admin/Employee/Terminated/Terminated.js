@@ -101,17 +101,17 @@ const Terminated = () => {
                       {/* LASTNAME */}
                       <section className="terminatedList_details">
                         <h5>Lastname: </h5>
-                        {e.lastname}
+                        <p>{e.lastname}</p>
                       </section>
                       {/* FIRSTNAME */}
                       <section className="terminatedList_details">
                         <h5>Firstname: </h5>
-                        {e.firstname}
+                        <p>{e.firstname}</p>
                       </section>
                       {/* MIDDLE */}
                       <section className="terminatedList_details">
                         <h5>Middle: </h5>
-                        {e.middle}
+                        <p>{e.middle}</p>
                       </section>
                     </section>
                     {/* ----------------- SECOND GROUP ------------------ */}
@@ -119,17 +119,17 @@ const Terminated = () => {
                       {/* EMPLOYEE ID */}
                       <section className="terminatedList_details">
                         <h5>Employee id: </h5>
-                        {e.employee_id}
+                        <p>{e.employee_id}</p>
                       </section>
                       {/* PHONE */}
                       <section className="terminatedList_details">
                         <h5>Phone: </h5>
-                        {e.phone}
+                        <p>{e.phone}</p>
                       </section>
                       {/* CONTRACT */}
                       <section className="terminatedList_details">
                         <h5>Contract: </h5>
-                        {e.contract}
+                        <p>{e.contract}</p>
                       </section>
                     </section>
                     {/* ----------------- THIRD GROUP ------------------ */}
@@ -137,17 +137,17 @@ const Terminated = () => {
                       {/* BIRTHDAY */}
                       <section className="terminatedList_details">
                         <h5>Birthday: </h5>
-                        {e.birthday}
+                        <p>{e.birthday}</p>
                       </section>
                       {/* GENDER */}
                       <section className="terminatedList_details">
                         <h5>Gender: </h5>
-                        {e.gender}
+                        <p>{e.gender}</p>
                       </section>
                       {/* ADDRESS */}
                       <section className="terminatedList_details">
                         <h5>Address: </h5>
-                        {e.address}
+                        <p>{e.address}</p>
                       </section>
                     </section>
                     {/* ----------------- FOURTH GROUP ------------------ */}
@@ -155,17 +155,17 @@ const Terminated = () => {
                       {/* EMAIL */}
                       <section className="terminatedList_details">
                         <h5>Email: </h5>
-                        {e.email}
+                        <p>{e.email}</p>
                       </section>
                       {/* POSITION */}
                       <section className="terminatedList_details">
                         <h5>Position: </h5>
-                        {e.position}
+                        <p>{e.position}</p>
                       </section>
                       {/* CIVIL STATUS */}
                       <section className="terminatedList_details">
                         <h5>Civil status: </h5>
-                        {e.civil_status}
+                        <p>{e.civil_status}</p>
                       </section>
                     </section>
                     {/* ----------------- FIFTH GROUP ------------------ */}
@@ -173,17 +173,17 @@ const Terminated = () => {
                       {/* SPOUSE NAME */}
                       <section className="terminatedList_details">
                         <h5>Spouse name: </h5>
-                        {e.spouce_fullname}
+                        <p>{e.spouce_fullname}</p>
                       </section>
                       {/* SPOUSE BIRTHDAY */}
                       <section className="terminatedList_details">
                         <h5>Spouse birthday: </h5>
-                        {e.spouce_birthday}
+                        <p>{e.spouce_birthday}</p>
                       </section>
                       {/* SPOUSE CONTACT NUMBER */}
                       <section className="terminatedList_details">
                         <h5>Spouse contact number: </h5>
-                        {e.spouce_contact_number}
+                        <p>{e.spouce_contact_number}</p>
                       </section>
                     </section>
                     {/* ----------------- SIXTH GROUP ------------------ */}
@@ -191,17 +191,17 @@ const Terminated = () => {
                       {/* RELIGION */}
                       <section className="terminatedList_details">
                         <h5>Religion: </h5>
-                        {e.religion}
+                        <p>{e.religion}</p>
                       </section>
                       {/* BLOODTYPE */}
                       <section className="terminatedList_details">
                         <h5>Bloodtype: </h5>
-                        {e.bloodtype}
+                        <p>{e.bloodtype}</p>
                       </section>
                       {/* HEIGHT */}
                       <section className="terminatedList_details">
                         <h5>Height: </h5>
-                        {e.height}
+                        <p>{e.height}</p>
                       </section>
                     </section>
                     {/* ----------------- SEVENTH GROUP ------------------ */}
@@ -209,12 +209,12 @@ const Terminated = () => {
                       {/* WEIGHT */}
                       <section className="terminatedList_details">
                         <h5>Weight: </h5>
-                        {e.weight}
+                        <p>{e.weight}</p>
                       </section>
                       {/* GUARDIAN */}
                       <section className="terminatedList_details">
                         <h5>Guardian: </h5>
-                        {e.guardian}
+                        <p>{e.guardian}</p>
                       </section>
                     </section>
                     {/* ----------------- NINTH GROUP ------------------ */}
@@ -222,7 +222,7 @@ const Terminated = () => {
                       {/* DATE HIRED */}
                       <section className="terminatedList_details">
                         <h5>Date hired: </h5>
-                        {e.date_hired.substring(4, 14)}
+                        <p>{e.datehired}</p>
                       </section>
                     </section>
                   </section>
@@ -231,7 +231,9 @@ const Terminated = () => {
                     {/* HEADER */}
                     <h4>Reason</h4>
                     {/* REASON */}
-                    <section className="reason_Container">{e.reason}</section>
+                    <section className="reason_Container">
+                      <p>{e.reason}</p>
+                    </section>
                   </section>
                 </section>
               </section>

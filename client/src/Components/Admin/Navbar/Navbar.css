@@ -48,7 +48,7 @@
 
 /* ADMIN PROFILE LINK */
 .admin_Navbar .admin_Profile_Container .adminProfile {
-  border: white solid;
+  background: rgb(153, 153, 199);
   width: 100px;
   height: 100px;
   margin: auto;

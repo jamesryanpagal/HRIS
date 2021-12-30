@@ -162,7 +162,7 @@ const Employee = () => {
                       {/* TITLE */}
                       <section className="title">Date hired</section>
                       {/* DESCRIPTION */}
-                      <section className="description">{e.date_hired}</section>
+                      <section className="description">{e.datehired}</section>
                     </section>
                   </section>
                   {/* VIEW DETAILS BUTTON */}
@@ -223,7 +223,7 @@ const Employee = () => {
                       {/* TITLE */}
                       <section className="title">Date hired</section>
                       {/* DESCRIPTION */}
-                      <section className="description">{e.date_hired}</section>
+                      <section className="description">{e.datehired}</section>
                     </section>
                   </section>
                   {/* VIEW DETAILS BUTTON */}
