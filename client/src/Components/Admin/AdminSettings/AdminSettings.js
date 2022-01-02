@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+// redux actions
+import { removeUsertokenActions } from "../../../Redux/Redux_actions/actions";
 
 // images
 import adminlisticon from "../../../PublicImages/adminlist.png";
 import changeusernameicon from "../../../PublicImages/changeusername.png";
 import changepasswordicon from "../../../PublicImages/changepassword.png";
+import logouticon from "../../../PublicImages/logout.png";
 
 // components
 import AdminList from "./AdminList/AdminList";
@@ -24,6 +29,9 @@ const AdminSettings = () => {
 
   // toggle change password state
   const [changePassword, setChangePassword] = useState(false);
+
+  // dispatch
+  const dispatch = useDispatch();
 
   return (
     <div className="admin_Settings_Container">
@@ -61,6 +69,14 @@ const AdminSettings = () => {
         >
           <img src={changepasswordicon} alt="" />
           <h5>Change password</h5>
+        </section>
+        {/* SIGNOUT */}
+        <section
+          className="signout_Container"
+          onClick={() => dispatch(removeUsertokenActions())}
+        >
+          <img src={logouticon} alt="" />
+          <h5>Sign out</h5>
         </section>
       </section>
     </div>

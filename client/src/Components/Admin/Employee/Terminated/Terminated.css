@@ -89,6 +89,7 @@
   background: white;
   box-shadow: 0 0 5px #c9c9c9;
   border-radius: 10px;
+  z-index: 10;
 }
 
 /* terminated EMPLOYEE PERSONAL DETAILS HEADER */

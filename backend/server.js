@@ -21,6 +21,7 @@ const CompanyProjects = require("./Routes/CompanyProjects_Routes");
 const SchedulesRoutes = require("./Routes/Schedules_Routes");
 const AdminListRoutes = require("./Routes/AdminListRoutes");
 const UpdateAdminRoutes = require("./Routes/UpdateAdmin_Routes");
+const UploadEmployeesRoutes = require("./Routes/UploadEmployees_Routes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -50,6 +51,7 @@ app.use("/CompanyProjects", CompanyProjects);
 app.use("/Schedule", SchedulesRoutes);
 app.use("/AdminList", AdminListRoutes);
 app.use("/UpdateAdmin", UpdateAdminRoutes);
+app.use("/UploadEmployees", UploadEmployeesRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();

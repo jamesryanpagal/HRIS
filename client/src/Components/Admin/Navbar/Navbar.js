@@ -5,10 +5,7 @@ import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
 
 // REDUX ACTIONS
-import {
-  removeUsertokenActions,
-  adminDetailsActions,
-} from "../../../Redux/Redux_actions/actions";
+import { adminDetailsActions } from "../../../Redux/Redux_actions/actions";
 
 // Icons
 import applicantsIcon from "../../../PublicImages/applicantsIcon.png";
@@ -17,6 +14,7 @@ import departmentIcon from "../../../PublicImages/departmentIcon.png";
 import companyProjectsIcon from "../../../PublicImages/companyProjectsIcon.png";
 import scheduleIcon from "../../../PublicImages/scheduleIcon.png";
 import newadminIcon from "../../../PublicImages/newadminIcon.png";
+import uploadCurrentEmployeeIcon from "../../../PublicImages/uploadCurrentEmployee.png";
 
 //css
 import "./Navbar.css";
@@ -111,10 +109,7 @@ const Navbar = () => {
               activeClassName="active_Link"
             >
               <img src={companyProjectsIcon} alt="" />
-              <span>
-                Company <br />
-                Projects
-              </span>
+              <span>Projects</span>
             </NavLink>
           </li>
           <li>
@@ -131,6 +126,17 @@ const Navbar = () => {
           <li>
             <NavLink
               exact
+              to="/UploadCurrentEmployee"
+              className="link"
+              activeClassName="active_Link"
+            >
+              <img src={uploadCurrentEmployeeIcon} alt="" />
+              <span>Upload</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              exact
               to="/Newadmin"
               className="link"
               activeClassName="active_Link"
@@ -140,15 +146,6 @@ const Navbar = () => {
             </NavLink>
           </li>
         </ul>
-      </section>
-      {/* LOGOUT */}
-      <section className="admin_Signout">
-        <button
-          type="button"
-          onClick={() => dispatch(removeUsertokenActions())}
-        >
-          Sign out
-        </button>
       </section>
     </div>
   );

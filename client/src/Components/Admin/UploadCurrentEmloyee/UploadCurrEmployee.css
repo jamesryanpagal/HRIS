@@ -1,0 +1,174 @@
+.uploadEmployee_Container {
+  width: 100%;
+  background: #f6f6ff;
+}
+
+/* HEADER */
+.uploadEmployee_Container .uploadEmployee_Header {
+  height: 10vh;
+  color: rgb(153, 153, 199);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+}
+
+/* HEADER ADD BUTTON */
+.uploadEmployee_Container .uploadEmployee_Header button {
+  border: none;
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  background: rgb(170, 255, 170);
+  color: green;
+  letter-spacing: 1px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+
+/* EXCEL TABLE CONTAINER */
+.uploadEmployee_Container .employeeTable {
+  height: 90vh;
+  position: relative;
+  padding: 10px;
+}
+
+/* EXCEL TABLE CONTAINER RESMESSAGE */
+.uploadEmployee_Container .employeeTable .errResMessage {
+  border-radius: 5px;
+  box-shadow: 0 0 5px #c9c9c9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: red;
+  width: 30%;
+  z-index: 10;
+  background: #ffffff;
+  padding: 10px;
+}
+
+/* EXCEL TABLE CONTAINER RESMESSAGE icon */
+.uploadEmployee_Container .employeeTable .errResMessage i {
+  margin-right: 5px;
+}
+
+/* EXCEL TABLE CONTAINER RESMESSAGE BUTTON */
+.uploadEmployee_Container .employeeTable .errResMessage button {
+  border: none;
+  height: 35px;
+  width: 100%;
+  background: rgb(255, 170, 170);
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* SUCCESS RESMESSAGE */
+.uploadEmployee_Container .employeeTable .successResMessage {
+  border-radius: 5px;
+  box-shadow: 0 0 5px #c9c9c9;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: green;
+  width: 30%;
+  z-index: 10;
+  background: #ffffff;
+  padding: 10px;
+}
+
+/* EXCEL TABLE CONTAINER RESMESSAGE icon */
+.uploadEmployee_Container .employeeTable .successResMessage i {
+  margin-right: 5px;
+}
+
+/* EXCEL TABLE CONTAINER RESMESSAGE BUTTON */
+.uploadEmployee_Container .employeeTable .successResMessage button {
+  border: none;
+  height: 35px;
+  width: 100%;
+  background: rgb(170, 255, 170);
+  color: #ffffff;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* HEADER ERROR MESSAGE */
+.uploadEmployee_Container .employeeTable .errorMessage {
+  color: red;
+  text-align: center;
+}
+
+/* HEADER ERROR MESSAGE ICON */
+.uploadEmployee_Container .employeeTable .errorMessage i {
+  margin: 0 5px;
+}
+
+/* EXCEL TABLE */
+.uploadEmployee_Container .employeeTable .excel_Table {
+  height: 100%;
+  width: 82vw;
+  overflow: scroll;
+  margin: auto;
+  position: relative;
+}
+
+/* EXCEL label */
+.uploadEmployee_Container .employeeTable .excel_Table label {
+  cursor: pointer;
+  font-size: 20px;
+  color: rgb(131, 131, 241);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px 20px;
+  border-radius: 50px;
+  box-shadow: 0 0 5px #c9c9c9;
+}
+
+/* EXCEL label */
+.uploadEmployee_Container .employeeTable .excel_Table label:hover {
+  background: rgb(131, 131, 241);
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+/* EXCEL label icon */
+.uploadEmployee_Container .employeeTable .excel_Table label i {
+  margin-right: 10px;
+}
+
+/* HEADER input */
+.uploadEmployee_Container .employeeTable .excel_Table input {
+  display: none;
+}
+
+/* TABLE */
+.uploadEmployee_Container .employeeTable .excel_Table table {
+  width: 90vw;
+}
+
+/* TABLE HEAD th */
+.uploadEmployee_Container .employeeTable .excel_Table table thead h5 {
+  width: 200px;
+  background: #5f5f5f;
+  color: #ffffff;
+  padding: 5px 0;
+}
+
+/* TABLE BODY td */
+.uploadEmployee_Container .employeeTable .excel_Table table tbody td {
+  text-align: center;
+  height: 50px;
+  font-size: 12px;
+}

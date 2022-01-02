@@ -10,7 +10,7 @@
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 60%;
+  width: 75%;
   margin: auto;
 }
 
@@ -100,6 +100,36 @@
 
 /* OPTION ADMIN PASSWORD HOVER */
 .admin_Settings_Container .options_Container .change_Password_Container:hover {
+  background: #f0f0f0;
+  transition: 0.5s;
+}
+
+/* SIGNOUT */
+.admin_Settings_Container .options_Container .signout_Container {
+  border-radius: 50%;
+  box-shadow: 0 0 10px #afafaf;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* OPTION ADMIN PASSWORD h5 */
+.admin_Settings_Container .options_Container .signout_Container h5 {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  text-align: center;
+  color: #5f5f5f;
+}
+
+/* OPTION ADMIN PASSWORD HOVER */
+.admin_Settings_Container .options_Container .signout_Container:hover {
   background: #f0f0f0;
   transition: 0.5s;
 }

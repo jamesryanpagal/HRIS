@@ -216,9 +216,6 @@ const Resigned = () => {
                         <h5>Guardian: </h5>
                         <p>{e.guardian}</p>
                       </section>
-                    </section>
-                    {/* ----------------- NINTH GROUP ------------------ */}
-                    <section className="group_Details">
                       {/* DATE HIRED */}
                       <section className="resignedList_details">
                         <h5>Date hired: </h5>

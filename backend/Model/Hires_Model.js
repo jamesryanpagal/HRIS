@@ -8,6 +8,10 @@ const hiresSchema = new schema(
       required: true,
       unique: true,
     },
+    employee_id: {
+      type: String,
+      unique: true,
+    },
     lastname: {
       type: String,
       required: true,

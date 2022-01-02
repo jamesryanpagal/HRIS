@@ -12,6 +12,7 @@ import Department from "../Department/Department";
 import CompanyProject from "../CompanyProjects/CompanyProject";
 import Schedules from "../Schedules/Schedules";
 import NewAdmin from "../NewAdmin/NewAdmin";
+import UploadCurrEmployee from "../UploadCurrentEmloyee/UploadCurrEmployee";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 
 // redux actions
@@ -316,6 +317,7 @@ const Admin_Router = () => {
           <Route path="/Companyprojects" component={CompanyProject} />
           <Route path="/Schedules" component={Schedules} />
           <Route path="/Adminsettings/:id" component={AdminSettings} />
+          <Route path="/UploadCurrentEmployee" component={UploadCurrEmployee} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>
