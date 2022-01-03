@@ -131,9 +131,10 @@ const employeeList = async (req, res) => {
       try {
         await Employees.create({
           hiredId: e.applicant_id,
-          employee_id: e.employee_id
-            ? e.employee_id
-            : `${date.getFullYear()}${date.getMonth() + 1}${index + 1}`,
+          employee_id:
+            e.employee_id !== "N/A"
+              ? e.employee_id
+              : `${date.getFullYear()}${date.getMonth() + 1}${index + 1}`,
           employee_image: "N/A",
           lastname: e.lastname,
           firstname: e.firstname,

@@ -375,6 +375,7 @@ const hiredApplicant = async (req, res) => {
     // move to hired
     await Hires.create({
       applicant_id: _id,
+      employee_id: "N/A",
       assignedBy,
       lastname,
       firstname,
