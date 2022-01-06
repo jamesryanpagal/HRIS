@@ -46,24 +46,22 @@ const Employee = () => {
   useEffect(() => {
     const getEmployeeList = async () => {
       // Employees container
-      // let employeesArr = [];
+      let employeesArr = [];
 
       // get employees from Employees database table
       const employees = await axiosConfig.get("Employee/employeeList");
 
-      console.log(employees.data);
+      // insert employees to employeesArr
+      employeesArr = [...employeesArr, ...employees.data];
 
-      // // insert employees to employeesArr
-      // employeesArr = [...employeesArr, ...employees.data];
+      // if employeeArr has no data
+      if (employeesArr.length === 0) {
+        dispatch(employeesActions("no data", employeesArr));
+        return;
+      }
 
-      // // if employeeArr has no data
-      // if (employeesArr.length === 0) {
-      //   dispatch(employeesActions("no data", employeesArr));
-      //   return;
-      // }
-
-      // // if employeeArr has a data
-      // employeesArr.map((e) => dispatch(employeesActions(e, employeesArr)));
+      // if employeeArr has a data
+      employeesArr.map((e) => dispatch(employeesActions(e, employeesArr)));
     };
 
     getEmployeeList();

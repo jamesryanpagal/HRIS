@@ -155,7 +155,9 @@ const employeeList = async (req, res) => {
           height: e.height,
           weight: e.weight,
           guardian: e.guardian,
-          datehired: `${monthName} ${date.getDate()}, ${date.getFullYear()}`,
+          datehired: `${monthName} ${
+            date.getDate() + 1
+          }, ${date.getFullYear()}`,
           sssno: e.sssno,
           tin: e.tin,
           pagibig: e.pagibig,
@@ -173,7 +175,7 @@ const employeeList = async (req, res) => {
 
     // get Employee list
     const getEmployeeList = await Employees.find();
-    res.json(`${monthName} ${date.getDate()}, ${date.getFullYear()}`);
+    res.json(getEmployeeList);
   } catch (error) {
     res.json(error.message);
   }
