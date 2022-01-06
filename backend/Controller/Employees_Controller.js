@@ -173,7 +173,7 @@ const employeeList = async (req, res) => {
 
     // get Employee list
     const getEmployeeList = await Employees.find();
-    res.json(getEmployeeList);
+    res.json(`${monthName} ${date.getDate()}, ${date.getFullYear()}`);
   } catch (error) {
     res.json(error.message);
   }
