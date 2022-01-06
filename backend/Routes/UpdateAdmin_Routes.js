@@ -3,6 +3,7 @@ const router = require("express").Router();
 // Middleware
 const {
   updatePasswordMiddleware,
+  updateUsernameMiddleware,
 } = require("../Middleware/UpdateAdmin_Middleware");
 
 // Controller
@@ -13,7 +14,7 @@ const {
 } = require("../Controller/UpdateAdmin_Controller");
 
 // update username
-router.route("/:id").patch(updateUsername);
+router.route("/:id").patch(updateUsernameMiddleware, updateUsername);
 
 // update password
 router

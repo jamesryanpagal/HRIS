@@ -156,9 +156,6 @@ const ApplicantsForm = () => {
       position,
       civil_status,
       religion,
-      bloodtype,
-      height,
-      weight,
       guardian,
     } = applicantDetails;
 
@@ -176,9 +173,6 @@ const ApplicantsForm = () => {
       !position ||
       !civil_status ||
       !religion ||
-      !bloodtype ||
-      !height ||
-      !weight ||
       !guardian
     ) {
       setResMessage(
@@ -960,7 +954,7 @@ const ApplicantsForm = () => {
               {/* BLOODTYPE */}
               <section className="applicants_Form_Inputs">
                 <label className="label" htmlFor="app_Bloodtype">
-                  Bloodtype
+                  Bloodtype <span>(optional)</span>
                 </label>
                 <input
                   type="text"
@@ -975,7 +969,7 @@ const ApplicantsForm = () => {
               {/* HEIGHT */}
               <section className="applicants_Form_Inputs">
                 <label className="label" htmlFor="app_Height">
-                  Height
+                  Height <span>(optional)</span>
                 </label>
                 <input
                   type="text"
@@ -994,7 +988,7 @@ const ApplicantsForm = () => {
               {/* WEIGHT */}
               <section className="applicants_Form_Inputs">
                 <label className="label" htmlFor="app_Weight">
-                  Weight
+                  Weight <span>(optional)</span>
                 </label>
                 <input
                   type="text"

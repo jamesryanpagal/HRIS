@@ -47,6 +47,11 @@ const EmployeeListModal = ({ setEmployeeListModal, employees }) => {
       e.firstname.toLowerCase().includes(value.toLowerCase())
     );
 
+    // filter by id
+    const filteredById = employeesContainer.filter((e) =>
+      e.employee_id.toLowerCase().includes(value.toLowerCase())
+    );
+
     if (value.length === 0) {
       setEmployeesContainer([...employees]);
       return;
@@ -59,6 +64,11 @@ const EmployeeListModal = ({ setEmployeeListModal, employees }) => {
 
     if (filteredByFirstname.length > 0) {
       setEmployeesContainer([...filteredByFirstname]);
+      return;
+    }
+
+    if (filteredById.length > 0) {
+      setEmployeesContainer([...filteredById]);
       return;
     }
 

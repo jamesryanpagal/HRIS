@@ -13,6 +13,9 @@ const ChangeUsername = ({ closeModal }) => {
   // loading state
   const [loading, setLoading] = useState(false);
 
+  // error message
+  const [errorMessage, setErrorMessage] = useState("");
+
   // selector
   const { adminId } = useSelector((state) => state.GS_Admin);
 
@@ -20,12 +23,20 @@ const ChangeUsername = ({ closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      await axiosConfig.patch(`UpdateAdmin/${adminId}`, {
-        Username: username,
-      });
-      window.location.reload();
-      setLoading(false);
+      if (username.length !== 0) {
+        setLoading(true);
+        const { data } = await axiosConfig.patch(`UpdateAdmin/${adminId}`, {
+          Username: username,
+        });
+        if (data.isError) {
+          setErrorMessage(data.errorMessage);
+          setLoading(false);
+          return;
+        }
+        console.log(data);
+        setLoading(false);
+        window.location.reload();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -37,6 +48,12 @@ const ChangeUsername = ({ closeModal }) => {
       <form onSubmit={handleSubmit}>
         {/* HEADER */}
         <h2>Change username</h2>
+        {errorMessage && (
+          <section className="errorMessage">
+            <i className="fas fa-exclamation-triangle"></i>
+            {errorMessage}
+          </section>
+        )}
         {/* INPUTS */}
         <input
           type="text"
@@ -55,7 +72,7 @@ const ChangeUsername = ({ closeModal }) => {
             {loading ? <Spinner /> : "Save"}
           </button>
           <button
-            type="button"
+            type="submit"
             className="back"
             onClick={() => closeModal(false)}
           >

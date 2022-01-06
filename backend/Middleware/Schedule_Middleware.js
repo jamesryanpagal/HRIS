@@ -21,8 +21,8 @@ const editScheduleMiddleware = async (req, res, next) => {
   const error = { isError: true, errorMessage: "" };
   try {
     const getSched = await Schedule.findOne({ title });
-    if (!getSched) {
-      error.errorMessage = "Event not found!";
+    if (getSched) {
+      error.errorMessage = "Title already used!";
       res.json(error);
       return;
     }

@@ -11,7 +11,7 @@ import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
 // components
 import AddNewEvent from "./AddNewEvent/AddNewEvent";
-import EditEvent from "./EditEvent/EditEvent";
+import Schedulelist from "./ScheduleList/Schedulelist";
 
 // css
 import "./Schedules.css";
@@ -78,7 +78,9 @@ const Schedules = () => {
       {/* ADD NEW EVENT CONTAINER */}
       {toggleNewEvent && <AddNewEvent setToggleNewEvent={setToggleNewEvent} />}
       {/* EDIT EVENT CONTAINER */}
-      {toggleEditEvent && <EditEvent setToggleEditEvent={setToggleEditEvent} />}
+      {toggleEditEvent && (
+        <Schedulelist setToggleEditEvent={setToggleEditEvent} />
+      )}
       <Calendar
         localizer={localizer}
         events={allEvents}

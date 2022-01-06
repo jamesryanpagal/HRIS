@@ -17,7 +17,7 @@ const {
 routes.route("/").post(createScheduleMiddleware, createSchedule);
 
 // Edit schedule
-routes.route("/editSchedule").post(editScheduleMiddleware, editSchedule);
+routes.route("/editSchedule/:id").post(editScheduleMiddleware, editSchedule);
 
 // Get all schedules
 routes.route("/getAllSchedules").get(getSchedule);

@@ -32,4 +32,31 @@ const updatePasswordMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = { updatePasswordMiddleware };
+// update username middleware
+const updateUsernameMiddleware = async (req, res, next) => {
+  const { Username } = req.body;
+  const error = { isError: true, errorMessage: "" };
+  try {
+    // check username if it has number
+    const regexForUsername = /[0-9]/g;
+    if (regexForUsername.test(Username)) {
+      error.errorMessage = "Invalid username";
+      res.json(error);
+      return;
+    }
+
+    // check if username already existed
+    const checkUsername = await GS_Users.findOne({ Username });
+    if (checkUsername) {
+      error.errorMessage = "Username already been taken";
+      res.json(error);
+      return;
+    }
+
+    next();
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
+module.exports = { updatePasswordMiddleware, updateUsernameMiddleware };

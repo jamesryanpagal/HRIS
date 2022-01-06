@@ -84,6 +84,30 @@ const hiresSchema = new schema(
       type: String,
       required: true,
     },
+    sssno: {
+      type: String,
+      required: true,
+    },
+    tin: {
+      type: String,
+      required: true,
+    },
+    pagibig: {
+      type: String,
+      required: true,
+    },
+    philhealth: {
+      type: String,
+      required: true,
+    },
+    biometricIdno: {
+      type: String,
+      required: true,
+    },
+    infotrackIdno: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

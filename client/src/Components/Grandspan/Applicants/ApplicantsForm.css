@@ -239,6 +239,16 @@
   transition: 0.3s;
 }
 
+/* OPTIONAL TEXT */
+.applicants_Form_Container
+  .applicants_Form_Inputs_Container
+  .applicants_Form_Input_Group
+  .applicants_Form_Inputs
+  .label
+  span {
+  font-size: 10px;
+}
+
 .applicants_Form_Container
   .applicants_Form_Inputs_Container
   .applicants_Form_Input_Group

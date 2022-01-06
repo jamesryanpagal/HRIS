@@ -34,6 +34,7 @@ const Header = ({
             <input
               type="text"
               name="search"
+              placeholder="Name or id"
               onChange={(e) => setSearchedValue(e.target.value)}
             />
             {/* SEARCHED RESULT */}
@@ -44,20 +45,24 @@ const Header = ({
                   No matching results!
                 </section>
               ) : // SEACHED VALUE HAS NO MATCHED
-              searchSource.filter((e) =>
-                  e.lastname.toLowerCase().includes(searchedValue.toLowerCase())
-                ).length < 1 ? (
+              searchSource.filter((e) => {
+                  const details = `${e.lastname} ${e.firstname} ${e.employee_id}`;
+                  return details
+                    .toLowerCase()
+                    .includes(searchedValue.toLowerCase());
+                }).length < 1 ? (
                 <section className="no_Matching_Results">
                   No matching results!
                 </section>
               ) : (
                 // SEARCHED VALUE HAS A MATCH
                 searchSource
-                  .filter((e) =>
-                    e.lastname
+                  .filter((e) => {
+                    const details = `${e.lastname} ${e.firstname} ${e.employee_id}`;
+                    return details
                       .toLowerCase()
-                      .includes(searchedValue.toLowerCase())
-                  )
+                      .includes(searchedValue.toLowerCase());
+                  })
                   .map((e) => {
                     return (
                       <section

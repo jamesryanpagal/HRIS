@@ -250,6 +250,41 @@ const CompanyProject = () => {
         return;
       }
     }
+
+    const startDateArr = projectDetails.projectStartDate.split("-");
+    const endDateArr = projectDetails.projectEndDate.split("-");
+
+    if (
+      startDateArr[0] === endDateArr[0] &&
+      startDateArr[1] === endDateArr[1]
+    ) {
+      if (startDateArr[2] > endDateArr[2]) {
+        setProjectDetailsMessage("Invalid date");
+        setTimeout(() => {
+          setProjectDetailsMessage("");
+        }, 5000);
+        return;
+      }
+    }
+
+    if (startDateArr[0] > endDateArr[0]) {
+      setProjectDetailsMessage("Invalid date");
+      setTimeout(() => {
+        setProjectDetailsMessage("");
+      }, 5000);
+      return;
+    }
+
+    if (startDateArr[0] === endDateArr[0]) {
+      if (startDateArr[1] > endDateArr[1]) {
+        setProjectDetailsMessage("Invalid date");
+        setTimeout(() => {
+          setProjectDetailsMessage("");
+        }, 5000);
+        return;
+      }
+    }
+
     setProjectConfirmation(true);
   };
 
@@ -296,6 +331,44 @@ const CompanyProject = () => {
     try {
       let uploadedImage = "";
       setSaveChangesLoading(true);
+
+      const startDateArr = projectDetailsContainer.projectStartDate.split("-");
+      const endDateArr = projectDetailsContainer.projectEndDate.split("-");
+
+      if (
+        startDateArr[0] === endDateArr[0] &&
+        startDateArr[1] === endDateArr[1]
+      ) {
+        if (startDateArr[2] > endDateArr[2]) {
+          setProjectDetailsMessage("Invalid date");
+          setTimeout(() => {
+            setProjectDetailsMessage("");
+          }, 5000);
+          setSaveChangesLoading(false);
+          return;
+        }
+      }
+
+      if (startDateArr[0] > endDateArr[0]) {
+        setProjectDetailsMessage("Invalid date");
+        setTimeout(() => {
+          setProjectDetailsMessage("");
+        }, 5000);
+        setSaveChangesLoading(false);
+        return;
+      }
+
+      if (startDateArr[0] === endDateArr[0]) {
+        if (startDateArr[1] > endDateArr[1]) {
+          setProjectDetailsMessage("Invalid date");
+          setTimeout(() => {
+            setProjectDetailsMessage("");
+          }, 5000);
+          setSaveChangesLoading(false);
+          return;
+        }
+      }
+
       if (projectDetailsContainer.projectImage.name) {
         const formData = new FormData();
         formData.append("file", projectDetailsContainer.projectImage);
@@ -449,6 +522,7 @@ const CompanyProject = () => {
                       type="file"
                       name="projectImage"
                       id="projectImage"
+                      accept="image/png, image/jpg, image/jpeg"
                       onChange={handleUpdateCompanyProjectImage}
                     />
                   </label>
@@ -669,6 +743,7 @@ const CompanyProject = () => {
                               type="file"
                               name="projectImage"
                               id="projectImage"
+                              accept="image/png, image/jpg, image/jpeg"
                               onChange={handleEditCompanyProjectImage}
                             />
                           </label>

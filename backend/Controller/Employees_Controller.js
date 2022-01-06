@@ -156,12 +156,12 @@ const employeeList = async (req, res) => {
           weight: e.weight,
           guardian: e.guardian,
           datehired: `${monthName} ${date.getDate()}, ${date.getFullYear()}`,
-          sssno: "N/A",
-          tin: "N/A",
-          pagibig: "N/A",
-          philhealth: "N/A",
-          biometricIdno: "N/A",
-          infotrackIdno: "N/A",
+          sssno: e.sssno,
+          tin: e.tin,
+          pagibig: e.pagibig,
+          philhealth: e.philhealth,
+          biometricIdno: e.biometricIdno,
+          infotrackIdno: e.infotrackIdno,
         });
       } catch (error) {
         if (error.message.includes("duplicate")) {

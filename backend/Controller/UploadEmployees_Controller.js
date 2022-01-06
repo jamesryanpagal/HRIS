@@ -74,6 +74,12 @@ const uploadEmployeesController = async (req, res) => {
         height: e.Height,
         weight: e.Weight,
         guardian: e.Guardian,
+        sssno: e.SSS_no,
+        tin: e.Tin,
+        pagibig: e.Pagibig,
+        philhealth: e.Philhealth,
+        biometricIdno: e.Biometric_id_no,
+        infotrackIdno: e.Infotrack_id_no,
       });
     } catch (error) {
       res.json(error.message);

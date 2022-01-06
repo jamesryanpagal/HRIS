@@ -395,6 +395,12 @@ const hiredApplicant = async (req, res) => {
       height,
       weight,
       guardian,
+      sssno: "N/A",
+      tin: "N/A",
+      pagibig: "N/A",
+      philhealth: "N/A",
+      biometricIdno: "N/A",
+      infotrackIdno: "N/A",
     });
     // remove applicant from interview
     const removeApplicant = await Interview.findByIdAndDelete(applicantId);

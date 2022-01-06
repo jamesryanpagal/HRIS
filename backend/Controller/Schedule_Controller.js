@@ -18,17 +18,23 @@ const createSchedule = async (req, res) => {
 
 // Edit Schedule
 const editSchedule = async (req, res) => {
-  const { title, newTitle, startTime, endTime, startDate } = req.body;
+  const { title, startTime, endTime, startDate } = req.body;
+  const id = req.params.id;
   try {
     const option = { new: true };
 
-    const getEvent = await Schedule.findOne({ title });
+    const event = await Schedule.findById(id);
+
     const update = await Schedule.findByIdAndUpdate(
-      getEvent._id,
+      id,
       {
-        title: newTitle,
-        start: `${startDate} ${startTime}`,
-        end: `${startDate} ${endTime}`,
+        title: !title ? event.title : title,
+        start: `${!startDate ? event.start.substring(0, 10) : startDate} ${
+          !startTime ? event.start.substring(11) : startTime
+        }`,
+        end: `${!startDate ? event.end.substring(0, 10) : startDate} ${
+          !endTime ? event.end.substring(11) : endTime
+        }`,
       },
       option
     );

@@ -120,8 +120,8 @@ io.on("connection", (socket) => {
         : spouce_contact_number,
       religion,
       bloodtype: !bloodtype ? "N/A" : bloodtype,
-      height,
-      weight,
+      height: !height ? "N/A" : height,
+      weight: !weight ? "N/A" : weight,
       guardian,
     });
     io.emit("getApplicants", newApplicants);

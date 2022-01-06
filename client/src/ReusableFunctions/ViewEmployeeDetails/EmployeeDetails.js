@@ -1084,6 +1084,24 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       <i className="fas fa-pen"></i>
                     </section>
                   </section>
+                  {/* PAGIBIG INPUT GROUP */}
+                  <section className="input_Group">
+                    <h6>Pagibig</h6>
+                    <input
+                      className="input"
+                      type="text"
+                      name="pagibig"
+                      onChange={handleChangeEmployeeDetails}
+                      disabled={true}
+                      value={employeeDetails.pagibig}
+                    />
+                    <section
+                      className="edit_Icon_Container"
+                      onClick={handleEditDetails}
+                    >
+                      <i className="fas fa-pen"></i>
+                    </section>
+                  </section>
                   {/* PHILHEALTH INPUT GROUP */}
                   <section className="input_Group">
                     <h6>Philhealth</h6>

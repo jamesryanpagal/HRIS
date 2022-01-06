@@ -5,12 +5,11 @@ import Spinner from "../../../../Spinner/Spinner";
 // css
 import "./EditEvent.css";
 
-const EditEvent = ({ setToggleEditEvent }) => {
+const EditEvent = ({ id, close }) => {
   // ------------------- STATE ------------------
   // event details state
   const [eventDetails, setEventDetails] = useState({
     title: "",
-    newTitle: "",
     startTime: "",
     endTime: "",
     startDate: "",
@@ -33,17 +32,10 @@ const EditEvent = ({ setToggleEditEvent }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { title, startTime, endTime, startDate } = eventDetails;
-
-    if (!title || !startTime || !endTime || !startDate) {
-      setErrorMessage("Please fill out all the input fields");
-      return;
-    }
-
     try {
       setLoading(true);
       const { data } = await axiosConfig.post(
-        "Schedule/editSchedule",
+        "Schedule/editSchedule/" + id,
         eventDetails
       );
       if (data.isError) {
@@ -76,16 +68,6 @@ const EditEvent = ({ setToggleEditEvent }) => {
               type="text"
               id="title"
               name="title"
-              onChange={handleChange}
-            />
-          </section>
-          {/* NEW TITLE */}
-          <section className="input_Container">
-            <label htmlFor="newTitle">New Title</label>
-            <input
-              type="text"
-              id="newTitle"
-              name="newTitle"
               onChange={handleChange}
             />
           </section>
@@ -131,11 +113,7 @@ const EditEvent = ({ setToggleEditEvent }) => {
             <button type="submit" className="add">
               {loading ? <Spinner /> : "Add"}
             </button>
-            <button
-              type="button"
-              className="back"
-              onClick={() => setToggleEditEvent(false)}
-            >
+            <button type="button" className="back" onClick={() => close("")}>
               Back
             </button>
           </section>
