@@ -155,9 +155,10 @@ const employeeList = async (req, res) => {
           height: e.height,
           weight: e.weight,
           guardian: e.guardian,
-          datehired: `${monthName} ${
-            date.getDate() + 1
-          }, ${date.getFullYear()}`,
+          datehired:
+            e.datehired === "N/A"
+              ? `${monthName} ${date.getDate() + 1}, ${date.getFullYear()}`
+              : e.datehired,
           sssno: e.sssno,
           tin: e.tin,
           pagibig: e.pagibig,

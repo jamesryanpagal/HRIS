@@ -72,7 +72,7 @@ const ChangeUsername = ({ closeModal }) => {
             {loading ? <Spinner /> : "Save"}
           </button>
           <button
-            type="submit"
+            type="button"
             className="back"
             onClick={() => closeModal(false)}
           >

@@ -74,6 +74,7 @@ const uploadEmployeesController = async (req, res) => {
         height: e.Height,
         weight: e.Weight,
         guardian: e.Guardian,
+        datehired: e.Date_hired,
         sssno: e.SSS_no,
         tin: e.Tin,
         pagibig: e.Pagibig,

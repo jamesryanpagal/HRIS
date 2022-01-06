@@ -395,6 +395,7 @@ const hiredApplicant = async (req, res) => {
       height,
       weight,
       guardian,
+      datehired: "N/A",
       sssno: "N/A",
       tin: "N/A",
       pagibig: "N/A",

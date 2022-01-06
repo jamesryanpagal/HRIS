@@ -84,6 +84,10 @@ const hiresSchema = new schema(
       type: String,
       required: true,
     },
+    datehired: {
+      type: String,
+      required: true,
+    },
     sssno: {
       type: String,
       required: true,
