@@ -305,6 +305,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
               <input
                 type="file"
                 id="update_Image"
+                accept="image/png, image/jpg, image/jpeg"
                 onChange={handleUpadteProfileImage}
               />
             </section>

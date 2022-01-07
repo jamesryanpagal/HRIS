@@ -1,6 +1,7 @@
 // ------------------------------ MODEL --------------------------------
 const GS_Users = require("../Model/Users_Model");
 const Employees = require("../Model/Employees_Model");
+const NewUsers = require("../Model/NewUsers_Model");
 
 const newUsers_Middleware = async (req, res, next) => {
   const { Employee_number, Username, Password, ConfirmPassword } = req.body;
@@ -40,6 +41,16 @@ const newUsers_Middleware = async (req, res, next) => {
     });
     if (!empNumExist) {
       error.errorMessage = "Employee number not found!";
+      res.json(error);
+      return;
+    }
+
+    // throws error if emp num already exist in new users
+    const newUserExist = await NewUsers.findOne({
+      employee_id: Employee_number,
+    });
+    if (newUserExist) {
+      error.errorMessage = "Account already created!";
       res.json(error);
       return;
     }
