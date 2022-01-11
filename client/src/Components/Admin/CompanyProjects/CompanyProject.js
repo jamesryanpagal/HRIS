@@ -32,6 +32,8 @@ const CompanyProject = () => {
     siteEmployees,
   } = useSelector((state) => state.CompanyProjects);
 
+  const { admin, adminEmpNum } = useSelector((state) => state.GS_Admin);
+
   // DISPATCH
   const dispatch = useDispatch();
 
@@ -328,6 +330,7 @@ const CompanyProject = () => {
 
   // handleSaveChanges
   const handleSaveChanges = async () => {
+    const date = new Date();
     try {
       let uploadedImage = "";
       setSaveChangesLoading(true);
@@ -396,6 +399,20 @@ const CompanyProject = () => {
           }
         );
       }
+
+      // for audit trail
+      const audittrails = {
+        actions: "Project edited",
+        subject: projectDetailsContainer.projectTitle,
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+
+      await axiosConfig.post("Audittrail", { audittrails });
       setSaveChangesLoading(false);
       window.location.reload();
     } catch (error) {

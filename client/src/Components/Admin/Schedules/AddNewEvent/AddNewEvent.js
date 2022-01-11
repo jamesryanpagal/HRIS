@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import axiosConfig from "../../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import Spinner from "../../../../Spinner/Spinner";
 
@@ -21,6 +22,9 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
   // error message
   const [errorMessage, setErrorMessage] = useState("");
 
+  // selector
+  const { admin, adminEmpNum } = useSelector((state) => state.GS_Admin);
+
   // handleChange
   const handleChange = (e) => {
     const name = e.target.name;
@@ -31,6 +35,8 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
   // handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const date = new Date();
 
     const { title, startTime, endTime, startDate } = eventDetails;
 
@@ -47,6 +53,20 @@ const AddNewEvent = ({ setToggleNewEvent }) => {
         setLoading(false);
         return;
       }
+
+      // for audit trail
+      const audittrails = {
+        actions: "Event created",
+        subject: eventDetails.title,
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+      await axiosConfig.post("Audittrail", { audittrails });
+
       setLoading(false);
       window.location.reload();
     } catch (error) {

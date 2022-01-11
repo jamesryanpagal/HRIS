@@ -44,6 +44,17 @@ const editSchedule = async (req, res) => {
   }
 };
 
+// Get Schedule
+const getSched = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const sched = await Schedule.findById(id);
+    res.json(sched);
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
 // Get All Schedule
 const getSchedule = async (req, res) => {
   try {
@@ -54,4 +65,4 @@ const getSchedule = async (req, res) => {
   }
 };
 
-module.exports = { createSchedule, getSchedule, editSchedule };
+module.exports = { createSchedule, getSchedule, editSchedule, getSched };

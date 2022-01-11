@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import axiosConfig from "../../AxiosConfig/AxiosConfig";
 import Spinner from "../../../Spinner/Spinner";
 
@@ -10,16 +11,35 @@ const Reject = ({
   rejectApi,
   socket,
   rejectSocket,
+  current,
+  applicantName,
   loading,
   setLoading,
   setIsRemove,
   setConfirmReject,
 }) => {
+  // selector
+  const { admin, adminEmpNum } = useSelector((state) => state.GS_Admin);
+
   // reject applicant
   const handleRejectApplicant = async () => {
+    // for audit trail
+    const date = new Date();
+    const audittrails = {
+      actions: `Rejected from ${current}`,
+      subject: applicantName,
+      admin,
+      adminId: adminEmpNum,
+      date: `${date.toLocaleString("default", {
+        month: "short",
+      })} ${date.getDate()}, ${date.getFullYear()}`,
+      time: date.toLocaleTimeString(),
+    };
+
     try {
       setLoading(true);
       await axiosConfig.post(rejectApi);
+      await axiosConfig.post("Audittrail", { audittrails });
       socket.emit(rejectSocket, applicantId);
       setIsRemove(true);
     } catch (error) {

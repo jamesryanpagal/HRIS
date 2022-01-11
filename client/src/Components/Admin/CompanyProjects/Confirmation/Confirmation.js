@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axiosConfig from "../../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import Spinner from "../../../../Spinner/Spinner";
 
@@ -21,9 +21,13 @@ const Confirmation = ({
   // dispatch
   const dispatch = useDispatch();
 
+  // selector
+  const { admin, adminEmpNum } = useSelector((state) => state.GS_Admin);
+
   // SAVE PROJECT
   const handleSaveProject = async () => {
     let uploadedImage = "";
+    const date = new Date();
     try {
       setLoading(true);
       if (projectDetails.projectImage.name) {
@@ -42,6 +46,21 @@ const Confirmation = ({
         ...projectDetails,
         projectImage: uploadedImage && uploadedImage,
       });
+
+      // for audit trail
+      const audittrails = {
+        actions: "Project created",
+        subject: projectDetails.projectTitle,
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+
+      await axiosConfig.post("Audittrail", { audittrails });
+
       setProjectCreated(true);
       setLoading(false);
       dispatch(clearCompanyProjects());

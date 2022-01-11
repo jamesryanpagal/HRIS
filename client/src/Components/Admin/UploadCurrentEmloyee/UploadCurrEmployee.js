@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import Spinner from "../../../Spinner/Spinner";
@@ -23,6 +24,9 @@ const UploadCurrEmployee = () => {
 
   // loading state
   const [loading, setLoading] = useState(false);
+
+  // selector
+  const { admin, adminEmpNum } = useSelector((state) => state.GS_Admin);
 
   // get excel data
   useEffect(() => {
@@ -58,6 +62,7 @@ const UploadCurrEmployee = () => {
 
   // save
   const handleSave = async () => {
+    const date = new Date();
     try {
       setLoading(true);
       const { data } = await axiosConfig.post("UploadEmployees", {
@@ -68,6 +73,21 @@ const UploadCurrEmployee = () => {
         setLoading(false);
         return;
       }
+
+      // for audit trail
+      const audittrails = {
+        actions: "Excel uploaded",
+        subject: "Excel",
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+
+      await axiosConfig.post("Audittrail", { audittrails });
+
       setResMessage(data);
       setLoading(false);
     } catch (error) {

@@ -74,10 +74,9 @@ const ConfirmbyPassword = ({
 
       // for syncing admin
       if (syncDetails) {
-        const { data } = await axiosConfig.post("SyncAdmin", {
+        await axiosConfig.post("SyncAdmin", {
           id: syncDetails,
         });
-        console.log(data);
         setLoading(false);
         window.location.reload();
         return;

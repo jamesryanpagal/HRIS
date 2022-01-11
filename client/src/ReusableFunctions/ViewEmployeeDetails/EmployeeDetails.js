@@ -77,7 +77,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
 
   // SELECTOR
   const { employees } = useSelector((state) => state.Employee);
-  const { adminEmpNum } = useSelector((state) => state.GS_Admin);
+  const { adminEmpNum, admin } = useSelector((state) => state.GS_Admin);
 
   // dispatch
   const dispatch = useDispatch();
@@ -161,6 +161,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
   // handle save changes
   const handleSaveChanges = async () => {
     let updateImage = "";
+    const date = new Date();
     try {
       setLoading(true);
       // upload to cloudinary
@@ -185,6 +186,18 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
             : employeeDetails.employee_image,
         },
       });
+      // for audit trail
+      const audittrails = {
+        actions: "Updated",
+        subject: `${employeeDetails.lastname} ${employeeDetails.firstname} ${employeeDetails.middle}`,
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+      await axiosConfig.post("Audittrail", { audittrails });
       setLoading(false);
       setUnSaveTotal(0);
       dispatch(updatingActions());

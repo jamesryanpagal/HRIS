@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import axiosConfig from "../../AxiosConfig/AxiosConfig";
 import io from "socket.io-client";
 
@@ -26,8 +27,12 @@ const Moveto = ({ setMoveto, destination, movetoDetails }) => {
   // employee moved
   const [isMoved, setIsMoved] = useState(false);
 
+  // selector
+  const { adminEmpNum, admin } = useSelector((state) => state.GS_Admin);
+
   // handle move to
   const handleMoveTo = async () => {
+    const date = new Date();
     try {
       setLoading(true);
       await axiosConfig.post(`/MoveTo/${destination}`, movingDetails);
@@ -37,6 +42,18 @@ const Moveto = ({ setMoveto, destination, movetoDetails }) => {
       if (data === "logout") {
         socket.emit("disableAdmin", movingDetails.employee_id);
       }
+      // for audit trail
+      const audittrails = {
+        actions: `Moved to ${destination}`,
+        subject: movetoDetails.name,
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+      await axiosConfig.post("Audittrail", { audittrails });
       setLoading(false);
       setIsMoved(true);
     } catch (error) {
