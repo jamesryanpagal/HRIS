@@ -9,8 +9,15 @@ const GSusers_Login_Middleware = async (req, res, next) => {
 
     // ---------------------------- FIND USER -----------------------------
     const findUser = await GS_Users.findOne({ Employee_number });
+
     if (!findUser) {
       error.errorMessage = "Incorrect Employee number or Password";
+      res.json(error);
+      return;
+    }
+
+    if (findUser.IsDisabled) {
+      error.errorMessage = "Your account has been disabled";
       res.json(error);
       return;
     }

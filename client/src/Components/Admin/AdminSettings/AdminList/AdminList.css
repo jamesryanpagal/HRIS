@@ -35,10 +35,11 @@
 
 /* ADMIN LIST */
 .adminList_Container .adminList {
-  height: 88%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 89%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-around;
+  align-items: flex-start;
   overflow-y: scroll;
 }
 
@@ -46,34 +47,112 @@
 .adminList_Container .adminList .loading_Adminlist {
   height: 50px;
   width: 50px;
-  position: relative;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* ADMIN */
 .adminList_Container .adminList .admin {
   background: #ffffff;
-  width: 30%;
-  border-radius: 50px;
-  padding: 5px 20px;
-  height: 50px;
+  width: 20vw;
+  border-radius: 10px;
+  padding: 20px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 15px 0;
+  position: relative;
+}
+
+/* ADMIN STATUS */
+.adminList_Container .adminList .admin .status {
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #afafaf;
+}
+
+/* ADMIN STATUS IMAGE */
+.adminList_Container .adminList .admin .status img {
+  height: 20px;
+}
+
+/* ADMIN DETAILS CONTAINER */
+.adminList_Container .adminList .admin .adminDetails_Container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+/* ADMIN DETAILS ID CONTAINER */
+.adminList_Container .adminList .admin .adminDetails_Container .adminId {
+  color: rgb(153, 153, 199);
+  margin-top: 10px;
+}
+
+/* ADMIN DETAILS IMAGE CONTAINER */
+.adminList_Container .adminList .admin .adminDetails_Container .adminImage {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  position: relative;
+}
+
+/* ADMIN ACTION CONTAINER */
+.adminList_Container .adminList .admin .actions_Container {
+  height: 120px;
+  width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 /* ADMIN ACTION */
 .adminList_Container .adminList .admin button {
   border: none;
-  background: rgb(255, 170, 170);
-  color: red;
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
+  height: 48%;
+  width: 100%;
+  border-radius: 5px;
   cursor: pointer;
+  background: none;
 }
 
-/* ADMIN ACTION */
-.adminList_Container .adminList .admin button i {
+/* DISABLE LOCK */
+.adminList_Container .adminList .admin .lock_disable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* DISABLE UNLOCK */
+.adminList_Container .adminList .admin .unlock_disable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ADMIN ACTION LOCK */
+.adminList_Container .adminList .admin .lock:hover {
+  background: rgba(255, 170, 170, 20%);
+  color: red;
+}
+
+/* ADMIN ACTION ULOCK */
+.adminList_Container .adminList .admin .unlock:hover {
+  background: rgba(170, 255, 170, 20%);
+  color: green;
+}
+
+/* ADMIN ACTION img */
+.adminList_Container .adminList .admin button img {
+  height: 30px;
+  width: 30px;
   pointer-events: none;
 }

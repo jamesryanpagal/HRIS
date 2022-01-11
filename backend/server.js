@@ -22,6 +22,11 @@ const SchedulesRoutes = require("./Routes/Schedules_Routes");
 const AdminListRoutes = require("./Routes/AdminListRoutes");
 const UpdateAdminRoutes = require("./Routes/UpdateAdmin_Routes");
 const UploadEmployeesRoutes = require("./Routes/UploadEmployees_Routes");
+const ConfirmByPassRoutes = require("./Routes/ConfirmByPassRoutes");
+const SendAccDetailsRoutes = require("./Routes/SendAccDetailsRoutes");
+const DisableEnableAdminRoutes = require("./Routes/DisableEnableAdminRoutes");
+const AudittrailRoutes = require("./Routes/Audittrail_Routes");
+const SyncAdminRoutes = require("./Routes/SyncAdminRoutes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -52,6 +57,11 @@ app.use("/Schedule", SchedulesRoutes);
 app.use("/AdminList", AdminListRoutes);
 app.use("/UpdateAdmin", UpdateAdminRoutes);
 app.use("/UploadEmployees", UploadEmployeesRoutes);
+app.use("/ConfirmByPass", ConfirmByPassRoutes);
+app.use("/SendAccDetails", SendAccDetailsRoutes);
+app.use("/DisableEnableAdmin", DisableEnableAdminRoutes);
+app.use("/Audittrail", AudittrailRoutes);
+app.use("/SyncAdmin", SyncAdminRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -244,9 +254,9 @@ io.on("connection", (socket) => {
     io.emit("unassignedInterviewApplicant", { applicantId });
   });
 
-  // REMOVE NEW ADMIN
-  socket.on("removeNewAdmin", (id) => {
-    io.emit("remove_NewAdmin", id);
+  // DISABLE ADMIN
+  socket.on("disableAdmin", (id) => {
+    io.emit("logoutAdmin", id);
   });
 });
 

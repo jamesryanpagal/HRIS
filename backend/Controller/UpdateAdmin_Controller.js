@@ -38,16 +38,4 @@ const updatePassword = async (req, res) => {
   }
 };
 
-// delete admin
-const deleteAdmin = async (req, res) => {
-  const name = req.params.name;
-  try {
-    const user = await GS_Users.findOne({ Username: name });
-    const remove = await GS_Users.findByIdAndDelete(user._id);
-    res.json(remove);
-  } catch (error) {
-    res.json(error.message);
-  }
-};
-
-module.exports = { updateUsername, updatePassword, deleteAdmin };
+module.exports = { updateUsername, updatePassword };

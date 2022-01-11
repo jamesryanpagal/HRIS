@@ -1,6 +1,13 @@
 // ------------------------------------------ USERS REDUCERS ----------------------------------
 export const usersReducers = (
-  state = { admin_token: "", admin: "", adminImage: "", adminId: "" },
+  state = {
+    admin_token: "",
+    admin: "",
+    adminImage: "",
+    adminId: "",
+    adminEmpNum: "",
+    adminType: "",
+  },
   action
 ) => {
   switch (action.type) {
@@ -15,13 +22,16 @@ export const usersReducers = (
 
     // ADMIN USERNAME
     case "ADMIN_DETAILS":
-      const { Username, Employee_image, _id } = action.payload;
+      const { Username, Employee_image, _id, Employee_id, AdminType } =
+        action.payload;
 
       return {
         ...state,
         admin: Username,
         adminImage: Employee_image,
         adminId: _id,
+        adminEmpNum: Employee_id,
+        adminType: AdminType,
       };
 
     // REMOVE USER TOKEN
@@ -32,12 +42,14 @@ export const usersReducers = (
         admin: "",
         adminImage: "",
         adminId: "",
+        adminEmpNum: "",
+        adminType: "",
       };
 
     default:
       return state;
   }
-}; // remove resume from employees database
+};
 
 // ------------------------------------------ APPLICANTS REDUCERS ----------------------------------
 export const applicantsReducers = (

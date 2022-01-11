@@ -27,6 +27,12 @@
   text-align: center;
 }
 
+/* FORM CONTAINER HEADER p */
+.accDetails_Container form p {
+  text-align: center;
+  padding: 5px 10px;
+}
+
 /* FORM CONTAINER ERROR MESSAGE */
 .accDetails_Container form .errorMessage {
   border-radius: 3px;
@@ -113,6 +119,11 @@
   width: 48%;
   cursor: pointer;
   position: relative;
+}
+
+/* FORM CONTAINER ACTIONS BUTTON FIRST SPINNER */
+.accDetails_Container form .actionsContainer_disable button .first_spinner {
+  border-top-color: black;
 }
 
 /* FORM CONTAINER ACTIONS SAVE */

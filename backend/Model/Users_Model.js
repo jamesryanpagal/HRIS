@@ -15,6 +15,14 @@ const GS_Users_Schema = new schema(
       required: true,
       unique: true,
     },
+    Admin_type: {
+      type: String,
+      required: true,
+    },
+    IsDisabled: {
+      type: Boolean,
+      required: true,
+    },
     Username: {
       type: String,
       required: true,

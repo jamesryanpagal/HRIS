@@ -3,9 +3,13 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 import ProfileImage from "../../../ReusableFunctions/ProfileImage/ProfileImage";
+import io from "socket.io-client";
 
 // REDUX ACTIONS
-import { adminDetailsActions } from "../../../Redux/Redux_actions/actions";
+import {
+  adminDetailsActions,
+  removeUsertokenActions,
+} from "../../../Redux/Redux_actions/actions";
 
 // Icons
 import applicantsIcon from "../../../PublicImages/applicantsIcon.png";
@@ -13,18 +17,21 @@ import employeesIcon from "../../../PublicImages/employeesIcon.png";
 import departmentIcon from "../../../PublicImages/departmentIcon.png";
 import companyProjectsIcon from "../../../PublicImages/companyProjectsIcon.png";
 import scheduleIcon from "../../../PublicImages/scheduleIcon.png";
-import newadminIcon from "../../../PublicImages/newadminIcon.png";
 import uploadCurrentEmployeeIcon from "../../../PublicImages/uploadCurrentEmployee.png";
+import audittrailIcon from "../../../PublicImages/audittrail.png";
 
 //css
 import "./Navbar.css";
+
+// SOCKET CONNECTION
+const socket = io.connect("https://grandspan.herokuapp.com/");
 
 const Navbar = () => {
   // dispatch
   const dispatch = useDispatch();
 
   // selector
-  const { admin_token, admin, adminImage, adminId } = useSelector(
+  const { admin_token, admin, adminImage, adminId, adminEmpNum } = useSelector(
     (state) => state.GS_Admin
   );
 
@@ -39,6 +46,15 @@ const Navbar = () => {
 
     getAdminDetails();
   }, [admin_token, dispatch]);
+
+  // check if admin was disabled
+  useEffect(() => {
+    socket.on("logoutAdmin", (id) => {
+      if (adminEmpNum === id) {
+        dispatch(removeUsertokenActions());
+      }
+    });
+  }, [dispatch, adminEmpNum]);
 
   return (
     <div className="admin_Navbar">
@@ -137,12 +153,12 @@ const Navbar = () => {
           <li>
             <NavLink
               exact
-              to="/Newadmin"
+              to="/Audittrail"
               className="link"
               activeClassName="active_Link"
             >
-              <img src={newadminIcon} alt="" />
-              <span>New Admin</span>
+              <img src={audittrailIcon} alt="" />
+              <span>Audit trail</span>
             </NavLink>
           </li>
         </ul>

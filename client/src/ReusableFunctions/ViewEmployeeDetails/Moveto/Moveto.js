@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axiosConfig from "../../AxiosConfig/AxiosConfig";
+import io from "socket.io-client";
 
 // component
 import Spinner from "../../../Spinner/Spinner";
 
 // css
 import "./Moveto.css";
+
+// SOCKET CONNECTION
+const socket = io.connect("https://grandspan.herokuapp.com/");
 
 const Moveto = ({ setMoveto, destination, movetoDetails }) => {
   // --------------------- STATE ------------------
@@ -27,6 +31,12 @@ const Moveto = ({ setMoveto, destination, movetoDetails }) => {
     try {
       setLoading(true);
       await axiosConfig.post(`/MoveTo/${destination}`, movingDetails);
+      const { data } = await axiosConfig.post("/DisableEnableAdmin/remove", {
+        adminId: movingDetails.employee_id,
+      });
+      if (data === "logout") {
+        socket.emit("disableAdmin", movingDetails.employee_id);
+      }
       setLoading(false);
       setIsMoved(true);
     } catch (error) {

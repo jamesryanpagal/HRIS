@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Grandspan from "../LandingPage/Grandspan";
 import ApplicantsForm from "../Applicants/ApplicantsForm";
 import AdminLogin from "../Login/Login";
-import AdminSignup from "../Signup/Signup";
 import PageNotFound from "../../PageNotFound/PageNotFound";
 
 const LandingPage_Router = () => {
@@ -16,7 +15,6 @@ const LandingPage_Router = () => {
           <Route exact path="/" component={Grandspan} />
           <Route path="/applicantsform" component={ApplicantsForm} />
           <Route path="/login" component={AdminLogin} />
-          <Route path="/signup" component={AdminSignup} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

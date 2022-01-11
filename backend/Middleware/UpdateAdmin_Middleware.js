@@ -19,6 +19,12 @@ const updatePasswordMiddleware = async (req, res, next) => {
       return;
     }
 
+    if (newpassword.length < 8) {
+      error.errorMessage = "Password too short!";
+      res.json(error);
+      return;
+    }
+
     // match new and confirm password
     if (newpassword !== confirmpassword) {
       error.errorMessage = "Password don't matched!";

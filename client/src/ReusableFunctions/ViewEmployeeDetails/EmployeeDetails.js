@@ -77,6 +77,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
 
   // SELECTOR
   const { employees } = useSelector((state) => state.Employee);
+  const { adminEmpNum } = useSelector((state) => state.GS_Admin);
 
   // dispatch
   const dispatch = useDispatch();
@@ -1162,23 +1163,25 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
             </section>
           </form>
         </section>
-        {/* MOVE TO */}
-        <section className="moveto_Container">
-          {/* TEXT */}
-          <section className="moveto_Text">Move employee to: </section>
-          {/* ACTIONS BUTTON */}
-          <section className="moveto_Actions_Button">
-            <button type="button" onClick={handleMoveTo}>
-              Blacklist
-            </button>
-            <button type="button" onClick={handleMoveTo}>
-              Terminated
-            </button>
-            <button type="button" onClick={handleMoveTo}>
-              Resigned
-            </button>
+        {employeeDetails.employee_id !== adminEmpNum && (
+          // MOVE TO
+          <section className="moveto_Container">
+            {/* TEXT */}
+            <section className="moveto_Text">Move employee to: </section>
+            {/* ACTIONS BUTTON */}
+            <section className="moveto_Actions_Button">
+              <button type="button" onClick={handleMoveTo}>
+                Blacklist
+              </button>
+              <button type="button" onClick={handleMoveTo}>
+                Terminated
+              </button>
+              <button type="button" onClick={handleMoveTo}>
+                Resigned
+              </button>
+            </section>
           </section>
-        </section>
+        )}
       </section>
     </div>
   );

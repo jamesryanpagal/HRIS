@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
@@ -132,12 +131,6 @@ const Login = ({ history }) => {
             className={loading ? "disable_OnLoggedIn" : "login_Form_Btn"}
           >
             <button type="submit">{loading ? <Spinner /> : "Login"}</button>
-          </section>
-          {/* SIGNUP LINK */}
-          <section className="signup_Form_Btn">
-            <span>
-              Don't have an account? <Link to="/signup">Signup</Link>
-            </span>
           </section>
         </form>
       </section>

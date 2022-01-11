@@ -45,6 +45,8 @@ const ApplicantDetails = ({
   acceptApi,
   rejectSocket,
   acceptSocket,
+  current,
+  applicantName,
   setToggleApplicantDetails,
   loading,
   setLoading,
@@ -212,6 +214,8 @@ const ApplicantDetails = ({
           rejectApi={rejectApi}
           socket={socket}
           rejectSocket={rejectSocket}
+          current={current}
+          applicantName={applicantName}
           loading={loading}
           setLoading={setLoading}
           setIsRemove={setIsRemove}
@@ -226,6 +230,8 @@ const ApplicantDetails = ({
           acceptApi={acceptApi}
           socket={socket}
           acceptSocket={acceptSocket}
+          current={current}
+          applicantName={applicantName}
           loading={loading}
           setIsRemove={setIsRemove}
           setLoading={setLoading}
@@ -456,6 +462,12 @@ const Applicants = () => {
 
   // remove applicant
   const [isRemove, setIsRemove] = useState(false);
+
+  // applicant name
+  const [applicantName, setApplicantName] = useState("");
+
+  // current step
+  const [current, setCurrent] = useState("");
 
   // dispatch instance
   const dispatch = useDispatch();
@@ -895,6 +907,8 @@ const Applicants = () => {
     setAcceptApi(applicantInfo[2].innerText);
     setRejectSocket(applicantInfo[3].innerText);
     setAcceptSocket(applicantInfo[4].innerText);
+    setApplicantName(applicantInfo[5].innerText);
+    setCurrent(applicantInfo[6].innerText);
     setToggleApplicantDetails(true);
   };
 
@@ -1038,6 +1052,8 @@ const Applicants = () => {
           acceptApi={acceptApi}
           rejectSocket={rejectSocket}
           acceptSocket={acceptSocket}
+          current={current}
+          applicantName={applicantName}
           setToggleApplicantDetails={setToggleApplicantDetails}
           loading={loading}
           setLoading={setLoading}
@@ -1136,6 +1152,10 @@ const Applicants = () => {
                           <span>{"rejectapplicant"}</span>
                           {/* move applicant to redux */}
                           <span>{"acceptApplicant"}</span>
+                          {/* applicant name */}
+                          <span>{`${a.lastname}, ${a.firstname} ${a.middle}.`}</span>
+                          {/* current */}
+                          <span>{"Applications"}</span>
                           View details
                         </button>
                       </section>
@@ -1211,6 +1231,10 @@ const Applicants = () => {
                           <span>{"rejectApplicantScreening"}</span>
                           {/* move applicant to redux */}
                           <span>{"acceptApplicantScreening"}</span>
+                          {/* applicant name */}
+                          <span>{`${a.lastname}, ${a.firstname} ${a.middle}.`}</span>
+                          {/* current */}
+                          <span>{"Screening"}</span>
                           View details
                         </button>
                       </section>
@@ -1285,6 +1309,10 @@ const Applicants = () => {
                           <span>{"rejectApplicantInterview"}</span>
                           {/* move applicant to redux */}
                           <span>{"acceptApplicantInterview"}</span>
+                          {/* applicant name */}
+                          <span>{`${a.lastname}, ${a.firstname} ${a.middle}.`}</span>
+                          {/* current */}
+                          <span>{"Interview"}</span>
                           View details
                         </button>
                       </section>

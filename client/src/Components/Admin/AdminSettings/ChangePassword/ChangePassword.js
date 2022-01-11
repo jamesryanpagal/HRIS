@@ -34,25 +34,31 @@ const ChangePassword = ({ closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      const { data } = await axiosConfig.patch(
-        `UpdateAdmin/updatePassword/${adminId}`,
-        {
-          oldpassword: userPassword.oldpassword,
-          newpassword: userPassword.newpassword,
-          confirmpassword: userPassword.confirmpassword,
+      if (
+        userPassword.oldpassword.length !== 0 &&
+        userPassword.newpassword.length !== 0 &&
+        userPassword.confirmpassword.length !== 0
+      ) {
+        setLoading(true);
+        const { data } = await axiosConfig.patch(
+          `UpdateAdmin/updatePassword/${adminId}`,
+          {
+            oldpassword: userPassword.oldpassword,
+            newpassword: userPassword.newpassword,
+            confirmpassword: userPassword.confirmpassword,
+          }
+        );
+
+        if (data.isError) {
+          setErrorMsg(data.errorMessage);
+          setLoading(false);
+          return;
         }
-      );
 
-      if (data.isError) {
-        setErrorMsg(data.errorMessage);
+        setErrorMsg("");
+        window.location.reload();
         setLoading(false);
-        return;
       }
-
-      setErrorMsg("");
-      window.location.reload();
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }

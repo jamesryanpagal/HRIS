@@ -7,20 +7,31 @@ const verifyTokenController = async (req, res) => {
   try {
     const getAdminDetails = await Users.findById(id);
 
-    let adminDetails = { _id: "", Employee_image: "", Username: "" };
+    let adminDetails = {
+      _id: "",
+      Employee_image: "",
+      Username: "",
+      Employee_id: "",
+      AdminType: "",
+    };
+
+    // get admin details to employees
     const employeeDetails = await Employees.findOne({
       employee_id: getAdminDetails.Employee_number,
     });
 
     if (employeeDetails) {
-      adminDetails._id = id;
-      adminDetails.Employee_image = employeeDetails.employee_image;
-      adminDetails.Username = getAdminDetails.Username;
-    } else {
-      adminDetails._id = id;
-      adminDetails.Employee_image = getAdminDetails.Employee_image;
-      adminDetails.Username = getAdminDetails.Username;
+      await Users.findByIdAndUpdate(id, {
+        Employee_image: employeeDetails.employee_image,
+      });
     }
+
+    adminDetails._id = id;
+    adminDetails.Employee_image = getAdminDetails.Employee_image;
+    adminDetails.Username = getAdminDetails.Username;
+    adminDetails.Employee_id = getAdminDetails.Employee_number;
+    adminDetails.AdminType = getAdminDetails.Admin_type;
+
     res.json(adminDetails);
   } catch (error) {
     res.json(error.message);
