@@ -13,6 +13,7 @@ const verifyTokenController = async (req, res) => {
       Username: "",
       Employee_id: "",
       AdminType: "",
+      IsAuthorized: "",
     };
 
     // get admin details to employees
@@ -31,6 +32,7 @@ const verifyTokenController = async (req, res) => {
     adminDetails.Username = getAdminDetails.Username;
     adminDetails.Employee_id = getAdminDetails.Employee_number;
     adminDetails.AdminType = getAdminDetails.Admin_type;
+    adminDetails.IsAuthorized = getAdminDetails.IsAuthorized;
 
     res.json(adminDetails);
   } catch (error) {

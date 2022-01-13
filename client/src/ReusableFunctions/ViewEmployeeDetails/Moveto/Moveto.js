@@ -40,7 +40,7 @@ const Moveto = ({ setMoveto, destination, movetoDetails }) => {
         adminId: movingDetails.employee_id,
       });
       if (data === "logout") {
-        socket.emit("disableAdmin", movingDetails.employee_id);
+        socket.emit("removeAdmin", movingDetails.employee_id);
       }
       // for audit trail
       const audittrails = {

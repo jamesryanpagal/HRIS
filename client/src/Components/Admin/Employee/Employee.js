@@ -41,6 +41,7 @@ const Employee = () => {
   const dispatch = useDispatch();
   // Selector
   const { employees } = useSelector((state) => state.Employee);
+  const { adminEmpNum, adminType } = useSelector((state) => state.GS_Admin);
 
   // get all employee from Database
   useEffect(() => {
@@ -51,8 +52,28 @@ const Employee = () => {
       // get employees from Employees database table
       const employees = await axiosConfig.get("Employee/employeeList");
 
-      // insert employees to employeesArr
-      employeesArr = [...employeesArr, ...employees.data];
+      if (adminType !== "SuperAdmin") {
+        // filter HR
+        const filterHR = employees.data.filter((hr) =>
+          hr.position.includes("(HUMAN RESOURCE)")
+        );
+
+        // hide other HR
+        const filterVisibleHR = filterHR.filter(
+          (visible) => visible.employee_id === adminEmpNum
+        );
+
+        // get other dept
+        const filterDept = employees.data.filter(
+          (otherDept) => !otherDept.position.includes("(HUMAN RESOURCE)")
+        );
+
+        // insert filtered employees to employeesArr
+        employeesArr = [...employeesArr, ...filterVisibleHR, ...filterDept];
+      } else {
+        // insert employees to employeesArr
+        employeesArr = [...employeesArr, ...employees.data];
+      }
 
       // if employeeArr has no data
       if (employeesArr.length === 0) {
@@ -65,7 +86,7 @@ const Employee = () => {
     };
 
     getEmployeeList();
-  }, [dispatch]);
+  }, [dispatch, adminEmpNum, adminType]);
 
   // update employee details
   useEffect(() => {

@@ -1,13 +1,38 @@
 // --------- MODEL ----------
 const GS_Users = require("../Model/Users_Model");
+const ArchiveAdmin = require("../Model/ArchiveAdminModel");
 
 // sync admin
 const syncAdminController = async (req, res) => {
-  const { id } = req.body;
+  const {
+    newAdmin_id,
+    formerAdmin_id,
+    formerAdmin_Name,
+    formerAdmin_Image,
+    formerAdmin_Type,
+  } = req.body.syncDetails;
   const options = { new: true };
   try {
     // admin details
-    const user = await GS_Users.findOne({ Employee_number: id });
+    const user = await GS_Users.findOne({ Employee_number: newAdmin_id });
+
+    // add former admin to archive admin
+    if (formerAdmin_id !== "000000") {
+      await ArchiveAdmin.create({
+        Employee_image: formerAdmin_Image,
+        Employee_number: formerAdmin_id,
+        Admin_type: formerAdmin_Type,
+        Username: formerAdmin_Name,
+      });
+    }
+
+    // add admin to archive admin
+    await ArchiveAdmin.create({
+      Employee_image: user.Employee_image,
+      Employee_number: user.Employee_number,
+      Admin_type: user.Admin_type,
+      Username: user.Username,
+    });
 
     // remove to admin
     await GS_Users.findByIdAndDelete(user._id);

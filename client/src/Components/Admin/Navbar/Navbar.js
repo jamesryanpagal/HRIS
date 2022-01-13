@@ -31,9 +31,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   // selector
-  const { admin_token, admin, adminImage, adminId, adminEmpNum } = useSelector(
-    (state) => state.GS_Admin
-  );
+  const { admin_token, admin, adminImage, adminId, adminEmpNum, adminType } =
+    useSelector((state) => state.GS_Admin);
 
   // get admin details
   useEffect(() => {
@@ -51,7 +50,22 @@ const Navbar = () => {
   useEffect(() => {
     socket.on("logoutAdmin", (id) => {
       if (adminEmpNum === id) {
+        console.log("equal disable", { id, adminEmpNum });
         dispatch(removeUsertokenActions());
+      } else {
+        console.log("not equal disable", { id, adminEmpNum });
+      }
+    });
+  }, [dispatch, adminEmpNum]);
+
+  // check if admin was removed
+  useEffect(() => {
+    socket.on("adminRemoved", (id) => {
+      if (adminEmpNum === id) {
+        console.log("equal remove");
+        dispatch(removeUsertokenActions());
+      } else {
+        console.log("not equal remove");
       }
     });
   }, [dispatch, adminEmpNum]);
@@ -150,17 +164,19 @@ const Navbar = () => {
               <span>Upload</span>
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              exact
-              to="/Audittrail"
-              className="link"
-              activeClassName="active_Link"
-            >
-              <img src={audittrailIcon} alt="" />
-              <span>Audit trail</span>
-            </NavLink>
-          </li>
+          {adminType === "SuperAdmin" && (
+            <li>
+              <NavLink
+                exact
+                to="/Audittrail"
+                className="link"
+                activeClassName="active_Link"
+              >
+                <img src={audittrailIcon} alt="" />
+                <span>Audit trail</span>
+              </NavLink>
+            </li>
+          )}
         </ul>
       </section>
     </div>

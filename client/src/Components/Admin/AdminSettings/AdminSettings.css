@@ -23,8 +23,8 @@
 .admin_Settings_Container .options_Container .admin_List_Container {
   border-radius: 50%;
   box-shadow: 0 0 10px #afafaf;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,8 +53,8 @@
 .admin_Settings_Container .options_Container .change_Username_Container {
   border-radius: 50%;
   box-shadow: 0 0 10px #afafaf;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,8 +83,8 @@
 .admin_Settings_Container .options_Container .change_Password_Container {
   border-radius: 50%;
   box-shadow: 0 0 10px #afafaf;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -113,8 +113,8 @@
 .admin_Settings_Container .options_Container .signout_Container {
   border-radius: 50%;
   box-shadow: 0 0 10px #afafaf;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;

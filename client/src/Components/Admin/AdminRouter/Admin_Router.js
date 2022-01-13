@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axiosConfig from "../../../ReusableFunctions/AxiosConfig/AxiosConfig";
+import IdleTimer from "react-idle-timer";
 
 //components
 import Navbar from "../Navbar/Navbar";
@@ -20,6 +21,7 @@ import {
   departmentsActions,
   updateEmployeeDepartmentActions,
   noUpdatesActions,
+  removeUsertokenActions,
 } from "../../../Redux/Redux_actions/actions";
 
 //css
@@ -305,6 +307,11 @@ const Admin_Router = () => {
     getBlacklisted();
   }, [dispatch]);
 
+  // idle logout
+  const handleIdleLogOut = () => {
+    dispatch(removeUsertokenActions());
+  };
+
   return (
     <div className="admin_Router">
       <Router>
@@ -321,6 +328,7 @@ const Admin_Router = () => {
           <Route component={PageNotFound} />
         </Switch>
       </Router>
+      <IdleTimer timeout={600000} onIdle={handleIdleLogOut}></IdleTimer>
     </div>
   );
 };

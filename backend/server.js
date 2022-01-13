@@ -27,6 +27,9 @@ const SendAccDetailsRoutes = require("./Routes/SendAccDetailsRoutes");
 const DisableEnableAdminRoutes = require("./Routes/DisableEnableAdminRoutes");
 const AudittrailRoutes = require("./Routes/Audittrail_Routes");
 const SyncAdminRoutes = require("./Routes/SyncAdminRoutes");
+const ArchiveAdminsRoutes = require("./Routes/ArchiveAdminRoutes");
+const AssignUnAssignRoutes = require("./Routes/AssignUnAssignRoutes");
+const RequestUpdateRoutes = require("./Routes/RequestUpdateRoutes");
 
 // PORT NUMBER
 const PORT = process.env.PORT || 8080;
@@ -62,6 +65,9 @@ app.use("/SendAccDetails", SendAccDetailsRoutes);
 app.use("/DisableEnableAdmin", DisableEnableAdminRoutes);
 app.use("/Audittrail", AudittrailRoutes);
 app.use("/SyncAdmin", SyncAdminRoutes);
+app.use("/ArchiveAdmins", ArchiveAdminsRoutes);
+app.use("/AssignUnAssign", AssignUnAssignRoutes);
+app.use("/RequestUpdate", RequestUpdateRoutes);
 
 // -------------------------------- DEPLOYMENT ------------------------------
 __dirname = path.resolve();
@@ -257,6 +263,11 @@ io.on("connection", (socket) => {
   // DISABLE ADMIN
   socket.on("disableAdmin", (id) => {
     io.emit("logoutAdmin", id);
+  });
+
+  // REMOVE EMPLOYEE
+  socket.on("removeAdmin", (id) => {
+    io.emit("adminRemoved", id);
   });
 });
 

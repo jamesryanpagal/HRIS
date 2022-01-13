@@ -7,6 +7,7 @@ export const usersReducers = (
     adminId: "",
     adminEmpNum: "",
     adminType: "",
+    isauthorized: "",
   },
   action
 ) => {
@@ -22,8 +23,14 @@ export const usersReducers = (
 
     // ADMIN USERNAME
     case "ADMIN_DETAILS":
-      const { Username, Employee_image, _id, Employee_id, AdminType } =
-        action.payload;
+      const {
+        Username,
+        Employee_image,
+        _id,
+        Employee_id,
+        AdminType,
+        IsAuthorized,
+      } = action.payload;
 
       return {
         ...state,
@@ -32,6 +39,7 @@ export const usersReducers = (
         adminId: _id,
         adminEmpNum: Employee_id,
         adminType: AdminType,
+        isauthorized: IsAuthorized,
       };
 
     // REMOVE USER TOKEN
@@ -44,6 +52,7 @@ export const usersReducers = (
         adminId: "",
         adminEmpNum: "",
         adminType: "",
+        isauthorized: "",
       };
 
     default:

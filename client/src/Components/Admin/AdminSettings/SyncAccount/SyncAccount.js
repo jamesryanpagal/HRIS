@@ -15,13 +15,21 @@ const SyncAccount = ({ closeModal }) => {
   const [adminList, setAdminList] = useState([]);
 
   // sync id state
-  const [syncId, setSyncId] = useState("");
+  const [syncDetails, setSyncDetails] = useState({
+    newAdmin_id: "",
+    formerAdmin_id: "",
+    formerAdmin_Name: "",
+    formerAdmin_Image: "",
+    formerAdmin_Type: "",
+  });
 
   // toggle confirm by password state
   const [confirmByPass, setConfirmByPass] = useState(false);
 
   // selector
-  const { adminEmpNum } = useSelector((state) => state.GS_Admin);
+  const { adminEmpNum, admin, adminImage, adminType } = useSelector(
+    (state) => state.GS_Admin
+  );
 
   // get adminlist
   useEffect(() => {
@@ -30,7 +38,10 @@ const SyncAccount = ({ closeModal }) => {
       const filtered = data.filter(
         (admin) => admin.Employee_number !== adminEmpNum
       );
-      setAdminList([...filtered]);
+      const filteredDisabled = filtered.filter(
+        (disable) => disable.IsDisabled !== true
+      );
+      setAdminList([...filteredDisabled]);
     };
 
     getAdmin();
@@ -39,7 +50,14 @@ const SyncAccount = ({ closeModal }) => {
   // handle sync
   const handleSync = (e) => {
     const value = e.target.value;
-    setSyncId(value);
+    setSyncDetails((prev) => ({
+      ...prev,
+      newAdmin_id: value,
+      formerAdmin_id: adminEmpNum,
+      formerAdmin_Name: admin,
+      formerAdmin_Image: adminImage,
+      formerAdmin_Type: adminType,
+    }));
     setConfirmByPass(true);
   };
 
@@ -47,7 +65,10 @@ const SyncAccount = ({ closeModal }) => {
     <div className="syncaccount_Container">
       {/* CONFIRM BY PASSWORD MODAL */}
       {confirmByPass && (
-        <ConfirmbyPassword syncDetails={syncId} closeModal={setConfirmByPass} />
+        <ConfirmbyPassword
+          syncDetails={syncDetails}
+          closeModal={setConfirmByPass}
+        />
       )}
       {/* CLOSE MODAL */}
       <button

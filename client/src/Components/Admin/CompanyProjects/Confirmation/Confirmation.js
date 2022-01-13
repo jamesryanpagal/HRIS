@@ -47,6 +47,11 @@ const Confirmation = ({
         projectImage: uploadedImage && uploadedImage,
       });
 
+      // set admin authorization back to not authorized
+      await axiosConfig.post("RequestUpdate/setToNotAuthorized", {
+        id: adminEmpNum,
+      });
+
       // for audit trail
       const audittrails = {
         actions: "Project created",

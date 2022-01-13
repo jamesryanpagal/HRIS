@@ -11,6 +11,8 @@ import "../UpdateAcc.css";
 const socket = io.connect("https://grandspan.herokuapp.com/");
 
 const ConfirmbyPassword = ({
+  requestDetails,
+  setTemp,
   disable_enableAdminDetails,
   syncDetails,
   newAdminDetails,
@@ -75,11 +77,58 @@ const ConfirmbyPassword = ({
       // for syncing admin
       if (syncDetails) {
         await axiosConfig.post("SyncAdmin", {
-          id: syncDetails,
+          syncDetails,
         });
         setLoading(false);
         window.location.reload();
         return;
+      }
+
+      // for assigning temp admin
+      if (setTemp) {
+        // for assigning
+        if (setTemp.type === "assign") {
+          await axiosConfig.post("AssignUnAssign/assign", {
+            id: setTemp.id,
+          });
+          setLoading(false);
+          window.location.reload();
+          return;
+        }
+
+        // for unassigning
+        if (setTemp.type === "unassign") {
+          await axiosConfig.post("AssignUnAssign/unassign", {
+            id: setTemp.id,
+          });
+          setLoading(false);
+          window.location.reload();
+          return;
+        }
+      }
+
+      // for requesting
+      if (requestDetails) {
+        // for authorizing
+        if (requestDetails.type === "authorized") {
+          await axiosConfig.post("RequestUpdate/authorized", {
+            id: requestDetails.id,
+          });
+          setLoading(false);
+          window.location.reload();
+          return;
+        }
+
+        // for not authorizing
+        if (requestDetails.type === "notauthorized") {
+          const { data } = await axiosConfig.post(
+            "RequestUpdate/notauthorized",
+            { id: requestDetails.id }
+          );
+          console.log(data);
+          setLoading(false);
+          return;
+        }
       }
 
       await axiosConfig.post("NewUsers", {

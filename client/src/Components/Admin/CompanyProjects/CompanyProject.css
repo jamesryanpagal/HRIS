@@ -113,14 +113,51 @@
 .projectlist_Container .projectslistbutton_Container {
   text-align: center;
   height: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* PROJECTSLIST BUTTON */
-.projectlist_Container .projectslistbutton_Container button {
+/* PROJECTSLIST REQUEST UPDATE AND CREATE BUTTON */
+.projectlist_Container .projectslistbutton_Container .requestUpdateCreate {
   border: none;
   outline: none;
   height: 100%;
-  width: 50%;
+  width: 48%;
+  font-size: 15px;
+  background: #6e7fe0;
+  box-shadow: 0 0 5px #c9c9c9;
+  border-radius: 5px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+/* PROJECTSLIST REQUEST UPDATE AND CREATE BUTTON DISABLE */
+.projectlist_Container
+  .projectslistbutton_Container
+  .requestUpdateCreateDisable {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 48%;
+  font-size: 15px;
+  background: #6e7fe0;
+  box-shadow: 0 0 5px #c9c9c9;
+  border-radius: 5px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* PROJECTSLIST NEWPROJECT BUTTON */
+.projectlist_Container .projectslistbutton_Container .newProject {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 48%;
   font-size: 15px;
   background: #ffffff;
   box-shadow: 0 0 5px #c9c9c9;

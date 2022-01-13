@@ -108,6 +108,11 @@
   background: #c9c9c9;
 }
 
+/* SEARCH HAS A MATCH h5 */
+.employee_Header .toggle_Search_Employee .searched_Results .results h5 {
+  color: #6e7fe0;
+}
+
 .employee_Header .toggle_Search_Employee .searched_Results .results span {
   display: none;
 }

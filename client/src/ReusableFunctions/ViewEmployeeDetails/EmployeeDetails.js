@@ -77,7 +77,9 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
 
   // SELECTOR
   const { employees } = useSelector((state) => state.Employee);
-  const { adminEmpNum, admin } = useSelector((state) => state.GS_Admin);
+  const { adminEmpNum, adminImage, admin, isauthorized } = useSelector(
+    (state) => state.GS_Admin
+  );
 
   // dispatch
   const dispatch = useDispatch();
@@ -186,6 +188,12 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
             : employeeDetails.employee_image,
         },
       });
+
+      // back to not authorized
+      await axiosConfig.post("RequestUpdate/setToNotAuthorized", {
+        id: adminEmpNum,
+      });
+
       // for audit trail
       const audittrails = {
         actions: "Updated",
@@ -201,6 +209,7 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
       setLoading(false);
       setUnSaveTotal(0);
       dispatch(updatingActions());
+      window.location.reload();
     } catch (error) {
       console.log(error.message);
     }
@@ -273,6 +282,20 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
     employeeDepartmentIndex
   );
 
+  // request update
+  const handleRequestUpdate = async () => {
+    try {
+      await axiosConfig.post("RequestUpdate", {
+        admin,
+        adminImage,
+        adminEmpNum,
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       className={
@@ -290,6 +313,37 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
         {/* CLOSE */}
         <section className="close">
           <i className="fas fa-times" onClick={handleCloseEmployeeDetails}></i>
+          {/* REQUEST STATUS */}
+          <section className="requestStatus">
+            <span>Authorized</span>
+            {/* STATUS AUTHORIZED */}
+            {isauthorized === "true" && (
+              <section className="authorized"></section>
+            )}
+            {/* STATUS PENDING */}
+            {isauthorized === "Pending" && (
+              <section className="pending"></section>
+            )}
+            {/* STATUS NOTAUTHORIZED */}
+            {isauthorized === "false" && (
+              <section className="notauthorized"></section>
+            )}
+          </section>
+          {/* REQUEST BUTTON */}
+          {isauthorized !== "true" && (
+            <button
+              type="button"
+              className={
+                isauthorized !== "false"
+                  ? "requestUpdateDisable"
+                  : "requestUpdate"
+              }
+              onClick={handleRequestUpdate}
+            >
+              Request update
+            </button>
+          )}
+          {/* SAVE CHANGES */}
           {unsaveTotal > 0 && (
             <section>
               <button
@@ -426,12 +480,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.email}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* POSITION GROUP */}
                   <section className="input_Group">
@@ -875,12 +931,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       {/* SUITES */}
                       <option value="Staff (SUITES)">Staff (SUITES)</option>
                     </select>
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* PHONE INPUT GROUP */}
                   <section className="input_Group">
@@ -893,12 +951,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.phone}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* CONTRACT INPUT GROUP */}
                   <section className="input_Group">
@@ -910,12 +970,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       onChange={handleChangeEmployeeDetails}
                       disabled={true}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                     <section className="contract_Container">
                       {employeeDetails.contract}
                     </section>
@@ -934,12 +996,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.height}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* WEIGHT INPUT GROUP */}
                   <section className="input_Group">
@@ -952,12 +1016,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.weight}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* BLOODTYPE INPUT GROUP */}
                   <section className="input_Group">
@@ -981,12 +1047,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.civil_status}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* SPOUCE NAME INPUT GROUP */}
                   <section className="input_Group">
@@ -999,12 +1067,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.spouce_fullname}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* SPOUCE BIRTHDAY INPUT GROUP */}
                   <section className="input_Group">
@@ -1017,12 +1087,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.spouce_birthday}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* SPOUCE CONTACT NUMBER INPUT GROUP */}
                   <section className="input_Group">
@@ -1035,12 +1107,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.spouce_contact_number}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                 </section>
                 {/* ---------------- THIRD SECTION ------------------ */}
@@ -1056,12 +1130,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.address}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* SSSNO INPUT GROUP */}
                   <section className="input_Group">
@@ -1074,12 +1150,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.sssno}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* TIN INPUT GROUP */}
                   <section className="input_Group">
@@ -1092,12 +1170,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.tin}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* PAGIBIG INPUT GROUP */}
                   <section className="input_Group">
@@ -1110,12 +1190,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.pagibig}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* PHILHEALTH INPUT GROUP */}
                   <section className="input_Group">
@@ -1128,12 +1210,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.philhealth}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* BIOMETRIC ID NO INPUT GROUP */}
                   <section className="input_Group">
@@ -1146,12 +1230,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.biometricIdno}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                   {/* INFOTRACK ID NO INPUT GROUP */}
                   <section className="input_Group">
@@ -1164,12 +1250,14 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
                       disabled={true}
                       value={employeeDetails.infotrackIdno}
                     />
-                    <section
-                      className="edit_Icon_Container"
-                      onClick={handleEditDetails}
-                    >
-                      <i className="fas fa-pen"></i>
-                    </section>
+                    {isauthorized === "true" && (
+                      <section
+                        className="edit_Icon_Container"
+                        onClick={handleEditDetails}
+                      >
+                        <i className="fas fa-pen"></i>
+                      </section>
+                    )}
                   </section>
                 </section>
               </section>
@@ -1178,7 +1266,13 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
         </section>
         {employeeDetails.employee_id !== adminEmpNum && (
           // MOVE TO
-          <section className="moveto_Container">
+          <section
+            className={
+              isauthorized !== "true"
+                ? "moveto_Container_Disable"
+                : "moveto_Container"
+            }
+          >
             {/* TEXT */}
             <section className="moveto_Text">Move employee to: </section>
             {/* ACTIONS BUTTON */}

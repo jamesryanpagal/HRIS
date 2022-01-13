@@ -11,6 +11,7 @@ const addNewUsers_Controller = async (req, res) => {
       Employee_number: employee_number,
       Admin_type: "Admin",
       IsDisabled: false,
+      IsAuthorized: "false",
       Username: username,
       Password: password,
     });

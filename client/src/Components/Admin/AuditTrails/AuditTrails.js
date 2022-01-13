@@ -45,7 +45,7 @@ const AuditTrails = () => {
             <th>
               <p>
                 <img src={adminIcon} alt="" />
-                <span>Admin</span>
+                <span>User</span>
               </p>
             </th>
             <th>

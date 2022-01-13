@@ -32,7 +32,9 @@ const CompanyProject = () => {
     siteEmployees,
   } = useSelector((state) => state.CompanyProjects);
 
-  const { admin, adminEmpNum } = useSelector((state) => state.GS_Admin);
+  const { admin, adminEmpNum, adminImage, isauthorized } = useSelector(
+    (state) => state.GS_Admin
+  );
 
   // DISPATCH
   const dispatch = useDispatch();
@@ -400,6 +402,11 @@ const CompanyProject = () => {
         );
       }
 
+      // set admin authorization back to not authorized
+      await axiosConfig.post("RequestUpdate/setToNotAuthorized", {
+        id: adminEmpNum,
+      });
+
       // for audit trail
       const audittrails = {
         actions: "Project edited",
@@ -414,6 +421,20 @@ const CompanyProject = () => {
 
       await axiosConfig.post("Audittrail", { audittrails });
       setSaveChangesLoading(false);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // request and create
+  const handleRequestCreate = async () => {
+    try {
+      await axiosConfig.post("RequestUpdate", {
+        admin,
+        adminImage,
+        adminEmpNum,
+      });
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -504,9 +525,30 @@ const CompanyProject = () => {
         </section>
         {/* NEW PROJECT BUTTON */}
         <section className="projectslistbutton_Container">
-          <button type="button" onClick={handleNewProject}>
-            <i className="fas fa-plus"></i> New project
-          </button>
+          {/* REQUEST UPDATE AND CREATE */}
+          {isauthorized !== "true" && (
+            <button
+              type="button"
+              className={
+                isauthorized !== "false"
+                  ? "requestUpdateCreateDisable"
+                  : "requestUpdateCreate"
+              }
+              onClick={handleRequestCreate}
+            >
+              Request update and create
+            </button>
+          )}
+          {/* NEW PROJECT BUTTON */}
+          {isauthorized === "true" && (
+            <button
+              type="button"
+              onClick={handleNewProject}
+              className="newProject"
+            >
+              <i className="fas fa-plus"></i> New project
+            </button>
+          )}
         </section>
       </section>
       {/* PROJECT DETAILS CONTAINER */}
@@ -727,14 +769,16 @@ const CompanyProject = () => {
                   {/* HEADER */}
                   <section className="newProject_Header">
                     <h3>{projectDetailsContainer.projectTitle}</h3>
-                    <button
-                      className={
-                        editProject ? "editProject_Active" : "editProject"
-                      }
-                      onClick={() => setEditProject((prev) => !prev)}
-                    >
-                      <i className="fas fa-edit"></i>
-                    </button>
+                    {isauthorized === "true" && (
+                      <button
+                        className={
+                          editProject ? "editProject_Active" : "editProject"
+                        }
+                        onClick={() => setEditProject((prev) => !prev)}
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                    )}
                   </section>
                   {/* PROJECT DETAILS */}
                   <section className="projectDetails">

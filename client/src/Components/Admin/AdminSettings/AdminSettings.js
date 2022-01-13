@@ -11,6 +11,9 @@ import changepasswordicon from "../../../PublicImages/changepassword.png";
 import logouticon from "../../../PublicImages/logout.png";
 import createadminIcon from "../../../PublicImages/createadmin.png";
 import syncaccountIcon from "../../../PublicImages/syncaccount.png";
+import archiveadminIcon from "../../../PublicImages/archiveadmin.png";
+import temporaryIcon from "../../../PublicImages/temporary.png";
+import requestIcon from "../../../PublicImages/request.png";
 
 // components
 import AdminList from "./AdminList/AdminList";
@@ -18,6 +21,9 @@ import ChangeUsername from "./ChangeUsername/ChangeUsername";
 import ChangePassword from "./ChangePassword/ChangePassword";
 import CreateAdminAcc from "./CreateAdminAcc/CreateAdminAcc";
 import SyncAccount from "./SyncAccount/SyncAccount";
+import ArchiveAdmin from "./ArchiveAdmin/ArchiveAdmin";
+import TempAdmin from "./AssignTempSuperAdmin/TempAdmin";
+import RequestUpdate from "./RequestUpdate/RequestUpdate";
 
 // css
 import "./AdminSettings.css";
@@ -39,6 +45,15 @@ const AdminSettings = () => {
 
   // toggle sync account
   const [syncAccount, setSyncAccount] = useState(false);
+
+  // toggle archive admin
+  const [archiveAdmin, setArchiveAdmin] = useState(false);
+
+  // toggle assign temporary admin
+  const [assignTemporary, setAssignTemporary] = useState(false);
+
+  // toggle request update
+  const [requestUpdate, setRequestUpdate] = useState(false);
 
   // dispatch
   const dispatch = useDispatch();
@@ -63,8 +78,18 @@ const AdminSettings = () => {
       {/* SYNC ACCOUNT MODAL */}
       {syncAccount && <SyncAccount closeModal={setSyncAccount} />}
 
+      {/* ARCHIVE ADMIN MODAL */}
+      {archiveAdmin && <ArchiveAdmin closeModal={setArchiveAdmin} />}
+
+      {/* TEMPORARY ADMIN MODAL */}
+      {assignTemporary && <TempAdmin closeModal={setAssignTemporary} />}
+
+      {/* REQUEST UPDATE */}
+      {requestUpdate && <RequestUpdate closeModal={setRequestUpdate} />}
+
       {/* OPTION */}
       <section className="options_Container">
+        {/* VISIBLE IN SUPER ADMIN */}
         {adminType === "SuperAdmin" && (
           <>
             {/* ADMIN LIST */}
@@ -82,6 +107,48 @@ const AdminSettings = () => {
             >
               <img src={syncaccountIcon} alt="" />
               <h5>Sync account</h5>
+            </section>
+            {/* ARCHIVE ADMIN */}
+            <section
+              className="admin_List_Container"
+              onClick={() => setArchiveAdmin(true)}
+            >
+              <img src={archiveadminIcon} alt="" />
+              <h5>Archive admin</h5>
+            </section>
+            {/* TEMPORARY ADMIN */}
+            <section
+              className="admin_List_Container"
+              onClick={() => setAssignTemporary(true)}
+            >
+              <img src={temporaryIcon} alt="" />
+              <h5>Temporary admin</h5>
+            </section>
+            {/* REQUEST */}
+            <section
+              className="admin_List_Container"
+              onClick={() => setRequestUpdate(true)}
+            >
+              <img src={requestIcon} alt="" />
+              <h5>Request</h5>
+            </section>
+            {/* CREATE ADMIN ACCOUNT */}
+            <section
+              className="admin_List_Container"
+              onClick={() => setCreateAdmin(true)}
+            >
+              <img src={createadminIcon} alt="" />
+              <h5>Create admin</h5>
+            </section>{" "}
+          </>
+        )}
+        {/* VISIBLE IN TEMPORARY ADMIN */}
+        {adminType === "TempAdmin" && (
+          <>
+            {/* REQUEST */}
+            <section className="admin_List_Container">
+              <img src={requestIcon} alt="" />
+              <h5>Request</h5>
             </section>
             {/* CREATE ADMIN ACCOUNT */}
             <section

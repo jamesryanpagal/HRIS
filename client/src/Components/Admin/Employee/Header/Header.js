@@ -71,6 +71,7 @@ const Header = ({
                         onClick={handleFilterEmployeeContainer}
                       >
                         <h4>{`${e.lastname}, ${e.firstname} ${e.middle}.`}</h4>
+                        <h5>{e.employee_id}</h5>
                         <span>{e.employee_id}</span>
                       </section>
                     );

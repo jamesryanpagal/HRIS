@@ -23,6 +23,10 @@ const GS_Users_Schema = new schema(
       type: Boolean,
       required: true,
     },
+    IsAuthorized: {
+      type: String,
+      required: true,
+    },
     Username: {
       type: String,
       required: true,
