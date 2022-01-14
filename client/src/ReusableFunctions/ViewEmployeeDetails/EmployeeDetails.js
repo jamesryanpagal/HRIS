@@ -366,17 +366,19 @@ const EmployeeDetails = ({ toggleViewDetails, setToggleViewDetails, id }) => {
               firstname={employeeDetails.firstname}
               updateImagePreview={updateImagePreview}
             />
-            <section className="update_Image_Container">
-              <label htmlFor="update_Image">
-                <i className="fas fa-pen"></i>
-              </label>
-              <input
-                type="file"
-                id="update_Image"
-                accept="image/png, image/jpg, image/jpeg"
-                onChange={handleUpadteProfileImage}
-              />
-            </section>
+            {isauthorized === "true" && (
+              <section className="update_Image_Container">
+                <label htmlFor="update_Image">
+                  <i className="fas fa-pen"></i>
+                </label>
+                <input
+                  type="file"
+                  id="update_Image"
+                  accept="image/png, image/jpg, image/jpeg"
+                  onChange={handleUpadteProfileImage}
+                />
+              </section>
+            )}
           </section>
           {/* PROFILE DETAILS */}
           <section className="profile_Details">

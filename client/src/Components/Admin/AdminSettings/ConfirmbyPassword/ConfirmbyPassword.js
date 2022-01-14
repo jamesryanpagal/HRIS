@@ -31,7 +31,9 @@ const ConfirmbyPassword = ({
   const [errorMessage, setErrorMessage] = useState("");
 
   // selector
-  const { adminId } = useSelector((state) => state.GS_Admin);
+  const { adminId, admin, adminEmpNum } = useSelector(
+    (state) => state.GS_Admin
+  );
 
   // handle submit
   const handleSubmit = async (e) => {
@@ -114,6 +116,20 @@ const ConfirmbyPassword = ({
           await axiosConfig.post("RequestUpdate/authorized", {
             id: requestDetails.id,
           });
+
+          // for audit trail
+          const date = new Date();
+          const audittrails = {
+            actions: "Request approve",
+            subject: "Employee details / Company project",
+            admin,
+            adminId: adminEmpNum,
+            date: `${date.toLocaleString("default", {
+              month: "short",
+            })} ${date.getDate()}, ${date.getFullYear()}`,
+            time: date.toLocaleTimeString(),
+          };
+          await axiosConfig.post("Audittrail", { audittrails });
           setLoading(false);
           window.location.reload();
           return;
@@ -121,12 +137,25 @@ const ConfirmbyPassword = ({
 
         // for not authorizing
         if (requestDetails.type === "notauthorized") {
-          const { data } = await axiosConfig.post(
-            "RequestUpdate/notauthorized",
-            { id: requestDetails.id }
-          );
-          console.log(data);
+          await axiosConfig.post("RequestUpdate/notauthorized", {
+            id: requestDetails.id,
+          });
+
+          // for audit trail
+          const date = new Date();
+          const audittrails = {
+            actions: "Request rejected",
+            subject: "Employee details / Company project",
+            admin,
+            adminId: adminEmpNum,
+            date: `${date.toLocaleString("default", {
+              month: "short",
+            })} ${date.getDate()}, ${date.getFullYear()}`,
+            time: date.toLocaleTimeString(),
+          };
+          await axiosConfig.post("Audittrail", { audittrails });
           setLoading(false);
+          window.location.reload();
           return;
         }
       }
@@ -134,6 +163,20 @@ const ConfirmbyPassword = ({
       await axiosConfig.post("NewUsers", {
         newAdminDetails,
       });
+
+      // for audit trail
+      const date = new Date();
+      const audittrails = {
+        actions: "Admin created",
+        subject: newAdminDetails.username,
+        admin,
+        adminId: adminEmpNum,
+        date: `${date.toLocaleString("default", {
+          month: "short",
+        })} ${date.getDate()}, ${date.getFullYear()}`,
+        time: date.toLocaleTimeString(),
+      };
+      await axiosConfig.post("Audittrail", { audittrails });
 
       setLoading(false);
       setCreateSuccess(true);

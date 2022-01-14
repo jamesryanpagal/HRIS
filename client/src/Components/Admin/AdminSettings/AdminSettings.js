@@ -146,7 +146,10 @@ const AdminSettings = () => {
         {adminType === "TempAdmin" && (
           <>
             {/* REQUEST */}
-            <section className="admin_List_Container">
+            <section
+              className="admin_List_Container"
+              onClick={() => setRequestUpdate(true)}
+            >
               <img src={requestIcon} alt="" />
               <h5>Request</h5>
             </section>
