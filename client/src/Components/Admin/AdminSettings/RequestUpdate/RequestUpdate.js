@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axiosConfig from "../../../../ReusableFunctions/AxiosConfig/AxiosConfig";
 
 // components
@@ -21,6 +22,9 @@ const RequestUpdate = ({ closeModal }) => {
 
   // confirm by pass
   const [confirmByPass, setConfirmByPass] = useState(false);
+
+  // selector
+  const { adminEmpNum } = useSelector((state) => state.GS_Admin);
 
   // get request
   useEffect(() => {
@@ -71,39 +75,43 @@ const RequestUpdate = ({ closeModal }) => {
         </section>
         {requestList.map((req) => {
           return (
-            <section className="request" key={req._id}>
-              {/* ADMIN IMAGE */}
-              <section className="adminImage">
-                <ProfileImage
-                  image={req.Employee_image}
-                  firstname={req.Username}
-                />
-              </section>
-              {/* ADMIN NAME */}
-              <section className="requestDetails">{req.Username}</section>
-              {/* ADMIN ID */}
-              <section className="requestDetails">
-                {req.Employee_number}
-              </section>
-              {/* ACTIONS */}
-              <section className="requestActions">
-                <button
-                  type="button"
-                  className="authorized"
-                  value={req.Employee_number}
-                  onClick={handleAuthorized}
-                >
-                  <i className="fas fa-check"></i>
-                </button>
-                <button
-                  type="button"
-                  className="notauthorized"
-                  value={req.Employee_number}
-                  onClick={handleNotAuthorized}
-                >
-                  <i className="fas fa-times"></i>
-                </button>
-              </section>
+            <section key={req._id}>
+              {req.Employee_number !== adminEmpNum && (
+                <section className="request">
+                  {/* ADMIN IMAGE */}
+                  <section className="adminImage">
+                    <ProfileImage
+                      image={req.Employee_image}
+                      firstname={req.Username}
+                    />
+                  </section>
+                  {/* ADMIN NAME */}
+                  <section className="requestDetails">{req.Username}</section>
+                  {/* ADMIN ID */}
+                  <section className="requestDetails">
+                    {req.Employee_number}
+                  </section>
+                  {/* ACTIONS */}
+                  <section className="requestActions">
+                    <button
+                      type="button"
+                      className="authorized"
+                      value={req.Employee_number}
+                      onClick={handleAuthorized}
+                    >
+                      <i className="fas fa-check"></i>
+                    </button>
+                    <button
+                      type="button"
+                      className="notauthorized"
+                      value={req.Employee_number}
+                      onClick={handleNotAuthorized}
+                    >
+                      <i className="fas fa-times"></i>
+                    </button>
+                  </section>
+                </section>
+              )}
             </section>
           );
         })}
